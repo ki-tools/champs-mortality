@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of champsmortality is to ...
+The goal of champsmortality is to provide functions for calculating mortality fractions and rates at CHAMPS sites for various causes.
 
 ## Installation
 

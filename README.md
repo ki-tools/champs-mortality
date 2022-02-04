@@ -7,11 +7,13 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of champsmortality is to …
+The goal of champsmortality is to provide functions for calculating
+mortality fractions and rates at CHAMPS sites for various causes.
 
 ## Installation
 
-You can install the development version of champsmortality with the following:
+You can install the development version of champsmortality with the
+following:
 
 ``` r
 install.packages("remotes") # one time only
@@ -34,7 +36,7 @@ data_dir <- tempfile()
 create_dataset_directory(data_dir)
 #> 
 #> The directory
-#> '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpEE8fUv/file135674d252b54'
+#> '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpcWmfvj/file136bb67c3d7fd'
 #> is ready for the appropriate data files to be placed in it. The following
 #> datasets should be placed in this directory:
 #> 
@@ -57,7 +59,7 @@ create_dataset_directory(data_dir)
 #>      season date ranges for each site, which will be used to classify the
 #>      season in which each case occurs.
 #> 
-#> Once the files are in place, edit the file /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpEE8fUv/file135674d252b54/config.yaml to provide the file names corresponding to each of these datasets.
+#> Once the files are in place, edit the file /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpcWmfvj/file136bb67c3d7fd/config.yaml to provide the file names corresponding to each of these datasets.
 #> The config.yaml template looks like this:
 #> 
 #> champs_analytics_dataset: ''
