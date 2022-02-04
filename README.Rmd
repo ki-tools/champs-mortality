@@ -1,0 +1,57 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<!-- devtools::build_readme() -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# champsmortality
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of champsmortality is to ...
+
+## Installation
+
+You can install the development version of champsmortality with the following:
+
+``` r
+install.packages("remotes") # one time only
+remotes::install_github("ki-tools/champsmortality")
+```
+
+## Example
+
+```{r}
+library(champsmortality)
+```
+
+The first time you use this package, you need to place the appropriate data files in a data directory that the package will pull from to perform the calculations. A function `create_dataset_directory()` is provided to help get this set up.
+
+```{r example}
+data_dir <- tempfile()
+create_dataset_directory(data_dir)
+```
+
+This is something that only needs to be done once.
+
+Once this is set up and the appropriate files are placed and mapped in the `config.yaml` file, you can read in the data with the following:
+
+```r
+d <- read_and_validate_data(data_dir)
+```
+
+This will read in the data files and ensure that all of the variables required to perform the calculations are present. If they are not, you will see an error message and will need to correct the error before being able to use the package.
+
+More to come...
