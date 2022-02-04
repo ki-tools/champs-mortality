@@ -36,7 +36,7 @@ data_dir <- tempfile()
 create_dataset_directory(data_dir)
 #> 
 #> The directory
-#> '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpcWmfvj/file136bb67c3d7fd'
+#> '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpQN6kws/file1375d5f18c288'
 #> is ready for the appropriate data files to be placed in it. The following
 #> datasets should be placed in this directory:
 #> 
@@ -59,7 +59,7 @@ create_dataset_directory(data_dir)
 #>      season date ranges for each site, which will be used to classify the
 #>      season in which each case occurs.
 #> 
-#> Once the files are in place, edit the file /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpcWmfvj/file136bb67c3d7fd/config.yaml to provide the file names corresponding to each of these datasets.
+#> Once the files are in place, edit the file /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpQN6kws/file1375d5f18c288/config.yaml to provide the file names corresponding to each of these datasets.
 #> The config.yaml template looks like this:
 #> 
 #> champs_analytics_dataset: ''
@@ -67,6 +67,7 @@ create_dataset_directory(data_dir)
 #> champs_vocabulary_dataset: ''
 #> dss_dataset: ''
 #> season_dataset: ''
+#> 
 #> So for example, if the CHAMPS Analytics Dataset you placed in this directory is named 'Analytics_Dataset_2021-09-01.xlsx', you would edit the corresponding line in config.yaml as follows:
 #> 
 #> champs_analytics_dataset: 'Analytics_Dataset_2021-09-01.xlsx'

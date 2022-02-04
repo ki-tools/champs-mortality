@@ -67,6 +67,7 @@ champs_vocabulary_dataset: ''
 dss_dataset: ''
 season_dataset: ''
 ")
+  message("")
   message(glue::glue("So for example, if the CHAMPS Analytics Dataset you \\
     placed in this directory is named 'Analytics_Dataset_2021-09-01.xlsx', \\
     you would edit the corresponding line in config.yaml as follows:"))
