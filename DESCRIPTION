@@ -11,7 +11,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
     assertthat,
-    glue,
+    cli,
     readr,
     readxl,
     snakecase,

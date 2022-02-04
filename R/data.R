@@ -4,18 +4,21 @@
 #' @importFrom yaml read_yaml
 read_and_validate_data <- function(data_path) {
   assertthat::assert_that(dir.exists(data_path),
-    msg = msg_wrap("The 'data_path' provided does not exist: ", data_path))
+    msg = cli::cli_alert_danger("The 'data_path' provided does not exist: \\
+      {data_path}", wrap = TRUE))
 
   yaml_path <- file.path(data_path, "config.yaml")
   assertthat::assert_that(file.exists(yaml_path),
-    msg = msg_wrap("Configuration file does not exist: ", yaml_path))
+    msg = cli::cli_alert_danger("Configuration file does not exist: \\
+    {yaml_path}", wrap = TRUE))
 
   cfg <- yaml::read_yaml(yaml_path)
 
   dff <- setdiff(ds_names, names(cfg))
+  dff_str <- paste(dff, collapse = ", ")
   assertthat::assert_that(length(dff) == 0,
-    msg = msg_wrap("The following required field(s) are not found in ",
-      "config.yaml: ", paste(dff, collapse = ", ")))
+    msg = cli::cli_alert_danger("The following required field(s) are not \\
+      found in config.yaml: {dff_str}", wrap = TRUE))
 
   ## champs_analytics_dataset
   ads  <- read_file(data_path, cfg, ads_names, "champs_analytics_dataset")
@@ -41,14 +44,14 @@ read_file <- function(data_path, cfg, nms, ds_name) {
   message("Reading ", path, "...")
 
   assertthat::assert_that(file.exists(path),
-    msg = msg_wrap("The file specified in config.yaml for ",
-      ds_name, " does not exist: ", path))
+    msg = cli::cli_alert_danger("The file specified in config.yaml for \\
+      {ds_name} does not exist: {path}", wrap = TRUE))
 
   ext <- tools::file_ext(path)
 
   assertthat::assert_that(ext %in% c("csv", "xls", "xlsx"),
-    msg = msg_wrap("File must have extension 'csv', 'xlsx', or 'xls': ",
-      path))
+    msg = cli::cli_alert_danger("File must have extension 'csv', 'xlsx', \\
+      or 'xls': {path}", wrap = TRUE))
 
   if (ext == "csv") {
     x <- readr::read_csv(path, show_col_types = FALSE, guess_max = 1e6)
@@ -60,9 +63,10 @@ read_file <- function(data_path, cfg, nms, ds_name) {
   nms2 <- snakecase::to_snake_case(nms)
 
   idx <- which(!nms2 %in% names(x))
+  vars <- paste0("      ", nms[idx], collapse = "\n")
   assertthat::assert_that(length(idx) == 0,
-    msg = paste0(msg_wrap("Expecting variables like the following in ",
-      path), ":\n", paste0("    ", nms[idx], collapse = "\n")))
+    msg = cli::cli_alert_danger(
+      "Expecting variables like the following in {path}:\n{vars}"))
 
   x
 }
