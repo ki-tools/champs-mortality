@@ -56,8 +56,9 @@ create_dataset_directory <- function(path) {
 
   message("")
 
-  message(glue::glue("Once the files are in place, edit the file {yaml_path} \\
-    to provide the file names corresponding to each of these datasets."))
+  message(msg_wrap(glue::glue("Once the files are in place, edit the file \\
+    {yaml_path} to provide the file names corresponding to each of these \\
+    datasets.")))
 
   message(glue::glue("The config.yaml template looks like this:"))
   message("
@@ -68,9 +69,10 @@ dss_dataset: ''
 season_dataset: ''
 ")
   message("")
-  message(glue::glue("So for example, if the CHAMPS Analytics Dataset you \\
-    placed in this directory is named 'Analytics_Dataset_2021-09-01.xlsx', \\
-    you would edit the corresponding line in config.yaml as follows:"))
+  message(msg_wrap(glue::glue("So for example, if the CHAMPS Analytics \\
+    Dataset you placed in this directory is named \\
+    'Analytics_Dataset_2021-09-01.xlsx', you would edit the corresponding \\
+    line in config.yaml as follows:")))
   message("")
   message("champs_analytics_dataset: 'Analytics_Dataset_2021-09-01.xlsx'")
 }
