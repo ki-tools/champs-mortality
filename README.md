@@ -36,30 +36,27 @@ data_dir <- tempfile()
 create_dataset_directory(data_dir)
 #> 
 #> The directory
-#> '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpQN6kws/file1375d5f18c288'
-#> is ready for the appropriate data files to be placed in it. The following
-#> datasets should be placed in this directory:
+#> '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpjNaHRT/file141b41a5f2251' is ready
+#> for the appropriate data files to be placed in it. The following datasets should be placed
+#> in this directory:
 #> 
-#> 1. CHAMPS Analytics Dataset: This dataset is available as a downloadable file
-#>      from LabKey and is continuously updated. It contains most of the CHAMPS
-#>      variables that are needed for the analysis.
-#> 2. Maternal Registry Forms table: This dataset is also available as a
-#>      downloadable file from LabKey and contains information about maternal
-#>      age and education.
-#> 3. CHAMPS vocabulary: This dataset provides a lookup table for all CHAMPS
-#>      codes, providing a correspond 'name' and 'preferred name' for each. This
-#>      file is accessible from the CHAMPS L2 dataset from dataverse.
-#> 4. DSS: This dataset contains counts of cases from the demographic
-#>      surveillance system (DSS) corresponding to each CHAMPS site and
-#>      catchment area, only for DSS cases that are not in the CHAMPS data.
-#>      These counts are broken down by age group, year, location of death,
-#>      season of death, maternal education, sex of child, and verbal autopsy
-#>      cause of death.
-#> 5. Season definition: This dataset is a spreadsheet containing rainy and dry
-#>      season date ranges for each site, which will be used to classify the
-#>      season in which each case occurs.
+#> 1. CHAMPS Analytics Dataset: This dataset is available as a downloadable file from LabKey
+#>      and is continuously updated. It contains most of the CHAMPS variables that are needed
+#>      for the analysis.
+#> 2. Maternal Registry Forms table: This dataset is also available as a downloadable file from
+#>      LabKey and contains information about maternal age and education.
+#> 3. CHAMPS vocabulary: This dataset provides a lookup table for all CHAMPS codes, providing a
+#>      correspond 'name' and 'preferred name' for each. This file is accessible from the
+#>      CHAMPS L2 dataset from dataverse.
+#> 4. DSS: This dataset contains counts of cases from the demographic surveillance system (DSS)
+#>      corresponding to each CHAMPS site and catchment area, only for DSS cases that are not
+#>      in the CHAMPS data. These counts are broken down by age group, year, location of death,
+#>      season of death, maternal education, sex of child, and verbal autopsy cause of death.
+#> 5. Season definition: This dataset is a spreadsheet containing rainy and dry season date
+#>      ranges for each site, which will be used to classify the season in which each case
+#>      occurs.
 #> 
-#> Once the files are in place, edit the file /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpQN6kws/file1375d5f18c288/config.yaml to provide the file names corresponding to each of these datasets.
+#> Once the files are in place, edit the file /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpjNaHRT/file141b41a5f2251/config.yaml to provide the file names corresponding to each of these datasets.
 #> The config.yaml template looks like this:
 #> 
 #> champs_analytics_dataset: ''

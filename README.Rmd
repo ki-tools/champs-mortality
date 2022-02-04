@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+options(width = 95)
 ```
 
 # champsmortality
@@ -39,7 +40,7 @@ library(champsmortality)
 
 The first time you use this package, you need to place the appropriate data files in a data directory that the package will pull from to perform the calculations. A function `create_dataset_directory()` is provided to help get this set up.
 
-```{r example}
+```{r strip.white=FALSE}
 data_dir <- tempfile()
 create_dataset_directory(data_dir)
 ```
