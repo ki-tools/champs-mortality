@@ -1,5 +1,6 @@
 ds_names <- c("champs_analytics_dataset", "maternal_registry_dataset",
-  "champs_vocabulary_dataset", "dss_dataset", "season_dataset")
+  "champs_vocabulary_dataset", "dss_dataset", "season_lookup",
+  "religion_lookup")
 
 ads_names <- c(
   "Champsid",
@@ -31,6 +32,7 @@ ads_names <- c(
   "MITS Flag",
   "M00060",
   "Calc Dod",
+  "Caretakers religion",
   "VA Cause1 Iva"
 )
 
@@ -50,11 +52,16 @@ voc_names <- c(
 dss_names <- c(
   "site",
   "catchment",
-  "year",
-  "age_group",
-  "factor_name",
-  "factor_level",
+  # "year",
+  "age",
+  "factor",
+  "level",
   "n"
+)
+
+rlgn_names <- c(
+  "champs_local_code",
+  "religion"
 )
 
 seas_names <- c(

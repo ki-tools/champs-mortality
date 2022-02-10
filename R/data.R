@@ -22,17 +22,20 @@ read_and_validate_data <- function(data_path) {
       The following required field(s) are not found in config.yaml: {dff_str}"))
 
   ## champs_analytics_dataset
-  ads  <- read_file(data_path, cfg, ads_names, "champs_analytics_dataset")
-  voc  <- read_file(data_path, cfg, voc_names, "champs_vocabulary_dataset")
+  ads  <- read_file(data_path, cfg, ads_names,  "champs_analytics_dataset")
+  voc  <- read_file(data_path, cfg, voc_names,  "champs_vocabulary_dataset")
   mreg <- read_file(data_path, cfg, mreg_names, "maternal_registry_dataset")
-  seas <- read_file(data_path, cfg, seas_names, "season_dataset")
-  # dss  <- read_file(data_path, cfg, dss_names, "dss_dataset")
+  dss  <- read_file(data_path, cfg, dss_names,  "dss_dataset")
+  seas <- read_file(data_path, cfg, seas_names, "season_lookup")
+  rlgn <- read_file(data_path, cfg, rlgn_names, "religion_lookup")
 
   list(
-    ads = ads,
-    voc = voc,
+    ads  = ads,
+    voc  = voc,
     mreg = mreg,
-    seas = seas
+    seas = seas,
+    dss = dss,
+    rlgn = rlgn
   )
 }
 

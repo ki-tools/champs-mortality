@@ -76,7 +76,8 @@ create_dataset_directory <- function(path) {
       "maternal_registry_dataset: ''",
       "champs_vocabulary_dataset: ''",
       "dss_dataset: ''",
-      "season_dataset: ''"
+      "religion_lookup: ''",
+      "season_lookup: ''"
     ),
     padding = c(0, 2, 0, 2),
     margin = c(0, 4, 0, 0)
