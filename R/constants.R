@@ -70,3 +70,9 @@ seas_names <- c(
   "start",
   "end"
 )
+
+catlkp_names <- c(
+  "site_name",
+  "catchment",
+  "catchment_id"
+)

@@ -38,6 +38,8 @@ remotes::install_github("ki-tools/champsmortality")
 library(champsmortality)
 ```
 
+### Data setup
+
 The first time you use this package, you need to place the appropriate data files in a data directory that the package will pull from to perform the calculations. A function `create_dataset_directory()` is provided to help get this set up.
 
 ```{r strip.white=FALSE}
@@ -47,12 +49,66 @@ create_dataset_directory(data_dir)
 
 This is something that only needs to be done once.
 
+### Read the data
+
 Once this is set up and the appropriate files are placed and mapped in the `config.yaml` file, you can read in the data with the following:
 
-```r
+```{r echo=FALSE}
+data_dir <- "_ignore/datasets"
+```
+
+```{r}
 d <- read_and_validate_data(data_dir)
 ```
 
 This will read in the data files and ensure that all of the variables required to perform the calculations are present. If they are not, you will see an error message and will need to correct the error before being able to use the package.
 
+### Process the data
+
+A function, `process_data()` takes the data that has been read and joins it together to create an analysis dataset and DSS dataset ready for analysis.
+```{r}
+dd <- process_data(d, start_year = 2017, end_year = 2020)
+```
+
+### Computing statistics
+
+The following code can be used to copute the total number of deaths in Baliakandi Bangladesh, by age and MITS and non-MITS+DSS-only.
+
+```{r}
+library(dplyr)
+
+bind_rows(
+  dd$ads %>%
+    filter(site == "Bangladesh", catchment == "Baliakandi") %>%
+    count(mits_flag, age),
+  dd$dss %>%
+    filter(site == "Bangladesh", catchment == "Baliakandi",
+      factor == "season") %>%
+    group_by(age) %>%
+    summarise(n = sum(n)) %>%
+    mutate(mits_flag = 0)
+) %>%
+  group_by(mits_flag, age) %>%
+  summarise(n = sum(n), .groups = "drop")
+```
+
+The following computes the number of MITS deaths with and without neural tube defects and congenital birth defects by age. This uses functions `has_icd10_cc()` to check if neural tube defects are in the causal chain using a regular expression indicating ICD10, and `has_champs_group_cc()` to check if congenital birth defects are in the causal chain using a CHAMPS group.
+
+```{r}
+cbd_ntd <- dd$ads %>%
+  mutate(
+    ntd_cc = has_icd10_cc(., "^Q00|^Q01|^Q05"),
+    cbd_cc = has_champs_group_cc(., "Congenital birth defects")
+  )
+
+cbd_ntd %>%
+  filter(site == "Bangladesh", catchment == "Baliakandi") %>%
+  count(cbd_cc, age) %>%
+  filter(!is.na(cbd_cc)) %>%
+  arrange(cbd_cc, age)
+```
+
+This code is part of the calculations of mortality rates and fractions and is being worked into functions that perform those operations.
+
 More to come...
+

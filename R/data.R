@@ -3,6 +3,7 @@
 #' @importFrom assertthat assert_that
 #' @importFrom yaml read_yaml
 #' @importFrom cli format_error
+#' @export
 read_and_validate_data <- function(data_path) {
   assertthat::assert_that(dir.exists(data_path),
     msg = cli::format_error(
@@ -28,15 +29,20 @@ read_and_validate_data <- function(data_path) {
   dss  <- read_file(data_path, cfg, dss_names,  "dss_dataset")
   seas <- read_file(data_path, cfg, seas_names, "season_lookup")
   rlgn <- read_file(data_path, cfg, rlgn_names, "religion_lookup")
+  catlkp <- read_file(data_path, cfg, catlkp_names, "catchment_lookup")
 
-  list(
+  res <- list(
     ads  = ads,
     voc  = voc,
     mreg = mreg,
     seas = seas,
     dss = dss,
-    rlgn = rlgn
+    rlgn = rlgn,
+    catlkp = catlkp
   )
+
+  class(res) <- c("list", "champs_files")
+  res
 }
 
 #' @importFrom readr read_csv

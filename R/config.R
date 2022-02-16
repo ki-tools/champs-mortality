@@ -15,7 +15,7 @@ create_dataset_directory <- function(path) {
   ))
 
   assertthat::assert_that(dir.exists(path),
-    msg = cli::cli_alert_danger("The path provided to \\
+    msg = cli::format_error("The path provided to \\
       create_dataset_directory() exists but is not a directory", wrap = TRUE))
 
   ff <- list.files(path)
@@ -77,7 +77,8 @@ create_dataset_directory <- function(path) {
       "champs_vocabulary_dataset: ''",
       "dss_dataset: ''",
       "religion_lookup: ''",
-      "season_lookup: ''"
+      "season_lookup: ''",
+      "catchment_lookup: ''"
     ),
     padding = c(0, 2, 0, 2),
     margin = c(0, 4, 0, 0)
