@@ -37,7 +37,7 @@ provided to help get this set up.
 data_dir <- tempfile()
 create_dataset_directory(data_dir)
 #> ✔ The directory
-#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpBehh81/file180425010868' is ready
+#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpRjRURC/file182d94c45c3c0' is ready
 #>   for the appropriate data files to be placed in it. The following datasets should be placed
 #>   in this directory:
 #> 
@@ -57,7 +57,7 @@ create_dataset_directory(data_dir)
 #>    ranges for each site, which will be used to classify the season in which each case occurs.
 #> 
 #> → Once the files are in place, edit the file
-#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpBehh81/file180425010868/config.yaml
+#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpRjRURC/file182d94c45c3c0/config.yaml
 #>   to provide the file names corresponding to each of these datasets.
 #> 
 #> The config.yaml template looks like this:
@@ -343,11 +343,11 @@ The table for Bangladesh/age:
 ``` r
 cbd_tbl$table[[1]]
 #> # A tibble: 3 × 3
-#>   level        `0`   `1`
-#>   <fct>      <int> <int>
-#> 1 Stillbirth    30     1
-#> 2 Neonate       48     3
-#> 3 Child          1     0
+#>   level      `Congenital birth defects-` `Congenital birth defects+`
+#>   <fct>                            <int>                       <int>
+#> 1 Stillbirth                          30                           1
+#> 2 Neonate                             48                           3
+#> 3 Child                                1                           0
 ```
 
 Which sites/factors pass the adjustment criterion:
@@ -361,6 +361,43 @@ filter(cbd_tbl, pval < 0.1, pct_na < 20)
 #> 2 Ethiopia va     <tibble [2 × 3]> 0.0753      15   166   9.04
 #> 3 Kenya    age    <tibble [4 × 3]> 0.000269     0   480   0   
 #> 4 Kenya    va     <tibble [3 × 3]> 0.00342     52   480  10.8
+```
+
+We can try other causes as well, such as malnutrition:
+
+``` r
+mal_tbl <- cc_factor_tables(dd,
+  sites = c("Bangladesh", "Ethiopia", "Kenya"),
+  catchments = c("Baliakandi", "Haramaya", "Harar", "Kersa",
+    "Manyatta", "Siaya"),
+  champs_group = "Malnutrition"
+)
+
+mal_tbl
+#> # A tibble: 21 × 7
+#>    site       factor    table                pval  n_na     n pct_na
+#>    <chr>      <chr>     <list>              <dbl> <int> <int>  <dbl>
+#>  1 Bangladesh age       <tibble [3 × 3]> 1.20e- 2     0    83   0   
+#>  2 Bangladesh education <tibble [4 × 3]> 1   e+ 0    30    83  36.1 
+#>  3 Bangladesh location  <tibble [2 × 3]> 1   e+ 0     0    83   0   
+#>  4 Bangladesh religion  <tibble [2 × 3]> 1   e+ 0     1    83   1.20
+#>  5 Bangladesh season    <tibble [2 × 3]> 3.86e- 1     0    83   0   
+#>  6 Bangladesh sex       <tibble [2 × 3]> 1   e+ 0     0    83   0   
+#>  7 Bangladesh va        <tibble [2 × 3]> 1.27e- 2     4    83   4.82
+#>  8 Ethiopia   age       <tibble [4 × 3]> 7.16e-16     0   166   0   
+#>  9 Ethiopia   education <tibble [4 × 3]> 1   e+ 0   138   166  83.1 
+#> 10 Ethiopia   location  <tibble [2 × 3]> 1.28e- 5     0   166   0   
+#> # … with 11 more rows
+```
+
+``` r
+mal_tbl$table[[1]]
+#> # A tibble: 3 × 3
+#>   level      `Malnutrition-` `Malnutrition+`
+#>   <fct>                <int>           <int>
+#> 1 Stillbirth              31               0
+#> 2 Neonate                 51               0
+#> 3 Child                    0               1
 ```
 
 #### Ad hoc computations

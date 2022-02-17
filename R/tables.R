@@ -123,7 +123,7 @@ cc_factor_tables <- function(
           x[["1"]] <- 0
         if (is.null(x[["0"]]))
           x[["0"]] <- 0
-        x %>%
+        x <- x %>%
           dplyr::rename("{champs_group}+" := "1", "{champs_group}-" := "0")
         if (fac == "age")
           x$level <- factor(x$level,

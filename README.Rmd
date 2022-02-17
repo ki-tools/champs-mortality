@@ -170,6 +170,23 @@ Which sites/factors pass the adjustment criterion:
 filter(cbd_tbl, pval < 0.1, pct_na < 20)
 ```
 
+We can try other causes as well, such as malnutrition:
+
+```{r}
+mal_tbl <- cc_factor_tables(dd,
+  sites = c("Bangladesh", "Ethiopia", "Kenya"),
+  catchments = c("Baliakandi", "Haramaya", "Harar", "Kersa",
+    "Manyatta", "Siaya"),
+  champs_group = "Malnutrition"
+)
+
+mal_tbl
+```
+
+```{r}
+mal_tbl$table[[1]]
+```
+
 #### Ad hoc computations
 
 The following code can be used to compute the total number of deaths in Baliakandi Bangladesh, by age and MITS and non-MITS+DSS-only. This is part of the computation that is provided automatically by `mits_selection_factor_tables()` described above.
