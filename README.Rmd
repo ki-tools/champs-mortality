@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-options(width = 95)
+options(width = 94)
 ```
 
 # champsmortality
@@ -72,20 +72,119 @@ dd <- process_data(d, start_year = 2017, end_year = 2020)
 
 ### Computing statistics
 
-The following code can be used to copute the total number of deaths in Baliakandi Bangladesh, by age and MITS and non-MITS+DSS-only.
+We will use the `dplyr` package for some of the examples below so let's load it:
+
+```{r message=FALSE}
+library(dplyr)
+```
+
+#### Tables of MITS / non-MITS+DSS-only counts by site and factor
+
+A function `mits_selection_factor_tables()` exists in this package that computes tables of MITS / non-MITS+DSS-only counts by site and factor and associated statistics.
+
+This function aims to replicate table 5a in "Supplemental Results (OLD)" as part of determining what factors to adjust for.
+
+To call the function for sites "Bangladesh", "Ethiopia", "Kenya" and their associated catchments:
 
 ```{r}
-library(dplyr)
+fac_tbl <- mits_selection_factor_tables(dd,
+  sites = c("Bangladesh", "Ethiopia", "Kenya"),
+  catchments = c("Baliakandi", "Haramaya", "Harar", "Kersa",
+    "Manyatta", "Siaya")
+)
+```
 
+The output looks like this:
+
+```{r}
+print(fac_tbl, n = 21)
+```
+
+Each row is for one site/factor combination and contains the table of counts (as a nested data frame), the p-value of the chi-square test, and percent missing values.
+
+To view the table of counts for the first record (Bangladesh/age):
+
+```{r}
+fac_tbl$table[[1]]
+```
+
+To see the table of counts for a specific record (e.g. Bangladesh/location):
+
+```{r}
+filter(fac_tbl, site == "Bangladesh", factor == "location")$table
+```
+
+To look at which sites/factors pass the adjustment criterion, we can filter the table based on these:
+
+```{r}
+filter(fac_tbl, pval < 0.1, pct_na < 20)
+```
+
+Suppose we want to compute the table separately for just one site in Kenya:
+
+```{r}
+# compute just for Kenya/Manyatta
+ke_man_tbl <- mits_selection_factor_tables(dd,
+  sites = "Kenya",
+  catchments = "Manyatta"
+)
+```
+
+The by-age table:
+
+```{r}
+ke_man_tbl$table[[1]]
+```
+
+#### Tables of MITS cases with and without a specified condition by factor
+
+Another table used to determine what factors to adjust for is MITS cases with and without the condition for which we are calculating mortality for by factor. This can be computed using `cc_factor_tables()`.
+
+It has the same arguments as the previous function but also has the `champs_group` argument that we use do define the cause we want to compute the statistics for.
+
+```{r}
+# table of MITS cases with and without a specified condition by factor
+cbd_tbl <- cc_factor_tables(dd,
+  sites = c("Bangladesh", "Ethiopia", "Kenya"),
+  catchments = c("Baliakandi", "Haramaya", "Harar", "Kersa",
+    "Manyatta", "Siaya"),
+  champs_group = "Congenital birth defects"
+)
+```
+
+The output structure is similar as shown before:
+
+```{r}
+cbd_tbl
+```
+
+The table for Bangladesh/age:
+
+```{r}
+cbd_tbl$table[[1]]
+```
+
+Which sites/factors pass the adjustment criterion:
+
+```{r}
+filter(cbd_tbl, pval < 0.1, pct_na < 20)
+```
+
+#### Ad hoc computations
+
+The following code can be used to compute the total number of deaths in Baliakandi Bangladesh, by age and MITS and non-MITS+DSS-only. This is part of the computation that is provided automatically by `mits_selection_factor_tables()` described above.
+
+```{r}
 bind_rows(
   dd$ads %>%
     filter(site == "Bangladesh", catchment == "Baliakandi") %>%
     count(mits_flag, age),
   dd$dss %>%
     filter(site == "Bangladesh", catchment == "Baliakandi",
-      factor == "season") %>%
-    group_by(age) %>%
+      factor == "age") %>%
+    group_by(level) %>%
     summarise(n = sum(n)) %>%
+    rename(age = "level") %>%
     mutate(mits_flag = 0)
 ) %>%
   group_by(mits_flag, age) %>%
@@ -108,7 +207,7 @@ cbd_ntd %>%
   arrange(cbd_cc, age)
 ```
 
-This code is part of the calculations of mortality rates and fractions and is being worked into functions that perform those operations.
+This code is part of the calculations of mortality rates and fractions automatically provided by the function `cc_factor_tables()` described previously.
 
 More to come...
 

@@ -14,8 +14,10 @@ Imports:
     cli,
     dplyr,
     lubridate,
+    purrr,
     readr,
     readxl,
     rlang,
     snakecase,
+    tidyr,
     yaml

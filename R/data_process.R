@@ -55,6 +55,7 @@ process_data <- function(x, start_year, end_year) {
       dataset", wrap = TRUE)
   }
 
+  ads_raw$calc_dod <- as.Date(ads_raw$calc_dod)
   ads_raw$year <- lubridate::year(ads_raw$calc_dod)
   cli::cli_alert_success("Calculated year of death from 'calc_dod'",
     wrap = TRUE)
@@ -231,7 +232,7 @@ process_data <- function(x, start_year, end_year) {
   for (ii in seq_len(nrow(seas))) {
     tmp <- seas[ii, ]
     idx <- ads_raw$site_name == tmp$site &
-      ads_raw$calc_dod > tmp$start & ads_raw$calc_dod <= tmp$end
+      ads_raw$calc_dod >= tmp$start & ads_raw$calc_dod <= tmp$end
     ads_raw$season[idx] <- tmp$season
   }
   cli::cli_alert_success("Calculated season of death")
@@ -338,8 +339,23 @@ process_data <- function(x, start_year, end_year) {
   check_valid_vals(filter(dss, factor == "va"),
     "va", valid_levels$va, "verbal autopsy categories", "DSS data")
 
-  return(list(
+  dss <- dplyr::bind_rows(
+    dss %>% select(!"age"),
+    dss %>%
+      dplyr::group_by(.data$site, .data$catchment, .data$age, .data$factor) %>%
+      dplyr::summarise(n = sum(.data$n), .groups = "drop") %>%
+      dplyr::group_by(.data$site, .data$catchment, .data$age) %>%
+      dplyr::summarise(n = max(.data$n)) %>%
+      mutate(factor = "age", level = .data$age) %>%
+      select(!"age")
+  )
+  cli::cli_alert_success("Folded age into factor/level form with DSS data")
+
+  res <- list(
     ads = ads,
     dss = dss
-  ))
+  )
+  class(res) <- c("list", "champs_processed")
+
+  return(res)
 }
