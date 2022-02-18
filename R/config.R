@@ -5,6 +5,7 @@
 #' @importFrom yaml write_yaml
 #' @importFrom cli cli_alert_danger cli_alert_info cli_div boxx
 #' cli_alert_success cli_ol cli_li cli_end cli_alert cli_text
+#' @importFrom glue glue
 create_dataset_directory <- function(path) {
   if (!file.exists(path))
     dir.create(path, recursive = TRUE)
@@ -25,14 +26,53 @@ create_dataset_directory <- function(path) {
     cli::cli_text("")
   }
 
+  has_catchment_lookup <- file.exists(file.path("path",
+    "catchment_lookup.csv"))
+  catchment_file <- ""
+  catchment_str <- ""
+  has_religion_lookup <- file.exists(file.path("path", "religion_lookup.csv"))
+  religion_file <- ""
+  religion_str <- ""
+  has_seasons <- file.exists(file.path("path", "seasons.csv"))
+  season_file <- ""
+  season_str <- ""
+
+  if (!has_catchment_lookup) {
+    file.copy(system.file("datasets/catchment_lookup.csv",
+      package = "champsmortality"), path)
+    catchment_file <- "catchment_lookup.csv"
+    catchment_str <- glue::glue("A dataset with known catchment lookups, \\
+      '{path}/catchment_lookup.csv', has been provided. Please update that \\
+      file if necessary.")
+  }
+  if (!has_religion_lookup) {
+    file.copy(system.file("datasets/religion_lookup.csv",
+      package = "champsmortality"), path)
+    religion_file <- "religion_lookup.csv"
+    religion_str <- glue::glue("A dataset with known religion lookups, \\
+      '{path}/religion_lookup.csv', has been provided. Please update that \\
+      file if necessary.")
+  }
+  if (!has_seasons) {
+    file.copy(system.file("datasets/seasons.csv",
+      package = "champsmortality"), path)
+    season_file <- "seasons.csv"
+    season_str <- glue::glue("A dataset with known season definitions, \\
+      '{path}/seasons.csv', has been provided. Please update that \\
+      file if necessary.")
+  }
+
   yaml_path <- file.path(path, "config.yaml")
   if (file.exists(yaml_path)) {
     cli::cli_alert_info("NOTE: config.yaml already exists... It will not be \\
       overwritten.", wrap = TRUE)
     cli::cli_text("")
   } else {
-    content <- structure(rep("", length(ds_names)), names = ds_names)
-    yaml::write_yaml(as.list(content), yaml_path)
+    content <- as.list(structure(rep("", length(ds_names)), names = ds_names))
+    content$catchment_lookup <- catchment_file
+    content$religion_lookup <- religion_file
+    content$season_lookup <- season_file
+    yaml::write_yaml(content, yaml_path)
   }
 
   cli::cli_alert_success("The directory '{path}' is ready for the \\
@@ -57,9 +97,17 @@ create_dataset_directory <- function(path) {
     CHAMPS data. These counts are broken down by age group, year, location \\
     of death, season of death, maternal education, sex of child, and verbal \\
     autopsy cause of death.")
-  cli::cli_li("Season definition: This dataset is a \\
-    spreadsheet containing rainy and dry season date ranges for each site, \\
-    which will be used to classify the season in which each case occurs.")
+  cli::cli_li("Season definition: This dataset is a csv file \\
+    containing rainy and dry season date ranges for each site, \\
+    which will be used to classify the season in which each case occurs. \\
+    {season_str}")
+  cli::cli_li("Religion lookup: This dataset is a csv file containing \\
+    mappings from religion CHAMPS codes to religion categories. \\
+    {religion_str}")
+  cli::cli_li("Catchment lookup: This dataset is a csv file containing \\
+    mappings from catchment codes to catchment names, used to link the \\
+    DSS data, which uses catchment names, to the CHAMPS analysis dataset, \\
+    which uses catchment IDs. {catchment_str}")
   cli::cli_end(olid)
 
   cli::cli_text("")
@@ -71,15 +119,7 @@ create_dataset_directory <- function(path) {
   cli::cli_text("")
   cli::cli_inform("The config.yaml template looks like this:")
   cli::cat_boxx(
-    c(
-      "champs_analytics_dataset: ''",
-      "maternal_registry_dataset: ''",
-      "champs_vocabulary_dataset: ''",
-      "dss_dataset: ''",
-      "religion_lookup: ''",
-      "season_lookup: ''",
-      "catchment_lookup: ''"
-    ),
+    readLines(file.path(path, "config.yaml")),
     padding = c(0, 2, 0, 2),
     margin = c(0, 4, 0, 0)
   )

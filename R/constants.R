@@ -1,6 +1,6 @@
 ds_names <- c("champs_analytics_dataset", "maternal_registry_dataset",
   "champs_vocabulary_dataset", "dss_dataset", "season_lookup",
-  "religion_lookup")
+  "religion_lookup", "catchment_lookup")
 
 ads_names <- c(
   "Champsid",
