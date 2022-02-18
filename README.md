@@ -37,7 +37,7 @@ provided to help get this set up.
 data_dir <- tempfile()
 create_dataset_directory(data_dir)
 #> ✔ The directory
-#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpHeLJYn/file279e4c4fdfb6' is ready
+#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpJLfgWB/file3aff4668eec9' is ready
 #>   for the appropriate data files to be placed in it. The following datasets should be placed
 #>   in this directory:
 #> 
@@ -53,23 +53,35 @@ create_dataset_directory(data_dir)
 #>    corresponding to each CHAMPS site and catchment area, only for DSS cases that are not in
 #>    the CHAMPS data. These counts are broken down by age group, year, location of death,
 #>    season of death, maternal education, sex of child, and verbal autopsy cause of death.
-#> 5. Season definition: This dataset is a spreadsheet containing rainy and dry season date
-#>    ranges for each site, which will be used to classify the season in which each case occurs.
+#> 5. Season definition: This dataset is a csv file containing rainy and dry season date ranges
+#>    for each site, which will be used to classify the season in which each case occurs. A
+#>    dataset with known season definitions,
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpJLfgWB/file3aff4668eec9/seasons.csv',
+#>    has been provided. Please update that file if necessary.
+#> 6. Religion lookup: This dataset is a csv file containing mappings from religion CHAMPS codes
+#>    to religion categories. A dataset with known religion lookups,
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpJLfgWB/file3aff4668eec9/religion_lookup.csv',
+#>    has been provided. Please update that file if necessary.
+#> 7. Catchment lookup: This dataset is a csv file containing mappings from catchment codes to
+#>    catchment names, used to link the DSS data, which uses catchment names, to the CHAMPS
+#>    analysis dataset, which uses catchment IDs. A dataset with known catchment lookups,
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpJLfgWB/file3aff4668eec9/catchment_lookup.csv',
+#>    has been provided. Please update that file if necessary.
 #> 
 #> → Once the files are in place, edit the file
-#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpHeLJYn/file279e4c4fdfb6/config.yaml
+#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpJLfgWB/file3aff4668eec9/config.yaml
 #>   to provide the file names corresponding to each of these datasets.
 #> 
 #> The config.yaml template looks like this:
-#>     ┌─────────────────────────────────┐
-#>     │  champs_analytics_dataset: ''   │
-#>     │  maternal_registry_dataset: ''  │
-#>     │  champs_vocabulary_dataset: ''  │
-#>     │  dss_dataset: ''                │
-#>     │  religion_lookup: ''            │
-#>     │  season_lookup: ''              │
-#>     │  catchment_lookup: ''           │
-#>     └─────────────────────────────────┘
+#>     ┌──────────────────────────────────────────┐
+#>     │  champs_analytics_dataset: ''            │
+#>     │  maternal_registry_dataset: ''           │
+#>     │  champs_vocabulary_dataset: ''           │
+#>     │  dss_dataset: ''                         │
+#>     │  season_lookup: seasons.csv              │
+#>     │  religion_lookup: religion_lookup.csv    │
+#>     │  catchment_lookup: catchment_lookup.csv  │
+#>     └──────────────────────────────────────────┘
 #> 
 #> 
 #> So for example, if the CHAMPS Analytics Dataset you placed in this directory is named
