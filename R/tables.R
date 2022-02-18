@@ -2,6 +2,7 @@
 #' @param x processed CHAMPS dataset
 #' @param sites a vector of site names to include in the calculations
 #' @param catchments a vector of catchments to include in the calculations
+#' @importFrom dplyr relocate
 #' @importFrom purrr map2 map_dbl
 #' @importFrom tidyr pivot_longer pivot_wider nest
 #' @export
@@ -11,6 +12,17 @@ mits_selection_factor_tables <- function(
   assertthat::assert_that(inherits(x, "champs_processed"),
     msg = cli::format_error("Data must come from process_data()")
   )
+
+  ctch <- dplyr::bind_rows(
+      x$ads %>%
+        dplyr::select(.data$site, .data$catchment),
+      x$dss %>%
+        dplyr::select(.data$site, .data$catchment)
+    ) %>%
+    dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments) %>%
+    dplyr::group_by(.data$site) %>%
+    dplyr::summarise(catchments = paste(sort(unique(.data$catchment)),
+      collapse = ", "))
 
   ads_ct <- x$ads %>%
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments) %>%
@@ -50,7 +62,6 @@ mits_selection_factor_tables <- function(
     tidyr::nest(data = -c("site", "factor")) %>%
     dplyr::mutate(
       table = purrr::map2(.data$data, .data$factor, function(x, fac) {
-        # if (fac == "va") browser()
         x <- x %>%
           tidyr::pivot_wider(names_from = "mits_flag",
             values_from = "n", values_fill = 0)
@@ -73,7 +84,9 @@ mits_selection_factor_tables <- function(
       })
     ) %>%
     dplyr::left_join(miss, by = c("site", "factor")) %>%
-    dplyr::select(-c("data"))
+    dplyr::select(-c("data")) %>%
+    dplyr::left_join(ctch, by = "site") %>%
+    dplyr::relocate("catchments", .after = "site")
 
   tblsn
 }
@@ -91,6 +104,10 @@ cc_factor_tables <- function(
     msg = cli::format_error("Data must come from process_data()")
   )
 
+  ctch <- x$ads %>%
+    dplyr::group_by(.data$site) %>%
+    dplyr::summarise(catchments = paste(sort(unique(.data$catchment)),
+      collapse = ", "))
   tbls <- x$ads %>%
     dplyr::mutate(cc = as.numeric(
       has_champs_group_cc(.data, !!champs_group))) %>%
@@ -135,7 +152,9 @@ cc_factor_tables <- function(
       })
     ) %>%
     dplyr::left_join(miss, by = c("site", "factor")) %>%
-    dplyr::select(-c("data"))
+    dplyr::select(-c("data")) %>%
+    dplyr::left_join(ctch, by = "site") %>%
+    dplyr::relocate("catchments", .after = "site")
 
   tblsn
 }

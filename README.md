@@ -37,7 +37,7 @@ provided to help get this set up.
 data_dir <- tempfile()
 create_dataset_directory(data_dir)
 #> ✔ The directory
-#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpRjRURC/file182d94c45c3c0' is ready
+#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpHeLJYn/file279e4c4fdfb6' is ready
 #>   for the appropriate data files to be placed in it. The following datasets should be placed
 #>   in this directory:
 #> 
@@ -57,7 +57,7 @@ create_dataset_directory(data_dir)
 #>    ranges for each site, which will be used to classify the season in which each case occurs.
 #> 
 #> → Once the files are in place, edit the file
-#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpRjRURC/file182d94c45c3c0/config.yaml
+#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpHeLJYn/file279e4c4fdfb6/config.yaml
 #>   to provide the file names corresponding to each of these datasets.
 #> 
 #> The config.yaml template looks like this:
@@ -198,30 +198,30 @@ The output looks like this:
 
 ``` r
 print(fac_tbl, n = 21)
-#> # A tibble: 21 × 8
-#>    site       factor    table                pval     n n_tot  n_na   pct_na
-#>    <chr>      <chr>     <list>              <dbl> <dbl> <dbl> <dbl>    <dbl>
-#>  1 Bangladesh age       <tibble [4 × 5]> 2.41e- 5   163   163     0   0     
-#>  2 Bangladesh education <tibble [5 × 5]> 1.53e- 2   131   163    32  19.6   
-#>  3 Bangladesh location  <tibble [2 × 5]> 4.39e-15   160   163     3   1.84  
-#>  4 Bangladesh religion  <tibble [4 × 5]> 1.58e- 1   140   163    23  14.1   
-#>  5 Bangladesh season    <tibble [2 × 5]> 4.92e- 1   161   163     2   1.23  
-#>  6 Bangladesh sex       <tibble [3 × 5]> 4.61e- 1   152   163    11   6.75  
-#>  7 Bangladesh va        <tibble [3 × 5]> 1.27e- 5   105   163    58  35.6   
-#>  8 Ethiopia   age       <tibble [4 × 5]> 3.51e-55  1156  1156     0   0     
-#>  9 Ethiopia   education <tibble [5 × 5]> 9.09e-49  1075  1156    81   7.01  
-#> 10 Ethiopia   location  <tibble [2 × 5]> 5.05e-65   991  1156   165  14.3   
-#> 11 Ethiopia   religion  <tibble [4 × 5]> 4.07e-19  1156  1156     0   0     
-#> 12 Ethiopia   season    <tibble [2 × 5]> 2.58e- 1  1153  1156     3   0.260 
-#> 13 Ethiopia   sex       <tibble [2 × 5]> 5.49e- 1   622  1156   534  46.2   
-#> 14 Ethiopia   va        <tibble [3 × 5]> 1   e+ 0     0  1156  1156 100     
-#> 15 Kenya      age       <tibble [4 × 5]> 5.00e- 4  1394  1394     0   0     
-#> 16 Kenya      education <tibble [5 × 5]> 1.02e-23   737  1394   657  47.1   
-#> 17 Kenya      location  <tibble [2 × 5]> 3.59e-17  1018  1394   376  27.0   
-#> 18 Kenya      religion  <tibble [4 × 5]> 7.50e-25   782  1394   612  43.9   
-#> 19 Kenya      season    <tibble [2 × 5]> 2.16e- 2  1394  1394     0   0     
-#> 20 Kenya      sex       <tibble [3 × 5]> 8.81e- 2  1393  1394     1   0.0717
-#> 21 Kenya      va        <tibble [3 × 5]> 7.03e-10   757  1394   637  45.7
+#> # A tibble: 21 × 9
+#>    site       catchments             factor    table        pval     n n_tot  n_na   pct_na
+#>    <chr>      <chr>                  <chr>     <list>      <dbl> <dbl> <dbl> <dbl>    <dbl>
+#>  1 Bangladesh Baliakandi             age       <tibble> 2.41e- 5   163   163     0   0     
+#>  2 Bangladesh Baliakandi             education <tibble> 1.53e- 2   131   163    32  19.6   
+#>  3 Bangladesh Baliakandi             location  <tibble> 4.39e-15   160   163     3   1.84  
+#>  4 Bangladesh Baliakandi             religion  <tibble> 1.58e- 1   140   163    23  14.1   
+#>  5 Bangladesh Baliakandi             season    <tibble> 4.92e- 1   161   163     2   1.23  
+#>  6 Bangladesh Baliakandi             sex       <tibble> 4.61e- 1   152   163    11   6.75  
+#>  7 Bangladesh Baliakandi             va        <tibble> 1.27e- 5   105   163    58  35.6   
+#>  8 Ethiopia   Haramaya, Harar, Kersa age       <tibble> 3.51e-55  1156  1156     0   0     
+#>  9 Ethiopia   Haramaya, Harar, Kersa education <tibble> 9.09e-49  1075  1156    81   7.01  
+#> 10 Ethiopia   Haramaya, Harar, Kersa location  <tibble> 5.05e-65   991  1156   165  14.3   
+#> 11 Ethiopia   Haramaya, Harar, Kersa religion  <tibble> 4.07e-19  1156  1156     0   0     
+#> 12 Ethiopia   Haramaya, Harar, Kersa season    <tibble> 2.58e- 1  1153  1156     3   0.260 
+#> 13 Ethiopia   Haramaya, Harar, Kersa sex       <tibble> 5.49e- 1   622  1156   534  46.2   
+#> 14 Ethiopia   Haramaya, Harar, Kersa va        <tibble> 1   e+ 0     0  1156  1156 100     
+#> 15 Kenya      Manyatta, Siaya        age       <tibble> 5.00e- 4  1394  1394     0   0     
+#> 16 Kenya      Manyatta, Siaya        education <tibble> 1.02e-23   737  1394   657  47.1   
+#> 17 Kenya      Manyatta, Siaya        location  <tibble> 3.59e-17  1018  1394   376  27.0   
+#> 18 Kenya      Manyatta, Siaya        religion  <tibble> 7.50e-25   782  1394   612  43.9   
+#> 19 Kenya      Manyatta, Siaya        season    <tibble> 2.16e- 2  1394  1394     0   0     
+#> 20 Kenya      Manyatta, Siaya        sex       <tibble> 8.81e- 2  1393  1394     1   0.0717
+#> 21 Kenya      Manyatta, Siaya        va        <tibble> 7.03e-10   757  1394   637  45.7
 ```
 
 Each row is for one site/factor combination and contains the table of
@@ -259,19 +259,19 @@ filter the table based on these:
 
 ``` r
 filter(fac_tbl, pval < 0.1, pct_na < 20)
-#> # A tibble: 10 × 8
-#>    site       factor    table                pval     n n_tot  n_na  pct_na
-#>    <chr>      <chr>     <list>              <dbl> <dbl> <dbl> <dbl>   <dbl>
-#>  1 Bangladesh age       <tibble [4 × 5]> 2.41e- 5   163   163     0  0     
-#>  2 Bangladesh education <tibble [5 × 5]> 1.53e- 2   131   163    32 19.6   
-#>  3 Bangladesh location  <tibble [2 × 5]> 4.39e-15   160   163     3  1.84  
-#>  4 Ethiopia   age       <tibble [4 × 5]> 3.51e-55  1156  1156     0  0     
-#>  5 Ethiopia   education <tibble [5 × 5]> 9.09e-49  1075  1156    81  7.01  
-#>  6 Ethiopia   location  <tibble [2 × 5]> 5.05e-65   991  1156   165 14.3   
-#>  7 Ethiopia   religion  <tibble [4 × 5]> 4.07e-19  1156  1156     0  0     
-#>  8 Kenya      age       <tibble [4 × 5]> 5.00e- 4  1394  1394     0  0     
-#>  9 Kenya      season    <tibble [2 × 5]> 2.16e- 2  1394  1394     0  0     
-#> 10 Kenya      sex       <tibble [3 × 5]> 8.81e- 2  1393  1394     1  0.0717
+#> # A tibble: 10 × 9
+#>    site       catchments             factor    table        pval     n n_tot  n_na  pct_na
+#>    <chr>      <chr>                  <chr>     <list>      <dbl> <dbl> <dbl> <dbl>   <dbl>
+#>  1 Bangladesh Baliakandi             age       <tibble> 2.41e- 5   163   163     0  0     
+#>  2 Bangladesh Baliakandi             education <tibble> 1.53e- 2   131   163    32 19.6   
+#>  3 Bangladesh Baliakandi             location  <tibble> 4.39e-15   160   163     3  1.84  
+#>  4 Ethiopia   Haramaya, Harar, Kersa age       <tibble> 3.51e-55  1156  1156     0  0     
+#>  5 Ethiopia   Haramaya, Harar, Kersa education <tibble> 9.09e-49  1075  1156    81  7.01  
+#>  6 Ethiopia   Haramaya, Harar, Kersa location  <tibble> 5.05e-65   991  1156   165 14.3   
+#>  7 Ethiopia   Haramaya, Harar, Kersa religion  <tibble> 4.07e-19  1156  1156     0  0     
+#>  8 Kenya      Manyatta, Siaya        age       <tibble> 5.00e- 4  1394  1394     0  0     
+#>  9 Kenya      Manyatta, Siaya        season    <tibble> 2.16e- 2  1394  1394     0  0     
+#> 10 Kenya      Manyatta, Siaya        sex       <tibble> 8.81e- 2  1393  1394     1  0.0717
 ```
 
 Suppose we want to compute the table separately for just one site in
@@ -322,19 +322,19 @@ The output structure is similar as shown before:
 
 ``` r
 cbd_tbl
-#> # A tibble: 21 × 7
-#>    site       factor    table             pval  n_na     n pct_na
-#>    <chr>      <chr>     <list>           <dbl> <int> <int>  <dbl>
-#>  1 Bangladesh age       <tibble [3 × 3]> 1         0    83   0   
-#>  2 Bangladesh education <tibble [4 × 3]> 0.384    30    83  36.1 
-#>  3 Bangladesh location  <tibble [2 × 3]> 1         0    83   0   
-#>  4 Bangladesh religion  <tibble [2 × 3]> 0.534     1    83   1.20
-#>  5 Bangladesh season    <tibble [2 × 3]> 1         0    83   0   
-#>  6 Bangladesh sex       <tibble [2 × 3]> 0.627     0    83   0   
-#>  7 Bangladesh va        <tibble [2 × 3]> 1         4    83   4.82
-#>  8 Ethiopia   age       <tibble [4 × 3]> 0.261     0   166   0   
-#>  9 Ethiopia   education <tibble [4 × 3]> 0.595   138   166  83.1 
-#> 10 Ethiopia   location  <tibble [2 × 3]> 0.314     0   166   0   
+#> # A tibble: 21 × 8
+#>    site       catchments             factor    table             pval  n_na     n pct_na
+#>    <chr>      <chr>                  <chr>     <list>           <dbl> <int> <int>  <dbl>
+#>  1 Bangladesh Baliakandi, Faridpur   age       <tibble [3 × 3]> 1         0    83   0   
+#>  2 Bangladesh Baliakandi, Faridpur   education <tibble [4 × 3]> 0.384    30    83  36.1 
+#>  3 Bangladesh Baliakandi, Faridpur   location  <tibble [2 × 3]> 1         0    83   0   
+#>  4 Bangladesh Baliakandi, Faridpur   religion  <tibble [2 × 3]> 0.534     1    83   1.20
+#>  5 Bangladesh Baliakandi, Faridpur   season    <tibble [2 × 3]> 1         0    83   0   
+#>  6 Bangladesh Baliakandi, Faridpur   sex       <tibble [2 × 3]> 0.627     0    83   0   
+#>  7 Bangladesh Baliakandi, Faridpur   va        <tibble [2 × 3]> 1         4    83   4.82
+#>  8 Ethiopia   Haramaya, Harar, Kersa age       <tibble [4 × 3]> 0.261     0   166   0   
+#>  9 Ethiopia   Haramaya, Harar, Kersa education <tibble [4 × 3]> 0.595   138   166  83.1 
+#> 10 Ethiopia   Haramaya, Harar, Kersa location  <tibble [2 × 3]> 0.314     0   166   0   
 #> # … with 11 more rows
 ```
 
@@ -354,13 +354,13 @@ Which sites/factors pass the adjustment criterion:
 
 ``` r
 filter(cbd_tbl, pval < 0.1, pct_na < 20)
-#> # A tibble: 4 × 7
-#>   site     factor table                pval  n_na     n pct_na
-#>   <chr>    <chr>  <list>              <dbl> <int> <int>  <dbl>
-#> 1 Ethiopia sex    <tibble [2 × 3]> 0.00935      0   166   0   
-#> 2 Ethiopia va     <tibble [2 × 3]> 0.0753      15   166   9.04
-#> 3 Kenya    age    <tibble [4 × 3]> 0.000269     0   480   0   
-#> 4 Kenya    va     <tibble [3 × 3]> 0.00342     52   480  10.8
+#> # A tibble: 4 × 8
+#>   site     catchments             factor table                pval  n_na     n pct_na
+#>   <chr>    <chr>                  <chr>  <list>              <dbl> <int> <int>  <dbl>
+#> 1 Ethiopia Haramaya, Harar, Kersa sex    <tibble [2 × 3]> 0.00935      0   166   0   
+#> 2 Ethiopia Haramaya, Harar, Kersa va     <tibble [2 × 3]> 0.0753      15   166   9.04
+#> 3 Kenya    Manyatta, Siaya        age    <tibble [4 × 3]> 0.000269     0   480   0   
+#> 4 Kenya    Manyatta, Siaya        va     <tibble [3 × 3]> 0.00342     52   480  10.8
 ```
 
 We can try other causes as well, such as malnutrition:
@@ -374,19 +374,19 @@ mal_tbl <- cc_factor_tables(dd,
 )
 
 mal_tbl
-#> # A tibble: 21 × 7
-#>    site       factor    table                pval  n_na     n pct_na
-#>    <chr>      <chr>     <list>              <dbl> <int> <int>  <dbl>
-#>  1 Bangladesh age       <tibble [3 × 3]> 1.20e- 2     0    83   0   
-#>  2 Bangladesh education <tibble [4 × 3]> 1   e+ 0    30    83  36.1 
-#>  3 Bangladesh location  <tibble [2 × 3]> 1   e+ 0     0    83   0   
-#>  4 Bangladesh religion  <tibble [2 × 3]> 1   e+ 0     1    83   1.20
-#>  5 Bangladesh season    <tibble [2 × 3]> 3.86e- 1     0    83   0   
-#>  6 Bangladesh sex       <tibble [2 × 3]> 1   e+ 0     0    83   0   
-#>  7 Bangladesh va        <tibble [2 × 3]> 1.27e- 2     4    83   4.82
-#>  8 Ethiopia   age       <tibble [4 × 3]> 7.16e-16     0   166   0   
-#>  9 Ethiopia   education <tibble [4 × 3]> 1   e+ 0   138   166  83.1 
-#> 10 Ethiopia   location  <tibble [2 × 3]> 1.28e- 5     0   166   0   
+#> # A tibble: 21 × 8
+#>    site       catchments             factor    table                pval  n_na     n pct_na
+#>    <chr>      <chr>                  <chr>     <list>              <dbl> <int> <int>  <dbl>
+#>  1 Bangladesh Baliakandi, Faridpur   age       <tibble [3 × 3]> 1.20e- 2     0    83   0   
+#>  2 Bangladesh Baliakandi, Faridpur   education <tibble [4 × 3]> 1   e+ 0    30    83  36.1 
+#>  3 Bangladesh Baliakandi, Faridpur   location  <tibble [2 × 3]> 1   e+ 0     0    83   0   
+#>  4 Bangladesh Baliakandi, Faridpur   religion  <tibble [2 × 3]> 1   e+ 0     1    83   1.20
+#>  5 Bangladesh Baliakandi, Faridpur   season    <tibble [2 × 3]> 3.86e- 1     0    83   0   
+#>  6 Bangladesh Baliakandi, Faridpur   sex       <tibble [2 × 3]> 1   e+ 0     0    83   0   
+#>  7 Bangladesh Baliakandi, Faridpur   va        <tibble [2 × 3]> 1.27e- 2     4    83   4.82
+#>  8 Ethiopia   Haramaya, Harar, Kersa age       <tibble [4 × 3]> 7.16e-16     0   166   0   
+#>  9 Ethiopia   Haramaya, Harar, Kersa education <tibble [4 × 3]> 1   e+ 0   138   166  83.1 
+#> 10 Ethiopia   Haramaya, Harar, Kersa location  <tibble [2 × 3]> 1.28e- 5     0   166   0   
 #> # … with 11 more rows
 ```
 
