@@ -65,7 +65,7 @@ process_data <- function(x, start_year, end_year) {
     dplyr::filter(.data$n > 1)
   n_dups <- nrow(dups)
   if (n_dups > 0) {
-    mreg <- mreg %>%
+    ads_raw <- ads_raw %>%
       dplyr::group_by(.data$champsid) %>%
       filter(dplyr::row_number() == 1) %>%
       dplyr::ungroup()
@@ -89,7 +89,6 @@ process_data <- function(x, start_year, end_year) {
   cli::cli_alert_success("Created a new variable 'age' that rolls up \\
     all neonates into one category to be compatible with DSS data",
     wrap = TRUE)
-  # TODO: make sure there are not any extra categories for age
 
   ads_raw <- voc_lookup(ads_raw, voc, "caretakers_religion", "analysis dataset")
 
@@ -255,7 +254,7 @@ process_data <- function(x, start_year, end_year) {
     msg = cli::format_error("
       {n_missing} necessary variable{?s} not found in the maternal registry \\
         dataset: {commas(missing_reg_vars)}", wrap = TRUE))
-
+  # TODO: check why this isn't being run for J
   nrm <- length(setdiff(names(mreg), reg_vars_keep))
   if (nrm > 0) {
     mreg <- mreg %>%

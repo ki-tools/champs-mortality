@@ -88,7 +88,7 @@ create_dataset_directory <- function(path) {
     dataset is also available as a downloadable file from LabKey and \\
     contains information about maternal age and education.")
   cli::cli_li("CHAMPS vocabulary: This dataset provides a \\
-    lookup table for all CHAMPS codes, providing a correspond 'name' and \\
+    lookup table for all CHAMPS codes, providing a corresponding 'name' and \\
     'preferred name' for each. This file is accessible from the CHAMPS L2 \\
     dataset from dataverse.")
   cli::cli_li("DSS: This dataset contains counts of cases \\
