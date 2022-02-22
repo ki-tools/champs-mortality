@@ -33,8 +33,8 @@ voc_lookup <- function(x, voc, join_var, ds_name) {
 check_valid_vals <- function(x, variable, valid, name, ds_name) {
   var_diff <- setdiff(unique(x[[variable]]), c(valid, NA))
   assertthat::assert_that(length(var_diff) == 0,
-    msg = cli::format_error("{dsname} contains {name} that are not in \\
-      the CHAMPS analysis dataset: {commas(var_diff)}"))
+    msg = cli::format_error("{ds_name} contains {name} that are not in \\
+      expected: {commas(var_diff)}"))
   cli::cli_alert_success("Checked that values for '{variable}' in the \\
     {ds_name} are correct", wrap = TRUE)
 }
