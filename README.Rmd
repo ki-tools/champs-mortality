@@ -54,7 +54,7 @@ This is something that only needs to be done once.
 Once this is set up and the appropriate files are placed and mapped in the `config.yaml` file, you can read in the data with the following:
 
 ```{r echo=FALSE}
-data_dir <- "_ignore/datasets"
+data_dir <- "_ignore/datasets_unique"
 ```
 
 ```{r}
@@ -69,6 +69,18 @@ A function, `process_data()` takes the data that has been read and joins it toge
 ```{r}
 dd <- process_data(d, start_year = 2017, end_year = 2020)
 ```
+
+### Valid conditions
+
+Computations with this data typically have the goal of finding adjusted mortality fractions and rates for a given condition found in the causal chain. As you will see, these can be specified by either using the condition name or a [regular expression](https://www.sitepoint.com/learn-regex/) indicating ICD10 codes that indicate the condition.
+
+A convenience function that lists all available conditions in the data is provided, `valid_conditions()`:
+
+```{r}
+valid_conditions(dd)
+```
+
+This searches the CHAMPS data and finds all unique condition values found anywhere in the causal chain. A ranking is also provided where a higher ranking indicates that the condition is found more frequently in the data than a condition with a lower ranking.
 
 ### Computing statistics
 
@@ -186,6 +198,153 @@ mal_tbl
 ```{r}
 mal_tbl$table[[1]]
 ```
+
+#### Fraction and rate calculation data
+
+A function, `get_rate_data()`, is available to compute the frequency of deaths by the categories necessary for computing crude and adjusted mortality rates and fractions (DSS only, CHAMPS, target, MITS, and condition) and broken down by any specified adjustment variables. It returns data sufficient to compute crude and adjusted mortality fractions and rates.
+
+As inputs, it takes the data returned from `process_data()`, the site(s) and catchment(s) for which we want to compute the rates for, one or both of `icd10_regex` or `condition` to specify what condition we are looking at, and `adjust_vars`, specifying any variables we would like to adjust by.
+
+For example, to get the rate computation data for Ethiopia/Harar for neural tube defects (defined by the ICD10 regular expression "^Q00|^Q01|^Q05") with no adjustment variables, we can do the following:
+
+```{r}
+get_rate_data(
+  dd,
+  site = "Ethiopia",
+  catchments = "Harar",
+  icd10_regex = "^Q00|^Q01|^Q05",
+  adjust_vars = NULL
+)
+```
+
+This returns a data frame, `data` containing the pertinent data, the site, catchment, and year range for this data, as well as the total live births relate to these.
+
+If we want to get the data grouped by age:
+
+```{r}
+get_rate_data(
+  dd,
+  site = "Ethiopia",
+  catchments = "Harar",
+  icd10_regex = "^Q00|^Q01|^Q05",
+  adjust_vars = "age"
+)
+```
+
+Grouped by sex:
+
+```{r}
+
+get_rate_data(
+  dd,
+  site = "Ethiopia",
+  catchments = "Harar",
+  icd10_regex = "^Q00|^Q01|^Q05",
+  adjust_vars = "sex"
+)
+```
+
+Grouped by age and sex:
+
+```{r}
+get_rate_data(
+  dd,
+  site = "Ethiopia",
+  catchments = "Harar",
+  icd10_regex = "^Q00|^Q01|^Q05",
+  adjust_vars = c("age", "sex")
+)
+```
+
+For congenital birth defects instead of NTDs:
+
+```{r}
+get_rate_data(
+  dd,
+  site = "Ethiopia",
+  catchments = "Harar",
+  condition = "Congenital birth defects",
+  adjust_vars = "age"
+)
+```
+
+Note that we can now use this data to compute the rates and fractions. Currently we show how to do this manually. We are working on more general-purpose functions that will compute the rates automatically.
+
+Let's look at NTDs for Ethiopia/Harar adjusted for age. First, we can compute the crude cause-specific mortality, `cCSMF` as follows. Note that a function `get_interval()` is made available to compute bayesian credible intervals for the estimate.
+
+```{r}
+et_harar <- get_rate_data(
+  dd,
+  site = "Ethiopia",
+  catchments = "Harar",
+  icd10_regex = "^Q00|^Q01|^Q05",
+  adjust_vars = "age"
+)
+
+mits <- sum(et_harar$data$mits)
+ntd <- sum(et_harar$data$condition)
+
+cCSMF <- 100 * ntd / mits
+cCSMF
+
+# 90% credible intervals
+cCSMF_CrI <- get_interval(ntd / mits, mits)
+cCSMF_CrI
+```
+
+To compute the adjusted fraction, `aCSMF`, for this data we need to group some of the age groups before making the adjustment due to the zero counts of NTDs in the infant and child groups. We will group infant and child into stillborn as follows:
+
+```{r}
+# combine stillbirth, infant, and child into same group
+rate_data <- et_harar$data %>%
+  mutate(group = c(1, 2, 1, 1)) %>%
+  select(-age) %>%
+  group_by(group) %>%
+  summarise_all(sum)
+
+rate_data
+```
+
+Now we can compute the weights and take the dot product to get the aCSMF:
+
+```{r}
+ns <- rate_data$mits
+n <- rate_data$condition
+N <- rate_data$target
+
+aCSMF <- 100 * (n / ns) %*% (N / sum(N)) %>% as.vector()
+aCSMF
+
+aCSMF_CrI <- get_interval(aCSMF / 100, sum(N))
+aCSMF_CrI
+```
+
+Now we can use this to get the all-cause total under-5 mortality rate and the cause-specific crude TU5MR and adjusted TU5MR as follows:
+
+```{r}
+# (stillbirths + under-five deaths) / (live-births + stillbirths) x 10,000
+lb <- et_harar$total_live_births
+sb <- filter(et_harar$data, age == "Stillbirth") %>% pull(target)
+u5d_sb <- sum(et_harar$data$target)
+
+acTU5MR <- 10000 * u5d_sb / (lb + sb)
+acTU5MR
+
+cTU5MR <- (cCSMF / 100) * acTU5MR
+cTU5MR
+
+cTU5MR_CrI <- (cCSMF_CrI / 100) * acTU5MR
+cTU5MR_CrI
+
+
+aTU5MR <- (aCSMF / 100) * acTU5MR
+aTU5MR
+
+aTU5MR_CrI <- (aCSMF_CrI / 100) * acTU5MR
+aTU5MR_CrI
+```
+
+A function that provides all of this is in development, but there are difficuties in dealing with how to roll up zero-count categories that are being worked out.
 
 #### Ad hoc computations
 
