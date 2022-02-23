@@ -30,6 +30,7 @@ read_and_validate_data <- function(data_path) {
   seas <- read_file(data_path, cfg, seas_names, "season_lookup")
   rlgn <- read_file(data_path, cfg, rlgn_names, "religion_lookup")
   catlkp <- read_file(data_path, cfg, catlkp_names, "catchment_lookup")
+  lb <- read_file(data_path, cfg, live_birth_names, "live_births_dataset")
 
   res <- list(
     ads  = ads,
@@ -38,7 +39,8 @@ read_and_validate_data <- function(data_path) {
     seas = seas,
     dss = dss,
     rlgn = rlgn,
-    catlkp = catlkp
+    catlkp = catlkp,
+    lb = lb
   )
 
   class(res) <- c("list", "champs_files")
