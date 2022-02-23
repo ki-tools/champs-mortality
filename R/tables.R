@@ -12,11 +12,12 @@ mits_selection_factor_tables <- function(
   assertthat::assert_that(inherits(x, "champs_processed"),
     msg = cli::format_error("Data must come from process_data()")
   )
+  dss <- dss_transform(x$dss)
 
   ctch <- dplyr::bind_rows(
       x$ads %>%
         dplyr::select(.data$site, .data$catchment),
-      x$dss %>%
+      dss %>%
         dplyr::select(.data$site, .data$catchment)
     ) %>%
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments) %>%
@@ -33,14 +34,14 @@ mits_selection_factor_tables <- function(
     dplyr::count(.data$site, .data$mits_flag, .data$factor, .data$level) %>%
     dplyr::filter(!is.na(.data$level))
 
-  dss_ct <- x$dss %>%
+  dss_ct <- dss %>%
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments) %>%
     dplyr::group_by(.data$site, .data$factor, .data$level) %>%
     dplyr::summarise(n = sum(.data$n), .groups = "drop") %>%
     dplyr::mutate(mits_flag = -1)
 
   # this will give the total DSS subjects at each site so we can compute missing
-  tots <- x$dss %>%
+  tots <- dss %>%
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments,
       .data$factor == "age") %>%
     dplyr::group_by(.data$site) %>%
@@ -157,19 +158,4 @@ cc_factor_tables <- function(
     dplyr::relocate("catchments", .after = "site")
 
   tblsn
-}
-
-#' @importFrom stats fisher.test
-fisher_test <- function(x) {
-  tryres <- try({
-    stats::fisher.test(x)
-  }, silent = TRUE)
-  if (inherits(tryres, "try-error")) {
-    tryres <- try({
-      stats::fisher.test(x, simulate.p.value = TRUE)
-    }, silent = TRUE)
-    if (inherits(tryres, "try-error"))
-      return(NA)
-  }
-  return(tryres$p.value)
 }
