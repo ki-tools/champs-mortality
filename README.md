@@ -17,7 +17,7 @@ following:
 
 ``` r
 install.packages("remotes") # one time only
-remotes::install_github("ki-tools/champsmortality")
+remotes::install_github("ki-tools/champs-mortality")
 ```
 
 ## Example
