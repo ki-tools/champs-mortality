@@ -98,7 +98,7 @@ mits_selection_factor_tables <- function(
 #' @param catchments a vector of catchments to include in the calculations
 #' @param champs_group CHAMPS group specifying the condition
 #' @export
-cc_factor_tables <- function(
+cond_factor_tables <- function(
   x, sites, catchments, champs_group
 ) {
   assertthat::assert_that(inherits(x, "champs_processed"),
@@ -106,13 +106,17 @@ cc_factor_tables <- function(
   )
 
   ctch <- x$ads %>%
+    dplyr::select(.data$site, .data$catchment) %>%
+    dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments) %>%
     dplyr::group_by(.data$site) %>%
     dplyr::summarise(catchments = paste(sort(unique(.data$catchment)),
       collapse = ", "))
+
   tbls <- x$ads %>%
     dplyr::mutate(cc = as.numeric(
-      has_champs_group_cc(.data, !!champs_group))) %>%
-    dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments) %>%
+      has_champs_group(.data, !!champs_group))) %>%
+    dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments,
+      .data$mits_flag == 1, .data$decoded == 1) %>%
     dplyr::select(dplyr::any_of(c("site", "catchment", "sex", "religion",
       "education", "season", "location", "va", "age", "cc"))) %>%
     tidyr::pivot_longer(cols = -all_of(c("site", "catchment", "cc")),
@@ -146,7 +150,10 @@ cc_factor_tables <- function(
         if (fac == "age")
           x$level <- factor(x$level,
             levels = c("Stillbirth", "Neonate", "Infant", "Child"))
-        dplyr::arrange(x, .data$level)
+        x <- dplyr::arrange(x, .data$level)
+        nms <- names(x)
+        nnms <- c(nms[1], sort(nms[-1], decreasing = TRUE))
+        x[, nnms]
       }),
       pval = purrr::map_dbl(table, function(x) {
         fisher_test(as.matrix(x[, -1]))
