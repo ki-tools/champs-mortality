@@ -139,10 +139,10 @@ get_rate_data <- function(x,
 
   check_cond <- function(., group, rgx) {
     if (is.null(group))
-      return(has_icd10_cc(., rgx))
+      return(has_icd10(., rgx))
     if (is.null(rgx))
-      return(has_champs_group_cc(., group))
-    has_icd10_cc(., rgx) | has_champs_group_cc(., group)
+      return(has_champs_group(., group))
+    has_icd10(., rgx) | has_champs_group(., group)
   }
 
   cond <- x$ads %>%
