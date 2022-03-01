@@ -20,6 +20,7 @@ process_data <- function(x, start_year, end_year) {
   seas <- x$seas
   catlkp <- x$catlkp
   lb <- x$lb
+  dhs <- x$dhs
 
   valid_sites <- unique(ads_raw$site_name)
   valid_catchments <- unique(catlkp$catchment)
@@ -304,6 +305,14 @@ process_data <- function(x, start_year, end_year) {
   check_valid_vals(lb, "catchment", valid_catchments,
     "catchments", "live births data")
 
+# -------------------------- DHS ------------------------- #
+
+  cli::cli_h1("checking DHS data")
+
+  check_valid_vals(dhs, "site", valid_sites, "sites", "live births data")
+  check_valid_vals(dhs, "catchment", valid_catchments,
+    "catchments", "live births data")
+
   # -------------------------- dss ------------------------- #
 
   cli::cli_h1("checking DSS")
@@ -340,7 +349,8 @@ process_data <- function(x, start_year, end_year) {
   res <- list(
     ads = ads,
     dss = dss,
-    lb = lb
+    lb = lb,
+    dhs = dhs
   )
   class(res) <- c("list", "champs_processed")
 
