@@ -37,7 +37,7 @@ provided to help get this set up.
 data_dir <- tempfile()
 create_dataset_directory(data_dir)
 #> ✔ The directory
-#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmpbwux7d/file24bf45a789f9' is ready
+#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3' is ready
 #>   for the appropriate data files to be placed in it. The following datasets should be placed
 #>   in this directory:
 #> 
@@ -56,25 +56,30 @@ create_dataset_directory(data_dir)
 #> 5. Season definition: This dataset is a csv file containing rainy and dry season date ranges
 #>    for each site, which will be used to classify the season in which each case occurs. A
 #>    dataset with known season definitions,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmpbwux7d/file24bf45a789f9/seasons.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/seasons.csv',
 #>    has been provided. Please update that file if necessary.
 #> 6. Religion lookup: This dataset is a csv file containing mappings from religion CHAMPS codes
 #>    to religion categories. A dataset with known religion lookups,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmpbwux7d/file24bf45a789f9/religion_lookup.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/religion_lookup.csv',
 #>    has been provided. Please update that file if necessary.
 #> 7. Catchment lookup: This dataset is a csv file containing mappings from catchment codes to
 #>    catchment names, used to link the DSS data, which uses catchment names, to the CHAMPS
 #>    analysis dataset, which uses catchment IDs. A dataset with known catchment lookups,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmpbwux7d/file24bf45a789f9/catchment_lookup.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/catchment_lookup.csv',
 #>    has been provided. Please update that file if necessary.
 #> 8. Live births: This dataset is a csv file containing yearly live births by site and
 #>    catchment from DSS. A dataset with known live birth statistics by site, catchment, and
 #>    year,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmpbwux7d/file24bf45a789f9/live_births.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/live_births.csv',
+#>    has been provided. Please update that file if necessary.
+#> 9. Live births: This dataset is a csv file containing yearly DHS all-cause mortality data by
+#>    site and catchment from DSS. A dataset with known DHS statistics by site, catchment, and
+#>    year,
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/dhs_allcause_u5.csv',
 #>    has been provided. Please update that file if necessary.
 #> 
 #> → Once the files are in place, edit the file
-#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmpbwux7d/file24bf45a789f9/config.yaml
+#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/config.yaml
 #>   to provide the file names corresponding to each of these datasets.
 #> 
 #> The config.yaml template looks like this:
@@ -87,6 +92,7 @@ create_dataset_directory(data_dir)
 #>     │  religion_lookup: religion_lookup.csv    │
 #>     │  catchment_lookup: catchment_lookup.csv  │
 #>     │  live_births_dataset: live_births.csv    │
+#>     │  dhs_dataset: dhs_allcause_u5.csv        │
 #>     └──────────────────────────────────────────┘
 #> 
 #> 
@@ -169,6 +175,10 @@ dd <- process_data(d, start_year = 2017, end_year = 2020)
 #> ✔ Joined analysis dataset and maternal registry
 #> 
 #> ── checking live births ──────────────────────────────────────────────────────────────────────
+#> ✔ Checked that values for 'site' in the live births data are correct
+#> ✔ Checked that values for 'catchment' in the live births data are correct
+#> 
+#> ── checking DHS data ─────────────────────────────────────────────────────────────────────────
 #> ✔ Checked that values for 'site' in the live births data are correct
 #> ✔ Checked that values for 'catchment' in the live births data are correct
 #> 
@@ -355,7 +365,7 @@ ke_man_tbl$table[[1]]
 
 Another table used to determine what factors to adjust for is MITS cases
 with and without the condition for which we are calculating mortality
-for by factor. This can be computed using `cc_factor_tables()`.
+for by factor. This can be computed using `cond_factor_tables()`.
 
 It has the same arguments as the previous function but also has the
 `champs_group` argument that we use do define the cause we want to
@@ -363,7 +373,7 @@ compute the statistics for.
 
 ``` r
 # table of MITS cases with and without a specified condition by factor
-cbd_tbl <- cc_factor_tables(dd,
+cbd_tbl <- cond_factor_tables(dd,
   sites = c("Bangladesh", "Ethiopia", "Kenya"),
   catchments = c("Baliakandi", "Haramaya", "Harar", "Kersa",
     "Manyatta", "Siaya"),
@@ -378,13 +388,13 @@ cbd_tbl
 #> # A tibble: 21 × 8
 #>    site       catchments             factor    table             pval  n_na     n pct_na
 #>    <chr>      <chr>                  <chr>     <list>           <dbl> <int> <int>  <dbl>
-#>  1 Bangladesh Baliakandi, Faridpur   age       <tibble [3 × 3]> 1         0    83   0   
-#>  2 Bangladesh Baliakandi, Faridpur   education <tibble [4 × 3]> 0.384    30    83  36.1 
-#>  3 Bangladesh Baliakandi, Faridpur   location  <tibble [2 × 3]> 1         0    83   0   
-#>  4 Bangladesh Baliakandi, Faridpur   religion  <tibble [2 × 3]> 0.534     1    83   1.20
-#>  5 Bangladesh Baliakandi, Faridpur   season    <tibble [2 × 3]> 1         0    83   0   
-#>  6 Bangladesh Baliakandi, Faridpur   sex       <tibble [2 × 3]> 0.627     0    83   0   
-#>  7 Bangladesh Baliakandi, Faridpur   va        <tibble [2 × 3]> 1         4    83   4.82
+#>  1 Bangladesh Baliakandi             age       <tibble [3 × 3]> 1         0    83   0   
+#>  2 Bangladesh Baliakandi             education <tibble [4 × 3]> 0.384    30    83  36.1 
+#>  3 Bangladesh Baliakandi             location  <tibble [2 × 3]> 1         0    83   0   
+#>  4 Bangladesh Baliakandi             religion  <tibble [2 × 3]> 0.534     1    83   1.20
+#>  5 Bangladesh Baliakandi             season    <tibble [2 × 3]> 1         0    83   0   
+#>  6 Bangladesh Baliakandi             sex       <tibble [2 × 3]> 0.627     0    83   0   
+#>  7 Bangladesh Baliakandi             va        <tibble [2 × 3]> 1         4    83   4.82
 #>  8 Ethiopia   Haramaya, Harar, Kersa age       <tibble [4 × 3]> 0.308     0   172   0   
 #>  9 Ethiopia   Haramaya, Harar, Kersa education <tibble [4 × 3]> 0.601   143   172  83.1 
 #> 10 Ethiopia   Haramaya, Harar, Kersa location  <tibble [2 × 3]> 0.315     0   172   0   
@@ -396,11 +406,11 @@ The table for Bangladesh/age:
 ``` r
 cbd_tbl$table[[1]]
 #> # A tibble: 3 × 3
-#>   level      `Congenital birth defects-` `Congenital birth defects+`
+#>   level      `Congenital birth defects+` `Congenital birth defects-`
 #>   <fct>                            <int>                       <int>
-#> 1 Stillbirth                          30                           1
-#> 2 Neonate                             48                           3
-#> 3 Child                                1                           0
+#> 1 Stillbirth                           1                          30
+#> 2 Neonate                              3                          48
+#> 3 Child                                0                           1
 ```
 
 Which sites/factors pass the adjustment criterion:
@@ -412,14 +422,14 @@ filter(cbd_tbl, pval < 0.1, pct_na < 20)
 #>   <chr>    <chr>                  <chr>  <list>              <dbl> <int> <int>  <dbl>
 #> 1 Ethiopia Haramaya, Harar, Kersa sex    <tibble [2 × 3]> 0.00583      0   172   0   
 #> 2 Ethiopia Haramaya, Harar, Kersa va     <tibble [2 × 3]> 0.0759      15   172   8.72
-#> 3 Kenya    Manyatta, Siaya        age    <tibble [4 × 3]> 0.000269     0   480   0   
-#> 4 Kenya    Manyatta, Siaya        va     <tibble [3 × 3]> 0.00342     52   480  10.8
+#> 3 Kenya    Manyatta, Siaya        age    <tibble [4 × 3]> 0.000263     0   481   0   
+#> 4 Kenya    Manyatta, Siaya        va     <tibble [3 × 3]> 0.00338     52   481  10.8
 ```
 
 We can try other causes as well, such as malnutrition:
 
 ``` r
-mal_tbl <- cc_factor_tables(dd,
+mal_tbl <- cond_factor_tables(dd,
   sites = c("Bangladesh", "Ethiopia", "Kenya"),
   catchments = c("Baliakandi", "Haramaya", "Harar", "Kersa",
     "Manyatta", "Siaya"),
@@ -430,13 +440,13 @@ mal_tbl
 #> # A tibble: 21 × 8
 #>    site       catchments             factor    table                pval  n_na     n pct_na
 #>    <chr>      <chr>                  <chr>     <list>              <dbl> <int> <int>  <dbl>
-#>  1 Bangladesh Baliakandi, Faridpur   age       <tibble [3 × 3]> 1.20e- 2     0    83   0   
-#>  2 Bangladesh Baliakandi, Faridpur   education <tibble [4 × 3]> 1   e+ 0    30    83  36.1 
-#>  3 Bangladesh Baliakandi, Faridpur   location  <tibble [2 × 3]> 1   e+ 0     0    83   0   
-#>  4 Bangladesh Baliakandi, Faridpur   religion  <tibble [2 × 3]> 1   e+ 0     1    83   1.20
-#>  5 Bangladesh Baliakandi, Faridpur   season    <tibble [2 × 3]> 3.86e- 1     0    83   0   
-#>  6 Bangladesh Baliakandi, Faridpur   sex       <tibble [2 × 3]> 1   e+ 0     0    83   0   
-#>  7 Bangladesh Baliakandi, Faridpur   va        <tibble [2 × 3]> 1.27e- 2     4    83   4.82
+#>  1 Bangladesh Baliakandi             age       <tibble [3 × 3]> 1.20e- 2     0    83   0   
+#>  2 Bangladesh Baliakandi             education <tibble [4 × 3]> 1   e+ 0    30    83  36.1 
+#>  3 Bangladesh Baliakandi             location  <tibble [2 × 3]> 1   e+ 0     0    83   0   
+#>  4 Bangladesh Baliakandi             religion  <tibble [2 × 3]> 1   e+ 0     1    83   1.20
+#>  5 Bangladesh Baliakandi             season    <tibble [2 × 3]> 3.86e- 1     0    83   0   
+#>  6 Bangladesh Baliakandi             sex       <tibble [2 × 3]> 1   e+ 0     0    83   0   
+#>  7 Bangladesh Baliakandi             va        <tibble [2 × 3]> 1.27e- 2     4    83   4.82
 #>  8 Ethiopia   Haramaya, Harar, Kersa age       <tibble [4 × 3]> 4.40e-16     0   172   0   
 #>  9 Ethiopia   Haramaya, Harar, Kersa education <tibble [4 × 3]> 1.00e+ 0   143   172  83.1 
 #> 10 Ethiopia   Haramaya, Harar, Kersa location  <tibble [2 × 3]> 9.70e- 6     0   172   0   
@@ -446,11 +456,11 @@ mal_tbl
 ``` r
 mal_tbl$table[[1]]
 #> # A tibble: 3 × 3
-#>   level      `Malnutrition-` `Malnutrition+`
+#>   level      `Malnutrition+` `Malnutrition-`
 #>   <fct>                <int>           <int>
-#> 1 Stillbirth              31               0
-#> 2 Neonate                 51               0
-#> 3 Child                    0               1
+#> 1 Stillbirth               0              31
+#> 2 Neonate                  0              51
+#> 3 Child                    1               0
 ```
 
 #### Fraction and rate calculation data
@@ -823,16 +833,16 @@ bind_rows(
 
 The following computes the number of MITS deaths with and without neural
 tube defects and congenital birth defects by age. This uses functions
-`has_icd10_cc()` to check if neural tube defects are in the causal chain
-using a regular expression indicating ICD10, and `has_champs_group_cc()`
-to check if congenital birth defects are in the causal chain using a
-CHAMPS group.
+`has_icd10()` to check if neural tube defects are in the causal chain
+using a regular expression indicating ICD10, and `has_champs_group()` to
+check if congenital birth defects are in the causal chain using a CHAMPS
+group.
 
 ``` r
 cbd_ntd <- dd$ads %>%
   mutate(
-    ntd_cc = has_icd10_cc(., "^Q00|^Q01|^Q05"),
-    cbd_cc = has_champs_group_cc(., "Congenital birth defects")
+    ntd_cc = has_icd10(., "^Q00|^Q01|^Q05"),
+    cbd_cc = has_champs_group(., "Congenital birth defects")
   )
 
 cbd_ntd %>%
@@ -840,18 +850,19 @@ cbd_ntd %>%
   count(cbd_cc, age) %>%
   filter(!is.na(cbd_cc)) %>%
   arrange(cbd_cc, age)
-#> # A tibble: 5 × 3
+#> # A tibble: 6 × 3
 #>   cbd_cc age            n
 #>   <lgl>  <fct>      <int>
-#> 1 FALSE  Stillbirth    30
-#> 2 FALSE  Neonate       48
-#> 3 FALSE  Child          1
-#> 4 TRUE   Stillbirth     1
-#> 5 TRUE   Neonate        3
+#> 1 FALSE  Stillbirth   431
+#> 2 FALSE  Neonate      420
+#> 3 FALSE  Infant        82
+#> 4 FALSE  Child         63
+#> 5 TRUE   Stillbirth     1
+#> 6 TRUE   Neonate        3
 ```
 
 This code is part of the calculations of mortality rates and fractions
-automatically provided by the function `cc_factor_tables()` described
+automatically provided by the function `cond_factor_tables()` described
 previously.
 
 More to come…

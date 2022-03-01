@@ -150,13 +150,13 @@ ke_man_tbl$table[[1]]
 
 #### Tables of MITS cases with and without a specified condition by factor
 
-Another table used to determine what factors to adjust for is MITS cases with and without the condition for which we are calculating mortality for by factor. This can be computed using `cc_factor_tables()`.
+Another table used to determine what factors to adjust for is MITS cases with and without the condition for which we are calculating mortality for by factor. This can be computed using `cond_factor_tables()`.
 
 It has the same arguments as the previous function but also has the `champs_group` argument that we use do define the cause we want to compute the statistics for.
 
 ```{r}
 # table of MITS cases with and without a specified condition by factor
-cbd_tbl <- cc_factor_tables(dd,
+cbd_tbl <- cond_factor_tables(dd,
   sites = c("Bangladesh", "Ethiopia", "Kenya"),
   catchments = c("Baliakandi", "Haramaya", "Harar", "Kersa",
     "Manyatta", "Siaya"),
@@ -185,7 +185,7 @@ filter(cbd_tbl, pval < 0.1, pct_na < 20)
 We can try other causes as well, such as malnutrition:
 
 ```{r}
-mal_tbl <- cc_factor_tables(dd,
+mal_tbl <- cond_factor_tables(dd,
   sites = c("Bangladesh", "Ethiopia", "Kenya"),
   catchments = c("Baliakandi", "Haramaya", "Harar", "Kersa",
     "Manyatta", "Siaya"),
@@ -234,7 +234,6 @@ get_rate_data(
 Grouped by sex:
 
 ```{r}
-
 get_rate_data(
   dd,
   site = "Ethiopia",
@@ -367,13 +366,13 @@ bind_rows(
   summarise(n = sum(n), .groups = "drop")
 ```
 
-The following computes the number of MITS deaths with and without neural tube defects and congenital birth defects by age. This uses functions `has_icd10_cc()` to check if neural tube defects are in the causal chain using a regular expression indicating ICD10, and `has_champs_group_cc()` to check if congenital birth defects are in the causal chain using a CHAMPS group.
+The following computes the number of MITS deaths with and without neural tube defects and congenital birth defects by age. This uses functions `has_icd10()` to check if neural tube defects are in the causal chain using a regular expression indicating ICD10, and `has_champs_group()` to check if congenital birth defects are in the causal chain using a CHAMPS group.
 
 ```{r}
 cbd_ntd <- dd$ads %>%
   mutate(
-    ntd_cc = has_icd10_cc(., "^Q00|^Q01|^Q05"),
-    cbd_cc = has_champs_group_cc(., "Congenital birth defects")
+    ntd_cc = has_icd10(., "^Q00|^Q01|^Q05"),
+    cbd_cc = has_champs_group(., "Congenital birth defects")
   )
 
 cbd_ntd %>%
@@ -383,7 +382,7 @@ cbd_ntd %>%
   arrange(cbd_cc, age)
 ```
 
-This code is part of the calculations of mortality rates and fractions automatically provided by the function `cc_factor_tables()` described previously.
+This code is part of the calculations of mortality rates and fractions automatically provided by the function `cond_factor_tables()` described previously.
 
 More to come...
 
