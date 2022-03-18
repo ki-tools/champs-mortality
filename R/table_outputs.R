@@ -1,4 +1,3 @@
-
 #' Build pretty table of factor significance and level counts
 #' @param df_table output from mits_selection_factor_tables()
 #' @param print_columns specific columns from the nested tibbles in the table column to print. Defaults to "MITS" and "non-MITS+DSS-only". "DSS-only" and "non-MITS" are the other two columns that can be printed.

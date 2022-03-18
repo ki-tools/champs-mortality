@@ -185,6 +185,8 @@ process_data <- function(x, start_year, end_year) {
         Unknown = as.character(NA)
       ),
       calc_location = dplyr::recode(.data$calc_location,
+        community = "Community",
+        facility = "Facility",
         other = as.character(NA)
       )
     )
@@ -297,6 +299,13 @@ process_data <- function(x, start_year, end_year) {
   ads <- dplyr::left_join(ads_raw, mreg, by = "champsid")
   cli::cli_alert_success("Joined analysis dataset and maternal registry")
 
+  ads$religion <- factor(ads$religion, levels = valid_levels$religion)
+  ads$education <- factor(ads$education, levels = valid_levels$education)
+  ads$sex <- factor(ads$sex, levels = valid_levels$sex)
+  ads$season <- factor(ads$season, levels = valid_levels$season)
+  ads$location <- factor(ads$location, levels = valid_levels$location)
+  ads$va <- factor(ads$va, levels = valid_levels$va)
+
   # -------------------------- live births ------------------------- #
 
   cli::cli_h1("checking live births")
@@ -309,9 +318,9 @@ process_data <- function(x, start_year, end_year) {
 
   cli::cli_h1("checking DHS data")
 
-  check_valid_vals(dhs, "site", valid_sites, "sites", "live births data")
+  check_valid_vals(dhs, "site", valid_sites, "sites", "DHS data")
   check_valid_vals(dhs, "catchment", valid_catchments,
-    "catchments", "live births data")
+    "catchments", "DHS data")
 
   # -------------------------- dss ------------------------- #
 
@@ -326,16 +335,16 @@ process_data <- function(x, start_year, end_year) {
   dss$age <- factor(dss$age, levels = valid_levels$age)
 
   check_valid_vals(filter(dss, factor == "education"),
-    "education", valid_levels$education, "education values", "DSS data")
+    "level", valid_levels$education, "education values", "DSS data")
 
   check_valid_vals(filter(dss, factor == "location"),
-    "location", valid_levels$locations, "locations", "DSS data")
+    "level", valid_levels$location, "locations", "DSS data")
 
   check_valid_vals(filter(dss, factor == "religion"),
-    "religion", valid_levels$religions, "religion values", "DSS data")
+    "level", valid_levels$religion, "religion values", "DSS data")
 
   check_valid_vals(filter(dss, factor == "sex"),
-    "sex", valid_levels$sex, "sex values", "DSS data")
+    "level", valid_levels$sex, "sex values", "DSS data")
 
   check_valid_vals(filter(dss, factor == "season"),
     "level", valid_levels$season, "seasons", "DSS data")

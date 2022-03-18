@@ -2,12 +2,13 @@
 #' @param x processed CHAMPS dataset
 #' @param sites a vector of site names to include in the calculations
 #' @param catchments a vector of catchments to include in the calculations
+#' @param factor_groups a named list that specifies how to group factors
 #' @importFrom dplyr relocate
 #' @importFrom purrr map2 map_dbl
 #' @importFrom tidyr pivot_longer pivot_wider nest
 #' @export
 mits_selection_factor_tables <- function(
-  x, sites, catchments
+  x, sites, catchments, factor_groups = NULL
 ) {
   assertthat::assert_that(inherits(x, "champs_processed"),
     msg = cli::format_error("Data must come from process_data()")
@@ -59,7 +60,7 @@ mits_selection_factor_tables <- function(
     dplyr::group_by(.data$site, .data$factor, .data$level, .data$mits_flag) %>%
     dplyr::summarise(n = sum(.data$n), .groups = "drop")
 
-  tblsn <- tbls %>%
+   tmp <- tbls %>%
     tidyr::nest(data = -c("site", "factor")) %>%
     dplyr::mutate(
       table = purrr::map2(.data$data, .data$factor, function(x, fac) {
@@ -72,14 +73,24 @@ mits_selection_factor_tables <- function(
           x[["0"]] <- 0
         if (is.null(x[["-1"]]))
           x[["-1"]] <- 0
-        if (fac == "age")
-          x$level <- factor(x$level,
-            levels = c("Stillbirth", "Neonate", "Infant", "Child"))
+        x$level <- factor(x$level,
+          levels = valid_levels[[fac]])
         x <- x %>%
           dplyr::mutate("non-MITS+DSS-only" = .data[["0"]] + .data[["-1"]]) %>%
           dplyr::rename("MITS" = "1", "non-MITS" = "0", "DSS-only" = "-1")
         dplyr::arrange(x, .data$level)
-      }),
+      })
+    )
+
+  for (ii in seq_len(nrow(tmp))) {
+    cur_fac <- tmp$factor[ii]
+    if (!is.null(factor_groups[[cur_fac]]))
+      tmp$table[[ii]] <- combine_levels(tmp$table[[ii]],
+        factor_groups[[cur_fac]])
+  }
+
+  tblsn <- tmp %>%
+    mutate(
       pval = purrr::map_dbl(table, function(x) {
         fisher_test(as.matrix(x[, c("MITS", "non-MITS+DSS-only")]))
       })

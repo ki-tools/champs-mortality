@@ -85,13 +85,15 @@ live_birth_names <- c(
   "live_births"
 )
 
+dhs_names <- c("site", "catchment", "year", "rate")
+
 valid_levels <- list(
   age = c("Stillbirth", "Neonate", "Infant", "Child"),
   education = c("None", "Primary", "Secondary", "Tertiary"),
   religion = c("Christian", "Hindu", "Muslim", "Other"),
-  sex = c("Male", "Female"),
+  sex = c("Female", "Male"),
   season = c("Dry", "Rainy"),
-  location = c("facility", "community"),
+  location = c("Community", "Facility"),
   va = c("Infection", "Trauma", "Other")
 )
 
