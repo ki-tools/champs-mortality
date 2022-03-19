@@ -1,37 +1,35 @@
 
-#' @param x an object read in from [read_and_validate_data()]
-#' @param catchments a vector of catchments to include in the calculations
-#' @param condition a CHAMPS condition (see [valid_conditions()])
-#' @param icd10_regex an optional regular expression specifying ICD10 codes
-#' that define a condition
-#' @param adjust_vars a vector of variables to adjust by
-#' @note One or both of `icd10_regex` and `condition` must be specified
-#' @export
-get_rates_fractions <- function(
-  x,
-  sites,
-  catchments = NULL,
-  group_catchments = FALSE,
-  condition = NULL,
-  icd10_regex = NULL,
-  causal_chain = TRUE,
-  adjust_var_override = NULL,
-  factor_groups = NULL
-) {
-  mits_selection_factor_tables(x, sites, catchments, factor_groups = NULL)
+# #' @param x an object read in from [read_and_validate_data()]
+# #' @param catchments a vector of catchments to include in the calculations
+# #' @param condition a CHAMPS condition (see [valid_conditions()])
+# #' @param icd10_regex an optional regular expression specifying ICD10 codes
+# #' that define a condition
+# #' @param adjust_vars a vector of variables to adjust by
+# #' @note One or both of `icd10_regex` and `condition` must be specified
+# #' @export
+# get_rates_fractions <- function(
+#   x,
+#   sites,
+#   catchments = NULL,
+#   group_catchments = FALSE,
+#   condition = NULL,
+#   icd10_regex = NULL,
+#   causal_chain = TRUE,
+#   adjust_var_override = NULL,
+#   factor_groups = NULL
+# ) {
+#   mits_selection_factor_tables(x, sites, catchments, factor_groups = NULL)
 
-}
+# }
 
 
-# •	Build a master function that is the main entry point to the package that, for a given set of inputs (site, condition, whether to search in causal chain, age groupings or subsets, and whether to break down by catchment or not) does the following:
-# o	automatically determine the factor(s) to adjust by (if any) 
-# o	compute the crude and adjusted mortality fractions
-# o	combine groups with zeros
-# o	combine the rates and fractions across all catchments (if broken down by catchment) to provide site-level statistics
-# o	outputs:
-# 	Crude and adjusted mortality rates and fractions with confidence intervals
-# 	All underlying tables and data which can be optionally presented for diagnostic purposes (e.g. show what was adjusted for and why, etc.)
-
+# automatically determine the factor(s) to adjust by (if any)
+# compute the crude and adjusted mortality fractions
+# combine groups with zeros
+# combine the rates and fractions across all catchments (if broken down by catchment) to provide site-level statistics
+# outputs:
+# Crude and adjusted mortality rates and fractions with confidence intervals
+# All underlying tables and data which can be optionally presented for diagnostic purposes (e.g. show what was adjusted for and why, etc.)
 
 
 # should we support multiple conditions?

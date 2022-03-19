@@ -89,9 +89,9 @@ dhs_names <- c("site", "catchment", "year", "rate")
 
 valid_levels <- list(
   age = c("Stillbirth", "Neonate", "Infant", "Child"),
-  education = c("None", "Primary", "Secondary", "Tertiary"),
-  religion = c("Christian", "Hindu", "Muslim", "Other"),
   sex = c("Female", "Male"),
+  religion = c("Christian", "Hindu", "Muslim", "Other"),
+  education = c("None", "Primary", "Secondary", "Tertiary"),
   season = c("Dry", "Rainy"),
   location = c("Community", "Facility"),
   va = c("Infection", "Trauma", "Other")

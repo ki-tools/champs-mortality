@@ -1,23 +1,29 @@
 #' Compute counts of MITS and non-MITS+DSS-only deaths by factors
-#' @param x processed CHAMPS dataset
-#' @param sites a vector of site names to include in the calculations
-#' @param catchments a vector of catchments to include in the calculations.
-#' If NULL, all catchments with DSS data will be used
-#' @param factor_groups a named list that specifies how to group factors
-#' @importFrom dplyr relocate
+#' @param x Processed CHAMPS dataset.
+#' @param sites A vector of site names to include in the calculations. If NULL,
+#' all sites with data (corresponding to value of use_dss) will be used.
+#' @param catchments A vector of catchments to include in the calculations.
+#' If NULL, all catchments with data (corresponding to value of use_dss)
+#' will be used.
+#' @param group_catchments Should all catchments within a site be grouped
+#' together?
+#' @param factor_groups A named list that specifies how to group factors
+#' @param use_dss Should the calculations be done only for catchments that
+#' have DSS data (TRUE) or for catchments that don't (FALSE)?
+#' @importFrom dplyr relocate group_by_at full_join
 #' @importFrom purrr map2 map_dbl
 #' @importFrom tidyr pivot_longer pivot_wider nest
 #' @export
 mits_selection_factor_tables <- function(
   x, sites = NULL, catchments = NULL, group_catchments = TRUE,
-  factor_groups = NULL
+  factor_groups = NULL, use_dss = TRUE
 ) {
   assertthat::assert_that(inherits(x, "champs_processed"),
     msg = cli::format_error("Data must come from process_data()")
   )
   dss <- dss_transform(x$dss)
 
-  obj <- get_ctch(x, sites, catchments)
+  obj <- get_ctch(x, sites, catchments, use_dss = use_dss)
   sites <- obj$sites
   ctch <- obj$ctch
   catchments <- obj$catchments
@@ -35,9 +41,11 @@ mits_selection_factor_tables <- function(
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments) %>%
     dplyr::select(dplyr::any_of(c("site", "catchment", "sex", "religion",
       "education", "season", "location", "va", "age", "mits_flag", "year"))) %>%
-    tidyr::pivot_longer(cols = -all_of(
-      c("site", "catchment", "mits_flag", "year")),
-      names_to = "factor", values_to = "level") %>%
+    tidyr::pivot_longer(
+      cols = -all_of(c("site", "catchment", "mits_flag", "year")),
+      names_to = "factor",
+      values_to = "level"
+    ) %>%
     dplyr::left_join(ctch, by = c("site", "catchment")) %>%
     # make sure we are looking at the right years between DSS and ADS
     dplyr::filter(
@@ -46,8 +54,39 @@ mits_selection_factor_tables <- function(
     ) %>%
     dplyr::group_by_at(group_vars) %>%
     dplyr::summarise(n = n()) %>%
-    dplyr::filter(!is.na(.data$level)) %>%
     dplyr::ungroup()
+
+  group_vars <- c(
+    "site",
+    if (group_catchments) NULL else "catchment",
+    "factor"
+  )
+  tots_ads <- ads_ct %>%
+    dplyr::filter(!is.na(.data$level)) %>%
+    dplyr::select(-c("level")) %>%
+    dplyr::group_by_at(group_vars) %>%
+    dplyr::summarise(
+      n_mits = sum(n[mits_flag == 1]),
+      n_non_mits = sum(n[mits_flag == 0])
+    ) %>%
+    dplyr::ungroup()
+
+  group_vars <- c(
+    "site",
+    if (group_catchments) NULL else "catchment",
+    "factor"
+  )
+  miss_ads <- ads_ct %>%
+    dplyr::filter(is.na(.data$level)) %>%
+    dplyr::select(-c("level")) %>%
+    dplyr::group_by_at(group_vars) %>%
+    dplyr::summarise(
+      na_mits = sum(n[mits_flag == 1]),
+      na_non_mits = sum(n[mits_flag == 0])
+    ) %>%
+    dplyr::ungroup()
+
+  ads_tbl <- dplyr::full_join(tots_ads, miss_ads, by = group_vars)
 
   group_vars <- c(
     "site",
@@ -55,7 +94,6 @@ mits_selection_factor_tables <- function(
     "factor",
     "level"
   )
-
   dss_ct <- dss %>%
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments) %>%
     dplyr::group_by_at(group_vars) %>%
@@ -71,13 +109,13 @@ mits_selection_factor_tables <- function(
     "site",
     if (group_catchments) NULL else "catchment"
   )
-
   # this will give the total DSS subjects at each site so we can compute missing
-  tots <- dss %>%
+  # assume age always has the full counts (never have unknown age in DSS)
+  tots_dss <- dss %>%
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments,
       .data$factor == "age") %>%
     dplyr::group_by_at(group_vars) %>%
-    dplyr::summarise(n_tot = sum(.data$n))
+    dplyr::summarise(n_dss_tot = sum(.data$n))
 
   group_vars <- c(
     "site",
@@ -88,14 +126,20 @@ mits_selection_factor_tables <- function(
     "site",
     if (group_catchments) NULL else "catchment"
   )
-
-  miss <- dss_ct %>%
+  dss_tbl <- dss_ct %>%
     dplyr::group_by_at(group_vars) %>%
-    dplyr::summarise(n = sum(.data$n), .groups = "drop") %>%
-    dplyr::left_join(tots, by = join_vars) %>%
+    dplyr::summarise(n_dss = sum(.data$n), .groups = "drop") %>%
+    dplyr::left_join(tots_dss, by = join_vars) %>%
+    dplyr::mutate(na_dss = .data$n_dss_tot - .data$n_dss) %>%
+    dplyr::select(-c("n_dss_tot"))
+
+  tots <- dplyr::full_join(dss_tbl, ads_tbl, by = group_vars) %>%
+    replace(is.na(.), 0) %>%
     dplyr::mutate(
-      n_na = .data$n_tot - .data$n,
-      pct_na = 100 * .data$n_na / .data$n_tot)
+      n_na = .data$na_dss + .data$na_mits + .data$na_non_mits,
+      n_tot = .data$n_na + .data$n_dss + .data$n_mits + .data$n_non_mits,
+      pct_na = 100 * .data$n_na / .data$n_tot
+    )
 
   group_vars <- c(
     "site",
@@ -104,7 +148,6 @@ mits_selection_factor_tables <- function(
     "level",
     "mits_flag"
   )
-
   tbls <- dplyr::bind_rows(ads_ct, dss_ct) %>%
     dplyr::group_by_at(group_vars) %>%
     dplyr::summarise(n = sum(.data$n), .groups = "drop")
@@ -134,6 +177,10 @@ mits_selection_factor_tables <- function(
         x <- x %>%
           dplyr::mutate("non-MITS+DSS-only" = .data[["0"]] + .data[["-1"]]) %>%
           dplyr::rename("MITS" = "1", "non-MITS" = "0", "DSS-only" = "-1")
+        if (!use_dss) {
+          x[["DSS-only"]] <- NULL
+          x[["non-MITS+DSS-only"]] <- NULL
+        }
         dplyr::arrange(x, .data$level)
       })
     )
@@ -153,33 +200,67 @@ mits_selection_factor_tables <- function(
   tblsn <- tmp %>%
     mutate(
       pval = purrr::map_dbl(table, function(x) {
-        fisher_test(as.matrix(x[, c("MITS", "non-MITS+DSS-only")]))
+        if (use_dss) {
+          fisher_test(as.matrix(x[, c("MITS", "non-MITS+DSS-only")]))
+        } else {
+          fisher_test(as.matrix(x[, c("MITS", "non-MITS")]))
+        }
       })
     ) %>%
-    dplyr::left_join(miss, by = join_vars) %>%
+    dplyr::left_join(tots, by = join_vars) %>%
     dplyr::select(-c("data")) %>%
-    dplyr::relocate("catchment", .after = "site")
+    dplyr::relocate("catchment", .after = "site") %>%
+    dplyr::mutate(factor = factor(.data$factor, levels = valid_factors)) %>%
+    dplyr::arrange_at(c("site", "catchment", "factor"))
 
   tblsn$pval[is.na(tblsn$pval)] <- 1
 
   tblsn
 }
 
+
+
 #' Compute counts of MITS cases and non-cases for a given condition by factors
-#' @param x processed CHAMPS dataset
-#' @param sites a vector of site names to include in the calculations
-#' @param catchments a vector of catchments to include in the calculations
-#' @param champs_group CHAMPS group specifying the condition
+#' @param x Processed CHAMPS dataset.
+#' @param sites A vector of site names to include in the calculations. If NULL,
+#' all sites with data (corresponding to value of use_dss) will be used.
+#' @param catchments A vector of catchments to include in the calculations.
+#' If NULL, all catchments with data (corresponding to value of use_dss)
+#' will be used.
+#' @param group_catchments Should all catchments within a site be grouped
+#' together?
+#' @param factor_groups A named list that specifies how to group factors
+#' @param use_dss Should the calculations be done only for catchments that
+#' have DSS data (TRUE) or for catchments that don't (FALSE)?
+#' @param condition CHAMPS group specifying the condition
+#' @param icd10_regex An optional regular expression specifying ICD10 codes
+#' that define a condition.
+#' @param cond_name The name of the condition to use in outputs (e.g. if
+#' the condition is "Congenital birth defects", cond_name could be "CBD").
+#' Defaults to `condition` if not specified.
+#' @param causal_chain Should the search for the condition be
+#' across the causal chain?
 #' @export
 cond_factor_tables <- function(
-  x, champs_group, sites = NULL, catchments = NULL, group_catchments = TRUE,
-  causal_chain = TRUE, factor_groups = NULL
+  x, sites = NULL, catchments = NULL, group_catchments = TRUE,
+  factor_groups = NULL, use_dss = TRUE,
+  condition = NULL, icd10_regex = NULL, cond_name = condition,
+  causal_chain = TRUE
 ) {
   assertthat::assert_that(inherits(x, "champs_processed"),
     msg = cli::format_error("Data must come from process_data()")
   )
 
-  obj <- get_ctch(x, sites, catchments)
+  assertthat::assert_that(!(is.null(condition) && is.null(icd10_regex)),
+    msg = cli::format_error("Must specify at least one of 'condition' \\
+      and icd10_regex")
+  )
+
+  assertthat::assert_that(!(is.null(cond_name)),
+    msg = cli::format_error("Must specify cond_name")
+  )
+
+  obj <- get_ctch(x, sites, catchments, use_dss = use_dss)
   sites <- obj$sites
   ctch <- obj$ctch
   catchments <- obj$catchments
@@ -193,9 +274,17 @@ cond_factor_tables <- function(
     "level"
   )
 
+  check_cond <- function(., group, rgx, causal_chain) {
+    if (is.null(group))
+      return(has_icd10(., rgx, cc = causal_chain))
+    if (is.null(rgx))
+      return(has_champs_group(., group, cc = causal_chain))
+    has_icd10(., rgx) | has_champs_group(., group)
+  }
+
   tbls <- x$ads %>%
     dplyr::mutate(cc = as.numeric(
-      has_champs_group(.data, !!champs_group))) %>%
+      check_cond(.data, condition, icd10_regex, causal_chain))) %>%
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments,
       .data$mits_flag == 1, .data$decoded == 1) %>%
     dplyr::select(dplyr::any_of(c("site", "catchment", "sex", "religion",
@@ -248,7 +337,7 @@ cond_factor_tables <- function(
         if (is.null(x[["0"]]))
           x[["0"]] <- 0
         x <- x %>%
-          dplyr::rename("{champs_group}+" := "1", "{champs_group}-" := "0")
+          dplyr::rename("{cond_name}+" := "1", "{cond_name}-" := "0")
         if (fac == "age")
           x$level <- factor(x$level,
             levels = c("Stillbirth", "Neonate", "Infant", "Child"))
@@ -279,25 +368,36 @@ cond_factor_tables <- function(
     ) %>%
     dplyr::left_join(miss, by = join_vars) %>%
     dplyr::select(-c("data")) %>%
-    dplyr::relocate("catchment", .after = "site")
+    dplyr::relocate("catchment", .after = "site") %>%
+    dplyr::mutate(factor = factor(.data$factor, levels = valid_factors)) %>%
+    dplyr::arrange_at(c("site", "catchment", "factor"))
 
   tblsn$pval[is.na(tblsn$pval)] <- 1
 
   tblsn
 }
 
-
-get_ctch <- function(x, sites, catchments, dss = TRUE) {
-  usite <- unique(x$dss$site)
+get_ctch <- function(x, sites, catchments, use_dss = TRUE) {
+  if (use_dss) {
+    usite <- unique(x$dss$site)
+  } else {
+    usite <- unique(x$ads$site)
+  }
   if (is.null(sites))
     sites <- usite
 
   # assumption is that any catchment that has DSS data shows up in DSS
-  ucatch <- unique(x$dss$catchment)
+  if (use_dss) {
+    ucatch <- unique(x$dss$catchment)
+    str <- " not "
+  } else {
+    ucatch <- setdiff(unique(x$ads$catchment), unique(x$dss$catchment))
+    str <- " "
+  }
   if (!is.null(catchments)) {
     not_supported <- setdiff(catchments, ucatch)
     if (length(not_supported) > 0)
-      cli::cli_alert_info("The following catchments are not found in DSS \\
+      cli::cli_alert_info("The following catchments are{str}found in DSS \\
         and will be removed from the calculations: \\
         {paste(not_supported, collapse = ', ')}", wrap = TRUE)
     catchments <- intersect(catchments, ucatch)
@@ -322,15 +422,29 @@ get_ctch <- function(x, sites, catchments, dss = TRUE) {
         for the sites that were specified: \\
         {paste(not_in_sites, collapse = ', ')}", wrap = TRUE)
   } else {
-    ctch <- x$dss %>%
-      dplyr::select(dplyr::all_of(c("site", "catchment",
-        "period_start_year", "period_end_year"))) %>%
-      dplyr::rename(
-        start_year = "period_start_year",
-        end_year = "period_end_year"
-      ) %>%
-      dplyr::filter(.data$site %in% sites) %>%
-      dplyr::distinct()
+    if (use_dss) {
+      ctch <- x$dss %>%
+        dplyr::select(dplyr::all_of(c("site", "catchment",
+          "period_start_year", "period_end_year"))) %>%
+        dplyr::rename(
+          start_year = "period_start_year",
+          end_year = "period_end_year"
+        ) %>%
+        dplyr::filter(.data$site %in% sites) %>%
+        dplyr::distinct()
+    } else {
+      catchments <- setdiff(unique(x$ads$catchment),
+        unique(x$dss$catchment))
+      ctch <- x$ads %>%
+        dplyr::group_by_at(c("site", "catchment")) %>%
+        dplyr::summarise(
+          start_year = min(year),
+          end_year = max(year)
+        ) %>%
+        dplyr::filter(
+          .data$catchment %in% catchments) %>%
+        dplyr::distinct()
+    }
     catchments <- unique(ctch$catchment)
   }
 

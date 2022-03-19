@@ -4,16 +4,48 @@
 \alias{cond_factor_tables}
 \title{Compute counts of MITS cases and non-cases for a given condition by factors}
 \usage{
-cond_factor_tables(x, sites, catchments, champs_group)
+cond_factor_tables(
+  x,
+  sites = NULL,
+  catchments = NULL,
+  group_catchments = TRUE,
+  factor_groups = NULL,
+  use_dss = TRUE,
+  condition = NULL,
+  icd10_regex = NULL,
+  cond_name = condition,
+  causal_chain = TRUE
+)
 }
 \arguments{
-\item{x}{processed CHAMPS dataset}
+\item{x}{Processed CHAMPS dataset.}
 
-\item{sites}{a vector of site names to include in the calculations}
+\item{sites}{A vector of site names to include in the calculations. If NULL,
+all sites with data (corresponding to value of use_dss) will be used.}
 
-\item{catchments}{a vector of catchments to include in the calculations}
+\item{catchments}{A vector of catchments to include in the calculations.
+If NULL, all catchments with data (corresponding to value of use_dss)
+will be used.}
 
-\item{champs_group}{CHAMPS group specifying the condition}
+\item{group_catchments}{Should all catchments within a site be grouped
+together?}
+
+\item{factor_groups}{A named list that specifies how to group factors}
+
+\item{use_dss}{Should the calculations be done only for catchments that
+have DSS data (TRUE) or for catchments that don't (FALSE)?}
+
+\item{condition}{CHAMPS group specifying the condition}
+
+\item{icd10_regex}{An optional regular expression specifying ICD10 codes
+that define a condition.}
+
+\item{cond_name}{The name of the condition to use in outputs (e.g. if
+the condition is "Congenital birth defects", cond_name could be "CBD").
+Defaults to \code{condition} if not specified.}
+
+\item{causal_chain}{Should the search for the condition be
+across the causal chain?}
 }
 \description{
 Compute counts of MITS cases and non-cases for a given condition by factors
