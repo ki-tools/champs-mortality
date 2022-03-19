@@ -13,10 +13,10 @@ build_table_location <- function(
   drop_columns <- count_columns[!count_columns %in% print_columns]
 
   # expand the nested tables
-  dat <- df_table %>%
+  dat <- suppressWarnings(df_table %>%
     dplyr::select(site, catchment, factor, table) %>%
     tidyr::unnest(cols = c("table")) %>%
-    dplyr::select(-dplyr::one_of(drop_columns))
+    dplyr::select(-dplyr::one_of(drop_columns)))
 
   # add percent columns
   dat_out <- dat %>%
@@ -34,6 +34,9 @@ build_table_location <- function(
           .funs = function(x) {
             paste0(x, "_percent")
           }
+        ) %>%
+        mutate(
+          dplyr::across(tidyselect:::where(is.numeric), ~tidyr::replace_na(.x, 0))
         ),
       by = c("site", "catchment", "factor", "level")
     ) %>%
@@ -63,7 +66,7 @@ build_table_location <- function(
     dat_gt <- dat_gt %>%
       gt::cols_merge(
         columns = c(dplyr::all_of(n_name),dplyr::all_of(pct_name)),
-        pattern = "{1} ({2})" 
+        pattern = "{1} ({2})"
       )
 
     while_names <- while_names[-1]
@@ -132,7 +135,7 @@ build_table_location <- function(
     dat_gt <- dat_gt %>%
       gt::tab_spanner(
         label = gt::md(column_title),
-        columns = create_name
+        columns = dplyr::all_of(create_name)
       ) %>%
       gt::cols_label({{ create_name }} := "n (%)")
 
