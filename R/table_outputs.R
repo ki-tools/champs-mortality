@@ -12,7 +12,7 @@ build_table_location <- function(
 
   # expand the nested tables
   dat <- df_table %>%
-    dplyr::select(site, catchments, factor, table) %>%
+    dplyr::select(site, catchment, factor, table) %>%
     tidyr::unnest(cols = c("table")) %>%
     dplyr::select(-dplyr::one_of(drop_columns))
 
@@ -33,7 +33,7 @@ build_table_location <- function(
             paste0(x, "_percent")
           }
         ),
-      by = c("site", "catchments", "factor", "level")
+      by = c("site", "catchment", "factor", "level")
     )
 
   # start dt table structure.
@@ -137,13 +137,13 @@ build_table_location <- function(
   }
 
   dat_gt %>%
-    gt::cols_hide(columns = c(site, catchments, factor)) %>%
+    gt::cols_hide(columns = c(site, catchment, factor)) %>%
     gt::tab_source_note(
       source_note = gt::md("Built using the champsmortality R package.")
     ) %>% # nolint
     gt::tab_stubhead(label = gt::md("__Factors__")) %>%
     gt::tab_header(
       title = gt::md(paste0("__", df_row$site, "__")),
-      subtitle = df_row$catchments
+      subtitle = df_row$catchment
     )
 }
