@@ -10,7 +10,7 @@
 #' @param factor_groups A named list that specifies how to group factors
 #' @param use_dss Should the calculations be done only for catchments that
 #' have DSS data (TRUE) or for catchments that don't (FALSE)?
-#' @importFrom dplyr relocate group_by_at full_join
+#' @importFrom dplyr relocate group_by_at full_join n
 #' @importFrom purrr map2 map_dbl
 #' @importFrom tidyr pivot_longer pivot_wider nest
 #' @export
@@ -23,11 +23,12 @@ mits_selection_factor_tables <- function(
   )
   dss <- dss_transform(x$dss)
 
-  obj <- get_ctch(x, sites, catchments, use_dss = use_dss)
-  sites <- obj$sites
-  ctch <- obj$ctch
-  catchments <- obj$catchments
-  gctch <- obj$gctch
+  obj <- get_ctch(x, sites, catchments)
+  type <- paste0(ifelse(use_dss, "", "non_"), "dss")
+  sites <- obj[[type]]$sites
+  ctch <- obj[[type]]$ctch
+  catchments <- obj[[type]]$catchments
+  gctch <- obj[[type]]$gctch
 
   group_vars <- c(
     "site",
@@ -53,7 +54,7 @@ mits_selection_factor_tables <- function(
       .data$year <= .data$end_year
     ) %>%
     dplyr::group_by_at(group_vars) %>%
-    dplyr::summarise(n = n()) %>%
+    dplyr::summarise(n = dplyr::n()) %>%
     dplyr::ungroup()
 
   group_vars <- c(
@@ -237,7 +238,8 @@ mits_selection_factor_tables <- function(
 #' that define a condition.
 #' @param cond_name The name of the condition to use in outputs (e.g. if
 #' the condition is "Congenital birth defects", cond_name could be "CBD").
-#' Defaults to `condition` if not specified.
+#' Defaults to value of `condition` if not specified. Required if only
+#' `icd10_regex` is specified.
 #' @param causal_chain Should the search for the condition be
 #' across the causal chain?
 #' @export
@@ -256,15 +258,25 @@ cond_factor_tables <- function(
       and icd10_regex")
   )
 
+  if (!is.null(condition)) {
+    assertthat::assert_that(length(condition) == 1)
+    conds <- valid_conditions(x)
+    assertthat::assert_that(condition %in% conds$condition,
+      msg = cli::format_error("Must provide a valid condition. See \\
+        valid_conditions() for a list.")
+    )
+  }
+
   assertthat::assert_that(!(is.null(cond_name)),
     msg = cli::format_error("Must specify cond_name")
   )
 
-  obj <- get_ctch(x, sites, catchments, use_dss = use_dss)
-  sites <- obj$sites
-  ctch <- obj$ctch
-  catchments <- obj$catchments
-  gctch <- obj$gctch
+  obj <- get_ctch(x, sites, catchments)
+  type <- paste0(ifelse(use_dss, "", "non_"), "dss")
+  sites <- obj[[type]]$sites
+  ctch <- obj[[type]]$ctch
+  catchments <- obj[[type]]$catchments
+  gctch <- obj[[type]]$gctch
 
   group_vars <- c(
     "site",
@@ -377,85 +389,93 @@ cond_factor_tables <- function(
   tblsn
 }
 
-get_ctch <- function(x, sites, catchments, use_dss = TRUE) {
-  if (use_dss) {
-    usite <- unique(x$dss$site)
-  } else {
-    usite <- unique(x$ads$site)
-  }
+get_ctch <- function(x, sites = NULL, catchments = NULL) {
+  usite <- unique(c(x$dss$site, x$ads$site))
   if (is.null(sites))
     sites <- usite
 
   # assumption is that any catchment that has DSS data shows up in DSS
-  if (use_dss) {
-    ucatch <- unique(x$dss$catchment)
-    str <- " not "
+  dss_ucatch <- x$dss %>%
+    dplyr::filter(.data$site %in% sites) %>%
+    dplyr::pull("catchment") %>%
+    unique()
+  non_dss_ucatch <- x$ads %>%
+    dplyr::filter(.data$site %in% sites) %>%
+    dplyr::pull("catchment") %>%
+    unique() %>%
+    setdiff(dss_ucatch)
+
+  if (is.null(catchments)) {
+    catchments <- c(dss_ucatch, non_dss_ucatch)
   } else {
-    ucatch <- setdiff(unique(x$ads$catchment), unique(x$dss$catchment))
-    str <- " "
-  }
-  if (!is.null(catchments)) {
-    not_supported <- setdiff(catchments, ucatch)
+    not_supported <- setdiff(catchments, c(dss_ucatch, non_dss_ucatch))
     if (length(not_supported) > 0)
-      cli::cli_alert_info("The following catchments are{str}found in DSS \\
+      cli::cli_alert_info("The following catchments are not found in the data \\
         and will be removed from the calculations: \\
         {paste(not_supported, collapse = ', ')}", wrap = TRUE)
-    catchments <- intersect(catchments, ucatch)
-
-    ctch <- x$dss %>%
-      dplyr::select(dplyr::all_of(c("site", "catchment",
-        "period_start_year", "period_end_year"))) %>%
-      dplyr::rename(
-        start_year = "period_start_year",
-        end_year = "period_end_year"
-      ) %>%
-      dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments) %>%
-      dplyr::distinct()
-
-    # x$dss %>%
-    #   select(site, catchment, period_start_year, period_end_year) %>%
-    #   distinct()
-
-    not_in_sites <- setdiff(ctch$catchment, catchments)
-    if (length(not_in_sites) > 0)
-      cli::cli_alert_info("The following catchments are not found in DSS \\
-        for the sites that were specified: \\
-        {paste(not_in_sites, collapse = ', ')}", wrap = TRUE)
-  } else {
-    if (use_dss) {
-      ctch <- x$dss %>%
-        dplyr::select(dplyr::all_of(c("site", "catchment",
-          "period_start_year", "period_end_year"))) %>%
-        dplyr::rename(
-          start_year = "period_start_year",
-          end_year = "period_end_year"
-        ) %>%
-        dplyr::filter(.data$site %in% sites) %>%
-        dplyr::distinct()
-    } else {
-      catchments <- setdiff(unique(x$ads$catchment),
-        unique(x$dss$catchment))
-      ctch <- x$ads %>%
-        dplyr::group_by_at(c("site", "catchment")) %>%
-        dplyr::summarise(
-          start_year = min(year),
-          end_year = max(year)
-        ) %>%
-        dplyr::filter(
-          .data$catchment %in% catchments) %>%
-        dplyr::distinct()
-    }
-    catchments <- unique(ctch$catchment)
+    catchments <- intersect(catchments, c(dss_ucatch, non_dss_ucatch))
   }
 
-  gctch <- ctch %>%
-  dplyr::group_by(.data$site) %>%
-  dplyr::summarise(
-    catchment = paste(sort(unique(.data$catchment)),
-      collapse = ", "),
-    start_year = min(start_year),
-    end_year = min(end_year)
+  dss_catch <- intersect(catchments, dss_ucatch)
+  dss_ctch <- x$dss %>%
+    dplyr::select(dplyr::all_of(c("site", "catchment",
+      "period_start_year", "period_end_year"))) %>%
+    dplyr::rename(
+      start_year = "period_start_year",
+      end_year = "period_end_year"
+    ) %>%
+    dplyr::filter(
+      .data$site %in% sites,
+      .data$catchment %in% dss_catch
+    ) %>%
+    dplyr::distinct()
+
+  non_dss_catch <- intersect(catchments, non_dss_ucatch)
+  non_dss_ctch <- x$ads %>%
+    dplyr::group_by_at(c("site", "catchment")) %>%
+    dplyr::summarise(
+      start_year = min(.data$year),
+      end_year = max(.data$year),
+      .groups = "drop"
+    ) %>%
+    dplyr::filter(
+      .data$site %in% sites,
+      .data$catchment %in% non_dss_catch
+    ) %>%
+    dplyr::distinct()
+
+  not_in_sites <- setdiff(catchments,
+    c(dss_ctch$catchment, non_dss_ctch$catchment))
+  if (length(not_in_sites) > 0)
+    cli::cli_alert_info("The following catchments are not found \\
+      for the sites that were specified: \\
+      {paste(not_in_sites, collapse = ', ')}", wrap = TRUE)
+
+  res <- list(
+    dss = list(
+      ctch = dss_ctch
+    ),
+    non_dss = list(
+      ctch = non_dss_ctch
+    )
   )
 
-  list(ctch = ctch, catchments = catchments, gctch = gctch, sites = sites)
+  for (ii in seq_along(res)) {
+    if (nrow(res[[ii]]$ctch) == 0) {
+      res[[ii]]$gctch <- res[[ii]]$ctch
+    } else {
+      res[[ii]]$gctch <- res[[ii]]$ctch %>%
+        dplyr::group_by(.data$site) %>%
+        dplyr::summarise(
+          catchment = paste(sort(unique(.data$catchment)),
+            collapse = ", "),
+          start_year = min(.data$start_year),
+          end_year = min(.data$end_year),
+          .groups = "drop"
+        )
+    }
+    res[[ii]]$sites <- unique(res[[ii]]$ctch$site)
+    res[[ii]]$catchments <- unique(res[[ii]]$ctch$catchment)
+  }
+  res
 }

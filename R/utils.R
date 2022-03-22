@@ -96,7 +96,11 @@ valid_conditions <- function(x) {
   tmp
 }
 
-combine_levels <- function(x, level_definitions = NULL) {
+combine_levels <- function(x, level_definitions = NULL,
+  varname = "level", summ = TRUE) {
+
+  if (varname != "level")
+    x <- rename(x, "level" = varname)
   # check that level is a factor. If not create
   if (is.null(level_definitions)) {
     out <- x
@@ -112,9 +116,16 @@ combine_levels <- function(x, level_definitions = NULL) {
       dplyr::mutate(level = factor(
         level,
         levels = names(level_definitions)
-      )) %>%
-      dplyr::group_by(level) %>%
-      dplyr::summarise_all(sum)
+      ))
+
+    if (summ) {
+      out <- out %>%
+        dplyr::group_by(level) %>%
+        dplyr::summarise_all(sum)
+    }
+
+    if (varname != "level")
+      out <- rename(out, "{varname}" := "level")
   }
   out
 }
