@@ -63,6 +63,9 @@ table_adjust_decision <- function(
   pmissing = 20,
   percent_digits = 1
 ) {
+  full_color <- "#4E79A7"
+  partial_color <- "#4E79A7AA"
+
   # build the wide table that has location by row and
   # all the missing and pvalue columns for every factor by column
   dat_wide <- df_table %>%
@@ -188,7 +191,7 @@ table_adjust_decision <- function(
     gt_table <- gt_table %>%
       gt::tab_style(
         style = list(
-          gt::cell_fill(color = "#fefefe")
+          gt::cell_fill(color = "#eeeeee")
         ),
         locations = gt::cells_body(
           columns = {{ col1 }}
@@ -196,7 +199,7 @@ table_adjust_decision <- function(
       ) %>%
       gt::tab_style(
         style = list(
-          gt::cell_fill(color = "#808080"),
+          gt::cell_fill(color = partial_color),
           gt::cell_text(color = "white")
         ),
         locations = gt::cells_body(
@@ -206,7 +209,7 @@ table_adjust_decision <- function(
       ) %>%
       gt::tab_style(
         style = list(
-          gt::cell_fill(color = "black"),
+          gt::cell_fill(color = full_color),
           gt::cell_text(color = "white")
         ),
         locations = gt::cells_body(
@@ -253,14 +256,18 @@ table_adjust_decision <- function(
     ) %>%
     gt::tab_header(
       title = gt::md(paste0("__Potential adjustment factors__")),
-      subtitle = gt::html(
-        '<span style="background-color:Black;color:White">Black: </span>\
+      subtitle = gt::html(glue::glue(
+        '<span style="background-color:{full_color};color:White">Blue: </span>\
                  <em>&nbsp; P-value < 0.1 & Missing < 20%</em> <b>,</b>
-                <span style="background-color:#808080;color:White"> Grey: </span>\
+                <span style="background-color:{partial_color};color:White"> Light blue: </span>\
                 <em>&nbsp; P-value < 0.1</em>'
-      )
+      ))
     ) %>%
-    gt::opt_align_table_header(align = "left")
+    gt::opt_align_table_header(align = "left") %>%
+    gt::tab_options(table.font.names = c("Poppins", "sans-serif")) %>%
+    gt::opt_css(
+      css = ".gt_col_heading { line-height: 18px; }"
+    )
 }
 
 # tables_dat <- list(

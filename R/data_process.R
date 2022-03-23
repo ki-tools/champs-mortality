@@ -38,6 +38,8 @@ process_data <- function(x, start_year, end_year) {
       {n_missing} necessary variable{?s} not found in the analysis dataset: \\
       {commas(missing_ads_vars)}"))
 
+  # ads_raw$age_group <- ads_raw$case_type_calc
+
   nrm <- length(setdiff(names(ads_raw), ads_vars_keep))
   if (nrm > 0) {
     ads_raw <- dplyr::select(ads_raw, dplyr::one_of(ads_vars_keep))

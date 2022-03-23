@@ -182,7 +182,9 @@ mits_selection_factor_tables <- function(
           x[["DSS-only"]] <- NULL
           x[["non-MITS+DSS-only"]] <- NULL
         }
-        dplyr::arrange(x, .data$level)
+        x %>%
+          dplyr::filter(!is.na(.data$level)) %>%
+          dplyr::arrange(.data$level)
       })
     )
 
@@ -353,7 +355,9 @@ cond_factor_tables <- function(
         if (fac == "age")
           x$level <- factor(x$level,
             levels = c("Stillbirth", "Neonate", "Infant", "Child"))
-        x <- dplyr::arrange(x, .data$level)
+        x <- x %>%
+          dplyr::filter(!is.na(.data$level)) %>%
+          dplyr::arrange(.data$level)
         nms <- names(x)
         nnms <- c(nms[1], sort(nms[-1], decreasing = TRUE))
         x[, nnms]

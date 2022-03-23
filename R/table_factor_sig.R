@@ -11,6 +11,8 @@ table_factor_sig_stats <- function(
   # identify drop columns
   count_columns <- c("DSS-only", "non-MITS", "MITS", "non-MITS+DSS-only")
   drop_columns <- count_columns[!count_columns %in% print_columns]
+  alternating_bg <- "#efefef"
+  gt_id <- gt::random_id()
 
   # expand the nested tables
   dat <- suppressWarnings(df_table %>%
@@ -42,9 +44,28 @@ table_factor_sig_stats <- function(
     ) %>%
     mutate(flevel = paste0(factor, "_", level))
 
+  faclvls <- levels(dat_out$factor)
+  grays <- faclvls[seq(1, length(faclvls), by = 2)]
+
   # start dt table structure.
   dat_gt <- dat_out %>%
-    gt::gt(rowname_col = "flevel")
+    gt::gt(rowname_col = "flevel", id = gt_id) %>%
+    gt::tab_style(
+      style = list(
+        gt::cell_fill(color = alternating_bg)
+      ),
+      locations = gt::cells_body(
+        rows = (.data$factor %in% grays)
+      )
+    ) %>%
+    gt::tab_style(
+      style = list(
+        gt::cell_fill(color = alternating_bg)
+      ),
+      locations = gt::cells_stub(
+        rows = (.data$factor %in% grays)
+      )
+    )
 
   # Using while loops to move through dataframes of an unpsecified number
   # - of columns to combine percentages.
@@ -90,6 +111,8 @@ table_factor_sig_stats <- function(
 
     # create factor_title
     factor_title <- stringr::str_to_title(df_row$factor)
+    if (df_row$factor == "va")
+      factor_title <- "VA CoD"
 
     # create percent_str
     percent_str <- paste0(round(df_row$pct_na, 2))
@@ -107,7 +130,8 @@ table_factor_sig_stats <- function(
 
     dat_gt <- dat_gt %>%
       gt::tab_row_group(
-        label = gt::md(factor_info), rows = as.character(combine_rows)
+        label = gt::md(factor_info), rows = as.character(combine_rows),
+        id = as.character(df_row$factor)
       )
 
     # remove previously built factor
@@ -141,21 +165,38 @@ table_factor_sig_stats <- function(
 
     gt_while_columns <- gt_while_columns[-1]
   }
-
   dat_gt %>%
     gt::cols_hide(columns = c(site, catchment, factor, level)) %>%
-    gt::tab_source_note(
-      source_note = gt::md("Built using the champsmortality R package.")
-    ) %>% # nolint
+    # gt::tab_source_note(
+    #   source_note = gt::md("Built using the champsmortality R package.")
+    # ) %>% # nolint
     gt::tab_stubhead(label = gt::md("__Factors__")) %>%
     gt::tab_header(
       title = gt::md(paste0("__", df_row$site, "__")),
       subtitle = df_row$catchment
     ) %>%
     gt::text_transform(
-            locations = gt::cells_stub(),
-            fn = function(x) {
-                stringr::str_split_fixed(x, n = 2, pattern = "_") %>%
-                .[, 2]
-            })
+      locations = gt::cells_stub(),
+      fn = function(x) {
+        stringr::str_split_fixed(x, n = 2, pattern = "_") %>%
+        .[, 2]
+      }
+    ) %>%
+    gt::tab_style(
+      style = list(
+        gt::cell_fill(color = alternating_bg)
+      ),
+      locations = gt::cells_row_groups(
+        grays
+      )
+    ) %>%
+    gt::tab_options(
+      table.font.size = gt::px(12),
+      data_row.padding = gt::px(3),
+      heading.padding = gt::px(0),
+      heading.subtitle.font.size = gt::pct(100),
+      container.overflow.x = "unset",
+      container.overflow.y = "unset",
+      table.font.names = c("Poppins", "sans-serif")
+    )
 }
