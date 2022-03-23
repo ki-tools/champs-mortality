@@ -188,6 +188,14 @@ table_adjust_decision <- function(
     gt_table <- gt_table %>%
       gt::tab_style(
         style = list(
+          gt::cell_fill(color = "#fefefe")
+        ),
+        locations = gt::cells_body(
+          columns = {{ col1 }}
+        )
+      ) %>%
+      gt::tab_style(
+        style = list(
           gt::cell_fill(color = "#808080"),
           gt::cell_text(color = "white")
         ),
@@ -208,6 +216,28 @@ table_adjust_decision <- function(
               (.data[[col2]] < pmissing))
         )
       )
+      # ) %>%
+      # gt::tab_style(
+      #   style = gt::cell_borders(
+      #     sides = c("left", "right"),
+      #     color = "black"
+      #   ),
+      #   locations = gt::cells_body(columns = {{ col1 }})
+      # )
+
+
+      if (grepl(paste0("\\.", table_names[2], "\\."), col1)) {
+        gt_table <- gt_table %>%
+          gt::tab_style(
+            style = gt::cell_borders(
+              sides = "right",
+              color = "white",
+              style = "solid",
+              weight = gt::px(8)
+            ),
+            locations = gt::cells_body(columns = {{ col1 }})
+          )
+      }
 
     fill_names <- fill_names[-1]
   }
@@ -230,14 +260,7 @@ table_adjust_decision <- function(
                 <em>&nbsp; P-value < 0.1</em>'
       )
     ) %>%
-    gt::opt_align_table_header(align = "left") %>%
-    gt::tab_style(
-      style = gt::cell_borders(
-        sides = c("right"),
-        color = "lightgrey"
-      ),
-      locations = gt::cells_body()
-    )
+    gt::opt_align_table_header(align = "left")
 }
 
 # tables_dat <- list(
