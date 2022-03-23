@@ -1,3 +1,4 @@
+#' Get rate and fraction data
 #' @param x Processed CHAMPS dataset.
 #' @param sites A vector of site names to include in the calculations. If NULL,
 #' all sites with data (corresponding to value of use_dss) will be used.
@@ -37,8 +38,59 @@ get_rates_and_fractions <- function(
   causal_chain = TRUE,
   adjust_vars_override = NULL,
   factor_groups = NULL,
-  pval_cutoff = 0.2,
-  prop_cutoff = 0.2
+  pval_cutoff = 0.1,
+  prop_cutoff = 20
+) {
+  if (is.null(sites))
+    sites <- sort(unique(x$ads$site))
+
+  res <- lapply(sites, function(st) {
+    if (length(sites) > 1)
+      message(st)
+    get_rates_and_fractions_single(dd,
+      sites = st,
+      catchments = catchments,
+      group_catchments = group_catchments,
+      condition = condition,
+      icd10_regex = icd10_regex,
+      cond_name = cond_name,
+      causal_chain = causal_chain,
+      adjust_vars_override = adjust_vars_override,
+      factor_groups = factor_groups,
+      pval_cutoff = pval_cutoff,
+      prop_cutoff = prop_cutoff
+    )
+  })
+
+  get_and_bind <- function(a, nm)
+    lapply(a, function(x) x[[nm]]) %>% dplyr::bind_rows()
+
+  list(
+    mits_dss = get_and_bind(res, "mits_dss"),
+    mits_non_dss = get_and_bind(res, "mits_non_dss"),
+    cond_dss = get_and_bind(res, "cond_dss"),
+    cond_non_dss = get_and_bind(res, "cond_non_dss"),
+    frac = get_and_bind(res, "frac"),
+    rate = get_and_bind(res, "rate"),
+    rate_data = lapply(res, function(x) x$rate_data)
+  )
+}
+
+
+
+get_rates_and_fractions_single <- function(
+  x,
+  sites = NULL,
+  catchments = NULL,
+  group_catchments = TRUE,
+  condition = NULL,
+  icd10_regex = NULL,
+  cond_name = condition,
+  causal_chain = TRUE,
+  adjust_vars_override = NULL,
+  factor_groups = NULL,
+  pval_cutoff = 0.1,
+  prop_cutoff = 20
 ) {
   tbl1a <- mits_selection_factor_tables(x,
     sites = sites,
@@ -63,7 +115,7 @@ get_rates_and_fractions <- function(
     factor_groups = factor_groups,
     condition = condition,
     icd10_regex = icd10_regex,
-    cond_name = condition,
+    cond_name = cond_name,
     causal_chain = causal_chain,
     use_dss = TRUE
   )
@@ -75,7 +127,7 @@ get_rates_and_fractions <- function(
     factor_groups = factor_groups,
     condition = condition,
     icd10_regex = icd10_regex,
-    cond_name = condition,
+    cond_name = cond_name,
     causal_chain = causal_chain,
     use_dss = FALSE
   )
@@ -93,19 +145,81 @@ get_rates_and_fractions <- function(
     dplyr::group_by_at(c("site", "catchment", "factor")) %>%
     dplyr::summarise(n = dplyr::n())
 
-  rate_data <- get_rate_data(x,
-    site = sites,
-    catchments = catchments,
-    condition = condition,
-    icd10_regex = icd10_regex,
-    adjust_vars = adjust_vars_override, # TODO: update
-    use_dss = TRUE
+  if (nrow(tbl1a) > 0) {
+    rd_dss <- get_rate_data(x,
+      site = sites,
+      catchments = catchments,
+      condition = condition,
+      icd10_regex = icd10_regex,
+      causal_chain = causal_chain,
+      factor_groups = factor_groups,
+      adjust_vars = adjust_vars_override, # TODO: update
+      use_dss = TRUE
+    )
+    lb <- sum(rd_dss$live_birth_data$live_births)
+    sb <- filter(rd_dss$data, age == "Stillbirth") %>%
+      pull(target) %>%
+      sum()
+    u5d_sb <- sum(rd_dss$data$target)
+    acTU5MR <- 10000 * u5d_sb / (lb + sb)
+    acTU5MR_dss <- acTU5MR
+    rd <- rd_dss
+  }
+
+  if (nrow(tbl1b) > 0) {
+    rd_ndss <- get_rate_data(x,
+      site = sites,
+      catchments = catchments,
+      condition = condition,
+      icd10_regex = icd10_regex,
+      causal_chain = causal_chain,
+      factor_groups = factor_groups,
+      adjust_vars = adjust_vars_override, # TODO: update
+      use_dss = FALSE
+    )
+    acTU5MR <- x$dhs %>%
+      dplyr::filter(
+        .data$site %in% rd_ndss$sites,
+        .data$catchment %in% rd_ndss$catchments
+      ) %>%
+      dplyr::left_join(rd_ndss$year_range, by = c("site", "catchment")) %>%
+      dplyr::filter(.data$year >= .data$start_year &
+        .data$year <= .data$end_year) %>%
+      # dplyr::group_by(.data$site, .data$catchment) %>%
+      # dplyr::slice(which.max(.data$year)) %>%
+      dplyr::pull(rate) %>%
+      mean()
+    acTU5MR_ndss <- acTU5MR
+    rd <- rd_ndss
+  }
+
+  # need to combine if it has dss and non-dss
+  if (nrow(tbl1a) > 0 && nrow(tbl1b) > 0) {
+    tmp <- rd_ndss$data
+    tmp$target <- tmp$target + rd_dss$data$champs
+    tmp$decode <- tmp$decode + rd_dss$data$decode
+    tmp$condition <- tmp$condition + rd_dss$data$condition
+    acTU5MR <- (acTU5MR_dss + acTU5MR_ndss) / 2
+    rd$data <- tmp
+    rd$sites <- unique(c(rd_dss$sites, rd_ndss$sites))
+    rd$catchments <- unique(c(rd_dss$catchments, rd_ndss$catchments))
+    rd$year_range <- dplyr::bind_rows(rd_dss$year_range, rd_ndss$year_range)
+  }
+
+  # rate_data$data$target <- c(293, 503, 1279)
+  # rate_data$data$decode <- c(132, 142, 207)
+  # rate_data$data$condition <- c(0, 1, 0)
+
+  # TODO: combine numbers when grouping dss and non-dss catchments
+  c(
+    list(
+      mits_dss = tbl1a,
+      mits_non_dss = tbl1b,
+      cond_dss = tbl2a,
+      cond_non_dss = tbl2b
+    ),
+    rates_fractions(rd, acTU5MR)
   )
-
-  browser()
-
-
-
 }
 
 
@@ -122,7 +236,7 @@ get_rates_and_fractions <- function(
 
 #' Get data necessary to compute adjusted mortality fractions and rates
 #' @param x an object read in from [read_and_validate_data()]
-#' @param site a vector of sites to include in the calculations 
+#' @param site a site name to get rate data for
 #' @param catchments a vector of catchments to include in the calculations
 #' @param condition a CHAMPS condition (see [valid_conditions()])
 #' @param icd10_regex an optional regular expression specifying ICD10 codes
@@ -133,10 +247,11 @@ get_rates_and_fractions <- function(
 #' @note One or both of `icd10_regex` and `condition` must be specified
 #' @export
 get_rate_data <- function(x,
-  sites,
+  site,
   catchments = NULL,
   condition = NULL,
   icd10_regex = NULL,
+  causal_chain = TRUE,
   adjust_vars = NULL,
   factor_groups = NULL,
   use_dss = TRUE
@@ -159,7 +274,7 @@ get_rate_data <- function(x,
     )
   }
 
-  obj <- get_ctch(x, sites, catchments)
+  obj <- get_ctch(x, site, catchments)
   type <- paste0(ifelse(use_dss, "", "non_"), "dss")
   sites <- obj[[type]]$sites
   ctch <- obj[[type]]$ctch
@@ -287,10 +402,11 @@ get_rate_data <- function(x,
 
   check_cond <- function(., group, rgx) {
     if (is.null(group))
-      return(has_icd10(., rgx))
+      return(has_icd10(., rgx, cc = causal_chain))
     if (is.null(rgx))
-      return(has_champs_group(., group))
-    has_icd10(., rgx) | has_champs_group(., group)
+      return(has_champs_group(., group, cc = causal_chain))
+    has_icd10(., rgx, cc = causal_chain) |
+      has_champs_group(., group, cc = causal_chain)
   }
 
   cond <- x$ads %>%
@@ -343,5 +459,139 @@ get_rate_data <- function(x,
     live_birth_data = ld,
     total_live_births = sum(ld$live_births),
     dss = use_dss
+  )
+}
+
+rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
+  # ci_limit <- 90
+
+  # figure out how to group
+  tmp <- rd$data %>%
+    dplyr::mutate(
+      selprob = ifelse(.data$target == 0, 0, .data$decode / .data$target)
+    ) %>%
+    dplyr::arrange(.data$selprob)
+
+  will_adjust <- TRUE
+  # if there aren't enough groups with counts, we don't adjust afterall
+  if (length(which(tmp$condition > 0)) == 0)
+    will_adjust <- FALSE
+
+  add_count <- FALSE
+  if (will_adjust) {
+    if (length(which(tmp$condition > 0)) == 1) {
+      newrd <- rd$data %>%
+        dplyr::select_if(is.numeric) %>%
+        dplyr::mutate(group = condition == 0) %>%
+        dplyr::group_by(.data$group) %>%
+        dplyr::summarise_all(sum)
+      add_count <- newrd$condition == 0
+    } else {
+      nonzero <- which(tmp$condition != 0)
+      zero <- which(tmp$condition == 0)
+      newcls <- sapply(zero, function(idx) {
+        nonzero[which.min(abs(tmp$selprob[idx] - tmp$selprob[nonzero]))]
+      })
+
+      tmp$group <- NA
+      tmp$group[nonzero] <- nonzero
+      tmp$group[zero] <- newcls
+
+      newrd <- tmp %>%
+        dplyr::select_if(is.numeric) %>%
+        dplyr::group_by(.data$group) %>%
+        dplyr::summarise_all(sum) %>%
+        dplyr::mutate(
+          group = as.numeric(factor(group)),
+          selprob = .data$decode / .data$target
+          # adjust = condition / mits
+        )
+    }
+  } else {
+    newrd <- rd$data
+  }
+  # CSMF
+  decode <- sum(newrd$decode)
+  condition <- sum(newrd$condition)
+  # crude mortality fraction
+  cCSMF <- 100 * condition / decode
+  cCSMF_CrI <- get_interval(condition / decode, decode, ci_limit)
+  # print_ci(cCSMF, cCSMF_CrI)
+
+  # adjusted CSMF
+  # if no adjustment, adjusted is crude
+  if (!will_adjust) {
+    aCSMF <- cCSMF
+    aCSMF_CrI <- cCSMF_CrI
+  } else {
+    ns <- newrd$decode + 0.5 * add_count
+    n <- newrd$condition + 0.5 * add_count
+    N <- newrd$target + 0.5 * add_count
+    aCSMF <- 100 * (n / ns) %*% (N / sum(N)) %>% as.vector()
+    aCSMF_CrI <- get_interval(aCSMF / 100, sum(N))
+    # print_ci(aCSMF, aCSMF_CrI)
+  }
+
+  frac <- dplyr::tibble(
+    site = rd$site,
+    catchments = paste(rd$catchments, collapse = ", "),
+    var = c("cCSMF", "aCSMF"),
+    label = c(
+      "Crude cause-specific mortality fraction",
+      "Adjusted cause-specific mortality fraction"
+    ),
+    decode = decode,
+    condition = condition,
+    est = c(cCSMF, aCSMF),
+    lower = c(cCSMF_CrI[1], aCSMF_CrI[1]),
+    upper = c(cCSMF_CrI[2], aCSMF_CrI[2])
+  )
+
+  if (rd$dss) {
+    # crude and adjusted mortality rates
+    cTU5MR <- (cCSMF / 100) * acTU5MR
+    cTU5MR_CrI <- (cCSMF_CrI / 100) * acTU5MR
+    # print_ci(cTU5MR, cTU5MR_CrI)
+
+    if (!will_adjust) {
+      aTU5MR <- cTU5MR
+      aTU5MR_CrI <- cTU5MR_CrI
+    } else {
+      aTU5MR <- (aCSMF / 100) * acTU5MR
+      aTU5MR_CrI <- (aCSMF_CrI / 100) * acTU5MR
+      # print_ci(aTU5MR, aTU5MR_CrI)
+    }
+  } else {
+    cTU5MR <- (cCSMF / 100) * acTU5MR
+    cTU5MR_CrI <- (cCSMF_CrI / 100) * acTU5MR
+    # print_ci(cTU5MR, cTU5MR_CrI)
+    if (will_adjust) {
+      aTU5MR <- cTU5MR
+      aTU5MR_CrI <- cTU5MR_CrI
+    } else {
+      aTU5MR <- (aCSMF / 100) * acTU5MR
+      aTU5MR_CrI <- (aCSMF_CrI / 100) * acTU5MR
+      # print_ci(aTU5MR, aTU5MR_CrI)
+    }
+  }
+
+  rate <- dplyr::tibble(
+    site = rd$site,
+    catchments = paste(rd$catchments, collapse = ", "),
+    var = c("cTU5MR", "aTU5MR"),
+    label = c(
+      "Crude total under-5 mortality rate",
+      "Adjusted total under-5 mortality rate"
+    ),
+    allcauseTU5MR = acTU5MR,
+    est = c(cTU5MR, aTU5MR),
+    lower = c(cTU5MR_CrI[1], aTU5MR_CrI[1]),
+    upper = c(cTU5MR_CrI[2], aTU5MR_CrI[2])
+  )
+
+  list(
+    frac = frac,
+    rate = rate,
+    rate_data = rd
   )
 }

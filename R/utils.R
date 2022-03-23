@@ -129,3 +129,15 @@ combine_levels <- function(x, level_definitions = NULL,
   }
   out
 }
+
+#' @export
+get_site_info <- function(x) {
+  x$ads %>%
+    dplyr::group_by_at(c("site", "catchment")) %>%
+    dplyr::summarise(
+      min_year = min(year, na.rm = TRUE),
+      max_year = max(year, na.rm = TRUE),
+      .groups = "drop"
+    ) %>%
+    dplyr::arrange(.data$site, .data$catchment)
+}

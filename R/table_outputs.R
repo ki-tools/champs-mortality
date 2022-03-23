@@ -3,7 +3,7 @@
 #' @param print_columns specific columns from the nested tibbles in the table column to print. Defaults to "MITS" and "non-MITS+DSS-only". "DSS-only" and "non-MITS" are the other two columns that can be printed.
 #' @param percent_digits the number of digits to round the percent columns to. Defaults to 1.
 #' @export
-build_table_location <- function(
+table_factor_sig_stats <- function(
   df_table,
   print_columns = c("MITS", "non-MITS+DSS-only"),
   percent_digits = 1

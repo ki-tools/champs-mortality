@@ -10,13 +10,16 @@ get_rate_data(
   catchments = NULL,
   condition = NULL,
   icd10_regex = NULL,
-  adjust_vars = NULL
+  causal_chain = TRUE,
+  adjust_vars = NULL,
+  factor_groups = NULL,
+  use_dss = TRUE
 )
 }
 \arguments{
 \item{x}{an object read in from \code{\link[=read_and_validate_data]{read_and_validate_data()}}}
 
-\item{site}{a vector of sites to include in the calculations}
+\item{site}{a site name to get rate data for}
 
 \item{catchments}{a vector of catchments to include in the calculations}
 
@@ -26,6 +29,10 @@ get_rate_data(
 that define a condition}
 
 \item{adjust_vars}{a vector of variables to adjust by}
+
+\item{factor_groups}{A named list that specifies how to group factors}
+
+\item{use_dss}{Should the calculations be done only for catchments that}
 }
 \description{
 Get data necessary to compute adjusted mortality fractions and rates
