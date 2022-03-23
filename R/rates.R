@@ -486,7 +486,7 @@ rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
         dplyr::group_by(.data$group) %>%
         dplyr::summarise_all(sum)
       add_count <- newrd$condition == 0
-    } else {
+    } else if (length(which(tmp$condition == 0)) > 0) {
       nonzero <- which(tmp$condition != 0)
       zero <- which(tmp$condition == 0)
       newcls <- sapply(zero, function(idx) {
@@ -506,6 +506,9 @@ rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
           selprob = .data$decode / .data$target
           # adjust = condition / mits
         )
+    } else {
+      newrd <- rd$data
+      newrd$group <- seq_len(nrow(newrd))
     }
   } else {
     newrd <- rd$data
