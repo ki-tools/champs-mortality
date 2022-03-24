@@ -20,12 +20,20 @@ table_factor_sig_stats <- function(
     tidyr::unnest(cols = c("table")) %>%
     dplyr::select(-dplyr::one_of(drop_columns)))
 
+  if ("non-MITS+DSS-only" %in% names(dat)) {
+    dat <- dat %>%
+      dplyr::rename(
+        "non-MITS +<br>DSS-only" = "non-MITS+DSS-only",
+        "<br>MITS" = "MITS"
+      )
+  }
+
   # add percent columns
   dat_out <- dat %>%
     dplyr::left_join(
       # percent table calculations to join
       dat %>%
-        dplyr::group_by(factor) %>%
+        dplyr::group_by(factor, .drop = FALSE) %>%
         dplyr::mutate(dplyr::across(
           tidyselect:::where(is.numeric),
           function(x) {
@@ -86,7 +94,7 @@ table_factor_sig_stats <- function(
 
     dat_gt <- dat_gt %>%
       gt::cols_merge(
-        columns = c(dplyr::all_of(n_name),dplyr::all_of(pct_name)),
+        columns = c(dplyr::all_of(n_name), dplyr::all_of(pct_name)),
         pattern = "{1} ({2})"
       )
 
@@ -141,7 +149,7 @@ table_factor_sig_stats <- function(
   # add other adornments to table.
   # N is the max observed over each of the factors
   dat_sum <- dat %>%
-    group_by(factor) %>%
+    group_by(factor, .drop = FALSE) %>%
     summarise_if(is.numeric, sum) %>%
     summarise_if(is.numeric, max)
 
@@ -152,8 +160,8 @@ table_factor_sig_stats <- function(
   while (length(gt_while_columns) > 0) {
     create_name <- gt_while_columns[1]
     column_title <- paste0(
-      create_name, "<br>N = ",
-      pull(dat_sum, create_name)
+      create_name, "<br><em>N = ",
+      prettyNum(pull(dat_sum, create_name), big.mark = ","), "</em>"
     )
 
     dat_gt <- dat_gt %>%

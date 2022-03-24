@@ -72,11 +72,12 @@ get_rates_and_fractions <- function(
     cond_non_dss = get_and_bind(res, "cond_non_dss"),
     frac = get_and_bind(res, "frac"),
     rate = get_and_bind(res, "rate"),
-    rate_data = lapply(res, function(x) x$rate_data)
+    rate_data = lapply(res, function(x) x$rate_data),
+    condition = condition,
+    causal_chain = causal_chain,
+    cond_name = cond_name
   )
 }
-
-
 
 get_rates_and_fractions_single <- function(
   x,
