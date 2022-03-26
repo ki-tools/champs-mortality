@@ -75,7 +75,8 @@ get_rates_and_fractions <- function(
     rate_data = lapply(res, function(x) x$rate_data),
     condition = condition,
     causal_chain = causal_chain,
-    cond_name = cond_name
+    cond_name = cond_name,
+    factor_groups = factor_groups
   )
 }
 

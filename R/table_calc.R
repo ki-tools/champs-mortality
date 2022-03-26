@@ -40,7 +40,8 @@ mits_selection_factor_tables <- function(
 
   ads_ct <- x$ads %>%
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments) %>%
-    dplyr::select(dplyr::any_of(c("site", "catchment", "sex", "religion",
+    dplyr::select(dplyr::any_of(c("site", "catchment", "sex",
+      # "religion",
       "education", "season", "location", "va", "age", "mits_flag", "year"))) %>%
     tidyr::pivot_longer(
       cols = -all_of(c("site", "catchment", "mits_flag", "year")),
@@ -178,6 +179,10 @@ mits_selection_factor_tables <- function(
         x <- x %>%
           dplyr::mutate("non-MITS+DSS-only" = .data[["0"]] + .data[["-1"]]) %>%
           dplyr::rename("MITS" = "1", "non-MITS" = "0", "DSS-only" = "-1")
+        col_ord <- intersect(
+          c("level", "MITS", "non-MITS", "DSS-only", "non-MITS+DSS-only"),
+          names(x))
+        x <- x[, col_ord]
         if (!use_dss) {
           x[["DSS-only"]] <- NULL
           x[["non-MITS+DSS-only"]] <- NULL
@@ -217,6 +222,7 @@ mits_selection_factor_tables <- function(
     dplyr::arrange_at(c("site", "catchment", "factor"))
 
   tblsn$pval[is.na(tblsn$pval)] <- 1
+  attr(tblsn, "factor_groups") <- factor_groups
 
   tblsn
 }
@@ -301,7 +307,8 @@ cond_factor_tables <- function(
       check_cond(.data, condition, icd10_regex, causal_chain))) %>%
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments,
       .data$mits_flag == 1, .data$decoded == 1) %>%
-    dplyr::select(dplyr::any_of(c("site", "catchment", "sex", "religion",
+    dplyr::select(dplyr::any_of(c("site", "catchment", "sex",
+      # "religion",
       "education", "season", "location", "va", "age", "cc", "year"))) %>%
     tidyr::pivot_longer(cols = -all_of(c("site", "catchment", "cc", "year")),
       names_to = "factor", values_to = "level") %>%
@@ -389,6 +396,7 @@ cond_factor_tables <- function(
     dplyr::arrange_at(c("site", "catchment", "factor"))
 
   tblsn$pval[is.na(tblsn$pval)] <- 1
+  attr(tblsn, "factor_groups") <- factor_groups
 
   tblsn
 }

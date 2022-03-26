@@ -16,7 +16,7 @@ process_data <- function(x, start_year, end_year) {
   ads_raw <- x$ads
   mreg <- x$mreg
   dss <- x$dss
-  rlgn <- x$rlgn
+  # rlgn <- x$rlgn
   seas <- x$seas
   catlkp <- x$catlkp
   lb <- x$lb
@@ -82,31 +82,32 @@ process_data <- function(x, start_year, end_year) {
     all neonates into one category to be compatible with DSS data",
     wrap = TRUE)
 
-  ads_raw <- voc_lookup(ads_raw, voc, "caretakers_religion", "analysis dataset")
+  # ads_raw <- voc_lookup(ads_raw, voc, "caretakers_religion", "analysis dataset")
 
   ads_raw <- voc_lookup(ads_raw, voc, "calc_sex", "analysis dataset")
 
-  ads_raw <- ads_raw %>%
-    dplyr::mutate(caretakers_religion_code =
-      substr(.data$caretakers_religion_code, 1, 7)) %>%
-    dplyr::left_join(
-      dplyr::select(rlgn,
-        dplyr::one_of(c("champs_local_code", "religion"))),
-      by = c(caretakers_religion_code = "champs_local_code"))
-  cli::cli_alert_success("Created a new variable 'religion' that \\
-    rolls up religions into categories compatible with DSS data",
-    wrap = TRUE)
+  ### ignore religion
+  # ads_raw <- ads_raw %>%
+  #   dplyr::mutate(caretakers_religion_code =
+  #     substr(.data$caretakers_religion_code, 1, 7)) %>%
+  #   dplyr::left_join(
+  #     dplyr::select(rlgn,
+  #       dplyr::one_of(c("champs_local_code", "religion"))),
+  #     by = c(caretakers_religion_code = "champs_local_code"))
+  # cli::cli_alert_success("Created a new variable 'religion' that \\
+  #   rolls up religions into categories compatible with DSS data",
+  #   wrap = TRUE)
 
-  not_handled <- setdiff(unique(
-    ads_raw$caretakers_religion_code[is.na(ads_raw$religion)]), NA)
-  nnh <- length(not_handled)
-  if (nnh > 0) {
-    cli::cli_alert_warning("There are {nnh} religion code{?s} that \\
-      do not match with any religion codes found in the \\
-      religion_lookup file: {commas(not_handled)} - it may be useful \\
-      to look these up and add them to the religion_lookup dataset",
-      wrap = TRUE)
-  }
+  # not_handled <- setdiff(unique(
+  #   ads_raw$caretakers_religion_code[is.na(ads_raw$religion)]), NA)
+  # nnh <- length(not_handled)
+  # if (nnh > 0) {
+  #   cli::cli_alert_warning("There are {nnh} religion code{?s} that \\
+  #     do not match with any religion codes found in the \\
+  #     religion_lookup file: {commas(not_handled)} - it may be useful \\
+  #     to look these up and add them to the religion_lookup dataset",
+  #     wrap = TRUE)
+  # }
 
   tmp <- suppressWarnings(
     as.numeric(substr(ads_raw$va_cause_1_iva, 1, 5))
@@ -179,9 +180,9 @@ process_data <- function(x, start_year, end_year) {
 
   ads_raw <- ads_raw %>%
     dplyr::mutate(
-      religion = dplyr::recode(.data$religion,
-        Unknown = as.character(NA)
-      ),
+      # religion = dplyr::recode(.data$religion,
+      #   Unknown = as.character(NA)
+      # ),
       calc_sex = dplyr::recode(.data$calc_sex,
         Indeterminate = as.character(NA),
         Unknown = as.character(NA)
@@ -196,7 +197,7 @@ process_data <- function(x, start_year, end_year) {
   cli::cli_alert_success("Modified some analysis set variables to match \\
     what is found in DSS data:")
   ul <- cli::cli_ul()
-  cli::cli_li("religion: set 'Unknown' to NA")
+  # cli::cli_li("religion: set 'Unknown' to NA")
   cli::cli_li("sex: set 'Indeterminate' and 'Unknown' to NA")
   cli::cli_li("location: 'other' to NA")
   cli::cli_end(ul)
@@ -204,8 +205,8 @@ process_data <- function(x, start_year, end_year) {
   check_valid_vals(ads_raw, "age", valid_levels$age,
     "age values", "analysis dataset")
 
-  check_valid_vals(ads_raw, "religion", valid_levels$religion,
-    "religion values", "analysis dataset")
+  # check_valid_vals(ads_raw, "religion", valid_levels$religion,
+  #   "religion values", "analysis dataset")
 
   check_valid_vals(ads_raw, "calc_sex", valid_levels$sex,
     "sex values", "analysis dataset")
@@ -301,7 +302,7 @@ process_data <- function(x, start_year, end_year) {
   ads <- dplyr::left_join(ads_raw, mreg, by = "champsid")
   cli::cli_alert_success("Joined analysis dataset and maternal registry")
 
-  ads$religion <- factor(ads$religion, levels = valid_levels$religion)
+  # ads$religion <- factor(ads$religion, levels = valid_levels$religion)
   ads$education <- factor(ads$education, levels = valid_levels$education)
   ads$sex <- factor(ads$sex, levels = valid_levels$sex)
   ads$season <- factor(ads$season, levels = valid_levels$season)
@@ -327,6 +328,7 @@ process_data <- function(x, start_year, end_year) {
   # -------------------------- dss ------------------------- #
 
   cli::cli_h1("checking DSS")
+  dss <- dplyr::filter(dss, factor != "religion")
 
   check_valid_vals(dss, "site", valid_sites, "sites", "DSS data")
   check_valid_vals(dss, "catchment", valid_catchments,
@@ -336,25 +338,25 @@ process_data <- function(x, start_year, end_year) {
 
   dss$age <- factor(dss$age, levels = valid_levels$age)
 
-  check_valid_vals(filter(dss, factor == "education"),
+  check_valid_vals(dplyr::filter(dss, factor == "education"),
     "level", valid_levels$education, "education values", "DSS data")
 
-  check_valid_vals(filter(dss, factor == "location"),
+  check_valid_vals(dplyr::filter(dss, factor == "location"),
     "level", valid_levels$location, "locations", "DSS data")
 
-  check_valid_vals(filter(dss, factor == "religion"),
-    "level", valid_levels$religion, "religion values", "DSS data")
+  # check_valid_vals(dplyr::filter(dss, factor == "religion"),
+  #   "level", valid_levels$religion, "religion values", "DSS data")
 
-  check_valid_vals(filter(dss, factor == "sex"),
+  check_valid_vals(dplyr::filter(dss, factor == "sex"),
     "level", valid_levels$sex, "sex values", "DSS data")
 
-  check_valid_vals(filter(dss, factor == "season"),
+  check_valid_vals(dplyr::filter(dss, factor == "season"),
     "level", valid_levels$season, "seasons", "DSS data")
 
   # TODO: make sure period_start_year and period_end_year are constant
   #   within a given site/catchment
 
-  check_valid_vals(filter(dss, factor == "va"),
+  check_valid_vals(dplyr::filter(dss, factor == "va"),
     "va", valid_levels$va, "verbal autopsy categories", "DSS data")
 
   res <- list(

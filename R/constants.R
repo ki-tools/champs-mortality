@@ -1,6 +1,7 @@
 ds_names <- c("champs_analytics_dataset", "maternal_registry_dataset",
   "champs_vocabulary_dataset", "dss_dataset", "season_lookup",
-  "religion_lookup", "catchment_lookup", "live_births_dataset")
+  # "religion_lookup",
+  "catchment_lookup", "live_births_dataset")
 
 ads_names <- c(
   "Champsid",
@@ -90,7 +91,7 @@ dhs_names <- c("site", "catchment", "year", "rate")
 valid_levels <- list(
   age = c("Stillbirth", "Neonate", "Infant", "Child"),
   sex = c("Female", "Male"),
-  religion = c("Christian", "Hindu", "Muslim", "Other"),
+  # religion = c("Christian", "Hindu", "Muslim", "Other"),
   education = c("None", "Primary", "Secondary", "Tertiary"),
   season = c("Dry", "Rainy"),
   location = c("Community", "Facility"),

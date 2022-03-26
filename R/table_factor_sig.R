@@ -8,8 +8,25 @@ table_factor_sig_stats <- function(
   print_columns = c("MITS", "non-MITS+DSS-only"),
   percent_digits = 1
 ) {
+  spacer <- ""
+  if ("dss" %in% names(df_table)) {
+    dss_str <- ifelse(df_table$dss[1],
+      "<span style='color: gray;'>(DSS)</span>",
+      "<span style='color: gray;'>(non-DSS)</span>"
+    )
+    if (!df_table$dss[1])
+      spacer <- "<br>"
+  } else {
+    dss_str <- ""
+  }
+
+  if (!any(grepl("DSS", names(df_table$table[[1]]))) &&
+    all(c("MITS", "non-MITS") %in% names(df_table$table[[1]]))) {
+    print_columns <- c("MITS", "non-MITS")
+  }
+
   # identify drop columns
-  count_columns <- c("DSS-only", "non-MITS", "MITS", "non-MITS+DSS-only")
+  count_columns <- c("DSS-only", "MITS", "non-MITS", "non-MITS+DSS-only")
   drop_columns <- count_columns[!count_columns %in% print_columns]
   alternating_bg <- "#efefef"
   gt_id <- gt::random_id()
@@ -26,6 +43,11 @@ table_factor_sig_stats <- function(
         "non-MITS +<br>DSS-only" = "non-MITS+DSS-only",
         "<br>MITS" = "MITS"
       )
+  }
+  if (spacer != "") {
+    nms <- names(dat)
+    names(dat)[nms == "MITS"] <- "<br>MITS"
+    names(dat)[nms == "non-MITS"] <- "<br>non-MITS"
   }
 
   # add percent columns
@@ -45,14 +67,39 @@ table_factor_sig_stats <- function(
             paste0(x, "_percent")
           }
         ) %>%
-        mutate(
-          dplyr::across(tidyselect:::where(is.numeric), ~tidyr::replace_na(.x, 0))
+        dplyr::mutate(
+          dplyr::across(tidyselect:::where(is.numeric),
+            ~tidyr::replace_na(.x, 0))
         ),
       by = c("site", "catchment", "factor", "level")
-    ) %>%
-    mutate(flevel = paste0(factor, "_", level))
+    )
 
-  faclvls <- levels(dat_out$factor)
+  # need all levels of all factors
+  factor_groups <- attr(df_table, "factor_groups")
+  lnms <- names(valid_levels)
+  all_facs <- dplyr::bind_rows(lapply(seq_along(valid_levels), function(idx) {
+    if (!is.null(factor_groups[[lnms[idx]]])) {
+      cur_lvls <- names(factor_groups[[lnms[idx]]])
+    } else {
+      cur_lvls <- valid_levels[[idx]]
+    }
+    dplyr::tibble(
+      site = dat_out$site[1],
+      catchment = dat_out$catchment[1],
+      factor = lnms[idx],
+      level = cur_lvls,
+      factor_order = idx,
+      level_order = seq_along(cur_lvls)
+    )
+  }))
+  dat_out <- dplyr::left_join(all_facs, dat_out,
+    by = c("site", "catchment", "factor", "level")) %>%
+    replace(is.na(.), 0) %>%
+    dplyr::mutate(flevel = paste0(factor, "_", level)) %>%
+    dplyr::arrange_at(c("factor_order", "level_order")) %>%
+    dplyr::select(-c("factor_order", "level_order"))
+
+  faclvls <- valid_factors
   grays <- faclvls[seq(1, length(faclvls), by = 2)]
 
   # start dt table structure.
@@ -181,7 +228,7 @@ table_factor_sig_stats <- function(
     gt::tab_stubhead(label = gt::md("__Factors__")) %>%
     gt::tab_header(
       title = gt::md(paste0("__", df_row$site, "__")),
-      subtitle = df_row$catchment
+      subtitle = gt::html(paste(df_row$catchment, dss_str))
     ) %>%
     gt::text_transform(
       locations = gt::cells_stub(),

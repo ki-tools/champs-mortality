@@ -30,9 +30,9 @@ create_dataset_directory <- function(path) {
     "catchment_lookup.csv"))
   catchment_file <- ""
   catchment_str <- ""
-  has_religion_lookup <- file.exists(file.path("path", "religion_lookup.csv"))
-  religion_file <- ""
-  religion_str <- ""
+  # has_religion_lookup <- file.exists(file.path("path", "religion_lookup.csv"))
+  # religion_file <- ""
+  # religion_str <- ""
   has_seasons <- file.exists(file.path("path", "seasons.csv"))
   season_file <- ""
   season_str <- ""
@@ -53,14 +53,14 @@ create_dataset_directory <- function(path) {
       '{path}/catchment_lookup.csv', has been provided. Please update that \\
       file if necessary.")
   }
-  if (!has_religion_lookup) {
-    file.copy(system.file("datasets/religion_lookup.csv",
-      package = "champsmortality"), path)
-    religion_file <- "religion_lookup.csv"
-    religion_str <- glue::glue("A dataset with known religion lookups, \\
-      '{path}/religion_lookup.csv', has been provided. Please update that \\
-      file if necessary.")
-  }
+  # if (!has_religion_lookup) {
+  #   file.copy(system.file("datasets/religion_lookup.csv",
+  #     package = "champsmortality"), path)
+  #   religion_file <- "religion_lookup.csv"
+  #   religion_str <- glue::glue("A dataset with known religion lookups, \\
+  #     '{path}/religion_lookup.csv', has been provided. Please update that \\
+  #     file if necessary.")
+  # }
   if (!has_seasons) {
     file.copy(system.file("datasets/seasons.csv",
       package = "champsmortality"), path)
@@ -94,7 +94,7 @@ create_dataset_directory <- function(path) {
   } else {
     content <- as.list(structure(rep("", length(ds_names)), names = ds_names))
     content$catchment_lookup <- catchment_file
-    content$religion_lookup <- religion_file
+    # content$religion_lookup <- religion_file
     content$season_lookup <- season_file
     content$dhs_dataset <- dhs_file
     content$live_births_dataset <- live_birth_file
@@ -127,9 +127,9 @@ create_dataset_directory <- function(path) {
     containing rainy and dry season date ranges for each site, \\
     which will be used to classify the season in which each case occurs. \\
     {season_str}")
-  cli::cli_li("Religion lookup: This dataset is a csv file containing \\
-    mappings from religion CHAMPS codes to religion categories. \\
-    {religion_str}")
+  # cli::cli_li("Religion lookup: This dataset is a csv file containing \\
+  #   mappings from religion CHAMPS codes to religion categories. \\
+  #   {religion_str}")
   cli::cli_li("Catchment lookup: This dataset is a csv file containing \\
     mappings from catchment codes to catchment names, used to link the \\
     DSS data, which uses catchment names, to the CHAMPS analysis dataset, \\

@@ -28,7 +28,7 @@ read_and_validate_data <- function(data_path) {
   mreg <- read_file(data_path, cfg, mreg_names, "maternal_registry_dataset")
   dss  <- read_file(data_path, cfg, dss_names,  "dss_dataset")
   seas <- read_file(data_path, cfg, seas_names, "season_lookup")
-  rlgn <- read_file(data_path, cfg, rlgn_names, "religion_lookup")
+  # rlgn <- read_file(data_path, cfg, rlgn_names, "religion_lookup")
   catlkp <- read_file(data_path, cfg, catlkp_names, "catchment_lookup")
   lb <- read_file(data_path, cfg, live_birth_names, "live_births_dataset")
   dhs <- read_file(data_path, cfg, dhs_names, "dhs_dataset")
@@ -39,7 +39,7 @@ read_and_validate_data <- function(data_path) {
     mreg = mreg,
     seas = seas,
     dss = dss,
-    rlgn = rlgn,
+    # rlgn = rlgn,
     catlkp = catlkp,
     lb = lb,
     dhs = dhs

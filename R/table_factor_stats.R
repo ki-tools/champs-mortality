@@ -5,7 +5,7 @@ combine_decision_tables <- function(tables_dat) {
 
   join_cols <- c(
     "site", "catchment", "factor",
-    "start_year", "end_year"
+    "start_year", "end_year", "dss"
   )
   # only need these two columns for tables
   unique_cols <- c("pval", "pct_na")
@@ -33,6 +33,8 @@ combine_decision_tables <- function(tables_dat) {
       .cols = dplyr::any_of(unique_cols_new)
     )
 
+  if (! "dss" %in% names(t1))
+    join_cols <- setdiff(join_cols, "dss")
   t1 %>%
     dplyr::left_join(t2, by = join_cols)
 }
@@ -66,6 +68,17 @@ table_adjust_decision <- function(
   full_color <- "#4E79A7"
   partial_color <- "#4E79A7AA"
 
+  tmp <- levels(df_table$factor)
+  tmp <- stringr::str_to_title(tmp)
+  tmp[tmp == "Va"] <- "VA CoD"
+  levels(df_table$factor) <- tmp
+
+  if (! "dss" %in% names(df_table)) {
+    df_table$dss <- ""
+  } else {
+    df_table$dss <- ifelse(df_table$dss, "(DSS)", "(non-DSS)")
+  }
+
   # build the wide table that has location by row and
   # all the missing and pvalue columns for every factor by column
   dat_wide <- df_table %>%
@@ -75,7 +88,7 @@ table_adjust_decision <- function(
       }
     ) %>%
     tidyr::pivot_wider(
-      site:end_year,
+      c("site", "catchment", "factor", "start_year", "end_year", "dss"),
       names_from = factor,
       values_from = c(
         dplyr::contains("value"),
@@ -88,7 +101,7 @@ table_adjust_decision <- function(
       year_period = paste0(start_year, "-", end_year, sep = "")
     ) %>%
     dplyr::select(
-      location_name, year_period,
+      location_name, year_period, dss,
       dplyr::contains("value"),
       dplyr::contains("Missing")
     ) %>%
@@ -96,7 +109,7 @@ table_adjust_decision <- function(
       values <- stringr::str_split_fixed(x, "_", n = 3) %>% data.frame()
       values %>%
         dplyr::mutate(new_name = paste0(
-          stringr::str_to_title(X3), ".", X1, ".", X2
+          X3, ".", X1, ".", X2
         )) %>%
         dplyr::pull(new_name)
     })
@@ -132,8 +145,8 @@ table_adjust_decision <- function(
       }
     ) %>%
     gt::cols_merge(
-      columns = c("location_name", "year_period"),
-      pattern = "<b>{1}</b><br><em>{2}</em>"
+      columns = c("location_name", "dss", "year_period"),
+      pattern = "<b>{1}</b> <span style='color: gray;'>{2}</span><br><em>{3}</em>"
     ) %>%
     gt::tab_spanner_delim(
       delim = ".",
