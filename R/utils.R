@@ -1,3 +1,5 @@
+utils::globalVariables(".")
+
 commas <- function(x) paste(x, collapse = ", ")
 
 voc_lookup <- function(x, voc, join_var, ds_name) {
@@ -111,16 +113,16 @@ combine_levels <- function(x, level_definitions = NULL,
       purrr::map(~ tibble::as_tibble_col(.x, column_name = "level")) %>%
       dplyr::bind_rows(.id = "new_levels") %>%
       dplyr::right_join(x, by = "level") %>%
-      dplyr::select(-level, level = new_levels) %>%
-      tidyr::drop_na(level) %>%
+      dplyr::select(-c("level"), level = .data$new_levels) %>%
+      tidyr::drop_na(.data$level) %>%
       dplyr::mutate(level = factor(
-        level,
+        .data$level,
         levels = names(level_definitions)
       ))
 
     if (summ) {
       out <- out %>%
-        dplyr::group_by(level) %>%
+        dplyr::group_by_at("level") %>%
         dplyr::summarise_all(sum)
     }
 
@@ -130,13 +132,15 @@ combine_levels <- function(x, level_definitions = NULL,
   out
 }
 
+#' Get a list of sites and catchments with data start and end years
+#' @param x TODO
 #' @export
 get_site_info <- function(x) {
   x$ads %>%
     dplyr::group_by_at(c("site", "catchment")) %>%
     dplyr::summarise(
-      min_year = min(year, na.rm = TRUE),
-      max_year = max(year, na.rm = TRUE),
+      min_year = min(.data$year, na.rm = TRUE),
+      max_year = max(.data$year, na.rm = TRUE),
       .groups = "drop"
     ) %>%
     dplyr::arrange(.data$site, .data$catchment)

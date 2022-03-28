@@ -18,6 +18,7 @@ Imports:
     ggthemes,
     glue,
     gt,
+    htmltools,
     lubridate,
     plotly,
     purrr,

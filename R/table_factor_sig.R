@@ -33,7 +33,9 @@ table_factor_sig_stats <- function(
 
   # expand the nested tables
   dat <- suppressWarnings(df_table %>%
-    dplyr::select(site, catchment, factor, table) %>%
+    dplyr::select(
+      dplyr::all_of(c("site", "catchment", "factor", "table"))
+    ) %>%
     tidyr::unnest(cols = c("table")) %>%
     dplyr::select(-dplyr::one_of(drop_columns)))
 
@@ -55,9 +57,9 @@ table_factor_sig_stats <- function(
     dplyr::left_join(
       # percent table calculations to join
       dat %>%
-        dplyr::group_by(factor, .drop = FALSE) %>%
+        dplyr::group_by(.data$factor, .drop = FALSE) %>%
         dplyr::mutate(dplyr::across(
-          tidyselect:::where(is.numeric),
+          tidyselect::vars_select_helpers$where(is.numeric),
           function(x) {
             round(100 * proportions(x), percent_digits)
           }
@@ -68,7 +70,7 @@ table_factor_sig_stats <- function(
           }
         ) %>%
         dplyr::mutate(
-          dplyr::across(tidyselect:::where(is.numeric),
+          dplyr::across(tidyselect::vars_select_helpers$where(is.numeric),
             ~tidyr::replace_na(.x, 0))
         ),
       by = c("site", "catchment", "factor", "level")
@@ -95,7 +97,7 @@ table_factor_sig_stats <- function(
   dat_out <- dplyr::left_join(all_facs, dat_out,
     by = c("site", "catchment", "factor", "level")) %>%
     replace(is.na(.), 0) %>%
-    dplyr::mutate(flevel = paste0(factor, "_", level)) %>%
+    dplyr::mutate(flevel = paste0(.data$factor, "_", .data$level)) %>%
     dplyr::arrange_at(c("factor_order", "level_order")) %>%
     dplyr::select(-c("factor_order", "level_order"))
 
@@ -150,13 +152,14 @@ table_factor_sig_stats <- function(
 
   # Second while loop to build factor grouping of the table
   #
-  while_factors <- rev(dplyr::pull(df_table, factor))
+  while_factors <- rev(dplyr::pull(df_table, .data$factor))
 
   while (length(while_factors) > 0) {
-    df_row <- dplyr::filter(df_table, factor == while_factors[1])
+    df_row <- dplyr::filter(df_table,
+      .data$factor == while_factors[1])
 
     # create pvalue_str
-    pvalue <- dplyr::pull(df_row, pval)
+    pvalue <- dplyr::pull(df_row, .data$pval)
 
     pvalue_str <- ifelse(
       pvalue < 0.001,
@@ -174,8 +177,8 @@ table_factor_sig_stats <- function(
 
     # identify rows for grouping
     combine_rows <- dat_out %>%
-      dplyr::filter(factor == df_row$factor) %>%
-      dplyr::pull(flevel)
+      dplyr::filter(.data$factor == df_row$factor) %>%
+      dplyr::pull(.data$flevel)
 
     # build formatting of table
     factor_info <- paste0(
@@ -196,9 +199,9 @@ table_factor_sig_stats <- function(
   # add other adornments to table.
   # N is the max observed over each of the factors
   dat_sum <- dat %>%
-    group_by(factor, .drop = FALSE) %>%
-    summarise_if(is.numeric, sum) %>%
-    summarise_if(is.numeric, max)
+    dplyr::group_by(.data$factor, .drop = FALSE) %>%
+    dplyr::summarise_if(is.numeric, sum) %>%
+    dplyr::summarise_if(is.numeric, max)
 
   # Third while add column count details and rename columns to n (%)
 
@@ -208,7 +211,8 @@ table_factor_sig_stats <- function(
     create_name <- gt_while_columns[1]
     column_title <- paste0(
       create_name, "<br><em>N = ",
-      prettyNum(pull(dat_sum, create_name), big.mark = ","), "</em>"
+      prettyNum(dplyr::pull(dat_sum, create_name),
+        big.mark = ","), "</em>"
     )
 
     dat_gt <- dat_gt %>%
@@ -221,7 +225,7 @@ table_factor_sig_stats <- function(
     gt_while_columns <- gt_while_columns[-1]
   }
   dat_gt %>%
-    gt::cols_hide(columns = c(site, catchment, factor, level)) %>%
+    gt::cols_hide(columns = c("site", "catchment", "factor", "level")) %>%
     # gt::tab_source_note(
     #   source_note = gt::md("Built using the champsmortality R package.")
     # ) %>% # nolint

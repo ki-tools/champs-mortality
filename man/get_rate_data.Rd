@@ -25,8 +25,11 @@ get_rate_data(
 
 \item{condition}{a CHAMPS condition (see \code{\link[=valid_conditions]{valid_conditions()}})}
 
-\item{icd10_regex}{an optional regular expression specifying ICD10 codes
-that define a condition}
+\item{icd10_regex}{an optional regular expression specifying
+ICD10 codes that define a condition}
+
+\item{causal_chain}{if TRUE, the causal chain is searched, if
+FALSE, the underlying cause is searched}
 
 \item{adjust_vars}{a vector of variables to adjust by}
 

@@ -97,11 +97,11 @@ table_adjust_decision <- function(
       names_sort = TRUE
     ) %>%
     dplyr::mutate(
-      location_name = paste0(site, ": ", catchment, sep = ""),
-      year_period = paste0(start_year, "-", end_year, sep = "")
+      location_name = paste0(.data$site, ": ", .data$catchment, sep = ""),
+      year_period = paste0(.data$start_year, "-", .data$end_year, sep = "")
     ) %>%
     dplyr::select(
-      location_name, year_period, dss,
+      dplyr::all_of(c("location_name", "year_period", "dss")),
       dplyr::contains("value"),
       dplyr::contains("Missing")
     ) %>%
@@ -109,9 +109,9 @@ table_adjust_decision <- function(
       values <- stringr::str_split_fixed(x, "_", n = 3) %>% data.frame()
       values %>%
         dplyr::mutate(new_name = paste0(
-          X3, ".", X1, ".", X2
+          .data$X3, ".", .data$X1, ".", .data$X2
         )) %>%
-        dplyr::pull(new_name)
+        dplyr::pull(.data$new_name)
     })
   # Tease out the two list names assigned to the column
   # names for using in naming below

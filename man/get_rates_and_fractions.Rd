@@ -16,7 +16,7 @@ get_rates_and_fractions(
   adjust_vars_override = NULL,
   factor_groups = NULL,
   pval_cutoff = 0.1,
-  prop_cutoff = 20
+  pct_na_cutoff = 20
 )
 }
 \arguments{
@@ -41,8 +41,8 @@ that define a condition.}
 the condition is "Congenital birth defects", cond_name could be "CBD").
 Defaults to \code{condition} if not specified.}
 
-\item{causal_chain}{Should the search for the condition be
-across the causal chain?}
+\item{causal_chain}{if TRUE, the causal chain is searched, if
+FALSE, the underlying cause is searched}
 
 \item{adjust_vars_override}{An optional vector of adjustment
 variables that will override the automatic adjustment. Cannot be
@@ -53,9 +53,7 @@ more than two variables and must include age.}
 \item{pval_cutoff}{P-value for which variables are considered
 for adjustment. Ignored if adjust_vars_override is specified.}
 
-\item{use_dss}{Should the calculations be done only for catchments that}
-
-\item{prop_na_cutoff}{Proportion of missingness for which
+\item{pct_na_cutoff}{Proportion of missingness for which
 variables are considered for adjustment. Ignored if
 adjust_vars_override is specified.}
 }

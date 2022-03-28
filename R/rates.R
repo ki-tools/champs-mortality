@@ -8,21 +8,20 @@
 #' @param group_catchments Should all catchments within a site be grouped
 #' together?
 #' @param factor_groups A named list that specifies how to group factors
-#' @param use_dss Should the calculations be done only for catchments that
 #' @param condition CHAMPS group specifying the condition
 #' @param icd10_regex An optional regular expression specifying ICD10 codes
 #' that define a condition.
 #' @param cond_name The name of the condition to use in outputs (e.g. if
 #' the condition is "Congenital birth defects", cond_name could be "CBD").
 #' Defaults to `condition` if not specified.
-#' @param causal_chain Should the search for the condition be
-#' across the causal chain?
+#' @param causal_chain if TRUE, the causal chain is searched, if
+#' FALSE, the underlying cause is searched
 #' @param adjust_vars_override An optional vector of adjustment
 #' variables that will override the automatic adjustment. Cannot be
 #' more than two variables and must include age.
 #' @param pval_cutoff P-value for which variables are considered
 #' for adjustment. Ignored if adjust_vars_override is specified.
-#' @param prop_na_cutoff Proportion of missingness for which
+#' @param pct_na_cutoff Proportion of missingness for which
 #' variables are considered for adjustment. Ignored if
 #' adjust_vars_override is specified.
 #' @note One or both of `icd10_regex` and `condition` must be specified
@@ -39,7 +38,7 @@ get_rates_and_fractions <- function(
   adjust_vars_override = NULL,
   factor_groups = NULL,
   pval_cutoff = 0.1,
-  prop_cutoff = 20
+  pct_na_cutoff = 20
 ) {
   if (is.null(sites))
     sites <- sort(unique(x$ads$site))
@@ -47,7 +46,7 @@ get_rates_and_fractions <- function(
   res <- lapply(sites, function(st) {
     if (length(sites) > 1)
       message(st)
-    get_rates_and_fractions_single(dd,
+    get_rates_and_fractions_single(x,
       sites = st,
       catchments = catchments,
       group_catchments = group_catchments,
@@ -58,7 +57,7 @@ get_rates_and_fractions <- function(
       adjust_vars_override = adjust_vars_override,
       factor_groups = factor_groups,
       pval_cutoff = pval_cutoff,
-      prop_cutoff = prop_cutoff
+      pct_na_cutoff = pct_na_cutoff
     )
   })
 
@@ -92,7 +91,7 @@ get_rates_and_fractions_single <- function(
   adjust_vars_override = NULL,
   factor_groups = NULL,
   pval_cutoff = 0.1,
-  prop_cutoff = 20
+  pct_na_cutoff = 20
 ) {
   tbl1a <- mits_selection_factor_tables(x,
     sites = sites,
@@ -143,7 +142,9 @@ get_rates_and_fractions_single <- function(
   )
 
   crit %>%
-    dplyr::filter(pct_na < prop_cutoff, pval < pval_cutoff) %>%
+    dplyr::filter(
+      .data$pct_na < pct_na_cutoff, .data$pval < pval_cutoff
+    ) %>%
     dplyr::group_by_at(c("site", "catchment", "factor")) %>%
     dplyr::summarise(n = dplyr::n())
 
@@ -159,8 +160,9 @@ get_rates_and_fractions_single <- function(
       use_dss = TRUE
     )
     lb <- sum(rd_dss$live_birth_data$live_births)
-    sb <- filter(rd_dss$data, age == "Stillbirth") %>%
-      pull(target) %>%
+    sb <- rd_dss$data %>%
+      dplyr::filter(.data$age == "Stillbirth") %>%
+      dplyr::pull(.data$target) %>%
       sum()
     u5d_sb <- sum(rd_dss$data$target)
     acTU5MR <- 10000 * u5d_sb / (lb + sb)
@@ -189,7 +191,7 @@ get_rates_and_fractions_single <- function(
         .data$year <= .data$end_year) %>%
       # dplyr::group_by(.data$site, .data$catchment) %>%
       # dplyr::slice(which.max(.data$year)) %>%
-      dplyr::pull(rate) %>%
+      dplyr::pull(.data$rate) %>%
       mean()
     acTU5MR_ndss <- acTU5MR
     rd <- rd_ndss
@@ -241,8 +243,10 @@ get_rates_and_fractions_single <- function(
 #' @param site a site name to get rate data for
 #' @param catchments a vector of catchments to include in the calculations
 #' @param condition a CHAMPS condition (see [valid_conditions()])
-#' @param icd10_regex an optional regular expression specifying ICD10 codes
-#' that define a condition
+#' @param icd10_regex an optional regular expression specifying 
+#' ICD10 codes that define a condition
+#' @param causal_chain if TRUE, the causal chain is searched, if
+#' FALSE, the underlying cause is searched
 #' @param adjust_vars a vector of variables to adjust by
 #' @param factor_groups A named list that specifies how to group factors
 #' @param use_dss Should the calculations be done only for catchments that
@@ -504,7 +508,7 @@ rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
         dplyr::group_by(.data$group) %>%
         dplyr::summarise_all(sum) %>%
         dplyr::mutate(
-          group = as.numeric(factor(group)),
+          group = as.numeric(factor(.data$group)),
           selprob = .data$decode / .data$target
           # adjust = condition / mits
         )

@@ -45,8 +45,8 @@ the condition is "Congenital birth defects", cond_name could be "CBD").
 Defaults to value of \code{condition} if not specified. Required if only
 \code{icd10_regex} is specified.}
 
-\item{causal_chain}{Should the search for the condition be
-across the causal chain?}
+\item{causal_chain}{if TRUE, the causal chain is searched, if
+FALSE, the underlying cause is searched}
 }
 \description{
 Compute counts of MITS cases and non-cases for a given condition by factors

@@ -68,8 +68,8 @@ mits_selection_factor_tables <- function(
     dplyr::select(-c("level")) %>%
     dplyr::group_by_at(group_vars) %>%
     dplyr::summarise(
-      n_mits = sum(n[mits_flag == 1]),
-      n_non_mits = sum(n[mits_flag == 0])
+      n_mits = sum(.data$n[.data$mits_flag == 1]),
+      n_non_mits = sum(.data$n[.data$mits_flag == 0])
     ) %>%
     dplyr::ungroup()
 
@@ -83,8 +83,8 @@ mits_selection_factor_tables <- function(
     dplyr::select(-c("level")) %>%
     dplyr::group_by_at(group_vars) %>%
     dplyr::summarise(
-      na_mits = sum(n[mits_flag == 1]),
-      na_non_mits = sum(n[mits_flag == 0])
+      na_mits = sum(.data$n[.data$mits_flag == 1]),
+      na_non_mits = sum(.data$n[.data$mits_flag == 0])
     ) %>%
     dplyr::ungroup()
 
@@ -248,8 +248,8 @@ mits_selection_factor_tables <- function(
 #' the condition is "Congenital birth defects", cond_name could be "CBD").
 #' Defaults to value of `condition` if not specified. Required if only
 #' `icd10_regex` is specified.
-#' @param causal_chain Should the search for the condition be
-#' across the causal chain?
+#' @param causal_chain if TRUE, the causal chain is searched, if
+#' FALSE, the underlying cause is searched
 #' @export
 cond_factor_tables <- function(
   x, sites = NULL, catchments = NULL, group_catchments = TRUE,
@@ -294,12 +294,12 @@ cond_factor_tables <- function(
     "level"
   )
 
-  check_cond <- function(., group, rgx, causal_chain) {
+  check_cond <- function(a, group, rgx, causal_chain) {
     if (is.null(group))
-      return(has_icd10(., rgx, cc = causal_chain))
+      return(has_icd10(a, rgx, cc = causal_chain))
     if (is.null(rgx))
-      return(has_champs_group(., group, cc = causal_chain))
-    has_icd10(., rgx) | has_champs_group(., group)
+      return(has_champs_group(a, group, cc = causal_chain))
+    has_icd10(a, rgx) | has_champs_group(a, group)
   }
 
   tbls <- x$ads %>%

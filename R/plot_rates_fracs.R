@@ -12,27 +12,27 @@
 plot_rates_fracs <- function(obj, type = "frac", plotly = TRUE) {
   pdat_frac <- obj$frac %>%
     dplyr::mutate(
-      type = factor(ifelse(var == "aCSMF", "Actual", "Crude"),
+      type = factor(ifelse(.data$var == "aCSMF", "Actual", "Crude"),
         levels = c("Crude", "Actual")),
-      estimate = round(est, 2),
-      lower = round(lower, 2),
-      upper = round(upper, 2),
-      site = factor(paste0(site, "<br>(", catchments, ")")),
-      site = forcats::fct_reorder(site, est),
-      text = paste0(site, "<br>", type, ": ", estimate,
-        "% (", lower, ", ", upper, ")")
+      estimate = round(.data$est, 2),
+      lower = round(.data$lower, 2),
+      upper = round(.data$upper, 2),
+      site = factor(paste0(.data$site, "<br>(", .data$catchments, ")")),
+      site = forcats::fct_reorder(.data$site, .data$est),
+      text = paste0(.data$site, "<br>", .data$type, ": ", .data$estimate,
+        "% (", .data$lower, ", ", .data$upper, ")")
     )
   pdat_rate <- obj$rate %>%
     dplyr::mutate(
-      type = factor(ifelse(var == "aTU5MR", "Actual", "Crude"),
+      type = factor(ifelse(.data$var == "aTU5MR", "Actual", "Crude"),
         levels = c("Crude", "Actual")),
-      estimate = round(est, 2),
-      lower = round(lower, 2),
-      upper = round(upper, 2),
-      site = factor(paste0(site, "<br>(", catchments, ")"),
+      estimate = round(.data$est, 2),
+      lower = round(.data$lower, 2),
+      upper = round(.data$upper, 2),
+      site = factor(paste0(.data$site, "<br>(", .data$catchments, ")"),
         levels = levels(pdat_frac$site)),
-      text = paste0(site, "<br>", type, ": ", estimate,
-        " (", lower, ", ", upper, ")")
+      text = paste0(.data$site, "<br>", .data$type, ": ", .data$estimate,
+        " (", .data$lower, ", ", .data$upper, ")")
     )
 
   if (type == "frac") {

@@ -1,13 +1,20 @@
+tags <- htmltools::tags
 
+#' View the results of a TODO
+#' @param obj TODO
+#' @param path TODO
 #' @export
-make_site <- function(obj, path = tempfile()) {
+make_results <- function(obj, path = tempfile()) {
   if (!dir.exists(path))
     dir.create(path)
 
+  message("index")
   write_page(index_page(obj), path)
-  write_page(index_page(obj), path)
+  message("factor adjustment table")
   write_page(fac_adj_page(obj), path)
+  message("MITS selection tables")
   write_page(stats_page(obj, mits = TRUE), path)
+  message("Condition selection tables")
   write_page(stats_page(obj, mits = FALSE), path)
 
   path
@@ -22,11 +29,12 @@ index_page <- function(obj) {
   p2 <- plot_rates_fracs(obj, "rate")
 
   make_page("index",
-    tagList(
+    htmltools::tagList(
       tags$div(class = "plot-container",
         tags$div(p1),
         tags$div(p2)
-      )
+      ),
+      tags$div(table_overview(obj))
     ),
     condition = obj$condition,
     causal_chain = obj$causal_chain
@@ -34,16 +42,16 @@ index_page <- function(obj) {
 }
 
 fac_adj_page <- function(obj) {
-  tmp1 <- bind_rows(
-    res$mits_dss %>% mutate(dss = TRUE),
-    res$mits_non_dss %>% mutate(dss = FALSE)
+  tmp1 <- dplyr::bind_rows(
+    obj$mits_dss %>% dplyr::mutate(dss = TRUE),
+    obj$mits_non_dss %>% dplyr::mutate(dss = FALSE)
   ) %>%
-    arrange(site, catchment)
-  tmp2 <- bind_rows(
-    res$cond_dss %>% mutate(dss = TRUE),
-    res$cond_non_dss %>% mutate(dss = FALSE)
+    dplyr::arrange_at(c("site", "catchment"))
+  tmp2 <- dplyr::bind_rows(
+    obj$cond_dss %>% dplyr::mutate(dss = TRUE),
+    obj$cond_non_dss %>% dplyr::mutate(dss = FALSE)
   ) %>%
-    arrange(site, catchment)
+    dplyr::arrange_at(c("site", "catchment"))
   tmp <- list(
     MITS = tmp1,
     other = tmp2
@@ -53,7 +61,7 @@ fac_adj_page <- function(obj) {
 
   name <- "fac_adj"
   make_page(name,
-    tagList(
+    htmltools::tagList(
       tb
     ),
     condition = obj$condition,
@@ -66,16 +74,16 @@ stats_page <- function(obj, mits = TRUE) {
 
   tmp1 <- obj[[paste0(prefix, "_dss")]]
   tmp2 <- obj[[paste0(prefix, "_non_dss")]]
-  tmp <- bind_rows(
-    tmp1 %>% mutate(dss = TRUE),
-    tmp2 %>% mutate(dss = FALSE)
+  tmp <- dplyr::bind_rows(
+    tmp1 %>% dplyr::mutate(dss = TRUE),
+    tmp2 %>% dplyr::mutate(dss = FALSE)
   ) %>%
-    arrange(site, catchment)
+    dplyr::arrange_at(c("site", "catchment"))
 
   tbls <- split(tmp, paste(tmp$site, tmp$catchment)) %>%
     lapply(table_factor_sig_stats)
 
-  content <- tagList(
+  content <- htmltools::tagList(
     tags$div(class = "table-container",
       tbls
     )
@@ -83,7 +91,7 @@ stats_page <- function(obj, mits = TRUE) {
 
   name <- paste0("stats_", prefix)
   make_page(name,
-    tagList(
+    htmltools::tagList(
       content
     ),
     condition = obj$condition,
@@ -94,9 +102,9 @@ stats_page <- function(obj, mits = TRUE) {
 make_page <- function(name, content, condition, causal_chain) {
   cc <- ifelse(causal_chain, "In the causal chain", "In the underlying cause")
 
-  tgs <- tagList(
+  tgs <- htmltools::tagList(
     tags$head(
-      tags$style(HTML("
+      tags$style(htmltools::HTML("
 body {
   font-family: 'Poppins', sans-serif;
   padding: 0px;
@@ -153,58 +161,36 @@ body {
   padding: 0;
 }
 
-.tabs > div.tab-item {
+.tabs > a > div.tab-item {
   padding-top: 11px;
   padding-bottom: 10px;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.tab-item > a {
-  text-decoration: none;
-  color: white;
+.tabs > a > div {
   font-weight: 300;
   font-size: 16px;
   padding-left: 30px;
   padding-right: 30px;
 }
 
+.tabs > a {
+  text-decoration: none;
+  color: white;
+}
+
 .tab-item:hover {
   background: #64b5f6;
 }
 
-.tab-item.is-active > a {
-  color: white;
-}
-
-.tab-item.is-active {
+.tabs > a > div.is-active {
   border-bottom: 2px solid #1e88e5;
   background: #42a5f5;
 }
 
-.tab-group {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-.tab-group-header {
-  font-size: 14px;
-  background: #64b5f6;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.tab-group-content {
-  display: flex;
-  flex-direction: row;
-}
-
-.tab-group-content > div.tab-item {
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-}
-
 .plot-container {
   width: 100%;
-  height: calc(65vh - 48px);
+  height: calc(60vh - 48px);
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -212,6 +198,21 @@ body {
 
 .plot-container > div {
   width: calc(50vw - 10px);
+}
+
+#notice {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: rgb(255, 255, 255, 0.4);
+  color: darkgray;
+  font-weight: 300;
+  font-size: 14px;
+  padding: 5px;
+}
+
+a {
+  color: black;
 }
       ")),
       tags$link(rel = "preconnect", href = "https://fonts.googleapis.com"),
@@ -221,54 +222,45 @@ body {
         rel = "stylesheet")
     ),
     tags$body(
+      tags$div(id = "notice",
+        "These results are produced using the ",
+        tags$a(href = "https://github.com/ki-tools/champs-mortality", "champs-mortality"),
+        " R package, which is under active development. The statistics provided have not been fully validated and should not yet be treated as reliable."
+      ),
       tags$div(class = "header",
         tags$div(class = "title",
           tags$div(class = "condition", condition),
           tags$div(class = "cc", cc)
         ),
         tags$div(class = "tabs",
-          tags$div(class = ifelse(
-            name == "index", "tab-item is-active", "tab-item"),
-            tags$a("Results", href = "index.html")
+          tags$a(
+            tags$div(class = ifelse(
+              name == "index", "tab-item is-active", "tab-item"),
+              "Results"
+            ),
+            href = "index.html"
           ),
-          # tags$div(class = "tab-group",
-          #   tags$div(class = "tab-group-header",
-          #     "DSS catchment background"
-          #   ),
-          #   tags$div(class = "tab-group-content",
-              tags$div(class = ifelse(
-                name == "fac_adj", "tab-item is-active", "tab-item"),
-                tags$a("Factor Adjustment Table", href = "fac_adj.html")
-              ),
-              tags$div(class = ifelse(
-                name == "stats_mits", "tab-item is-active", "tab-item"),
-                tags$a("MITS Selection Stats", href = "stats_mits.html")
-              ),
-              tags$div(class = ifelse(
-                name == "stats_cond", "tab-item is-active", "tab-item"),
-                tags$a("Condition Selection Stats", href = "stats_cond.html")
-              ),
-          #   )
-          # ),
-          # tags$div(class = "tab-group",
-          #   tags$div(class = "tab-group-header",
-          #     "non-DSS catchment background"
-          #   ),
-          #   tags$div(class = "tab-group-content",
-          #     tags$div(class = ifelse(
-          #       name == "fac_adj_non_dss", "tab-item is-active", "tab-item"),
-          #       tags$a("Factor Adj.", href = "fac_adj_non_dss.html")
-          #     ),
-          #     tags$div(class = ifelse(
-          #       name == "stats_mits_non_dss", "tab-item is-active", "tab-item"),
-          #       tags$a("MITS Stats", href = "stats_mits_non_dss.html")
-          #     ),
-          #     tags$div(class = ifelse(
-          #       name == "stats_cond_non_dss", "tab-item is-active", "tab-item"),
-          #       tags$a("Cond Stats", href = "stats_cond_non_dss.html")
-          #     )
-          #   )
-          # )
+          tags$a(
+            tags$div(class = ifelse(
+              name == "fac_adj", "tab-item is-active", "tab-item"),
+              "Factor Adjustment Table"
+            ),
+            href = "fac_adj.html"
+          ),
+          tags$a(
+            tags$div(class = ifelse(
+              name == "stats_mits", "tab-item is-active", "tab-item"),
+              "MITS Selection Stats"
+            ),
+            href = "stats_mits.html"
+          ),
+          tags$a(
+            tags$div(class = ifelse(
+              name == "stats_cond", "tab-item is-active", "tab-item"),
+              "Condition Selection Stats"
+            ),
+            href = "stats_cond.html"
+          ),
         )
       ),
       content
