@@ -1,27 +1,37 @@
 #' Build pretty table of factor significance and level counts
-#' @param df_table output from mits_selection_factor_tables()
-#' @param print_columns specific columns from the nested tibbles in the table column to print. Defaults to "MITS" and "non-MITS+DSS-only". "DSS-only" and "non-MITS" are the other two columns that can be printed.
-#' @param percent_digits the number of digits to round the percent columns to. Defaults to 1.
+#' @param tbl output from mits_factor_tables() or
+#' cond_factor_tables()
+#' @param print_columns specific columns from the nested tibbles in the table
+#' column to print. Defaults to "MITS" and "non-MITS+DSS-only". "DSS-only" and
+#' "non-MITS" are the other two columns that can be printed.
+#' @param percent_digits the number of digits to round the percent columns to.
+#' Defaults to 1.
 #' @export
 table_factor_sig_stats <- function(
-  df_table,
+  tbl,
   print_columns = c("MITS", "non-MITS+DSS-only"),
   percent_digits = 1
 ) {
+  assertthat::assert_that(inherits(x, "rate_frac_multi_site"),
+    msg = cli::format_error("'tbl' must come from ",
+    "mits_factor_tables() or ",
+    "cond_factor_tables()")
+  )
+
   spacer <- ""
-  if ("dss" %in% names(df_table)) {
-    dss_str <- ifelse(df_table$dss[1],
+  if ("dss" %in% names(tbl)) {
+    dss_str <- ifelse(tbl$dss[1],
       "<span style='color: gray;'>(DSS)</span>",
       "<span style='color: gray;'>(non-DSS)</span>"
     )
-    if (!df_table$dss[1])
+    if (!tbl$dss[1])
       spacer <- "<br>"
   } else {
     dss_str <- ""
   }
 
-  if (!any(grepl("DSS", names(df_table$table[[1]]))) &&
-    all(c("MITS", "non-MITS") %in% names(df_table$table[[1]]))) {
+  if (!any(grepl("DSS", names(tbl$table[[1]]))) &&
+    all(c("MITS", "non-MITS") %in% names(tbl$table[[1]]))) {
     print_columns <- c("MITS", "non-MITS")
   }
 
@@ -32,7 +42,7 @@ table_factor_sig_stats <- function(
   gt_id <- gt::random_id()
 
   # expand the nested tables
-  dat <- suppressWarnings(df_table %>%
+  dat <- suppressWarnings(tbl %>%
     dplyr::select(
       dplyr::all_of(c("site", "catchment", "factor", "table"))
     ) %>%
@@ -77,7 +87,7 @@ table_factor_sig_stats <- function(
     )
 
   # need all levels of all factors
-  factor_groups <- attr(df_table, "factor_groups")
+  factor_groups <- attr(tbl, "factor_groups")
   lnms <- names(valid_levels)
   all_facs <- dplyr::bind_rows(lapply(seq_along(valid_levels), function(idx) {
     if (!is.null(factor_groups[[lnms[idx]]])) {
@@ -152,10 +162,10 @@ table_factor_sig_stats <- function(
 
   # Second while loop to build factor grouping of the table
   #
-  while_factors <- rev(dplyr::pull(df_table, .data$factor))
+  while_factors <- rev(dplyr::pull(tbl, .data$factor))
 
   while (length(while_factors) > 0) {
-    df_row <- dplyr::filter(df_table,
+    df_row <- dplyr::filter(tbl,
       .data$factor == while_factors[1])
 
     # create pvalue_str

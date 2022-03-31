@@ -1,6 +1,5 @@
-
 #' Create a plot of rates or fractions
-#' @param obj object (TODO)
+#' @param obj an object from [get_rates_and_fractions()]
 #' @param type one of "frac" or "rate"
 #' @param plotly should the result be a plotly graph?
 #' @export
@@ -10,7 +9,16 @@
 #' @importFrom plotly ggplotly layout config
 #' @importFrom forcats fct_reorder
 plot_rates_fracs <- function(obj, type = "frac", plotly = TRUE) {
-  pdat_frac <- obj$frac %>%
+  assertthat::assert_that(inherits(obj, "rate_frac_multi_site"),
+    msg = cli::format_error("'obj' must come from get_rates_and_fractions()")
+  )
+
+  datr <- lapply(obj, function(x) x$rate) %>%
+    dplyr::bind_rows()
+  datf <- lapply(obj, function(x) x$frac) %>%
+    dplyr::bind_rows()
+
+  pdat_frac <- datf %>%
     dplyr::mutate(
       type = factor(ifelse(.data$var == "aCSMF", "Actual", "Crude"),
         levels = c("Crude", "Actual")),
@@ -22,7 +30,7 @@ plot_rates_fracs <- function(obj, type = "frac", plotly = TRUE) {
       text = paste0(.data$site, "<br>", .data$type, ": ", .data$estimate,
         "% (", .data$lower, ", ", .data$upper, ")")
     )
-  pdat_rate <- obj$rate %>%
+  pdat_rate <- datr %>%
     dplyr::mutate(
       type = factor(ifelse(.data$var == "aTU5MR", "Actual", "Crude"),
         levels = c("Crude", "Actual")),

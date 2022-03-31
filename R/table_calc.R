@@ -14,7 +14,7 @@
 #' @importFrom purrr map2 map_dbl
 #' @importFrom tidyr pivot_longer pivot_wider nest
 #' @export
-mits_selection_factor_tables <- function(
+mits_factor_tables <- function(
   x, sites = NULL, catchments = NULL, group_catchments = TRUE,
   factor_groups = NULL, use_dss = TRUE
 ) {
@@ -160,6 +160,17 @@ mits_selection_factor_tables <- function(
     tbls <- dplyr::left_join(tbls, ctch, by = c("site", "catchment"))
   }
 
+  ages <- valid_levels$age
+  if (!is.null(factor_groups$age))
+    ages <- unlist(factor_groups$age)
+  pop_mits <- dplyr::bind_rows(ads_ct, dss_ct) %>%
+    dplyr::filter(.data$factor == "age", .data$level %in% ages) %>%
+    dplyr::group_by_at("site") %>%
+    dplyr::summarise(
+      stillbirths = sum(.data$n[.data$level == "Stillbirth"]),
+      u5d_sb = sum(.data$n)
+    )
+
   tmp <- tbls %>%
     tidyr::nest(data = -c("site", "catchment", "factor",
       "start_year", "end_year")) %>%
@@ -223,10 +234,11 @@ mits_selection_factor_tables <- function(
 
   tblsn$pval[is.na(tblsn$pval)] <- 1
   attr(tblsn, "factor_groups") <- factor_groups
+  attr(tblsn, "pop_mits") <- pop_mits
+  attr(tblsn, "cm_class") <- c("factor_table", "mits_factor_table")
 
   tblsn
 }
-
 
 
 #' Compute counts of MITS cases and non-cases for a given condition by factors
@@ -244,8 +256,8 @@ mits_selection_factor_tables <- function(
 #' @param condition CHAMPS group specifying the condition
 #' @param icd10_regex An optional regular expression specifying ICD10 codes
 #' that define a condition.
-#' @param cond_name The name of the condition to use in outputs (e.g. if
-#' the condition is "Congenital birth defects", cond_name could be "CBD").
+#' @param cond_name_short The name of the condition to use in outputs (e.g. if
+#' the condition is "Congenital birth defects", cond_name_short could be "CBD").
 #' Defaults to value of `condition` if not specified. Required if only
 #' `icd10_regex` is specified.
 #' @param causal_chain if TRUE, the causal chain is searched, if
@@ -254,7 +266,7 @@ mits_selection_factor_tables <- function(
 cond_factor_tables <- function(
   x, sites = NULL, catchments = NULL, group_catchments = TRUE,
   factor_groups = NULL, use_dss = TRUE,
-  condition = NULL, icd10_regex = NULL, cond_name = condition,
+  condition = NULL, icd10_regex = NULL, cond_name_short = condition,
   causal_chain = TRUE
 ) {
   assertthat::assert_that(inherits(x, "champs_processed"),
@@ -275,8 +287,8 @@ cond_factor_tables <- function(
     )
   }
 
-  assertthat::assert_that(!(is.null(cond_name)),
-    msg = cli::format_error("Must specify cond_name")
+  assertthat::assert_that(!(is.null(cond_name_short)),
+    msg = cli::format_error("Must specify cond_name_short")
   )
 
   obj <- get_ctch(x, sites, catchments)
@@ -358,7 +370,7 @@ cond_factor_tables <- function(
         if (is.null(x[["0"]]))
           x[["0"]] <- 0
         x <- x %>%
-          dplyr::rename("{cond_name}+" := "1", "{cond_name}-" := "0")
+          dplyr::rename("{cond_name_short}+" := "1", "{cond_name_short}-" := "0")
         if (fac == "age")
           x$level <- factor(x$level,
             levels = c("Stillbirth", "Neonate", "Infant", "Child"))
@@ -489,5 +501,8 @@ get_ctch <- function(x, sites = NULL, catchments = NULL) {
     res[[ii]]$sites <- unique(res[[ii]]$ctch$site)
     res[[ii]]$catchments <- unique(res[[ii]]$ctch$catchment)
   }
+
+  attr(res, "cm_class") <- c("factor_table", "cond_factor_table")
+
   res
 }

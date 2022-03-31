@@ -1,66 +1,13 @@
-#' Combine mits_selection_factor_tables() and cond_factor_tables() output to one decision dataframe
-#' @param tables_dat a named list object with a table from mits_selection_factor_tables() and a table from cond_factor_tables().  The names assigned to each table will be used in naming the table columns.
-combine_decision_tables <- function(tables_dat) {
-  append_names <- names(tables_dat)
-
-  join_cols <- c(
-    "site", "catchment", "factor",
-    "start_year", "end_year", "dss"
-  )
-  # only need these two columns for tables
-  unique_cols <- c("pval", "pct_na")
-  # Clean names for columns to take advantage of dt::tab_spanner_delim()
-  unique_cols_new <- c("P-value", "Missing")
-
-  # now downselect the two tables to necessary columns and join
-  t1 <- tables_dat[[append_names[1]]] %>%
-    dplyr::select(dplyr::any_of(c(join_cols, unique_cols))) %>%
-    dplyr::rename_with(~unique_cols_new, dplyr::all_of(unique_cols)) %>%
-    dplyr::rename_with(
-      .fn = function(x) {
-        paste(append_names[1], x, sep = "_")
-      },
-      .cols = dplyr::any_of(unique_cols_new)
-    )
-
-  t2 <- tables_dat[[append_names[2]]] %>%
-    dplyr::select(dplyr::any_of(c(join_cols, unique_cols))) %>%
-    dplyr::rename_with(~unique_cols_new, dplyr::all_of(unique_cols)) %>%
-    dplyr::rename_with(
-      .fn = function(x) {
-        paste(append_names[2], x, sep = "_")
-      },
-      .cols = dplyr::any_of(unique_cols_new)
-    )
-
-  if (! "dss" %in% names(t1))
-    join_cols <- setdiff(join_cols, "dss")
-  t1 %>%
-    dplyr::left_join(t2, by = join_cols)
-}
-
-# tables_dat <- list(
-#     MITS = fac_tbl, # table 5a
-#     CBD = cbd_tbl # table 6a
-# )
-
-# tables_dat_b <- list(
-#     MITS = fac_tbl_b, # table 5b
-#     CBD = cbd_tbl_b # table 6b
-# )
-# a_dat <- combine_decision_tables(tables_dat)
-# b_dat <- combine_decision_tables(tables_dat_b)
-
-
-
 #' Selected variables decision table
-#' @param df_table a dataframe with the output from combine_decision_tables()
-#' @param alpha_value the threshold to compare against the p-value. Cells are colored based on this value
-#' @param pmissing the percent missing allowed for a factor to be considered in the decision table. Cells are colored using this value.
+#' @param obj an object that comes from [get_rates_and_fractions()]
+#' @param alpha_value the threshold to compare against the p-value.
+#' Cells are colored based on this value
+#' @param pmissing the percent missing allowed for a factor to be considered
+#' in the decision table. Cells are colored using this value.
 #' @param percent_digits the number of digits to round the percent missing to.
 #' @export
 table_adjust_decision <- function(
-  df_table,
+  obj,
   alpha_value = 0.1,
   pmissing = 20,
   percent_digits = 1
@@ -68,28 +15,64 @@ table_adjust_decision <- function(
   full_color <- "#4E79A7"
   partial_color <- "#4E79A7AA"
 
-  tmp <- levels(df_table$factor)
+  if (inherits(obj, "rate_frac_site")) {
+    mits_dss <- obj$mits_dss
+    mits_non_dss <- obj$mits_non_dss
+    cond_dss <- obj$cond_dss
+    cond_non_dss <- obj$cond_non_dss
+    cond_name_short <- obj$cond_name_short
+  } else if (inherits(obj, "rate_frac_multi_site")) {
+    mits_dss <- lapply(obj, function(x) x$mits_dss) %>%
+      dplyr::bind_rows()
+    mits_non_dss <- lapply(obj, function(x) x$mits_non_dss) %>%
+      dplyr::bind_rows()
+    cond_dss <- lapply(obj, function(x) x$cond_dss) %>%
+      dplyr::bind_rows()
+    cond_non_dss <- lapply(obj, function(x) x$cond_non_dss) %>%
+      dplyr::bind_rows()
+    cond_name_short <- obj[[1]]$cond_name_short
+  } else {
+    stop("'obj' must come from get_rates_and_fractions()")
+  }
+  tmp1 <- dplyr::bind_rows(
+    mits_dss %>% dplyr::mutate(dss = TRUE),
+    mits_non_dss %>% dplyr::mutate(dss = FALSE)
+  ) %>%
+    dplyr::arrange_at(c("site", "catchment"))
+  tmp2 <- dplyr::bind_rows(
+    cond_dss %>% dplyr::mutate(dss = TRUE),
+    cond_non_dss %>% dplyr::mutate(dss = FALSE)
+  ) %>%
+    dplyr::arrange_at(c("site", "catchment"))
+  tmp <- list(
+    MITS = tmp1,
+    other = tmp2
+  )
+  names(tmp)[2] <- cond_name_short
+  tbl <- combine_decision_tables(tmp)
+
+  tmp <- levels(tbl$factor)
   tmp <- stringr::str_to_title(tmp)
   tmp[tmp == "Va"] <- "VA CoD"
-  levels(df_table$factor) <- tmp
+  levels(tbl$factor) <- tmp
 
-  if (! "dss" %in% names(df_table)) {
-    df_table$dss <- ""
+  if (! "dss" %in% names(tbl)) {
+    tbl$dss <- ""
   } else {
-    df_table$dss <- ifelse(df_table$dss, "(DSS)", "(non-DSS)")
+    tbl$dss <- ifelse(tbl$dss, "(DSS)", "(non-DSS)")
   }
 
   # build the wide table that has location by row and
   # all the missing and pvalue columns for every factor by column
-  dat_wide <- df_table %>%
+  dat_wide <- tbl %>%
     dplyr::mutate_at(dplyr::vars(dplyr::contains("value")),
       .funs = function(x) {
         ifelse(x < .001, .001, x)
       }
     ) %>%
     tidyr::pivot_wider(
-      c("site", "catchment", "factor", "start_year", "end_year", "dss"),
-      names_from = factor,
+      id_cols = c("site", "catchment", "start_year", "end_year", "dss"),
+      names_from = "factor",
       values_from = c(
         dplyr::contains("value"),
         dplyr::contains("Missing")
@@ -106,13 +89,15 @@ table_adjust_decision <- function(
       dplyr::contains("Missing")
     ) %>%
     dplyr::rename_if(is.numeric, .funs = function(x) {
-      values <- stringr::str_split_fixed(x, "_", n = 3) %>% data.frame()
+      values <- stringr::str_split_fixed(x, "_", n = 3) %>%
+        data.frame()
       values %>%
         dplyr::mutate(new_name = paste0(
           .data$X3, ".", .data$X1, ".", .data$X2
         )) %>%
         dplyr::pull(.data$new_name)
     })
+
   # Tease out the two list names assigned to the column
   # names for using in naming below
   # first name will be the first list item from the combine_decision_tables()
@@ -283,16 +268,46 @@ table_adjust_decision <- function(
     )
 }
 
-# tables_dat <- list(
-#     MITS = fac_tbl, # table 5a
-#     CBD = cbd_tbl # table 6a
-# )
+#' Combine mits_factor_tables() and cond_factor_tables() output to one
+#' decision dataframe
+#' @param tables_dat a named list object with a table
+#' from mits_factor_tables() and a table from cond_factor_tables().
+#' The names assigned to each table will be used in naming the table columns.
+combine_decision_tables <- function(tables_dat) {
+  append_names <- names(tables_dat)
 
-# tables_dat_b <- list(
-#     MITS = fac_tbl_b, # table 5b
-#     CBD = cbd_tbl_b # table 6b
-# )
-# a_dat <- combine_decision_tables(tables_dat)
-# b_dat <- combine_decision_tables(tables_dat_b)
-# build_table_selected(a_dat, alpha_value = 0.1, pmissing = 20, percent_digits = 1)
-# build_table_selected(b_dat, alpha_value = 0.1, pmissing = 20)
+  join_cols <- c(
+    "site", "catchment", "factor",
+    "start_year", "end_year", "dss"
+  )
+  # only need these two columns for tables
+  unique_cols <- c("pval", "pct_na")
+  # Clean names for columns to take advantage of dt::tab_spanner_delim()
+  unique_cols_new <- c("P-value", "Missing")
+
+  # now downselect the two tables to necessary columns and join
+  t1 <- tables_dat[[append_names[1]]] %>%
+    dplyr::select(dplyr::any_of(c(join_cols, unique_cols))) %>%
+    dplyr::rename_with(~unique_cols_new, dplyr::all_of(unique_cols)) %>%
+    dplyr::rename_with(
+      .fn = function(x) {
+        paste(append_names[1], x, sep = "_")
+      },
+      .cols = dplyr::any_of(unique_cols_new)
+    )
+
+  t2 <- tables_dat[[append_names[2]]] %>%
+    dplyr::select(dplyr::any_of(c(join_cols, unique_cols))) %>%
+    dplyr::rename_with(~unique_cols_new, dplyr::all_of(unique_cols)) %>%
+    dplyr::rename_with(
+      .fn = function(x) {
+        paste(append_names[2], x, sep = "_")
+      },
+      .cols = dplyr::any_of(unique_cols_new)
+    )
+
+  if (! "dss" %in% names(t1))
+    join_cols <- setdiff(join_cols, "dss")
+  t1 %>%
+    dplyr::left_join(t2, by = join_cols)
+}

@@ -1,6 +1,17 @@
+#' Create an overview table of results
 #' @importFrom utils tail
+#' @export
 table_overview <- function(obj) {
-  tmp1 <- obj$rate %>%
+  assertthat::assert_that(inherits(obj, "rate_frac_multi_site"),
+    msg = cli::format_error("'obj' must come from get_rates_and_fractions()")
+  )
+
+  datr <- lapply(obj, function(x) x$rate) %>%
+    dplyr::bind_rows()
+  datf <- lapply(obj, function(x) x$frac) %>%
+    dplyr::bind_rows()
+
+  tmp1 <- datr %>%
     dplyr::mutate(
       interval = paste0(
         round(.data$est, 1), " (",
@@ -19,7 +30,7 @@ table_overview <- function(obj) {
     "cCSMR (per 10k)<br>(Bayesian CrI)", "aCSMR (per 10k)<br>(Bayesian CrI)")
 
 
-  tmp2 <- obj$frac %>%
+  tmp2 <- datf %>%
     dplyr::mutate(interval = paste0(
       round(.data$est, 1), " (",
       round(.data$lower, 1), ", ",
@@ -33,7 +44,15 @@ table_overview <- function(obj) {
   names(tmp2) <- c("Site", "Catchment", "cCSMF (%)<br>(Bayesian CrI)",
     "aCSMF (%)<br>(Bayesian CrI)")
 
-  tmp <- dplyr::left_join(tmp2, tmp1, by = c("Site", "Catchment"))
+  adj_vars <- lapply(obj, function(x) dplyr::tibble(Site = x$site,
+    adjust_vars = if (is.null(x$adjust_vars)) "none" else
+      paste(x$adjust_vars, collapse = ", "))) %>%
+    dplyr::bind_rows()
+  names(adj_vars)[2] <- "Adjustment<br>Factor(s)"
+
+  tmp <- dplyr::left_join(tmp2, tmp1, by = c("Site", "Catchment")) %>%
+    dplyr::left_join(adj_vars, by = "Site") %>%
+    dplyr::relocate(8, .before = 3)
   labs <- lapply(names(tmp), function(x) gt::html(paste0("<b>", x, "</b>")))
   names(labs) <- names(tmp)
 

@@ -5,17 +5,21 @@
 \title{Build pretty table of factor significance and level counts}
 \usage{
 table_factor_sig_stats(
-  df_table,
+  tbl,
   print_columns = c("MITS", "non-MITS+DSS-only"),
   percent_digits = 1
 )
 }
 \arguments{
-\item{df_table}{output from mits_selection_factor_tables()}
+\item{tbl}{output from mits_factor_tables() or
+cond_factor_tables()}
 
-\item{print_columns}{specific columns from the nested tibbles in the table column to print. Defaults to "MITS" and "non-MITS+DSS-only". "DSS-only" and "non-MITS" are the other two columns that can be printed.}
+\item{print_columns}{specific columns from the nested tibbles in the table
+column to print. Defaults to "MITS" and "non-MITS+DSS-only". "DSS-only" and
+"non-MITS" are the other two columns that can be printed.}
 
-\item{percent_digits}{the number of digits to round the percent columns to. Defaults to 1.}
+\item{percent_digits}{the number of digits to round the percent columns to.
+Defaults to 1.}
 }
 \description{
 Build pretty table of factor significance and level counts

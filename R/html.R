@@ -1,10 +1,14 @@
 tags <- htmltools::tags
 
-#' View the results of a TODO
-#' @param obj TODO
-#' @param path TODO
+#' Create html outputs for a given mortality rate/fraction analysis
+#' @param obj an object that comes from [get_rates_and_fractions()]
+#' @param path path to where the output html will be stored
 #' @export
-make_results <- function(obj, path = tempfile()) {
+make_outputs <- function(obj, path = tempfile()) {
+  assertthat::assert_that(inherits(obj, "rate_frac_multi_site"),
+    msg = cli::format_error("'obj' must come from get_rates_and_fractions()")
+  )
+
   if (!dir.exists(path))
     dir.create(path)
 
@@ -36,44 +40,34 @@ index_page <- function(obj) {
       ),
       tags$div(table_overview(obj))
     ),
-    condition = obj$condition,
-    causal_chain = obj$causal_chain
+    condition = obj[[1]]$condition,
+    causal_chain = obj[[1]]$causal_chain
   )
 }
 
+
+
 fac_adj_page <- function(obj) {
-  tmp1 <- dplyr::bind_rows(
-    obj$mits_dss %>% dplyr::mutate(dss = TRUE),
-    obj$mits_non_dss %>% dplyr::mutate(dss = FALSE)
-  ) %>%
-    dplyr::arrange_at(c("site", "catchment"))
-  tmp2 <- dplyr::bind_rows(
-    obj$cond_dss %>% dplyr::mutate(dss = TRUE),
-    obj$cond_non_dss %>% dplyr::mutate(dss = FALSE)
-  ) %>%
-    dplyr::arrange_at(c("site", "catchment"))
-  tmp <- list(
-    MITS = tmp1,
-    other = tmp2
-  )
-  tbl <- combine_decision_tables(tmp)
-  tb <- table_adjust_decision(tbl)
+  tbl <- table_adjust_decision(obj)
 
   name <- "fac_adj"
   make_page(name,
     htmltools::tagList(
-      tb
+      tbl
     ),
-    condition = obj$condition,
-    causal_chain = obj$causal_chain
+    condition = obj[[1]]$condition,
+    causal_chain = obj[[1]]$causal_chain
   )
 }
 
 stats_page <- function(obj, mits = TRUE) {
   prefix <- ifelse(mits, "mits", "cond")
 
-  tmp1 <- obj[[paste0(prefix, "_dss")]]
-  tmp2 <- obj[[paste0(prefix, "_non_dss")]]
+  tmp1 <- lapply(obj, function(x) x[[paste0(prefix, "_dss")]]) %>%
+    dplyr::bind_rows()
+  tmp2 <- lapply(obj, function(x) x[[paste0(prefix, "_non_dss")]]) %>%
+    dplyr::bind_rows()
+
   tmp <- dplyr::bind_rows(
     tmp1 %>% dplyr::mutate(dss = TRUE),
     tmp2 %>% dplyr::mutate(dss = FALSE)
@@ -94,8 +88,8 @@ stats_page <- function(obj, mits = TRUE) {
     htmltools::tagList(
       content
     ),
-    condition = obj$condition,
-    causal_chain = obj$causal_chain
+    condition = obj[[1]]$condition,
+    causal_chain = obj[[1]]$causal_chain
   )
 }
 

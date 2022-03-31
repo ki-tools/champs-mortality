@@ -11,8 +11,8 @@
 #' @param condition CHAMPS group specifying the condition
 #' @param icd10_regex An optional regular expression specifying ICD10 codes
 #' that define a condition.
-#' @param cond_name The name of the condition to use in outputs (e.g. if
-#' the condition is "Congenital birth defects", cond_name could be "CBD").
+#' @param cond_name_short The name of the condition to use in outputs (e.g. if
+#' the condition is "Congenital birth defects", cond_name_short could be "CBD").
 #' Defaults to `condition` if not specified.
 #' @param causal_chain if TRUE, the causal chain is searched, if
 #' FALSE, the underlying cause is searched
@@ -33,7 +33,7 @@ get_rates_and_fractions <- function(
   group_catchments = TRUE,
   condition = NULL,
   icd10_regex = NULL,
-  cond_name = condition,
+  cond_name_short = condition,
   causal_chain = TRUE,
   adjust_vars_override = NULL,
   factor_groups = NULL,
@@ -46,13 +46,13 @@ get_rates_and_fractions <- function(
   res <- lapply(sites, function(st) {
     if (length(sites) > 1)
       message(st)
-    get_rates_and_fractions_single(x,
+    get_rates_and_fractions_site(x,
       sites = st,
       catchments = catchments,
       group_catchments = group_catchments,
       condition = condition,
       icd10_regex = icd10_regex,
-      cond_name = cond_name,
+      cond_name_short = cond_name_short,
       causal_chain = causal_chain,
       adjust_vars_override = adjust_vars_override,
       factor_groups = factor_groups,
@@ -61,39 +61,28 @@ get_rates_and_fractions <- function(
     )
   })
 
-  get_and_bind <- function(a, nm)
-    lapply(a, function(x) x[[nm]]) %>% dplyr::bind_rows()
+  names(res) <- sapply(res, function(x) x$site)
+  class(res) <- c("list", "rate_frac_multi_site")
 
-  list(
-    mits_dss = get_and_bind(res, "mits_dss"),
-    mits_non_dss = get_and_bind(res, "mits_non_dss"),
-    cond_dss = get_and_bind(res, "cond_dss"),
-    cond_non_dss = get_and_bind(res, "cond_non_dss"),
-    frac = get_and_bind(res, "frac"),
-    rate = get_and_bind(res, "rate"),
-    rate_data = lapply(res, function(x) x$rate_data),
-    condition = condition,
-    causal_chain = causal_chain,
-    cond_name = cond_name,
-    factor_groups = factor_groups
-  )
+  res
 }
 
-get_rates_and_fractions_single <- function(
+get_rates_and_fractions_site <- function(
   x,
   sites = NULL,
   catchments = NULL,
   group_catchments = TRUE,
   condition = NULL,
   icd10_regex = NULL,
-  cond_name = condition,
+  cond_name_short = condition,
   causal_chain = TRUE,
   adjust_vars_override = NULL,
   factor_groups = NULL,
   pval_cutoff = 0.1,
   pct_na_cutoff = 20
 ) {
-  tbl1a <- mits_selection_factor_tables(x,
+
+  tbl1a <- mits_factor_tables(x,
     sites = sites,
     catchments = catchments,
     group_catchments = group_catchments,
@@ -101,7 +90,7 @@ get_rates_and_fractions_single <- function(
     use_dss = TRUE
   )
 
-  tbl1b <- mits_selection_factor_tables(x,
+  tbl1b <- mits_factor_tables(x,
     sites = sites,
     catchments = catchments,
     group_catchments = group_catchments,
@@ -116,7 +105,7 @@ get_rates_and_fractions_single <- function(
     factor_groups = factor_groups,
     condition = condition,
     icd10_regex = icd10_regex,
-    cond_name = cond_name,
+    cond_name_short = cond_name_short,
     causal_chain = causal_chain,
     use_dss = TRUE
   )
@@ -128,7 +117,7 @@ get_rates_and_fractions_single <- function(
     factor_groups = factor_groups,
     condition = condition,
     icd10_regex = icd10_regex,
-    cond_name = cond_name,
+    cond_name_short = cond_name_short,
     causal_chain = causal_chain,
     use_dss = FALSE
   )
@@ -141,37 +130,77 @@ get_rates_and_fractions_single <- function(
     dplyr::select(tbl2b, dplyr::all_of(vars))
   )
 
-  crit %>%
-    dplyr::filter(
-      .data$pct_na < pct_na_cutoff, .data$pval < pval_cutoff
-    ) %>%
-    dplyr::group_by_at(c("site", "catchment", "factor")) %>%
-    dplyr::summarise(n = dplyr::n())
+  if (!is.null(adjust_vars_override)) {
+    message("  using override adjustment variables:",
+      paste0(adjust_vars_override, collapse = ", "))
+    adjust_vars <- adjust_vars_override
+  } else {
+    # we need p-value and pct missing to meet critaria
+    # for both dss and non-dss -- so need 4 records to meet criteria
+    # if site has both dss and non-dss, or just 2 if dss-only or non-dss only
+    n_to_select <- (nrow(tbl1a) > 0) * 2 + (nrow(tbl1b) > 0) * 2
+    adj_cand <- crit %>%
+      dplyr::filter(
+        .data$pct_na < pct_na_cutoff, .data$pval < pval_cutoff
+      ) %>%
+      dplyr::group_by_at(c("site", "catchment", "factor")) %>%
+      dplyr::summarise(n = dplyr::n()) %>%
+      dplyr::filter(.data$n == n_to_select) %>%
+      dplyr::pull(.data$factor) %>%
+      as.character()
+
+    if (length(adj_cand) == 0) {
+      message("  no adjustment variables")
+      adjust_vars <- NULL
+    } else if (length(adj_cand) == 1) {
+      adjust_vars <- adj_cand
+      message("  using adjustment variable: ", adjust_vars)
+    } else {
+      adj_order <- c("age" = 1, "season" = 2, "location" = 3,
+        "va" = 4, "sex" = 5, "education" = 6)
+      adj_cand_ord <- names(sort(adj_order[adj_cand]))
+      if (! "age" %in% adj_cand) {
+        adjust_vars <- adj_cand_ord[1]
+        message("  using adjustment variable: ", adjust_vars)
+      } else {
+        adjust_vars <- adj_cand_ord[1:2]
+        message("  using adjustment variables: ",
+          paste0(adjust_vars, collapse = ", "))
+      }
+      leftover <- setdiff(adj_cand_ord, adjust_vars)
+      if (length(leftover) > 0)
+        message("  other significant factors not adjusted for: ",
+          paste0(leftover, collapse = ", "))
+    }
+  }
+
+  pop_mits <- dplyr::bind_rows(
+    attr(tbl1a, "pop_mits"),
+    attr(tbl1b, "pop_mits")
+  ) %>%
+    dplyr::group_by_at("site") %>%
+    dplyr::summarise_all(sum)
 
   if (nrow(tbl1a) > 0) {
-    rd_dss <- get_rate_data(x,
+    rd_dss <- get_rate_frac_data(x,
       site = sites,
       catchments = catchments,
       condition = condition,
       icd10_regex = icd10_regex,
       causal_chain = causal_chain,
       factor_groups = factor_groups,
-      adjust_vars = adjust_vars_override, # TODO: update
+      adjust_vars = adjust_vars,
       use_dss = TRUE
     )
     lb <- sum(rd_dss$live_birth_data$live_births)
-    sb <- rd_dss$data %>%
-      dplyr::filter(.data$age == "Stillbirth") %>%
-      dplyr::pull(.data$target) %>%
-      sum()
-    u5d_sb <- sum(rd_dss$data$target)
-    acTU5MR <- 10000 * u5d_sb / (lb + sb)
+    u5d_sb <- pop_mits$u5d_sb
+    acTU5MR <- 10000 * u5d_sb / (lb + pop_mits$stillbirths)
     acTU5MR_dss <- acTU5MR
     rd <- rd_dss
   }
 
   if (nrow(tbl1b) > 0) {
-    rd_ndss <- get_rate_data(x,
+    rd_ndss <- get_rate_frac_data(x,
       site = sites,
       catchments = catchments,
       condition = condition,
@@ -210,40 +239,37 @@ get_rates_and_fractions_single <- function(
     rd$year_range <- dplyr::bind_rows(rd_dss$year_range, rd_ndss$year_range)
   }
 
-  # rate_data$data$target <- c(293, 503, 1279)
-  # rate_data$data$decode <- c(132, 142, 207)
-  # rate_data$data$condition <- c(0, 1, 0)
-
-  # TODO: combine numbers when grouping dss and non-dss catchments
-  c(
+  res <- c(
     list(
+      site = sites,
+      catchments = catchments,
+      group_catchments = group_catchments,
+      condition = condition,
+      icd10_regex = icd10_regex,
+      cond_name_short = cond_name_short,
+      causal_chain = causal_chain,
+      adjust_vars = adjust_vars,
+      factor_groups = factor_groups,
+      pval_cutoff = pval_cutoff,
+      pct_na_cutoff = pct_na_cutoff,
       mits_dss = tbl1a,
       mits_non_dss = tbl1b,
       cond_dss = tbl2a,
-      cond_non_dss = tbl2b
+      cond_non_dss = tbl2b,
+      pop_mits = pop_mits
     ),
-    rates_fractions(rd, acTU5MR)
+    calculate_rates_fractions(rd, acTU5MR)
   )
+  class(res) <- c("list", "rate_frac_site")
+  res
 }
-
-
-# automatically determine the factor(s) to adjust by (if any)
-# compute the crude and adjusted mortality fractions
-# combine groups with zeros
-# combine the rates and fractions across all catchments (if broken down by catchment) to provide site-level statistics
-# outputs:
-# Crude and adjusted mortality rates and fractions with confidence intervals
-# All underlying tables and data which can be optionally presented for diagnostic purposes (e.g. show what was adjusted for and why, etc.)
-
-
-# should we support multiple conditions?
 
 #' Get data necessary to compute adjusted mortality fractions and rates
 #' @param x an object read in from [read_and_validate_data()]
 #' @param site a site name to get rate data for
 #' @param catchments a vector of catchments to include in the calculations
 #' @param condition a CHAMPS condition (see [valid_conditions()])
-#' @param icd10_regex an optional regular expression specifying 
+#' @param icd10_regex an optional regular expression specifying
 #' ICD10 codes that define a condition
 #' @param causal_chain if TRUE, the causal chain is searched, if
 #' FALSE, the underlying cause is searched
@@ -251,8 +277,8 @@ get_rates_and_fractions_single <- function(
 #' @param factor_groups A named list that specifies how to group factors
 #' @param use_dss Should the calculations be done only for catchments that
 #' @note One or both of `icd10_regex` and `condition` must be specified
-#' @export
-get_rate_data <- function(x,
+# @export
+get_rate_frac_data <- function(x,
   site,
   catchments = NULL,
   condition = NULL,
@@ -457,7 +483,7 @@ get_rate_data <- function(x,
       dplyr::summarise_all(sum)
   }
 
-  list(
+  res <- list(
     data = tbldat,
     sites = sites,
     catchments = catchments,
@@ -466,9 +492,12 @@ get_rate_data <- function(x,
     total_live_births = sum(ld$live_births),
     dss = use_dss
   )
+
+  class(res) <- c("list", "rate_frac_data")
+  res
 }
 
-rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
+calculate_rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
   # ci_limit <- 90
 
   # figure out how to group
@@ -598,9 +627,13 @@ rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
     upper = c(cTU5MR_CrI[2], aTU5MR_CrI[2])
   )
 
-  list(
+  res <- list(
     frac = frac,
     rate = rate,
-    rate_data = rd
+    rate_data = rd,
+    rate_data_grouped = newrd
   )
+
+  class(res) <- c("list", "rate_frac_calc")
+  res
 }

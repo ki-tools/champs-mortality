@@ -7,7 +7,7 @@
 plot_rates_fracs(obj, type = "frac", plotly = TRUE)
 }
 \arguments{
-\item{obj}{object (TODO)}
+\item{obj}{an object from \code{\link[=get_rates_and_fractions]{get_rates_and_fractions()}}}
 
 \item{type}{one of "frac" or "rate"}
 
