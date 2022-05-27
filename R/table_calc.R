@@ -58,6 +58,8 @@ mits_factor_tables <- function(
     dplyr::summarise(n = dplyr::n()) %>%
     dplyr::ungroup()
 
+  tmp <- filter(ads_ct, factor == "va", mits_flag == 1)
+
   group_vars <- c(
     "site",
     if (group_catchments) NULL else "catchment",
@@ -163,6 +165,7 @@ mits_factor_tables <- function(
   ages <- valid_levels$age
   if (!is.null(factor_groups$age))
     ages <- unlist(factor_groups$age)
+
   pop_mits <- dplyr::bind_rows(ads_ct, dss_ct) %>%
     dplyr::filter(.data$factor == "age", .data$level %in% ages) %>%
     dplyr::group_by_at("site") %>%
@@ -266,7 +269,7 @@ mits_factor_tables <- function(
 cond_factor_tables <- function(
   x, sites = NULL, catchments = NULL, group_catchments = TRUE,
   factor_groups = NULL, use_dss = TRUE,
-  condition = NULL, icd10_regex = NULL, cond_name_short = condition,
+  condition = NULL, icd10_regex = NULL, cond_name_short = condition[1],
   causal_chain = TRUE
 ) {
   assertthat::assert_that(inherits(x, "champs_processed"),
@@ -279,9 +282,9 @@ cond_factor_tables <- function(
   )
 
   if (!is.null(condition)) {
-    assertthat::assert_that(length(condition) == 1)
+    # assertthat::assert_that(length(condition) == 1)
     conds <- valid_conditions(x)
-    assertthat::assert_that(condition %in% conds$condition,
+    assertthat::assert_that(all(condition %in% conds$condition),
       msg = cli::format_error("Must provide a valid condition. See \\
         valid_conditions() for a list.")
     )

@@ -33,7 +33,8 @@ get_rates_and_fractions <- function(
   group_catchments = TRUE,
   condition = NULL,
   icd10_regex = NULL,
-  cond_name_short = condition,
+  cond_name = condition,
+  cond_name_short = condition[1],
   causal_chain = TRUE,
   adjust_vars_override = NULL,
   factor_groups = NULL,
@@ -74,7 +75,7 @@ get_rates_and_fractions_site <- function(
   group_catchments = TRUE,
   condition = NULL,
   icd10_regex = NULL,
-  cond_name_short = condition,
+  cond_name_short = condition[1],
   causal_chain = TRUE,
   adjust_vars_override = NULL,
   factor_groups = NULL,
@@ -82,7 +83,7 @@ get_rates_and_fractions_site <- function(
   pct_na_cutoff = 20
 ) {
 
-  tbl1a <- mits_factor_tables(x,
+  tbl1_dss <- mits_factor_tables(x,
     sites = sites,
     catchments = catchments,
     group_catchments = group_catchments,
@@ -90,7 +91,7 @@ get_rates_and_fractions_site <- function(
     use_dss = TRUE
   )
 
-  tbl1b <- mits_factor_tables(x,
+  tbl1_non_dss <- mits_factor_tables(x,
     sites = sites,
     catchments = catchments,
     group_catchments = group_catchments,
@@ -98,7 +99,7 @@ get_rates_and_fractions_site <- function(
     use_dss = FALSE
   )
 
-  tbl2a <- cond_factor_tables(x,
+  tbl2_dss <- cond_factor_tables(x,
     sites = sites,
     catchments = catchments,
     group_catchments = group_catchments,
@@ -110,7 +111,7 @@ get_rates_and_fractions_site <- function(
     use_dss = TRUE
   )
 
-  tbl2b <- cond_factor_tables(x,
+  tbl2_non_dss <- cond_factor_tables(x,
     sites = sites,
     catchments = catchments,
     group_catchments = group_catchments,
@@ -124,10 +125,10 @@ get_rates_and_fractions_site <- function(
 
   vars <- c("site", "catchment", "factor", "pval", "pct_na")
   crit <- dplyr::bind_rows(
-    dplyr::select(tbl1a, dplyr::all_of(vars)),
-    dplyr::select(tbl1b, dplyr::all_of(vars)),
-    dplyr::select(tbl2a, dplyr::all_of(vars)),
-    dplyr::select(tbl2b, dplyr::all_of(vars))
+    dplyr::select(tbl1_dss, dplyr::all_of(vars)),
+    dplyr::select(tbl1_non_dss, dplyr::all_of(vars)),
+    dplyr::select(tbl2_dss, dplyr::all_of(vars)),
+    dplyr::select(tbl2_non_dss, dplyr::all_of(vars))
   )
 
   if (!is.null(adjust_vars_override)) {
@@ -138,7 +139,7 @@ get_rates_and_fractions_site <- function(
     # we need p-value and pct missing to meet critaria
     # for both dss and non-dss -- so need 4 records to meet criteria
     # if site has both dss and non-dss, or just 2 if dss-only or non-dss only
-    n_to_select <- (nrow(tbl1a) > 0) * 2 + (nrow(tbl1b) > 0) * 2
+    n_to_select <- (nrow(tbl1_dss) > 0) * 2 + (nrow(tbl1_non_dss) > 0) * 2
     adj_cand <- crit %>%
       dplyr::filter(
         .data$pct_na < pct_na_cutoff, .data$pval < pval_cutoff
@@ -175,13 +176,13 @@ get_rates_and_fractions_site <- function(
   }
 
   pop_mits <- dplyr::bind_rows(
-    attr(tbl1a, "pop_mits"),
-    attr(tbl1b, "pop_mits")
+    attr(tbl1_dss, "pop_mits"),
+    attr(tbl1_non_dss, "pop_mits")
   ) %>%
     dplyr::group_by_at("site") %>%
     dplyr::summarise_all(sum)
 
-  if (nrow(tbl1a) > 0) {
+  if (nrow(tbl1_dss) > 0) {
     rd_dss <- get_rate_frac_data(x,
       site = sites,
       catchments = catchments,
@@ -199,7 +200,7 @@ get_rates_and_fractions_site <- function(
     rd <- rd_dss
   }
 
-  if (nrow(tbl1b) > 0) {
+  if (nrow(tbl1_non_dss) > 0) {
     rd_ndss <- get_rate_frac_data(x,
       site = sites,
       catchments = catchments,
@@ -207,7 +208,7 @@ get_rates_and_fractions_site <- function(
       icd10_regex = icd10_regex,
       causal_chain = causal_chain,
       factor_groups = factor_groups,
-      adjust_vars = adjust_vars_override, # TODO: update
+      adjust_vars = adjust_vars,
       use_dss = FALSE
     )
     acTU5MR <- x$dhs %>%
@@ -227,7 +228,8 @@ get_rates_and_fractions_site <- function(
   }
 
   # need to combine if it has dss and non-dss
-  if (nrow(tbl1a) > 0 && nrow(tbl1b) > 0) {
+  if (nrow(tbl1_dss) > 0 && nrow(tbl1_non_dss) > 0) {
+    browser()
     tmp <- rd_ndss$data
     tmp$target <- tmp$target + rd_dss$data$champs
     tmp$decode <- tmp$decode + rd_dss$data$decode
@@ -238,6 +240,14 @@ get_rates_and_fractions_site <- function(
     rd$catchments <- unique(c(rd_dss$catchments, rd_ndss$catchments))
     rd$year_range <- dplyr::bind_rows(rd_dss$year_range, rd_ndss$year_range)
   }
+
+  tmp <- x$ads %>%
+    filter(site %in% rd$site, catchment %in% rd$catchments) %>%
+    filter(mits_flag == 1, decoded == 1)
+  tmp$cond_idx <- check_cond(tmp, condition, icd10_regex,
+    causal_chain)
+  crude_decoded <- nrow(tmp)
+  crude_condition <- length(which(tmp$cond_idx == 1))
 
   res <- c(
     list(
@@ -252,13 +262,17 @@ get_rates_and_fractions_site <- function(
       factor_groups = factor_groups,
       pval_cutoff = pval_cutoff,
       pct_na_cutoff = pct_na_cutoff,
-      mits_dss = tbl1a,
-      mits_non_dss = tbl1b,
-      cond_dss = tbl2a,
-      cond_non_dss = tbl2b,
-      pop_mits = pop_mits
+      mits_dss = tbl1_dss,
+      mits_non_dss = tbl1_non_dss,
+      cond_dss = tbl2_dss,
+      cond_non_dss = tbl2_non_dss,
+      pop_mits = pop_mits,
+      crude_decoded = crude_decoded,
+      crude_condition = crude_condition
     ),
-    calculate_rates_fractions(rd, acTU5MR)
+    calculate_rates_fractions(rd, acTU5MR,
+      adjust_vars = adjust_vars,
+      crude_decoded = crude_decoded, crude_condition = crude_condition)
   )
   class(res) <- c("list", "rate_frac_site")
   res
@@ -298,9 +312,9 @@ get_rate_frac_data <- function(x,
   )
 
   if (!is.null(condition)) {
-    assertthat::assert_that(length(condition) == 1)
+    # assertthat::assert_that(length(condition) == 1)
     conds <- valid_conditions(x)
-    assertthat::assert_that(condition %in% conds$condition,
+    assertthat::assert_that(all(condition %in% conds$condition),
       msg = cli::format_error("Must provide a valid condition. See \\
         valid_conditions() for a list.")
     )
@@ -331,9 +345,6 @@ get_rate_frac_data <- function(x,
         following: {paste(valid_factors, collapse = ', ')}")
     )
   }
-
-  # TODO: if catchments with different year coverage are specified
-  #   filter all data down to years that all have in common and give a warning
 
   if (is.null(adjust_vars)) {
     if (use_dss) {
@@ -432,22 +443,15 @@ get_rate_frac_data <- function(x,
     dplyr::count() %>%
     dplyr::rename("decode" = "n")
 
-  check_cond <- function(., group, rgx) {
-    if (is.null(group))
-      return(has_icd10(., rgx, cc = causal_chain))
-    if (is.null(rgx))
-      return(has_champs_group(., group, cc = causal_chain))
-    has_icd10(., rgx, cc = causal_chain) |
-      has_champs_group(., group, cc = causal_chain)
-  }
-
   cond <- x$ads %>%
     dplyr::filter(
       .data$site %in% sites,
       .data$catchment %in% catchments,
       .data$mits_flag == 1,
       .data$decoded == 1) %>%
-    mutate(cond_cc = check_cond(.data, condition, icd10_regex)) %>%
+    mutate(
+      cond_cc = check_cond(.data, condition, icd10_regex, causal_chain)
+    ) %>%
     dplyr::filter(.data$cond_cc) %>%
     dplyr::group_by_at(adjust_vars, .drop = FALSE) %>%
     dplyr::count() %>%
@@ -497,7 +501,9 @@ get_rate_frac_data <- function(x,
   res
 }
 
-calculate_rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
+calculate_rates_fractions <- function(
+  rd, acTU5MR, adjust_vars, crude_decoded, crude_condition, ci_limit = 90
+) {
   # ci_limit <- 90
 
   # figure out how to group
@@ -507,10 +513,9 @@ calculate_rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
     ) %>%
     dplyr::arrange(.data$selprob)
 
-  will_adjust <- TRUE
-  # if there aren't enough groups with counts, we don't adjust afterall
-  if (length(which(tmp$condition > 0)) == 0)
-    will_adjust <- FALSE
+  # browser()
+
+  will_adjust <- !is.null(adjust_vars)
 
   add_count <- FALSE
   if (will_adjust) {
@@ -552,8 +557,9 @@ calculate_rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
   decode <- sum(newrd$decode)
   condition <- sum(newrd$condition)
   # crude mortality fraction
-  cCSMF <- 100 * condition / decode
-  cCSMF_CrI <- get_interval(condition / decode, decode, ci_limit)
+  cCSMF <- 100 * crude_condition / crude_decoded
+  cCSMF_CrI <- get_interval(
+    crude_condition / crude_decoded, crude_decoded, ci_limit)
   # print_ci(cCSMF, cCSMF_CrI)
 
   # adjusted CSMF
@@ -578,39 +584,25 @@ calculate_rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
       "Crude cause-specific mortality fraction",
       "Adjusted cause-specific mortality fraction"
     ),
-    decode = decode,
-    condition = condition,
+    decode = c(crude_decoded, decode),
+    condition = c(crude_condition, condition),
     est = c(cCSMF, aCSMF),
     lower = c(cCSMF_CrI[1], aCSMF_CrI[1]),
     upper = c(cCSMF_CrI[2], aCSMF_CrI[2])
   )
 
-  if (rd$dss) {
-    # crude and adjusted mortality rates
-    cTU5MR <- (cCSMF / 100) * acTU5MR
-    cTU5MR_CrI <- (cCSMF_CrI / 100) * acTU5MR
-    # print_ci(cTU5MR, cTU5MR_CrI)
+  # crude and adjusted mortality rates
+  cTU5MR <- (cCSMF / 100) * acTU5MR
+  cTU5MR_CrI <- (cCSMF_CrI / 100) * acTU5MR
+  # print_ci(cTU5MR, cTU5MR_CrI)
 
-    if (!will_adjust) {
-      aTU5MR <- cTU5MR
-      aTU5MR_CrI <- cTU5MR_CrI
-    } else {
-      aTU5MR <- (aCSMF / 100) * acTU5MR
-      aTU5MR_CrI <- (aCSMF_CrI / 100) * acTU5MR
-      # print_ci(aTU5MR, aTU5MR_CrI)
-    }
+  if (!will_adjust) {
+    aTU5MR <- cTU5MR
+    aTU5MR_CrI <- cTU5MR_CrI
   } else {
-    cTU5MR <- (cCSMF / 100) * acTU5MR
-    cTU5MR_CrI <- (cCSMF_CrI / 100) * acTU5MR
-    # print_ci(cTU5MR, cTU5MR_CrI)
-    if (will_adjust) {
-      aTU5MR <- cTU5MR
-      aTU5MR_CrI <- cTU5MR_CrI
-    } else {
-      aTU5MR <- (aCSMF / 100) * acTU5MR
-      aTU5MR_CrI <- (aCSMF_CrI / 100) * acTU5MR
-      # print_ci(aTU5MR, aTU5MR_CrI)
-    }
+    aTU5MR <- (aCSMF / 100) * acTU5MR
+    aTU5MR_CrI <- (aCSMF_CrI / 100) * acTU5MR
+    # print_ci(aTU5MR, aTU5MR_CrI)
   }
 
   rate <- dplyr::tibble(
@@ -636,4 +628,13 @@ calculate_rates_fractions <- function(rd, acTU5MR, ci_limit = 90) {
 
   class(res) <- c("list", "rate_frac_calc")
   res
+}
+
+check_cond <- function(., group, rgx, causal_chain) {
+  if (is.null(group))
+    return(has_icd10(., rgx, cc = causal_chain))
+  if (is.null(rgx))
+    return(has_champs_group(., group, cc = causal_chain))
+  has_icd10(., rgx, cc = causal_chain) |
+    has_champs_group(., group, cc = causal_chain)
 }
