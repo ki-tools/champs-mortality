@@ -229,7 +229,7 @@ get_rates_and_fractions_site <- function(
 
   # need to combine if it has dss and non-dss
   if (nrow(tbl1_dss) > 0 && nrow(tbl1_non_dss) > 0) {
-    browser()
+    # browser()
     tmp <- rd_ndss$data
     tmp$target <- tmp$target + rd_dss$data$champs
     tmp$decode <- tmp$decode + rd_dss$data$decode
