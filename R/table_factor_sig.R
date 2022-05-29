@@ -12,7 +12,7 @@ table_factor_sig_stats <- function(
   print_columns = c("MITS", "non-MITS+DSS-only"),
   percent_digits = 1
 ) {
-  assertthat::assert_that(inherits(x, "rate_frac_multi_site"),
+  assertthat::assert_that(inherits(tbl, "rate_frac_multi_site"),
     msg = cli::format_error("'tbl' must come from ",
     "mits_factor_tables() or ",
     "cond_factor_tables()")

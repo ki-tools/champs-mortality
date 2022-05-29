@@ -8,12 +8,10 @@ cond_factor_tables(
   x,
   sites = NULL,
   catchments = NULL,
-  group_catchments = TRUE,
   factor_groups = NULL,
-  use_dss = TRUE,
   condition = NULL,
   icd10_regex = NULL,
-  cond_name = condition,
+  cond_name_short = condition[1],
   causal_chain = TRUE
 )
 }
@@ -21,27 +19,20 @@ cond_factor_tables(
 \item{x}{Processed CHAMPS dataset.}
 
 \item{sites}{A vector of site names to include in the calculations. If NULL,
-all sites with data (corresponding to value of use_dss) will be used.}
+all sites with data will be used.}
 
 \item{catchments}{A vector of catchments to include in the calculations.
-If NULL, all catchments with data (corresponding to value of use_dss)
-will be used.}
-
-\item{group_catchments}{Should all catchments within a site be grouped
-together?}
+If NULL, all catchments with data will be used.}
 
 \item{factor_groups}{A named list that specifies how to group factors}
-
-\item{use_dss}{Should the calculations be done only for catchments that
-have DSS data (TRUE) or for catchments that don't (FALSE)?}
 
 \item{condition}{CHAMPS group specifying the condition}
 
 \item{icd10_regex}{An optional regular expression specifying ICD10 codes
 that define a condition.}
 
-\item{cond_name}{The name of the condition to use in outputs (e.g. if
-the condition is "Congenital birth defects", cond_name could be "CBD").
+\item{cond_name_short}{The name of the condition to use in outputs (e.g. if
+the condition is "Congenital birth defects", cond_name_short could be "CBD").
 Defaults to value of \code{condition} if not specified. Required if only
 \code{icd10_regex} is specified.}
 

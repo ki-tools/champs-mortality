@@ -1,12 +1,9 @@
 #' Get rate and fraction data
 #' @param x Processed CHAMPS dataset.
 #' @param sites A vector of site names to include in the calculations. If NULL,
-#' all sites with data (corresponding to value of use_dss) will be used.
+#' all sites with data will be used.
 #' @param catchments A vector of catchments to include in the calculations.
-#' If NULL, all catchments with data (corresponding to value of use_dss)
-#' will be used.
-#' @param group_catchments Should all catchments within a site be grouped
-#' together?
+#' If NULL, all catchments with data will be used.
 #' @param factor_groups A named list that specifies how to group factors
 #' @param condition CHAMPS group specifying the condition
 #' @param icd10_regex An optional regular expression specifying ICD10 codes
@@ -30,10 +27,9 @@ get_rates_and_fractions <- function(
   x,
   sites = NULL,
   catchments = NULL,
-  group_catchments = TRUE,
+  # group_catchments = TRUE,
   condition = NULL,
   icd10_regex = NULL,
-  cond_name = condition,
   cond_name_short = condition[1],
   causal_chain = TRUE,
   adjust_vars_override = NULL,
@@ -50,7 +46,7 @@ get_rates_and_fractions <- function(
     get_rates_and_fractions_site(x,
       sites = st,
       catchments = catchments,
-      group_catchments = group_catchments,
+      # group_catchments = group_catchments,
       condition = condition,
       icd10_regex = icd10_regex,
       cond_name_short = cond_name_short,
@@ -72,7 +68,7 @@ get_rates_and_fractions_site <- function(
   x,
   sites = NULL,
   catchments = NULL,
-  group_catchments = TRUE,
+  # group_catchments = TRUE,
   condition = NULL,
   icd10_regex = NULL,
   cond_name_short = condition[1],
@@ -82,53 +78,28 @@ get_rates_and_fractions_site <- function(
   pval_cutoff = 0.1,
   pct_na_cutoff = 20
 ) {
-
-  tbl1_dss <- mits_factor_tables(x,
+  tbl1 <- mits_factor_tables(x,
     sites = sites,
     catchments = catchments,
-    group_catchments = group_catchments,
-    factor_groups = factor_groups,
-    use_dss = TRUE
+    # group_catchments = group_catchments,
+    factor_groups = factor_groups
   )
 
-  tbl1_non_dss <- mits_factor_tables(x,
+  tbl2 <- cond_factor_tables(x,
     sites = sites,
     catchments = catchments,
-    group_catchments = group_catchments,
-    factor_groups = factor_groups,
-    use_dss = FALSE
-  )
-
-  tbl2_dss <- cond_factor_tables(x,
-    sites = sites,
-    catchments = catchments,
-    group_catchments = group_catchments,
+    # group_catchments = group_catchments,
     factor_groups = factor_groups,
     condition = condition,
     icd10_regex = icd10_regex,
     cond_name_short = cond_name_short,
-    causal_chain = causal_chain,
-    use_dss = TRUE
-  )
-
-  tbl2_non_dss <- cond_factor_tables(x,
-    sites = sites,
-    catchments = catchments,
-    group_catchments = group_catchments,
-    factor_groups = factor_groups,
-    condition = condition,
-    icd10_regex = icd10_regex,
-    cond_name_short = cond_name_short,
-    causal_chain = causal_chain,
-    use_dss = FALSE
+    causal_chain = causal_chain
   )
 
   vars <- c("site", "catchment", "factor", "pval", "pct_na")
   crit <- dplyr::bind_rows(
-    dplyr::select(tbl1_dss, dplyr::all_of(vars)),
-    dplyr::select(tbl1_non_dss, dplyr::all_of(vars)),
-    dplyr::select(tbl2_dss, dplyr::all_of(vars)),
-    dplyr::select(tbl2_non_dss, dplyr::all_of(vars))
+    dplyr::select(tbl1, dplyr::all_of(vars)),
+    dplyr::select(tbl2, dplyr::all_of(vars)),
   )
 
   if (!is.null(adjust_vars_override)) {
@@ -137,16 +108,13 @@ get_rates_and_fractions_site <- function(
     adjust_vars <- adjust_vars_override
   } else {
     # we need p-value and pct missing to meet critaria
-    # for both dss and non-dss -- so need 4 records to meet criteria
-    # if site has both dss and non-dss, or just 2 if dss-only or non-dss only
-    n_to_select <- (nrow(tbl1_dss) > 0) * 2 + (nrow(tbl1_non_dss) > 0) * 2
     adj_cand <- crit %>%
       dplyr::filter(
         .data$pct_na < pct_na_cutoff, .data$pval < pval_cutoff
       ) %>%
       dplyr::group_by_at(c("site", "catchment", "factor")) %>%
       dplyr::summarise(n = dplyr::n()) %>%
-      dplyr::filter(.data$n == n_to_select) %>%
+      dplyr::filter(.data$n == 2) %>%
       dplyr::pull(.data$factor) %>%
       as.character()
 
@@ -176,74 +144,61 @@ get_rates_and_fractions_site <- function(
   }
 
   pop_mits <- dplyr::bind_rows(
-    attr(tbl1_dss, "pop_mits"),
-    attr(tbl1_non_dss, "pop_mits")
+    attr(tbl1, "pop_mits")
   ) %>%
     dplyr::group_by_at("site") %>%
     dplyr::summarise_all(sum)
 
-  if (nrow(tbl1_dss) > 0) {
-    rd_dss <- get_rate_frac_data(x,
-      site = sites,
-      catchments = catchments,
-      condition = condition,
-      icd10_regex = icd10_regex,
-      causal_chain = causal_chain,
-      factor_groups = factor_groups,
-      adjust_vars = adjust_vars,
-      use_dss = TRUE
-    )
-    lb <- sum(rd_dss$live_birth_data$live_births)
+  can_use_dss <- attr(tbl1, "can_use_dss")
+
+  rd <- get_rate_frac_data(x,
+    site = sites,
+    catchments = catchments,
+    condition = condition,
+    icd10_regex = icd10_regex,
+    causal_chain = causal_chain,
+    factor_groups = factor_groups,
+    adjust_vars = adjust_vars
+  )
+
+  if (can_use_dss) {
+    lb <- sum(rd$live_birth_data$live_births)
     u5d_sb <- pop_mits$u5d_sb
     acTU5MR <- 10000 * u5d_sb / (lb + pop_mits$stillbirths)
-    acTU5MR_dss <- acTU5MR
-    rd <- rd_dss
-  }
-
-  if (nrow(tbl1_non_dss) > 0) {
-    rd_ndss <- get_rate_frac_data(x,
-      site = sites,
-      catchments = catchments,
-      condition = condition,
-      icd10_regex = icd10_regex,
-      causal_chain = causal_chain,
-      factor_groups = factor_groups,
-      adjust_vars = adjust_vars,
-      use_dss = FALSE
-    )
+  } else {
     acTU5MR <- x$dhs %>%
       dplyr::filter(
-        .data$site %in% rd_ndss$sites,
-        .data$catchment %in% rd_ndss$catchments
+        .data$site %in% rd$sites,
+        .data$catchment %in% rd$catchments
       ) %>%
-      dplyr::left_join(rd_ndss$year_range, by = c("site", "catchment")) %>%
+      dplyr::left_join(rd$year_range, by = c("site", "catchment")) %>%
       dplyr::filter(.data$year >= .data$start_year &
         .data$year <= .data$end_year) %>%
       # dplyr::group_by(.data$site, .data$catchment) %>%
       # dplyr::slice(which.max(.data$year)) %>%
       dplyr::pull(.data$rate) %>%
       mean()
-    acTU5MR_ndss <- acTU5MR
-    rd <- rd_ndss
   }
 
-  # need to combine if it has dss and non-dss
-  if (nrow(tbl1_dss) > 0 && nrow(tbl1_non_dss) > 0) {
-    browser()
-    tmp <- rd_ndss$data
-    tmp$target <- tmp$target + rd_dss$data$champs
-    tmp$decode <- tmp$decode + rd_dss$data$decode
-    tmp$condition <- tmp$condition + rd_dss$data$condition
-    acTU5MR <- (acTU5MR_dss + acTU5MR_ndss) / 2
-    rd$data <- tmp
-    rd$sites <- unique(c(rd_dss$sites, rd_ndss$sites))
-    rd$catchments <- unique(c(rd_dss$catchments, rd_ndss$catchments))
-    rd$year_range <- dplyr::bind_rows(rd_dss$year_range, rd_ndss$year_range)
-  }
+  # # need to combine if it has dss and non-dss
+  # if (nrow(tbl1_dss) > 0 && nrow(tbl1_non_dss) > 0) {
+  #   browser()
+  #   tmp <- rd_ndss$data
+  #   tmp$target <- tmp$target + rd_dss$data$champs
+  #   tmp$decode <- tmp$decode + rd_dss$data$decode
+  #   tmp$condition <- tmp$condition + rd_dss$data$condition
+  #   acTU5MR <- (acTU5MR_dss + acTU5MR_ndss) / 2
+  #   rd$data <- tmp
+  #   rd$sites <- unique(c(rd_dss$sites, rd_ndss$sites))
+  #   rd$catchments <- unique(c(rd_dss$catchments, rd_ndss$catchments))
+  #   rd$year_range <- dplyr::bind_rows(rd_dss$year_range, rd_ndss$year_range)
+  # }
 
   tmp <- x$ads %>%
-    filter(site %in% rd$site, catchment %in% rd$catchments) %>%
-    filter(mits_flag == 1, decoded == 1)
+    dplyr::filter(
+      .data$site %in% rd$site,
+      .data$catchment %in% rd$catchments) %>%
+    dplyr::filter(.data$mits_flag == 1, .data$decoded == 1)
   tmp$cond_idx <- check_cond(tmp, condition, icd10_regex,
     causal_chain)
   crude_decoded <- nrow(tmp)
@@ -253,7 +208,7 @@ get_rates_and_fractions_site <- function(
     list(
       site = sites,
       catchments = catchments,
-      group_catchments = group_catchments,
+      # group_catchments = group_catchments,
       condition = condition,
       icd10_regex = icd10_regex,
       cond_name_short = cond_name_short,
@@ -262,13 +217,12 @@ get_rates_and_fractions_site <- function(
       factor_groups = factor_groups,
       pval_cutoff = pval_cutoff,
       pct_na_cutoff = pct_na_cutoff,
-      mits_dss = tbl1_dss,
-      mits_non_dss = tbl1_non_dss,
-      cond_dss = tbl2_dss,
-      cond_non_dss = tbl2_non_dss,
+      mits = tbl1,
+      cond = tbl2,
       pop_mits = pop_mits,
       crude_decoded = crude_decoded,
-      crude_condition = crude_condition
+      crude_condition = crude_condition,
+      can_use_dss = can_use_dss
     ),
     calculate_rates_fractions(rd, acTU5MR,
       adjust_vars = adjust_vars,
@@ -289,7 +243,6 @@ get_rates_and_fractions_site <- function(
 #' FALSE, the underlying cause is searched
 #' @param adjust_vars a vector of variables to adjust by
 #' @param factor_groups A named list that specifies how to group factors
-#' @param use_dss Should the calculations be done only for catchments that
 #' @note One or both of `icd10_regex` and `condition` must be specified
 # @export
 get_rate_frac_data <- function(x,
@@ -299,8 +252,7 @@ get_rate_frac_data <- function(x,
   icd10_regex = NULL,
   causal_chain = TRUE,
   adjust_vars = NULL,
-  factor_groups = NULL,
-  use_dss = TRUE
+  factor_groups = NULL
 ) {
   assertthat::assert_that(inherits(x, "champs_processed"),
     msg = cli::format_error("Data must come from process_data()")
@@ -321,11 +273,11 @@ get_rate_frac_data <- function(x,
   }
 
   obj <- get_ctch(x, site, catchments)
-  type <- paste0(ifelse(use_dss, "", "non_"), "dss")
-  sites <- obj[[type]]$sites
-  ctch <- obj[[type]]$ctch
-  catchments <- obj[[type]]$catchments
-  gctch <- obj[[type]]$gctch
+  sites <- obj$sites
+  ctch <- obj$ctch
+  catchments <- obj$catchments
+  gctch <- obj$gctch
+  use_dss <- obj$can_use_dss
 
   assertthat::assert_that(length(adjust_vars) <= 2,
     msg = cli::format_error("Can only provide up to two adjustment variables.")
@@ -493,8 +445,7 @@ get_rate_frac_data <- function(x,
     catchments = catchments,
     year_range = year_range,
     live_birth_data = ld,
-    total_live_births = sum(ld$live_births),
-    dss = use_dss
+    total_live_births = sum(ld$live_births)
   )
 
   class(res) <- c("list", "rate_frac_data")

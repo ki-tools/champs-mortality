@@ -1,4 +1,5 @@
 #' Create an overview table of results
+#' @param obj an object [from get_rates_and_fractions]()
 #' @importFrom utils tail
 #' @export
 table_overview <- function(obj) {

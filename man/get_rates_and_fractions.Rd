@@ -8,10 +8,9 @@ get_rates_and_fractions(
   x,
   sites = NULL,
   catchments = NULL,
-  group_catchments = TRUE,
   condition = NULL,
   icd10_regex = NULL,
-  cond_name = condition,
+  cond_name_short = condition[1],
   causal_chain = TRUE,
   adjust_vars_override = NULL,
   factor_groups = NULL,
@@ -23,22 +22,18 @@ get_rates_and_fractions(
 \item{x}{Processed CHAMPS dataset.}
 
 \item{sites}{A vector of site names to include in the calculations. If NULL,
-all sites with data (corresponding to value of use_dss) will be used.}
+all sites with data will be used.}
 
 \item{catchments}{A vector of catchments to include in the calculations.
-If NULL, all catchments with data (corresponding to value of use_dss)
-will be used.}
-
-\item{group_catchments}{Should all catchments within a site be grouped
-together?}
+If NULL, all catchments with data will be used.}
 
 \item{condition}{CHAMPS group specifying the condition}
 
 \item{icd10_regex}{An optional regular expression specifying ICD10 codes
 that define a condition.}
 
-\item{cond_name}{The name of the condition to use in outputs (e.g. if
-the condition is "Congenital birth defects", cond_name could be "CBD").
+\item{cond_name_short}{The name of the condition to use in outputs (e.g. if
+the condition is "Congenital birth defects", cond_name_short could be "CBD").
 Defaults to \code{condition} if not specified.}
 
 \item{causal_chain}{if TRUE, the causal chain is searched, if
