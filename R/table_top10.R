@@ -63,13 +63,13 @@ get_results_wide <- function(inputs, dat) {
     }
 
     # site and catchment output of function
-    isites <- dat_calc[[inputs$Site]][['site']]
+    isites <- dat_calc[[inputs$Site]][['rate_data']][['sites']]
     isites <- ifelse(
         length(isites) == 1,
         isites,
         paste(isites, collapse = "; "))
 
-    icatchments <- dat_calc[[inputs$Site]][['catchments']]
+    icatchments <- dat_calc[[inputs$Site]][['rate_data']][['catchments']]
     icatchments <- ifelse(
         length(icatchments) == 1,
         icatchments,
@@ -86,6 +86,7 @@ get_results_wide <- function(inputs, dat) {
         Age = inputs$Age,
         Condition = inputs$Condition,
         UC_or_CC = inputs$UC_or_CC,
+        DSS = inputs$DSS,
         # actual catcment, site
         Site_calc = isites,
         Catchment_calc = icatchments,
@@ -111,6 +112,7 @@ get_results_wide <- function(inputs, dat) {
     print(out[, 1:9])
     out
 }
+
 
 #' @title Calculate rates and fraction of an input list of values.
 #' @description Allows user to provide an input table in CSV format
