@@ -17,7 +17,7 @@ create_dataset_directory <- function(path) {
 
   assertthat::assert_that(dir.exists(path),
     msg = cli::format_error("The path provided to \\
-      create_dataset_directory() exists but is not a directory", wrap = TRUE))
+      create_dataset_directory() exists but is not a directory"))
 
   ff <- list.files(path)
   if (length(ff) > 0) {

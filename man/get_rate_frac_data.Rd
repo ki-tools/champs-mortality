@@ -12,8 +12,7 @@ get_rate_frac_data(
   icd10_regex = NULL,
   causal_chain = TRUE,
   adjust_vars = NULL,
-  factor_groups = NULL,
-  use_dss = TRUE
+  factor_groups = NULL
 )
 }
 \arguments{
@@ -34,8 +33,6 @@ FALSE, the underlying cause is searched}
 \item{adjust_vars}{a vector of variables to adjust by}
 
 \item{factor_groups}{A named list that specifies how to group factors}
-
-\item{use_dss}{Should the calculations be done only for catchments that}
 }
 \description{
 Get data necessary to compute adjusted mortality fractions and rates

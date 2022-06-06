@@ -4,32 +4,18 @@
 \alias{mits_factor_tables}
 \title{Compute counts of MITS and non-MITS+DSS-only deaths by factors}
 \usage{
-mits_factor_tables(
-  x,
-  sites = NULL,
-  catchments = NULL,
-  group_catchments = TRUE,
-  factor_groups = NULL,
-  use_dss = TRUE
-)
+mits_factor_tables(x, sites = NULL, catchments = NULL, factor_groups = NULL)
 }
 \arguments{
 \item{x}{Processed CHAMPS dataset.}
 
 \item{sites}{A vector of site names to include in the calculations. If NULL,
-all sites with data (corresponding to value of use_dss) will be used.}
+all sites with data will be used.}
 
 \item{catchments}{A vector of catchments to include in the calculations.
-If NULL, all catchments with data (corresponding to value of use_dss)
-will be used.}
-
-\item{group_catchments}{Should all catchments within a site be grouped
-together?}
+If NULL, all catchments with data will be used.}
 
 \item{factor_groups}{A named list that specifies how to group factors}
-
-\item{use_dss}{Should the calculations be done only for catchments that
-have DSS data (TRUE) or for catchments that don't (FALSE)?}
 }
 \description{
 Compute counts of MITS and non-MITS+DSS-only deaths by factors

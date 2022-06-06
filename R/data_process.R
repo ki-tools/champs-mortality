@@ -249,7 +249,7 @@ process_data <- function(x, start_year, end_year) {
   assertthat::assert_that(n_missing == 0,
     msg = cli::format_error("
       {n_missing} necessary variable{?s} not found in the maternal registry \\
-        dataset: {commas(missing_reg_vars)}", wrap = TRUE))
+        dataset: {commas(missing_reg_vars)}"))
   # TODO: check why this isn't being run for J
   nrm <- length(setdiff(names(mreg), reg_vars_keep))
   if (nrm > 0) {
