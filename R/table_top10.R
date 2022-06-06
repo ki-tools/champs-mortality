@@ -31,14 +31,14 @@ get_results_wide <- function(inputs, dat) {
         }
 
     # Expand semi-colon seperated vars
-    icatchments <- inputs$Catchment |>
-        strsplit(";") |>
-        unlist() |>
+    icatchments <- inputs$Catchment %>%
+        strsplit(";") %>%
+        unlist() %>%
         trimws()
 
-    isites <- inputs$Site |>
-        strsplit(";") |>
-        unlist() |>
+    isites <- inputs$Site %>%
+        strsplit(";") %>%
+        unlist() %>%
         trimws()
 
     # Do calculations
@@ -130,10 +130,10 @@ input_rates_and_fractions <- function(
     dat_folder,
     start_year, end_year) {
 
-    input_list <- read_csv(inputs_csv) |>
+    input_list <- read_csv(inputs_csv) %>%
         purrr::transpose()
 
-    d <- read_and_validate_data(dat_folder) |>
+    d <- read_and_validate_data(dat_folder) %>%
         process_data(start_year = start_year, end_year = end_year)
 
     out_df <- purrr::map_df(input_list, get_results_wide, dat = d)
