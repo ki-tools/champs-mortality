@@ -40,6 +40,21 @@ get_rates_and_fractions <- function(
   if (is.null(sites))
     sites <- sort(unique(x$ads$site))
 
+  # apply any filtering that may be specified in factor_groups
+  for (nm in names(factor_groups)) {
+    cur_group <- factor_groups[[nm]]
+    lvls <- unlist(unname(cur_group))
+    if (nm %in% names(x$ads)) {
+      idx <- which(x$ads[[nm]] %in% lvls)
+      x$ads <- x$ads[idx, ]
+    }
+    if (nm %in% names(x$dss)) {
+      idx <- which(x$dss[[nm]] %in% lvls)
+      x$dss <- x$dss[idx, ]
+    }
+    # TODO: DHS as well when it has ages
+  }
+
   res <- lapply(sites, function(st) {
     if (length(sites) > 1)
       message(st)
@@ -161,6 +176,7 @@ get_rates_and_fractions_site <- function(
     adjust_vars = adjust_vars
   )
 
+  # if a mix of DSS/non-DSS, calculate for DSS and use DHS for non-DSS and avg
   if (can_use_dss) {
     lb <- sum(rd$live_birth_data$live_births)
     u5d_sb <- pop_mits$u5d_sb

@@ -91,6 +91,7 @@ mits_factor_tables <- function(
     "factor",
     "level"
   )
+
   dss_ct <- dss %>%
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments) %>%
     dplyr::group_by_at(group_vars) %>%
