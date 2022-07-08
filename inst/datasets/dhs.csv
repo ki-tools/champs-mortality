@@ -1,0 +1,81 @@
+site,catchment,year,age,rate,note
+Bangladesh,Faridpur,2017,U5,414,
+Bangladesh,Faridpur,2017,Neonate,132,
+Bangladesh,Faridpur,2017,Infant,0.1,
+Bangladesh,Faridpur,2017,Child,449,
+Bangladesh,Faridpur,2017,Neonate + Infant,270,
+Bangladesh,Faridpur,2018,U5,377,
+Bangladesh,Faridpur,2018,Neonate,132,based on latest data available (2017)
+Bangladesh,Faridpur,2018,Infant,0.1,based on latest data available (2017)
+Bangladesh,Faridpur,2018,Child,449,based on latest data available (2017)
+Bangladesh,Faridpur,2018,Neonate + Infant,266,
+Bangladesh,Faridpur,2019,U5,340,
+Bangladesh,Faridpur,2019,Neonate,132,based on latest data available (2017)
+Bangladesh,Faridpur,2019,Infant,0.1,based on latest data available (2017)
+Bangladesh,Faridpur,2019,Child,449,based on latest data available (2017)
+Bangladesh,Faridpur,2019,Neonate + Infant,263,
+Bangladesh,Faridpur,2020,U5,303,
+Bangladesh,Faridpur,2020,Neonate,132,based on latest data available (2017)
+Bangladesh,Faridpur,2020,Infant,0.1,based on latest data available (2017)
+Bangladesh,Faridpur,2020,Child,449,based on latest data available (2017)
+Bangladesh,Faridpur,2020,Neonate + Infant,259,
+Mali,Bamako,2017,U5,558,
+Mali,Bamako,2017,Neonate,213,
+Mali,Bamako,2017,Infant,144,
+Mali,Bamako,2017,Child,209,
+Mali,Bamako,2017,Neonate + Infant,356,
+Mali,Bamako,2018,U5,550,
+Mali,Bamako,2018,Neonate,197,
+Mali,Bamako,2018,Infant,144,
+Mali,Bamako,2018,Child,216,
+Mali,Bamako,2018,Neonate + Infant,341,
+Mali,Bamako,2019,U5,542,
+Mali,Bamako,2019,Neonate,181,
+Mali,Bamako,2019,Infant,145,
+Mali,Bamako,2019,Child,223,
+Mali,Bamako,2019,Neonate + Infant,326,
+Mali,Bamako,2020,U5,534,
+Mali,Bamako,2020,Neonate,165,
+Mali,Bamako,2020,Infant,146,
+Mali,Bamako,2020,Child,230,
+Mali,Bamako,2020,Neonate + Infant,311,
+Sierra Leone,Makeni,2017,U5,1210,data from Bombali region
+Sierra Leone,Makeni,2017,Neonate,268,data from Bombali region
+Sierra Leone,Makeni,2017,Infant,298,data from Bombali region
+Sierra Leone,Makeni,2017,Child,489,data from Bombali region
+Sierra Leone,Makeni,2017,Neonate + Infant,760,data from Bombali region
+Sierra Leone,Makeni,2018,U5,1090,data from Bombali region
+Sierra Leone,Makeni,2018,Neonate,245,data from Bombali region
+Sierra Leone,Makeni,2018,Infant,283,data from Bombali region
+Sierra Leone,Makeni,2018,Child,501,data from Bombali region
+Sierra Leone,Makeni,2018,Neonate + Infant,625,data from Bombali region
+Sierra Leone,Makeni,2019,U5,977,data from Bombali region
+Sierra Leone,Makeni,2019,Neonate,222,data from Bombali region
+Sierra Leone,Makeni,2019,Infant,267,data from Bombali region
+Sierra Leone,Makeni,2019,Child,513,data from Bombali region
+Sierra Leone,Makeni,2019,Neonate + Infant,489,data from Bombali region
+Sierra Leone,Makeni,2020,U5,863,data from Bombali region
+Sierra Leone,Makeni,2020,Neonate,200,data from Bombali region
+Sierra Leone,Makeni,2020,Infant,251,data from Bombali region
+Sierra Leone,Makeni,2020,Child,525,data from Bombali region
+Sierra Leone,Makeni,2020,Neonate + Infant,354,data from Bombali region
+Mozambique,Quelimane,2017,U5,1480,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2017,Neonate,388,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2017,Infant,577,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2017,Child,573,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2017,Neonate + Infant,965,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2018,U5,1480,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2018,Neonate,388,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2018,Infant,577,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2018,Child,573,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2018,Neonate + Infant,965,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2019,U5,1480,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2019,Neonate,388,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2019,Infant,577,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2019,Child,573,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2019,Neonate + Infant,965,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2020,U5,1480,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2020,Neonate,388,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2020,Infant,577,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2020,Child,573,based on latest data available (2014 Zambezia)
+Mozambique,Quelimane,2020,Neonate + Infant,965,based on latest data available (2014 Zambezia)
