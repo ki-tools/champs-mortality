@@ -30,6 +30,8 @@ ads_names <- c(
   "Morbid Condition 06",
   "Morbid Condition 07",
   "Morbid Condition 08",
+  "Main Maternal Disease Condition",
+  "Main Maternal Champs Group Desc",
   "MITS Flag",
   "M00060",
   "Calc Dod",

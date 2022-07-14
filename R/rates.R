@@ -8,6 +8,8 @@
 #' @param condition CHAMPS group specifying the condition
 #' @param icd10_regex An optional regular expression specifying ICD10 codes
 #' that define a condition.
+#' @param maternal Are we searching for a maternal condition or ICD10
+#' specification? Default is FALSE.
 #' @param cond_name_short The name of the condition to use in outputs (e.g. if
 #' the condition is "Congenital birth defects", cond_name_short could be "CBD").
 #' Defaults to `condition` if not specified.
@@ -30,6 +32,7 @@ get_rates_and_fractions <- function(
   # group_catchments = TRUE,
   condition = NULL,
   icd10_regex = NULL,
+  maternal = FALSE,
   cond_name_short = condition[1],
   causal_chain = TRUE,
   adjust_vars_override = NULL,
@@ -64,6 +67,7 @@ get_rates_and_fractions <- function(
       # group_catchments = group_catchments,
       condition = condition,
       icd10_regex = icd10_regex,
+      maternal = maternal,
       cond_name_short = cond_name_short,
       causal_chain = causal_chain,
       adjust_vars_override = adjust_vars_override,
@@ -86,6 +90,7 @@ get_rates_and_fractions_site <- function(
   # group_catchments = TRUE,
   condition = NULL,
   icd10_regex = NULL,
+  maternal = FALSE,
   cond_name_short = condition[1],
   causal_chain = TRUE,
   adjust_vars_override = NULL,
@@ -107,6 +112,7 @@ get_rates_and_fractions_site <- function(
     factor_groups = factor_groups,
     condition = condition,
     icd10_regex = icd10_regex,
+    maternal = maternal,
     cond_name_short = cond_name_short,
     causal_chain = causal_chain
   )
@@ -171,6 +177,7 @@ get_rates_and_fractions_site <- function(
     catchments = catchments,
     condition = condition,
     icd10_regex = icd10_regex,
+    maternal = maternal,
     causal_chain = causal_chain,
     factor_groups = factor_groups,
     adjust_vars = adjust_vars
@@ -215,8 +222,8 @@ get_rates_and_fractions_site <- function(
       .data$site %in% rd$site,
       .data$catchment %in% rd$catchments) %>%
     dplyr::filter(.data$mits_flag == 1, .data$decoded == 1)
-  tmp$cond_idx <- check_cond(tmp, condition, icd10_regex,
-    causal_chain)
+  tmp$cond_idx <- check_cond_switch(tmp, condition, icd10_regex,
+    causal_chain, maternal)
   crude_decoded <- nrow(tmp)
   crude_condition <- length(which(tmp$cond_idx == 1))
 
@@ -227,6 +234,7 @@ get_rates_and_fractions_site <- function(
       # group_catchments = group_catchments,
       condition = condition,
       icd10_regex = icd10_regex,
+      maternal = maternal,
       cond_name_short = cond_name_short,
       causal_chain = causal_chain,
       adjust_vars = adjust_vars,
@@ -255,6 +263,8 @@ get_rates_and_fractions_site <- function(
 #' @param condition a CHAMPS condition (see [valid_conditions()])
 #' @param icd10_regex an optional regular expression specifying
 #' ICD10 codes that define a condition
+#' @param maternal Are we searching for a maternal condition or ICD10
+#' specification? Default is FALSE.
 #' @param causal_chain if TRUE, the causal chain is searched, if
 #' FALSE, the underlying cause is searched
 #' @param adjust_vars a vector of variables to adjust by
@@ -266,6 +276,7 @@ get_rate_frac_data <- function(x,
   catchments = NULL,
   condition = NULL,
   icd10_regex = NULL,
+  maternal = FALSE,
   causal_chain = TRUE,
   adjust_vars = NULL,
   factor_groups = NULL
@@ -281,7 +292,11 @@ get_rate_frac_data <- function(x,
 
   if (!is.null(condition)) {
     # assertthat::assert_that(length(condition) == 1)
-    conds <- valid_conditions(x)
+    if (maternal) {
+      conds <- valid_maternal_conditions(x)
+    } else {
+      conds <- valid_conditions(x)
+    }
     assertthat::assert_that(all(condition %in% conds$condition),
       msg = cli::format_error("Must provide a valid condition. See \\
         valid_conditions() for a list.")
@@ -418,7 +433,9 @@ get_rate_frac_data <- function(x,
       .data$mits_flag == 1,
       .data$decoded == 1) %>%
     mutate(
-      cond_cc = check_cond(.data, condition, icd10_regex, causal_chain)
+      cond_cc = check_cond_switch(
+        .data, condition, icd10_regex, causal_chain, maternal
+      )
     ) %>%
     dplyr::filter(.data$cond_cc) %>%
     dplyr::group_by_at(adjust_vars, .drop = FALSE) %>%
@@ -595,13 +612,4 @@ calculate_rates_fractions <- function(
 
   class(res) <- c("list", "rate_frac_calc")
   res
-}
-
-check_cond <- function(., group, rgx, causal_chain) {
-  if (is.null(group))
-    return(has_icd10(., rgx, cc = causal_chain))
-  if (is.null(rgx))
-    return(has_champs_group(., group, cc = causal_chain))
-  has_icd10(., rgx, cc = causal_chain) |
-    has_champs_group(., group, cc = causal_chain)
 }

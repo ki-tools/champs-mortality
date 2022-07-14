@@ -51,3 +51,19 @@ has_champs_group <- function(ads, group, cc = TRUE) {
     ads$uc_champs_group_desc %in% group
   }
 }
+
+#' Check to see if an ICD10 regular expression is in the main maternal cause
+#' @param ads CHAMPS analysis dataset
+#' @param rgx regular expression representing ICD10 codes
+#' @export
+has_maternal_icd10 <- function(ads, rgx) {
+  grepl(rgx, ads$main_maternal_disease_condition)
+}
+
+#' Check to see if a CHAMPS group is in the main maternal cause
+#' @param ads CHAMPS analysis dataset
+#' @param group string representing a CHAMPS group
+#' @export
+has_maternal_champs_group <- function(ads, group) {
+  ads$main_maternal_champs_group_desc %in% group
+}

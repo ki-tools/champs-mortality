@@ -272,6 +272,8 @@ mits_factor_tables <- function(
 #' @param condition CHAMPS group specifying the condition
 #' @param icd10_regex An optional regular expression specifying ICD10 codes
 #' that define a condition.
+#' @param maternal Are we searching for a maternal condition or ICD10
+#' specification? Default is FALSE.
 #' @param cond_name_short The name of the condition to use in outputs (e.g. if
 #' the condition is "Congenital birth defects", cond_name_short could be "CBD").
 #' Defaults to value of `condition` if not specified. Required if only
@@ -282,7 +284,8 @@ mits_factor_tables <- function(
 cond_factor_tables <- function(
   x, sites = NULL, catchments = NULL,
   factor_groups = NULL,
-  condition = NULL, icd10_regex = NULL, cond_name_short = condition[1],
+  condition = NULL, icd10_regex = NULL, maternal = FALSE,
+  cond_name_short = condition[1],
   causal_chain = TRUE
 ) {
   group_catchments <- TRUE
@@ -298,7 +301,11 @@ cond_factor_tables <- function(
 
   if (!is.null(condition)) {
     # assertthat::assert_that(length(condition) == 1)
-    conds <- valid_conditions(x)
+    if (maternal) {
+      conds <- valid_maternal_conditions(x)
+    } else {
+      conds <- valid_conditions(x)
+    }
     assertthat::assert_that(all(condition %in% conds$condition),
       msg = cli::format_error("Must provide a valid condition. See \\
         valid_conditions() for a list.")
@@ -324,17 +331,11 @@ cond_factor_tables <- function(
     "level"
   )
 
-  check_cond <- function(a, group, rgx, causal_chain) {
-    if (is.null(group))
-      return(has_icd10(a, rgx, cc = causal_chain))
-    if (is.null(rgx))
-      return(has_champs_group(a, group, cc = causal_chain))
-    has_icd10(a, rgx) | has_champs_group(a, group)
-  }
-
   tbls <- x$ads %>%
     dplyr::mutate(cc = as.numeric(
-      check_cond(.data, condition, icd10_regex, causal_chain))) %>%
+      check_cond_switch(
+        .data, condition, icd10_regex, causal_chain, maternal
+      ))) %>%
     dplyr::filter(.data$site %in% sites, .data$catchment %in% catchments,
       .data$mits_flag == 1, .data$decoded == 1) %>%
     dplyr::select(dplyr::any_of(c("site", "catchment", "sex",

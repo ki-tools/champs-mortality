@@ -18,8 +18,8 @@ get_results_wide <- function(inputs, dat) {
     }
 
     # filter to age group
-    dat$ads <- filter(dat$ads, age == inputs$Age)
-    dat$dss <- filter(dat$dss, age == inputs$Age)
+    dat$ads <- filter(dat$ads, .data$age == inputs$Age)
+    dat$dss <- filter(dat$dss, .data$age == inputs$Age)
 
     # causal chain input
     if (inputs$UC_or_CC == "CC") {
@@ -79,7 +79,7 @@ get_results_wide <- function(inputs, dat) {
     fracs <- dat_calc[[inputs$Site]][['frac']]
     rates <- dat_calc[[inputs$Site]][['rate']]
 
-    out <- tibble(
+    out <- dplyr::tibble(
         # inputs
         Catchment = inputs$Catchment,
         Site = inputs$Site,

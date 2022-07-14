@@ -10,6 +10,7 @@ get_rates_and_fractions(
   catchments = NULL,
   condition = NULL,
   icd10_regex = NULL,
+  maternal = FALSE,
   cond_name_short = condition[1],
   causal_chain = TRUE,
   adjust_vars_override = NULL,
@@ -31,6 +32,9 @@ If NULL, all catchments with data will be used.}
 
 \item{icd10_regex}{An optional regular expression specifying ICD10 codes
 that define a condition.}
+
+\item{maternal}{Are we searching for a maternal condition or ICD10
+specification? Default is FALSE.}
 
 \item{cond_name_short}{The name of the condition to use in outputs (e.g. if
 the condition is "Congenital birth defects", cond_name_short could be "CBD").

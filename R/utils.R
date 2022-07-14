@@ -63,6 +63,26 @@ dss_transform <- function(dss) {
   )
 }
 
+#' Get a list of valid maternal conditions
+#' @param x an object read in from [read_and_validate_data()]
+#' @export
+valid_maternal_conditions <- function(x) {
+  assertthat::assert_that(inherits(x, "champs_processed"),
+    msg = cli::format_error("Data must come from process_data()")
+  )
+
+  tmp <- dplyr::tibble(
+    condition = x$ads$main_maternal_champs_group_desc
+  ) %>%
+  dplyr::filter(!is.na(.data$condition)) %>%
+  dplyr::count(.data$condition) %>%
+  dplyr::arrange(-.data$n) %>%
+  dplyr::mutate(rank = seq_len(dplyr::n())) %>%
+  dplyr::select(-c("n"))
+
+  tmp
+}
+
 #' Get a list of valid conditions found in the causal chain
 #' @param x an object read in from [read_and_validate_data()]
 #' @export
@@ -144,4 +164,29 @@ get_site_info <- function(x) {
       .groups = "drop"
     ) %>%
     dplyr::arrange(.data$site, .data$catchment)
+}
+
+check_cond <- function(., group, rgx, causal_chain) {
+  if (is.null(group))
+    return(has_icd10(., rgx, cc = causal_chain))
+  if (is.null(rgx))
+    return(has_champs_group(., group, cc = causal_chain))
+  has_icd10(., rgx, cc = causal_chain) |
+    has_champs_group(., group, cc = causal_chain)
+}
+
+check_maternal_cond <- function(., group, rgx) {
+  if (is.null(group))
+    return(has_maternal_icd10(., rgx))
+  if (is.null(rgx))
+    return(has_maternal_champs_group(., group))
+  has_maternal_icd10(., rgx) | has_maternal_champs_group(., group)
+}
+
+check_cond_switch <- function(., group, rgx, causal_chain, maternal) {
+  if (maternal) {
+    check_maternal_cond(., group, rgx)
+  } else {
+    check_cond(., group, rgx, causal_chain)
+  }
 }

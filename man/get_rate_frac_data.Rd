@@ -10,6 +10,7 @@ get_rate_frac_data(
   catchments = NULL,
   condition = NULL,
   icd10_regex = NULL,
+  maternal = FALSE,
   causal_chain = TRUE,
   adjust_vars = NULL,
   factor_groups = NULL
@@ -26,6 +27,9 @@ get_rate_frac_data(
 
 \item{icd10_regex}{an optional regular expression specifying
 ICD10 codes that define a condition}
+
+\item{maternal}{Are we searching for a maternal condition or ICD10
+specification? Default is FALSE.}
 
 \item{causal_chain}{if TRUE, the causal chain is searched, if
 FALSE, the underlying cause is searched}
