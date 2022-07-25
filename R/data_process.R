@@ -250,13 +250,12 @@ process_data <- function(x, start_year, end_year) {
     msg = cli::format_error("
       {n_missing} necessary variable{?s} not found in the maternal registry \\
         dataset: {commas(missing_reg_vars)}"))
- 
+
   nrm <- length(setdiff(names(mreg), reg_vars_keep))
-  browser()
   if (nrm > 0) {
     mreg <- mreg %>%
       dplyr::select(dplyr::all_of(reg_vars_keep))
-    
+
     cli::cli_alert_success("Removed {nrm} unnecessary variables from maternal \\
       registry dataset", wrap = TRUE)
   }
