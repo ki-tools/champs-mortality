@@ -35,7 +35,7 @@ ads_names <- c(
   "MITS Flag",
   "M00060",
   "Calc Dod",
-  "Caretakers religion",
+  "Caretakers Religion",
   "VA Cause1 Iva"
 )
 
