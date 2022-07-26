@@ -43,6 +43,9 @@ get_rates_and_fractions <- function(
   if (is.null(sites))
     sites <- sort(unique(x$ads$site))
 
+  if (is.null(factor_groups)) {
+    x$dhs <- dplyr::filter(x$dhs, .data$age == "U5")
+  }
   # apply any filtering that may be specified in factor_groups
   for (nm in names(factor_groups)) {
     cur_group <- factor_groups[[nm]]
@@ -55,7 +58,21 @@ get_rates_and_fractions <- function(
       idx <- which(x$dss[[nm]] %in% lvls)
       x$dss <- x$dss[idx, ]
     }
-    # TODO: DHS as well when it has ages
+    if (nm == "age") {
+      # DHS data doesn't have stillbirths
+      lvls2 <- setdiff(lvls, "Stillbirth")
+      # need to match up DHS to specified age levels
+      # (DHS has Neonate, Infant, Child, Neonate + Infant, U5)
+      if (all(c("Neonate", "Infant", "Child") %in% lvls2)) {
+        filt_val <- "U5"
+      } else if (all(c("Neonate", "Infant") %in% lvls2)) {
+        filt_val <- "Neonate + Infant"
+      } else {
+        filt_val <- lvls2
+      }
+      x$dhs <- x$dhs %>%
+        dplyr::filter(.data$age %in% filt_val)
+    }
   }
 
   res <- lapply(sites, function(st) {
@@ -171,6 +188,7 @@ get_rates_and_fractions_site <- function(
     dplyr::summarise_all(sum)
 
   can_use_dss <- attr(tbl1, "can_use_dss")
+  has_dhs <- !can_use_dss
 
   rd <- get_rate_frac_data(x,
     site = sites,
@@ -184,12 +202,23 @@ get_rates_and_fractions_site <- function(
   )
 
   # if a mix of DSS/non-DSS, calculate for DSS and use DHS for non-DSS and avg
-  if (can_use_dss) {
-    lb <- sum(rd$live_birth_data$live_births)
+  acMR <- NULL
+  acMR_dss <- NULL
+  acMR_dhs <- NULL
+  if (nrow(rd$live_birth_data) > 0) {
+    lb <- rd$live_birth_data %>%
+      dplyr::left_join(rd$year_range, by = c("site", "catchment")) %>%
+      dplyr::filter(.data$year >= .data$start_year &
+        .data$year <= .data$end_year) %>%
+      dplyr::pull(.data$live_births) %>%
+      sum()
     u5d_sb <- pop_mits$u5d_sb
-    acTU5MR <- 10000 * u5d_sb / (lb + pop_mits$stillbirths)
-  } else {
-    acTU5MR <- x$dhs %>%
+    acMR_dss <- 10000 * u5d_sb / (lb + pop_mits$stillbirths)
+    acMR <- acMR_dss
+  }
+
+  if (has_dhs) {
+    acMR_dhs <- x$dhs %>%
       dplyr::filter(
         .data$site %in% rd$sites,
         .data$catchment %in% rd$catchments
@@ -197,10 +226,18 @@ get_rates_and_fractions_site <- function(
       dplyr::left_join(rd$year_range, by = c("site", "catchment")) %>%
       dplyr::filter(.data$year >= .data$start_year &
         .data$year <= .data$end_year) %>%
+      dplyr::group_by_at(c("site", "catchment", "year")) %>%
+      dplyr::summarise(rate = sum(.data$rate)) %>%
       # dplyr::group_by(.data$site, .data$catchment) %>%
       # dplyr::slice(which.max(.data$year)) %>%
       dplyr::pull(.data$rate) %>%
       mean()
+
+    if (!is.null(acMR)) {
+      acMR <- mean(c(acMR, acMR_dhs))
+    } else {
+      acMR <- acMR_dhs
+    }
   }
 
   # # need to combine if it has dss and non-dss
@@ -210,7 +247,7 @@ get_rates_and_fractions_site <- function(
   #   tmp$target <- tmp$target + rd_dss$data$champs
   #   tmp$decode <- tmp$decode + rd_dss$data$decode
   #   tmp$condition <- tmp$condition + rd_dss$data$condition
-  #   acTU5MR <- (acTU5MR_dss + acTU5MR_ndss) / 2
+  #   acMR <- (acMR_dss + acMR_ndss) / 2
   #   rd$data <- tmp
   #   rd$sites <- unique(c(rd_dss$sites, rd_ndss$sites))
   #   rd$catchments <- unique(c(rd_dss$catchments, rd_ndss$catchments))
@@ -246,9 +283,11 @@ get_rates_and_fractions_site <- function(
       pop_mits = pop_mits,
       crude_decoded = crude_decoded,
       crude_condition = crude_condition,
-      can_use_dss = can_use_dss
+      can_use_dss = can_use_dss,
+      acMR_dss = acMR_dss,
+      acMR_dhs = acMR_dhs
     ),
-    calculate_rates_fractions(rd, acTU5MR,
+    calculate_rates_fractions(rd, acMR,
       adjust_vars = adjust_vars,
       crude_decoded = crude_decoded, crude_condition = crude_condition)
   )
@@ -486,7 +525,7 @@ get_rate_frac_data <- function(x,
 }
 
 calculate_rates_fractions <- function(
-  rd, acTU5MR, adjust_vars, crude_decoded, crude_condition, ci_limit = 90
+  rd, acMR, adjust_vars, crude_decoded, crude_condition, ci_limit = 90
 ) {
   # ci_limit <- 90
 
@@ -576,16 +615,16 @@ calculate_rates_fractions <- function(
   )
 
   # crude and adjusted mortality rates
-  cTU5MR <- (cCSMF / 100) * acTU5MR
-  cTU5MR_CrI <- (cCSMF_CrI / 100) * acTU5MR
+  cTU5MR <- (cCSMF / 100) * acMR
+  cTU5MR_CrI <- (cCSMF_CrI / 100) * acMR
   # print_ci(cTU5MR, cTU5MR_CrI)
 
   if (!will_adjust) {
     aTU5MR <- cTU5MR
     aTU5MR_CrI <- cTU5MR_CrI
   } else {
-    aTU5MR <- (aCSMF / 100) * acTU5MR
-    aTU5MR_CrI <- (aCSMF_CrI / 100) * acTU5MR
+    aTU5MR <- (aCSMF / 100) * acMR
+    aTU5MR_CrI <- (aCSMF_CrI / 100) * acMR
     # print_ci(aTU5MR, aTU5MR_CrI)
   }
 
@@ -597,7 +636,7 @@ calculate_rates_fractions <- function(
       "Crude total under-5 mortality rate",
       "Adjusted total under-5 mortality rate"
     ),
-    allcauseTU5MR = acTU5MR,
+    allcauseMR = acMR,
     est = c(cTU5MR, aTU5MR),
     lower = c(cTU5MR_CrI[1], aTU5MR_CrI[1]),
     upper = c(cTU5MR_CrI[2], aTU5MR_CrI[2])

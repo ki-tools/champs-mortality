@@ -41,7 +41,7 @@ create_dataset_directory <- function(path) {
   live_birth_str <- ""
   live_birth_file <- ""
   live_birth_str <- ""
-  has_dhs_data <- file.exists(file.path("path", "dhs_allcause_u5.csv"))
+  has_dhs_data <- file.exists(file.path("path", "dhs.csv"))
   dhs_file <- ""
   dhs_str <- ""
 
@@ -78,11 +78,11 @@ create_dataset_directory <- function(path) {
       has been provided. Please update that file if necessary.")
   }
   if (!has_dhs_data) {
-    file.copy(system.file("datasets/dhs_allcause_u5.csv",
+    file.copy(system.file("datasets/dhs.csv",
       package = "champsmortality"), path)
-    dhs_file <- "dhs_allcause_u5.csv"
+    dhs_file <- "dhs.csv"
     dhs_str <- glue::glue("A dataset with known DHS \\
-      statistics by site, catchment, and year, '{path}/dhs_allcause_u5.csv', \\
+      statistics by site, catchment, year, and age, '{path}/dhs.csv', \\
       has been provided. Please update that file if necessary.")
   }
 

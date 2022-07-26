@@ -88,7 +88,7 @@ live_birth_names <- c(
   "live_births"
 )
 
-dhs_names <- c("site", "catchment", "year", "rate")
+dhs_names <- c("site", "catchment", "year", "age", "rate", "note")
 
 valid_levels <- list(
   age = c("Stillbirth", "Neonate", "Infant", "Child"),

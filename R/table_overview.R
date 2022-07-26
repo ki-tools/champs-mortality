@@ -18,14 +18,14 @@ table_overview <- function(obj) {
         round(.data$est, 1), " (",
         round(.data$lower, 1), ", ",
         round(.data$upper, 1), ")"),
-      allcauseTU5MR = round(.data$allcauseTU5MR, 0)
+      allcauseMR = round(.data$allcauseMR, 0)
     ) %>%
     dplyr::select(dplyr::all_of(
-      c("site", "catchments", "var", "allcauseTU5MR", "interval")
+      c("site", "catchments", "var", "allcauseMR", "interval")
     )) %>%
     tidyr::pivot_wider(id_cols = c("site", "catchments"),
-      names_from = "var", values_from = c("allcauseTU5MR", "interval")) %>%
-    dplyr::select(-c("allcauseTU5MR_aTU5MR"))
+      names_from = "var", values_from = c("allcauseMR", "interval")) %>%
+    dplyr::select(-c("allcauseMR_aTU5MR"))
 
   names(tmp1) <- c("Site", "Catchment", "ACTU5MR",
     "cCSMR (per 10k)<br>(Bayesian CrI)", "aCSMR (per 10k)<br>(Bayesian CrI)")
