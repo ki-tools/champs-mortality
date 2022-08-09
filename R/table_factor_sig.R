@@ -1,6 +1,6 @@
 #' Build pretty table of factor significance and level counts
 #' @param tbl output from mits_factor_tables() or
-#' cond_factor_tables()
+#' cond_factor_tables() for one site.
 #' @param print_columns specific columns from the nested tibbles in the table
 #' column to print. Defaults to "MITS" and "non-MITS+DSS-only". "DSS-only" and
 #' "non-MITS" are the other two columns that can be printed.
@@ -162,8 +162,8 @@ table_factor_sig_stats <- function(
   }
 
   # Second while loop to build factor grouping of the table
-  #
-  while_factors <- rev(dplyr::pull(tbl, .data$factor))
+  # filter out NA lines by only using defined levels.
+  while_factors <- rev(levels(dplyr::pull(tbl, .data$factor)))
 
   while (length(while_factors) > 0) {
     df_row <- dplyr::filter(tbl,
@@ -180,7 +180,7 @@ table_factor_sig_stats <- function(
 
     # create factor_title
     factor_title <- stringr::str_to_title(df_row$factor)
-    if (df_row$factor == "va")
+    if (df_row$factor[1] == "va")
       factor_title <- "VA CoD"
 
     # create percent_str
@@ -188,7 +188,7 @@ table_factor_sig_stats <- function(
 
     # identify rows for grouping
     combine_rows <- dat_out %>%
-      dplyr::filter(.data$factor == df_row$factor) %>%
+      dplyr::filter(.data$factor == df_row$factor[1]) %>%
       dplyr::pull(.data$flevel)
 
     # build formatting of table
@@ -200,7 +200,7 @@ table_factor_sig_stats <- function(
     dat_gt <- dat_gt %>%
       gt::tab_row_group(
         label = gt::md(factor_info), rows = as.character(combine_rows),
-        id = as.character(df_row$factor)
+        id = as.character(df_row$factor)[1]
       )
 
     # remove previously built factor
