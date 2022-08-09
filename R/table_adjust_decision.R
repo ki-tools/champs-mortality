@@ -6,6 +6,7 @@
 #' in the decision table. Cells are colored using this value.
 #' @param percent_digits the number of digits to round the percent missing to.
 #' @export
+# broken on line 28. Commented out for now.
 table_adjust_decision <- function(
   obj,
   alpha_value = 0.1,
@@ -16,34 +17,26 @@ table_adjust_decision <- function(
   partial_color <- "#4E79A7AA"
 
   if (inherits(obj, "rate_frac_site")) {
-    mits_dss <- obj$mits_dss
-    mits_non_dss <- obj$mits_non_dss
-    cond_dss <- obj$cond_dss
-    cond_non_dss <- obj$cond_non_dss
+    tmp1 <- obj$mits %>% mutate(dss = obj$can_use_dss) %>%
+      dplyr::arrange_at(c("site", "catchment"))
+    tmp2 <- obj$cond %>% mutate(dss = obj$can_use_dss) %>%
+      dplyr::arrange_at(c("site", "catchment"))
+
     cond_name_short <- obj$cond_name_short
   } else if (inherits(obj, "rate_frac_multi_site")) {
-    mits_dss <- lapply(obj, function(x) x$mits_dss) %>%
-      dplyr::bind_rows()
-    mits_non_dss <- lapply(obj, function(x) x$mits_non_dss) %>%
-      dplyr::bind_rows()
-    cond_dss <- lapply(obj, function(x) x$cond_dss) %>%
-      dplyr::bind_rows()
-    cond_non_dss <- lapply(obj, function(x) x$cond_non_dss) %>%
-      dplyr::bind_rows()
+    tmp1 <- lapply(obj, function(x) { x$mits %>%
+          mutate(dss = x$can_use_dss)}) %>%
+      dplyr::bind_rows() %>%
+      dplyr::arrange_at(c("site", "catchment"))
+    tmp2 <- lapply(obj, function(x) { x$cond %>%
+        mutate(dss = x$can_use_dss) }) %>%
+      dplyr::bind_rows() %>%
+      dplyr::arrange_at(c("site", "catchment"))
     cond_name_short <- obj[[1]]$cond_name_short
   } else {
     stop("'obj' must come from get_rates_and_fractions()")
   }
-  tmp1 <- dplyr::bind_rows(
-    mits_dss %>% dplyr::mutate(dss = TRUE),
-    mits_non_dss %>% dplyr::mutate(dss = FALSE)
-  ) %>%
-    dplyr::arrange_at(c("site", "catchment"))
-  tmp2 <- dplyr::bind_rows(
-    cond_dss %>% dplyr::mutate(dss = TRUE),
-    cond_non_dss %>% dplyr::mutate(dss = FALSE)
-  ) %>%
-    dplyr::arrange_at(c("site", "catchment"))
+
   tmp <- list(
     MITS = tmp1,
     other = tmp2
@@ -107,7 +100,7 @@ table_adjust_decision <- function(
     stringr::str_split_fixed("\\.", n = 3) %>%
     .[, 2] %>%
     unique()
-
+  browser()
   # start base table with initial formatting.
   gt_table <- dat_wide %>%
     gt::gt() %>%
@@ -132,11 +125,11 @@ table_adjust_decision <- function(
     gt::cols_merge(
       columns = c("location_name", "dss", "year_period"),
       pattern = "<b>{1}</b> <span style='color: gray;'>{2}</span><br><em>{3}</em>"
-    ) %>%
-    gt::tab_spanner_delim(
-      delim = ".",
-      split = "first"
-    )
+    ) #%>%
+    # gt::tab_spanner_delim(
+    #   delim = ".",
+    #   split = "first"
+    # ) # breaks on line 28. I can't tell what is different.
 
   # since missing columns and p-value columns are the same name with the
   # the exception of the label.
