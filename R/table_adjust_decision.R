@@ -6,6 +6,7 @@
 #' in the decision table. Cells are colored using this value.
 #' @param percent_digits the number of digits to round the percent missing to.
 #' @export
+# broken on line 28. Commented out for now.
 table_adjust_decision <- function(
   obj,
   alpha_value = 0.1,
@@ -16,34 +17,34 @@ table_adjust_decision <- function(
   partial_color <- "#4E79A7AA"
 
   if (inherits(obj, "rate_frac_site")) {
-    mits_dss <- obj$mits_dss
-    mits_non_dss <- obj$mits_non_dss
-    cond_dss <- obj$cond_dss
-    cond_non_dss <- obj$cond_non_dss
+    tmp1 <- obj$mits %>%
+      filter(!is.na(factor)) %>%
+      mutate(dss = obj$can_use_dss) %>%
+      dplyr::arrange_at(c("site", "catchment"))
+    tmp2 <- obj$cond %>%
+      filter(!is.na(factor)) %>%
+      mutate(dss = obj$can_use_dss) %>%
+      dplyr::arrange_at(c("site", "catchment"))
+
     cond_name_short <- obj$cond_name_short
   } else if (inherits(obj, "rate_frac_multi_site")) {
-    mits_dss <- lapply(obj, function(x) x$mits_dss) %>%
-      dplyr::bind_rows()
-    mits_non_dss <- lapply(obj, function(x) x$mits_non_dss) %>%
-      dplyr::bind_rows()
-    cond_dss <- lapply(obj, function(x) x$cond_dss) %>%
-      dplyr::bind_rows()
-    cond_non_dss <- lapply(obj, function(x) x$cond_non_dss) %>%
-      dplyr::bind_rows()
+    tmp1 <- lapply(obj, function(x) {
+        x$mits %>%
+          filter(!is.na(factor)) %>%
+          dplyr::mutate(dss = x$can_use_dss)}) %>%
+      dplyr::bind_rows() %>%
+      dplyr::arrange_at(c("site", "catchment"))
+    tmp2 <- lapply(obj, function(x) {
+        x$cond %>%
+          filter(!is.na(factor)) %>%
+          dplyr::mutate(dss = x$can_use_dss) }) %>%
+      dplyr::bind_rows() %>%
+      dplyr::arrange_at(c("site", "catchment"))
     cond_name_short <- obj[[1]]$cond_name_short
   } else {
     stop("'obj' must come from get_rates_and_fractions()")
   }
-  tmp1 <- dplyr::bind_rows(
-    mits_dss %>% dplyr::mutate(dss = TRUE),
-    mits_non_dss %>% dplyr::mutate(dss = FALSE)
-  ) %>%
-    dplyr::arrange_at(c("site", "catchment"))
-  tmp2 <- dplyr::bind_rows(
-    cond_dss %>% dplyr::mutate(dss = TRUE),
-    cond_non_dss %>% dplyr::mutate(dss = FALSE)
-  ) %>%
-    dplyr::arrange_at(c("site", "catchment"))
+
   tmp <- list(
     MITS = tmp1,
     other = tmp2
@@ -107,7 +108,7 @@ table_adjust_decision <- function(
     stringr::str_split_fixed("\\.", n = 3) %>%
     .[, 2] %>%
     unique()
-
+  
   # start base table with initial formatting.
   gt_table <- dat_wide %>%
     gt::gt() %>%
@@ -133,10 +134,12 @@ table_adjust_decision <- function(
       columns = c("location_name", "dss", "year_period"),
       pattern = "<b>{1}</b> <span style='color: gray;'>{2}</span><br><em>{3}</em>"
     ) %>%
-    gt::tab_spanner_delim(
+    tab_spanner_delim_old(
       delim = ".",
       split = "first"
     )
+    # tab_spanner_delim_old is the Feb, 2022 version from gt. See notes
+    # on around line 319
 
   # since missing columns and p-value columns are the same name with the
   # the exception of the label.
@@ -310,4 +313,97 @@ combine_decision_tables <- function(tables_dat) {
     join_cols <- setdiff(join_cols, "dss")
   t1 %>%
     dplyr::left_join(t2, by = join_cols)
+}
+
+
+# hack from old gt function as the new one is not
+# working
+# Old function from
+# https://github.com/rstudio/gt/blob/8a306326cd63de71c7d887dc3706fc0ec1c553c9/R/tab_create_modify.R
+tab_spanner_delim_old <- function(data,
+                              delim,
+                              columns = everything(),
+                              gather = TRUE,
+                              split = c("last", "first")) {
+
+  # Perform input object validation
+  gt:::stop_if_not_gt(data = data)
+
+  split <- match.arg(split)
+
+  # Get all of the columns in the dataset
+  all_cols <- gt:::dt_boxhead_get_vars(data = data)
+
+  # Get the columns supplied in `columns` as a character vector
+  columns <-
+    gt:::resolve_cols_c(
+      expr = {{ columns }},
+      data = data
+    )
+
+  if (!is.null(columns)) {
+    colnames <- base::intersect(all_cols, columns)
+  } else {
+    colnames <- all_cols
+  }
+
+  if (length(colnames) == 0) {
+    return(data)
+  }
+
+  colnames_has_delim <- grepl(pattern = delim, x = colnames, fixed = TRUE)
+
+  if (any(colnames_has_delim)) {
+
+    colnames_with_delim <- colnames[colnames_has_delim]
+
+    # Perform regexec match where the delimiter is either declared
+    # to be the 'first' instance or the 'last' instance
+    regexec_m <-
+      regexec(
+        paste0(
+          "^(.*",
+          ifelse(split == "first", "?", ""),
+          ")\\Q", delim, "\\E(.*)$"
+        ),
+        colnames_with_delim
+      )
+
+    split_colnames <-
+      lapply(regmatches(colnames_with_delim, regexec_m), FUN = `[`, 2:3)
+
+    spanners <- vapply(split_colnames, FUN.VALUE = character(1), `[[`, 1)
+
+    spanner_var_list <- split(colnames_with_delim, spanners)
+
+    for (label in names(spanner_var_list)) {
+
+      data <-
+        gt::tab_spanner(
+          data = data,
+          label = label,
+          columns = spanner_var_list[[label]],
+          gather = gather
+        )
+    }
+
+    new_labels <-
+      lapply(split_colnames, `[[`, -1) %>%
+      vapply(paste0, FUN.VALUE = character(1), collapse = delim)
+
+    for (i in seq_along(split_colnames)) {
+
+      new_labels_i <- new_labels[i]
+      var_i <- colnames_with_delim[i]
+
+      data <-
+        gt:::dt_boxhead_edit(
+          data = data,
+          var = var_i,
+          column_label = new_labels_i
+        )
+    }
+  }
+
+  data
 }

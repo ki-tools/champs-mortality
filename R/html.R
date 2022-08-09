@@ -62,17 +62,11 @@ fac_adj_page <- function(obj) {
 
 stats_page <- function(obj, mits = TRUE) {
   prefix <- ifelse(mits, "mits", "cond")
-
-  tmp1 <- lapply(obj, function(x) x[[paste0(prefix, "_dss")]]) %>%
-    dplyr::bind_rows()
-  tmp2 <- lapply(obj, function(x) x[[paste0(prefix, "_non_dss")]]) %>%
-    dplyr::bind_rows()
-
-  tmp <- dplyr::bind_rows(
-    tmp1 %>% dplyr::mutate(dss = TRUE),
-    tmp2 %>% dplyr::mutate(dss = FALSE)
-  ) %>%
-    dplyr::arrange_at(c("site", "catchment"))
+  tmp <- lapply(obj, function(x) {
+        x[[prefix]] %>%
+          dplyr::mutate(dss = x$can_use_dss)}) %>%
+      dplyr::bind_rows() %>%
+      dplyr::arrange_at(c("site", "catchment"))
 
   tbls <- split(tmp, paste(tmp$site, tmp$catchment)) %>%
     lapply(table_factor_sig_stats)

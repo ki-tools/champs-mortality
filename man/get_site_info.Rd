@@ -7,7 +7,7 @@
 get_site_info(x)
 }
 \arguments{
-\item{x}{TODO}
+\item{x}{an object read in from \code{\link[=read_and_validate_data]{read_and_validate_data()}}}
 }
 \description{
 Get a list of sites and catchments with data start and end years

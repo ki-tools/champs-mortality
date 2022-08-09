@@ -153,7 +153,7 @@ combine_levels <- function(x, level_definitions = NULL,
 }
 
 #' Get a list of sites and catchments with data start and end years
-#' @param x TODO
+#' @param x an object read in from [read_and_validate_data()] 
 #' @export
 get_site_info <- function(x) {
   x$ads %>%
