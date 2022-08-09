@@ -7,7 +7,7 @@
 #' get_results_wide
 #' @param dat is the object returned from process_data()
 #' @export
-get_results_wide <- function(inputs, dat) {
+rates_and_fractions_wide <- function(inputs, dat) {
 
     # handle manual or lists of lists from purrr
     if (length(inputs) == 1) {
@@ -125,7 +125,7 @@ get_results_wide <- function(inputs, dat) {
 #' @param end_year is the end_year argument passed to
 #' read_and_validate_data()
 #' @export
-input_rates_and_fractions <- function(
+batch_rates_and_fractions <- function(
     inputs_csv,
     dat_folder,
     start_year, end_year) {
@@ -136,6 +136,6 @@ input_rates_and_fractions <- function(
     d <- read_and_validate_data(dat_folder) %>%
         process_data(start_year = start_year, end_year = end_year)
 
-    out_df <- purrr::map_df(input_list, get_results_wide, dat = d)
+    out_df <- purrr::map_df(input_list, rates_and_fractions_wide, dat = d)
     out_df
 }

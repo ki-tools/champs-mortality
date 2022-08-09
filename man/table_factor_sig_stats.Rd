@@ -12,7 +12,7 @@ table_factor_sig_stats(
 }
 \arguments{
 \item{tbl}{output from mits_factor_tables() or
-cond_factor_tables()}
+cond_factor_tables() for one site.}
 
 \item{print_columns}{specific columns from the nested tibbles in the table
 column to print. Defaults to "MITS" and "non-MITS+DSS-only". "DSS-only" and
