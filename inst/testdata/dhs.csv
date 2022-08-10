@@ -1,0 +1,81 @@
+site,catchment,year,age,rate,note
+S6,C2,2017,U5,414,NA
+S6,C2,2017,Neonate,132,NA
+S6,C2,2017,Infant,0.1,NA
+S6,C2,2017,Child,449,NA
+S6,C2,2017,Neonate + Infant,270,NA
+S6,C2,2018,U5,377,NA
+S6,C2,2018,Neonate,132,based on latest data available (2017)
+S6,C2,2018,Infant,0.1,based on latest data available (2017)
+S6,C2,2018,Child,449,based on latest data available (2017)
+S6,C2,2018,Neonate + Infant,266,NA
+S6,C2,2019,U5,340,NA
+S6,C2,2019,Neonate,132,based on latest data available (2017)
+S6,C2,2019,Infant,0.1,based on latest data available (2017)
+S6,C2,2019,Child,449,based on latest data available (2017)
+S6,C2,2019,Neonate + Infant,263,NA
+S6,C2,2020,U5,303,NA
+S6,C2,2020,Neonate,132,based on latest data available (2017)
+S6,C2,2020,Infant,0.1,based on latest data available (2017)
+S6,C2,2020,Child,449,based on latest data available (2017)
+S6,C2,2020,Neonate + Infant,259,NA
+S2,C8,2017,U5,558,NA
+S2,C8,2017,Neonate,213,NA
+S2,C8,2017,Infant,144,NA
+S2,C8,2017,Child,209,NA
+S2,C8,2017,Neonate + Infant,356,NA
+S2,C8,2018,U5,550,NA
+S2,C8,2018,Neonate,197,NA
+S2,C8,2018,Infant,144,NA
+S2,C8,2018,Child,216,NA
+S2,C8,2018,Neonate + Infant,341,NA
+S2,C8,2019,U5,542,NA
+S2,C8,2019,Neonate,181,NA
+S2,C8,2019,Infant,145,NA
+S2,C8,2019,Child,223,NA
+S2,C8,2019,Neonate + Infant,326,NA
+S2,C8,2020,U5,534,NA
+S2,C8,2020,Neonate,165,NA
+S2,C8,2020,Infant,146,NA
+S2,C8,2020,Child,230,NA
+S2,C8,2020,Neonate + Infant,311,NA
+S1,C11,2017,U5,1210,data from Bombali region
+S1,C11,2017,Neonate,268,data from Bombali region
+S1,C11,2017,Infant,298,data from Bombali region
+S1,C11,2017,Child,489,data from Bombali region
+S1,C11,2017,Neonate + Infant,760,data from Bombali region
+S1,C11,2018,U5,1090,data from Bombali region
+S1,C11,2018,Neonate,245,data from Bombali region
+S1,C11,2018,Infant,283,data from Bombali region
+S1,C11,2018,Child,501,data from Bombali region
+S1,C11,2018,Neonate + Infant,625,data from Bombali region
+S1,C11,2019,U5,977,data from Bombali region
+S1,C11,2019,Neonate,222,data from Bombali region
+S1,C11,2019,Infant,267,data from Bombali region
+S1,C11,2019,Child,513,data from Bombali region
+S1,C11,2019,Neonate + Infant,489,data from Bombali region
+S1,C11,2020,U5,863,data from Bombali region
+S1,C11,2020,Neonate,200,data from Bombali region
+S1,C11,2020,Infant,251,data from Bombali region
+S1,C11,2020,Child,525,data from Bombali region
+S1,C11,2020,Neonate + Infant,354,data from Bombali region
+S3,C10,2017,U5,1480,based on latest data available (2014 Zambezia)
+S3,C10,2017,Neonate,388,based on latest data available (2014 Zambezia)
+S3,C10,2017,Infant,577,based on latest data available (2014 Zambezia)
+S3,C10,2017,Child,573,based on latest data available (2014 Zambezia)
+S3,C10,2017,Neonate + Infant,965,based on latest data available (2014 Zambezia)
+S3,C10,2018,U5,1480,based on latest data available (2014 Zambezia)
+S3,C10,2018,Neonate,388,based on latest data available (2014 Zambezia)
+S3,C10,2018,Infant,577,based on latest data available (2014 Zambezia)
+S3,C10,2018,Child,573,based on latest data available (2014 Zambezia)
+S3,C10,2018,Neonate + Infant,965,based on latest data available (2014 Zambezia)
+S3,C10,2019,U5,1480,based on latest data available (2014 Zambezia)
+S3,C10,2019,Neonate,388,based on latest data available (2014 Zambezia)
+S3,C10,2019,Infant,577,based on latest data available (2014 Zambezia)
+S3,C10,2019,Child,573,based on latest data available (2014 Zambezia)
+S3,C10,2019,Neonate + Infant,965,based on latest data available (2014 Zambezia)
+S3,C10,2020,U5,1480,based on latest data available (2014 Zambezia)
+S3,C10,2020,Neonate,388,based on latest data available (2014 Zambezia)
+S3,C10,2020,Infant,577,based on latest data available (2014 Zambezia)
+S3,C10,2020,Child,573,based on latest data available (2014 Zambezia)
+S3,C10,2020,Neonate + Infant,965,based on latest data available (2014 Zambezia)

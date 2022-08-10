@@ -1,0 +1,4 @@
+﻿Catchment,Site,Age,Condition,UC_or_CC,DSS
+C1,S6,Stillbirth,Perinatal asphyxia/hypoxia,UC,Yes
+C1,S6,Stillbirth,Congenital birth defects,UC,Yes
+C1,S6,Stillbirth,Other neonatal disorders,UC,Yes

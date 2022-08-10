@@ -1,0 +1,8 @@
+champs_analytics_dataset: 'analytics_2022-05-24.csv'
+maternal_registry_dataset: 'registry_2022-05-24.csv'
+champs_vocabulary_dataset: 'vocabulary_2022-05-24.csv'
+dss_dataset: 'dss_2022-05-24.csv'
+season_lookup: seasons.csv
+catchment_lookup: catchment_lookup.csv
+live_births_dataset: live_births.csv
+dhs_dataset: dhs.csv
