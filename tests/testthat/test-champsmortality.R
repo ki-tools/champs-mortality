@@ -1,6 +1,6 @@
-comp <- readRDS("tests/testthat/evaluation_results_v1_82022.rds")
-dat_folder <- "inst/testdata"
-path_wide <- "inst/testdata/inputs_wide.csv"
+# comp <- readRDS("tests/testthat/evaluation_results_v1_82022.rds")
+# dat_folder <- "inst/testdata"
+# path_wide <- "inst/testdata/inputs_wide.csv"
 
 comp <- readRDS("evaluation_results_v1_82022.rds")
 
