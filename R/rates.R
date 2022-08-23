@@ -565,6 +565,7 @@ calculate_rates_fractions <- function(
         nonzero[which.min(abs(tmp$selprob[idx] - tmp$selprob[nonzero]))]
       })
 
+      tmp <- ungroup(tmp)
       tmp$group <- NA
       tmp$group[nonzero] <- nonzero
       tmp$group[zero] <- newcls
