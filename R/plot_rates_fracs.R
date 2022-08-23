@@ -12,7 +12,7 @@ plot_rates_fracs <- function(obj, type = "frac", plotly = TRUE) {
   assertthat::assert_that(inherits(obj, "rate_frac_multi_site"),
     msg = cli::format_error("'obj' must come from get_rates_and_fractions()")
   )
-
+  per <- obj[[1]]$per
   datr <- lapply(obj, function(x) x$rate) %>%
     dplyr::bind_rows()
   datf <- lapply(obj, function(x) x$frac) %>%
@@ -47,13 +47,15 @@ plot_rates_fracs <- function(obj, type = "frac", plotly = TRUE) {
     make_plot(
       pdat_frac,
       xlb = "Estimate, % (90% Bayesian CrI)",
-      ttl = "Cause-specfic mortality fractions (CSMF)"
+      ttl = "Cause-specfic mortality fractions (CSMF)",
+      plotly = plotly
     )
   } else {
     make_plot(
       pdat_rate,
-      xlb = "Estimate, per 10,000 deaths (90% Bayesian CrI)",
-      ttl = "Actual total under 5 mortality rates (TU5MR)"
+      xlb = paste("Estimate, per", per, "deaths (90% Bayesian CrI)"),
+      ttl = "Actual total under 5 mortality rates (TU5MR)",
+      plotly = plotly
     )
   }
 }
@@ -83,7 +85,7 @@ make_plot <- function(pdat, xlb, ttl, plotly = TRUE) {
     ggthemes::scale_color_tableau(name = NULL)
 
   if (!plotly) {
-    return (p)
+    return(p)
   }
 
   pp <- plotly::ggplotly(p, width = NULL, height = NULL, tooltip = "text") %>%
