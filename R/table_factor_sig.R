@@ -12,13 +12,12 @@ table_factor_sig_stats <- function(
   print_columns = c("MITS", "non-MITS+DSS-only"),
   percent_digits = 1
 ) {
-  # TODO: ask J about this
-  # assertthat::assert_that(
-  #   attributes(mft)$cm_class[1] == "factor_table",
-  #   msg = cli::format_error(paste0("'tbl' must come from ",
-  #   "mits_factor_tables() or ",
-  #   "cond_factor_tables()"))
-  # )
+  assertthat::assert_that(
+    attributes(tbl)$cm_class[1] == "factor_table",
+    msg = cli::format_error(paste0("'tbl' must come from ",
+    "mits_factor_tables() or ",
+    "cond_factor_tables()"))
+  )
 
   spacer <- ""
   if ("dss" %in% names(tbl)) {
