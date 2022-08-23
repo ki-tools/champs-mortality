@@ -140,7 +140,7 @@ dr$batch_rates_and_fractions <- batch_rates_and_fractions(
 # should this be hidden
 dr$get_interval <- get_interval(1 / 100, 1000, 95)
 
-saveRDS(dr, paste0("inst/testdata/evaluation_results_v", version, ".rds"))
+saveRDS(dr, paste0("inst/evaluationdata/evaluation_results_v", version, ".rds"))
 
 # This functions writes files
 # make_outputs(graf)

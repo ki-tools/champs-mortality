@@ -5,7 +5,7 @@
 get_file <- function(x)
   file.path(system.file(package = "champsmortality"), x)
 
-comp <- readRDS(get_file("testdata/evaluation_results_v1_82022.rds"))
+comp <- readRDS(get_file("evaluationdata/evaluation_results_v1_82022.rds"))
 
 dat_folder <- get_file("testdata")
 path_wide <- get_file("testdata/inputs_wide.csv")
