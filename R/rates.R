@@ -23,6 +23,8 @@
 #' @param pct_na_cutoff Proportion of missingness for which
 #' variables are considered for adjustment. Ignored if
 #' adjust_vars_override is specified.
+#' @param per Calculate rates and fractions per how many births. 
+#' 10k is the default.
 #' @note One or both of `icd10_regex` and `condition` must be specified
 #' @export
 get_rates_and_fractions <- function(
@@ -38,10 +40,14 @@ get_rates_and_fractions <- function(
   adjust_vars_override = NULL,
   factor_groups = NULL,
   pval_cutoff = 0.1,
-  pct_na_cutoff = 20
+  pct_na_cutoff = 20,
+  per = 10000
 ) {
   if (is.null(sites))
     sites <- sort(unique(x$ads$site))
+
+  # adjust DHS rate (reported in per 10k live births)
+  x$dhs$rate <- x$dhs$rate / (10000 / per)
 
   if (is.null(factor_groups)) {
     x$dhs <- dplyr::filter(x$dhs, .data$age == "U5")
@@ -90,7 +96,8 @@ get_rates_and_fractions <- function(
       adjust_vars_override = adjust_vars_override,
       factor_groups = factor_groups,
       pval_cutoff = pval_cutoff,
-      pct_na_cutoff = pct_na_cutoff
+      pct_na_cutoff = pct_na_cutoff,
+      per = per
     )
   })
 
@@ -113,7 +120,8 @@ get_rates_and_fractions_site <- function(
   adjust_vars_override = NULL,
   factor_groups = NULL,
   pval_cutoff = 0.1,
-  pct_na_cutoff = 20
+  pct_na_cutoff = 20,
+  per = 10000
 ) {
   tbl1 <- mits_factor_tables(x,
     sites = sites,
@@ -213,7 +221,7 @@ get_rates_and_fractions_site <- function(
       dplyr::pull(.data$live_births) %>%
       sum()
     u5d_sb <- pop_mits$u5d_sb
-    acMR_dss <- 10000 * u5d_sb / (lb + pop_mits$stillbirths)
+    acMR_dss <- per * u5d_sb / (lb + pop_mits$stillbirths)
     acMR <- acMR_dss
   }
 
@@ -285,7 +293,8 @@ get_rates_and_fractions_site <- function(
       crude_condition = crude_condition,
       can_use_dss = can_use_dss,
       acMR_dss = acMR_dss,
-      acMR_dhs = acMR_dhs
+      acMR_dhs = acMR_dhs,
+      per = per
     ),
     calculate_rates_fractions(rd, acMR,
       adjust_vars = adjust_vars,

@@ -16,7 +16,8 @@ get_rates_and_fractions(
   adjust_vars_override = NULL,
   factor_groups = NULL,
   pval_cutoff = 0.1,
-  pct_na_cutoff = 20
+  pct_na_cutoff = 20,
+  per = 10000
 )
 }
 \arguments{
@@ -55,6 +56,9 @@ for adjustment. Ignored if adjust_vars_override is specified.}
 \item{pct_na_cutoff}{Proportion of missingness for which
 variables are considered for adjustment. Ignored if
 adjust_vars_override is specified.}
+
+\item{per}{Calculate rates and fractions per how many births.
+10k is the default.}
 }
 \description{
 Get rate and fraction data

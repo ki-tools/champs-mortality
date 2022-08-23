@@ -6,6 +6,7 @@
 #' mutate one_of recode rename row_number select ungroup %>%
 #' @importFrom utils capture.output
 #' @importFrom rlang .data :=
+#' @importFrom anytime anydate
 #' @export
 process_data <- function(x, start_year, end_year) {
   assertthat::assert_that(inherits(x, "champs_files"),
@@ -47,7 +48,7 @@ process_data <- function(x, start_year, end_year) {
       dataset", wrap = TRUE)
   }
 
-  ads_raw$calc_dod <- as.Date(ads_raw$calc_dod)
+  ads_raw$calc_dod <- anytime::anydate(ads_raw$calc_dod)
   ads_raw$year <- lubridate::year(ads_raw$calc_dod)
   cli::cli_alert_success("Calculated year of death from 'calc_dod'",
     wrap = TRUE)
