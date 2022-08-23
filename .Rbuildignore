@@ -2,3 +2,6 @@
 ^_ignore$
 ^README\.Rmd$
 \.code-workspace$
+docs
+^\.github$
+^codecov\.yml$

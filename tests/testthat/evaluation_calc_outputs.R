@@ -1,6 +1,6 @@
-#devtools::install_github("ki-tools/champs-mortality")
-devtools::load_all()
-library(champsmortality)
+# devtools::install_github("ki-tools/champs-mortality")
+# devtools::load_all()
+# library(champsmortality)
 
 version <- readLines("inst/testdata/version.txt")
 dr <- list()
@@ -39,9 +39,7 @@ dr$has_icd10_cct <- has_icd10(d$ads,
 # has_maternal_icd10
 dr$has_maternal_icd10 <- has_maternal_icd10(d$ads, rgx = "^A32")
 
-
 ### Table calculations
-
 sites_use <- c("S6", "S5", "S7")
 catch_use <- c("C1", "C4", "C3", "C5", "C6", "C7")
 
@@ -110,7 +108,7 @@ dr$table_factor_sig_stats_mits <- table_factor_sig_stats(
   percent_digits = 1
 )
 
-dr$table_factor_sig_stas_cond <- table_factor_sig_stats(
+dr$table_factor_sig_stats_cond <- table_factor_sig_stats(
   cftb1,
   print_columns = c("MITS", "non-MITS+DSS-only"),
   percent_digits = 1
@@ -140,9 +138,9 @@ dr$batch_rates_and_fractions <- batch_rates_and_fractions(
 ### Calculations
 # should get interval check for one input on each
 # should this be hidden
-dr$get_interval <- get_interval(1/100, 1000, 95)
+dr$get_interval <- get_interval(1 / 100, 1000, 95)
 
-saveRDS(dr, paste0("tests/testthat/evaluation_results_v", version, ".rds"))
+saveRDS(dr, paste0("inst/testdata/evaluation_results_v", version, ".rds"))
 
 # This functions writes files
-#make_outputs(graf)
+# make_outputs(graf)

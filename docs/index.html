@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">champsmortality</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
       </span>
     </div>
 
@@ -58,7 +58,8 @@
 <div class="section level1">
 <div class="page-header"><h1 id="champsmortality">champsmortality<a class="anchor" aria-label="anchor" href="#champsmortality"></a>
 </h1></div>
-<!-- badges: start --><!-- badges: end --><p>The goal of champsmortality is to provide functions for calculating mortality fractions and rates at CHAMPS sites for various causes.</p>
+<!-- badges: start -->
+<p>The goal of champsmortality is to provide functions for calculating mortality fractions and rates at CHAMPS sites for various causes.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -80,7 +81,7 @@
 <code class="sourceCode R"><span><span class="va">data_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/create_dataset_directory.html">create_dataset_directory</a></span><span class="op">(</span><span class="va">data_dir</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ✔ The directory</span></span>
-<span><span class="co">#&gt;   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3' is ready</span></span>
+<span><span class="co">#&gt;   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6' is ready</span></span>
 <span><span class="co">#&gt;   for the appropriate data files to be placed in it. The following datasets should be placed</span></span>
 <span><span class="co">#&gt;   in this directory:</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -99,30 +100,26 @@
 <span><span class="co">#&gt; 5. Season definition: This dataset is a csv file containing rainy and dry season date ranges</span></span>
 <span><span class="co">#&gt;    for each site, which will be used to classify the season in which each case occurs. A</span></span>
 <span><span class="co">#&gt;    dataset with known season definitions,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/seasons.csv',</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6/seasons.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
-<span><span class="co">#&gt; 6. Religion lookup: This dataset is a csv file containing mappings from religion CHAMPS codes</span></span>
-<span><span class="co">#&gt;    to religion categories. A dataset with known religion lookups,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/religion_lookup.csv',</span></span>
-<span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
-<span><span class="co">#&gt; 7. Catchment lookup: This dataset is a csv file containing mappings from catchment codes to</span></span>
+<span><span class="co">#&gt; 6. Catchment lookup: This dataset is a csv file containing mappings from catchment codes to</span></span>
 <span><span class="co">#&gt;    catchment names, used to link the DSS data, which uses catchment names, to the CHAMPS</span></span>
 <span><span class="co">#&gt;    analysis dataset, which uses catchment IDs. A dataset with known catchment lookups,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/catchment_lookup.csv',</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6/catchment_lookup.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
-<span><span class="co">#&gt; 8. Live births: This dataset is a csv file containing yearly live births by site and</span></span>
+<span><span class="co">#&gt; 7. Live births: This dataset is a csv file containing yearly live births by site and</span></span>
 <span><span class="co">#&gt;    catchment from DSS. A dataset with known live birth statistics by site, catchment, and</span></span>
 <span><span class="co">#&gt;    year,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/live_births.csv',</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6/live_births.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
-<span><span class="co">#&gt; 9. Live births: This dataset is a csv file containing yearly DHS all-cause mortality data by</span></span>
-<span><span class="co">#&gt;    site and catchment from DSS. A dataset with known DHS statistics by site, catchment, and</span></span>
-<span><span class="co">#&gt;    year,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/dhs_allcause_u5.csv',</span></span>
+<span><span class="co">#&gt; 8. Live births: This dataset is a csv file containing yearly DHS all-cause mortality data by</span></span>
+<span><span class="co">#&gt;    site and catchment from DSS. A dataset with known DHS statistics by site, catchment, year,</span></span>
+<span><span class="co">#&gt;    and age,</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6/dhs.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; → Once the files are in place, edit the file</span></span>
-<span><span class="co">#&gt;   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpThSJed/file145466eec7fd3/config.yaml</span></span>
+<span><span class="co">#&gt;   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6/config.yaml</span></span>
 <span><span class="co">#&gt;   to provide the file names corresponding to each of these datasets.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; The config.yaml template looks like this:</span></span>
@@ -132,12 +129,10 @@
 <span><span class="co">#&gt;     │  champs_vocabulary_dataset: ''           │</span></span>
 <span><span class="co">#&gt;     │  dss_dataset: ''                         │</span></span>
 <span><span class="co">#&gt;     │  season_lookup: seasons.csv              │</span></span>
-<span><span class="co">#&gt;     │  religion_lookup: religion_lookup.csv    │</span></span>
 <span><span class="co">#&gt;     │  catchment_lookup: catchment_lookup.csv  │</span></span>
 <span><span class="co">#&gt;     │  live_births_dataset: live_births.csv    │</span></span>
-<span><span class="co">#&gt;     │  dhs_dataset: dhs_allcause_u5.csv        │</span></span>
+<span><span class="co">#&gt;     │  dhs_dataset: dhs.csv                    │</span></span>
 <span><span class="co">#&gt;     └──────────────────────────────────────────┘</span></span>
-<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; So for example, if the CHAMPS Analytics Dataset you placed in this directory is named</span></span>
 <span><span class="co">#&gt; 'Analytics_Dataset_2021-09-01.xlsx', you would edit the corresponding line in config.yaml as</span></span>
@@ -152,47 +147,48 @@
 </h3>
 <p>Once this is set up and the appropriate files are placed and mapped in the <code>config.yaml</code> file, you can read in the data with the following:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_and_validate_data.html">read_and_validate_data</a></span><span class="op">(</span><span class="va">data_dir</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ✔ _ignore/datasets_unique/Analytics_Dataset_2021-09-01.csv</span></span>
-<span><span class="co">#&gt; ✔ _ignore/datasets_unique/CHAMPS_vocabulary.csv</span></span>
-<span><span class="co">#&gt; ✔ _ignore/datasets_unique/MaternalRegistry_2021-09-01.csv</span></span>
-<span><span class="co">#&gt; ✔ _ignore/datasets_unique/dss.csv</span></span>
-<span><span class="co">#&gt; ✔ _ignore/datasets_unique/seasons.csv</span></span>
-<span><span class="co">#&gt; ✔ _ignore/datasets_unique/religion_lookup.csv</span></span>
-<span><span class="co">#&gt; ✔ _ignore/datasets_unique/catchment_lookup.csv</span></span>
-<span><span class="co">#&gt; ✔ _ignore/datasets_unique/live_births.csv</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">input_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"champsmortality"</span><span class="op">)</span>, <span class="st">"testdata"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">input_path</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "analytics_2022-05-24.csv"  "catchment_lookup.csv"      "config.yaml"              </span></span>
+<span><span class="co">#&gt;  [4] "dhs.csv"                   "dss_2022-05-24.csv"        "inputs_wide.csv"          </span></span>
+<span><span class="co">#&gt;  [7] "live_births.csv"           "registry_2022-05-24.csv"   "seasons.csv"              </span></span>
+<span><span class="co">#&gt; [10] "version.txt"               "vocabulary_2022-05-24.csv"</span></span></code></pre></div>
+<p>TODO: Talk about the data in each of these files…</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_and_validate_data.html">read_and_validate_data</a></span><span class="op">(</span><span class="va">input_path</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/analytics_2022-05-24.csv</span></span>
+<span><span class="co">#&gt; ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/vocabulary_2022-05-24.csv</span></span>
+<span><span class="co">#&gt; ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/registry_2022-05-24.csv</span></span>
+<span><span class="co">#&gt; ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/dss_2022-05-24.csv</span></span>
+<span><span class="co">#&gt; ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/seasons.csv</span></span>
+<span><span class="co">#&gt; ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/catchment_lookup.csv</span></span>
+<span><span class="co">#&gt; ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/live_births.csv</span></span>
+<span><span class="co">#&gt; ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/dhs.csv</span></span></code></pre></div>
 <p>This will read in the data files and ensure that all of the variables required to perform the calculations are present. If they are not, you will see an error message and will need to correct the error before being able to use the package.</p>
+<p>TODO: Talk about the structure of <code>d</code>.</p>
 </div>
 <div class="section level3">
 <h3 id="process-the-data">Process the data<a class="anchor" aria-label="anchor" href="#process-the-data"></a>
 </h3>
 <p>A function, <code><a href="reference/process_data.html">process_data()</a></code> takes the data that has been read and joins it together to create an analysis dataset and DSS dataset ready for analysis.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dd</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/process_data.html">process_data</a></span><span class="op">(</span><span class="va">d</span>, start_year <span class="op">=</span> <span class="fl">2017</span>, end_year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── processing analysis dataset ───────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; ✔ Removed 218 unnecessary variables from analysis dataset</span></span>
 <span><span class="co">#&gt; ✔ Calculated year of death from 'calc_dod'</span></span>
 <span><span class="co">#&gt; ✔ Used CHAMPS vocabulary to transform 'age_group' in analysis dataset</span></span>
 <span><span class="co">#&gt; ✔ Created a new variable 'age' that rolls up all neonates into one category to be compatible</span></span>
 <span><span class="co">#&gt; with DSS data</span></span>
-<span><span class="co">#&gt; ✔ Used CHAMPS vocabulary to transform 'caretakers_religion' in analysis dataset</span></span>
 <span><span class="co">#&gt; ✔ Used CHAMPS vocabulary to transform 'calc_sex' in analysis dataset</span></span>
-<span><span class="co">#&gt; ✔ Created a new variable 'religion' that rolls up religions into categories compatible with</span></span>
-<span><span class="co">#&gt; DSS data</span></span>
-<span><span class="co">#&gt; ! There are 2 religion codes that do not match with any religion codes found in the</span></span>
-<span><span class="co">#&gt; religion_lookup file: CH00029, CH00003 - it may be useful to look these up and add them to</span></span>
-<span><span class="co">#&gt; the religion_lookup dataset</span></span>
 <span><span class="co">#&gt; ✔ Classified Verbal Autopsy Inter-VA Cause 1 codes as 'Infection', 'Trauma', 'Other', or NA</span></span>
-<span><span class="co">#&gt; ✔ Removed 1204 records that occur before 2017 or after 2020 or have a missing date of death</span></span>
+<span><span class="co">#&gt; ✔ Removed 2879 records that occur before 2017 or after 2020 or have a missing date of death</span></span>
 <span><span class="co">#&gt; ✔ Resolved catchment names from catchment IDs using catchment lookup table</span></span>
 <span><span class="co">#&gt; ✔ Checked that values for 'catchment' in the analysis dataset are correct</span></span>
 <span><span class="co">#&gt; ✔ Modified some analysis set variables to match what is found in DSS data:</span></span>
-<span><span class="co">#&gt; • religion: set 'Unknown' to NA</span></span>
 <span><span class="co">#&gt; • sex: set 'Indeterminate' and 'Unknown' to NA</span></span>
 <span><span class="co">#&gt; • location: 'other' to NA</span></span>
 <span><span class="co">#&gt; ✔ Checked that values for 'age' in the analysis dataset are correct</span></span>
-<span><span class="co">#&gt; ✔ Checked that values for 'religion' in the analysis dataset are correct</span></span>
 <span><span class="co">#&gt; ✔ Checked that values for 'calc_sex' in the analysis dataset are correct</span></span>
 <span><span class="co">#&gt; ✔ Checked that values for 'calc_location' in the analysis dataset are correct</span></span>
 <span><span class="co">#&gt; ✔ Checked that values for 'va_cod_iva' in the analysis dataset are correct</span></span>
@@ -201,8 +197,15 @@
 <span><span class="co">#&gt; ✔ Checked that values for 'season' in the seasons lookup are correct</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── processing maternal registry ──────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; ✔ Removed 90 unnecessary variables from maternal registry dataset</span></span>
-<span><span class="co">#&gt; ✔ Removed 5025 records with missing 'champsid' from maternal registry dataset</span></span>
+<span><span class="co">#&gt; ✔ Removed 244 records with missing 'champsid' from maternal registry dataset</span></span>
+<span><span class="co">#&gt; ✔ The following 47 CHAMPS IDs have duplicate entries in the maternal registry dataset and</span></span>
+<span><span class="co">#&gt; only the first record for each was kept: SEAA00272, SFAA00050, SHAA00046, SHAA00052,</span></span>
+<span><span class="co">#&gt; SHAA00700, SHAA00882, SHAA00958, SHAA01135, SHAA01553, SHAA01898, SHAA01935, SHAA02086,</span></span>
+<span><span class="co">#&gt; SHAA02123, SHCC00294, SIAA00004, SIAA00076, SIAA00104, SIAA00327, SIAA00428, SIAA00518,</span></span>
+<span><span class="co">#&gt; SIAA00605, SIAA00851, SIAA00921, SIAA00935, SIAA01277, SIAA01735, SIAA01841, SIAA01891,</span></span>
+<span><span class="co">#&gt; SOAA00370, SOAA00831, SOAA00833, SOAA01383, SOCC00033, SOCC00043, SOCC00091, SOCC00207,</span></span>
+<span><span class="co">#&gt; SOCC00209, SOCC00225, SOCC00236, SOCC00249, SOCC00308, SSAA00025, SSAA00267, SSAA00476,</span></span>
+<span><span class="co">#&gt; SSAA01016, SSAA02207, STAA01650</span></span>
 <span><span class="co">#&gt; ✔ Used CHAMPS vocabulary to transform 'education' in maternal registry dataset</span></span>
 <span><span class="co">#&gt; ✔ Checked that values for 'education' in the maternal registry dataset are correct</span></span>
 <span><span class="co">#&gt; ✔ Joined analysis dataset and maternal registry</span></span>
@@ -212,17 +215,16 @@
 <span><span class="co">#&gt; ✔ Checked that values for 'catchment' in the live births data are correct</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── checking DHS data ─────────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; ✔ Checked that values for 'site' in the live births data are correct</span></span>
-<span><span class="co">#&gt; ✔ Checked that values for 'catchment' in the live births data are correct</span></span>
+<span><span class="co">#&gt; ✔ Checked that values for 'site' in the DHS data are correct</span></span>
+<span><span class="co">#&gt; ✔ Checked that values for 'catchment' in the DHS data are correct</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── checking DSS ──────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; ✔ Checked that values for 'site' in the DSS data are correct</span></span>
 <span><span class="co">#&gt; ✔ Checked that values for 'catchment' in the DSS data are correct</span></span>
 <span><span class="co">#&gt; ✔ Checked that values for 'age' in the DSS data are correct</span></span>
-<span><span class="co">#&gt; ✔ Checked that values for 'education' in the DSS data are correct</span></span>
-<span><span class="co">#&gt; ✔ Checked that values for 'location' in the DSS data are correct</span></span>
-<span><span class="co">#&gt; ✔ Checked that values for 'religion' in the DSS data are correct</span></span>
-<span><span class="co">#&gt; ✔ Checked that values for 'sex' in the DSS data are correct</span></span>
+<span><span class="co">#&gt; ✔ Checked that values for 'level' in the DSS data are correct</span></span>
+<span><span class="co">#&gt; ✔ Checked that values for 'level' in the DSS data are correct</span></span>
+<span><span class="co">#&gt; ✔ Checked that values for 'level' in the DSS data are correct</span></span>
 <span><span class="co">#&gt; ✔ Checked that values for 'level' in the DSS data are correct</span></span>
 <span><span class="co">#&gt; ✔ Checked that values for 'va' in the DSS data are correct</span></span></code></pre></div>
 </div>
@@ -231,7 +233,7 @@
 </h3>
 <p>Computations with this data typically have the goal of finding adjusted mortality fractions and rates for a given condition found in the causal chain. As you will see, these can be specified by either using the condition name or a <a href="https://www.sitepoint.com/learn-regex/" class="external-link">regular expression</a> indicating ICD10 codes that indicate the condition.</p>
 <p>A convenience function that lists all available conditions in the data is provided, <code><a href="reference/valid_conditions.html">valid_conditions()</a></code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/valid_conditions.html">valid_conditions</a></span><span class="op">(</span><span class="va">dd</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 54 × 2</span></span>
 <span><span class="co">#&gt;    condition                            `causal chain rank`</span></span>
@@ -243,524 +245,50 @@
 <span><span class="co">#&gt;  5 Sepsis                                                 5</span></span>
 <span><span class="co">#&gt;  6 Congenital birth defects                               6</span></span>
 <span><span class="co">#&gt;  7 Other neonatal disorders                               7</span></span>
-<span><span class="co">#&gt;  8 Meningitis/Encephalitis                                8</span></span>
-<span><span class="co">#&gt;  9 Malnutrition                                           9</span></span>
+<span><span class="co">#&gt;  8 Malnutrition                                           8</span></span>
+<span><span class="co">#&gt;  9 Meningitis/Encephalitis                                9</span></span>
 <span><span class="co">#&gt; 10 Malaria                                               10</span></span>
 <span><span class="co">#&gt; # … with 44 more rows</span></span></code></pre></div>
 <p>This searches the CHAMPS data and finds all unique condition values found anywhere in the causal chain. A ranking is also provided where a higher ranking indicates that the condition is found more frequently in the data than a condition with a lower ranking.</p>
 </div>
 <div class="section level3">
-<h3 id="computing-statistics">Computing statistics<a class="anchor" aria-label="anchor" href="#computing-statistics"></a>
+<h3 id="getting-rates-and-fractions">Getting Rates and Fractions<a class="anchor" aria-label="anchor" href="#getting-rates-and-fractions"></a>
 </h3>
-<p>We will use the <code>dplyr</code> package for some of the examples below so let’s load it:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
-<div class="section level4">
-<h4 id="tables-of-mits--non-mitsdss-only-counts-by-site-and-factor">Tables of MITS / non-MITS+DSS-only counts by site and factor<a class="anchor" aria-label="anchor" href="#tables-of-mits--non-mitsdss-only-counts-by-site-and-factor"></a>
-</h4>
-<p>A function <code>mits_selection_factor_tables()</code> exists in this package that computes tables of MITS / non-MITS+DSS-only counts by site and factor and associated statistics.</p>
-<p>This function aims to replicate table 5a in “Supplemental Results (OLD)” as part of determining what factors to adjust for.</p>
-<p>To call the function for sites “Bangladesh”, “Ethiopia”, “Kenya” and their associated catchments:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fac_tbl</span> <span class="op">&lt;-</span> <span class="fu">mits_selection_factor_tables</span><span class="op">(</span><span class="va">dd</span>,</span>
-<span>  sites <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Bangladesh"</span>, <span class="st">"Ethiopia"</span>, <span class="st">"Kenya"</span><span class="op">)</span>,</span>
-<span>  catchments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Baliakandi"</span>, <span class="st">"Haramaya"</span>, <span class="st">"Harar"</span>, <span class="st">"Kersa"</span>,</span>
-<span>    <span class="st">"Manyatta"</span>, <span class="st">"Siaya"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>The output looks like this:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">fac_tbl</span>, n <span class="op">=</span> <span class="fl">21</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 21 × 9</span></span>
-<span><span class="co">#&gt;    site       catchments             factor    table        pval     n n_tot  n_na   pct_na</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt;                  &lt;chr&gt;     &lt;list&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 Bangladesh Baliakandi             age       &lt;tibble&gt; 2.50e- 5   163   163     0   0     </span></span>
-<span><span class="co">#&gt;  2 Bangladesh Baliakandi             education &lt;tibble&gt; 1.52e- 2   131   163    32  19.6   </span></span>
-<span><span class="co">#&gt;  3 Bangladesh Baliakandi             location  &lt;tibble&gt; 4.36e-15   160   163     3   1.84  </span></span>
-<span><span class="co">#&gt;  4 Bangladesh Baliakandi             religion  &lt;tibble&gt; 1.57e- 1   140   163    23  14.1   </span></span>
-<span><span class="co">#&gt;  5 Bangladesh Baliakandi             season    &lt;tibble&gt; 5.64e- 1   161   163     2   1.23  </span></span>
-<span><span class="co">#&gt;  6 Bangladesh Baliakandi             sex       &lt;tibble&gt; 3.01e- 1   152   163    11   6.75  </span></span>
-<span><span class="co">#&gt;  7 Bangladesh Baliakandi             va        &lt;tibble&gt; 1.27e- 5   105   163    58  35.6   </span></span>
-<span><span class="co">#&gt;  8 Ethiopia   Haramaya, Harar, Kersa age       &lt;tibble&gt; 1.26e-57  1156  1156     0   0     </span></span>
-<span><span class="co">#&gt;  9 Ethiopia   Haramaya, Harar, Kersa education &lt;tibble&gt; 2.54e-50  1075  1156    81   7.01  </span></span>
-<span><span class="co">#&gt; 10 Ethiopia   Haramaya, Harar, Kersa location  &lt;tibble&gt; 8.11e-68   991  1156   165  14.3   </span></span>
-<span><span class="co">#&gt; 11 Ethiopia   Haramaya, Harar, Kersa religion  &lt;tibble&gt; 1.60e-19  1156  1156     0   0     </span></span>
-<span><span class="co">#&gt; 12 Ethiopia   Haramaya, Harar, Kersa season    &lt;tibble&gt; 2.65e- 1  1153  1156     3   0.260 </span></span>
-<span><span class="co">#&gt; 13 Ethiopia   Haramaya, Harar, Kersa sex       &lt;tibble&gt; 4.48e- 1   622  1156   534  46.2   </span></span>
-<span><span class="co">#&gt; 14 Ethiopia   Haramaya, Harar, Kersa va        &lt;tibble&gt; 1   e+ 0     0  1156  1156 100     </span></span>
-<span><span class="co">#&gt; 15 Kenya      Manyatta, Siaya        age       &lt;tibble&gt; 5.00e- 4  1394  1394     0   0     </span></span>
-<span><span class="co">#&gt; 16 Kenya      Manyatta, Siaya        education &lt;tibble&gt; 1.02e-23   737  1394   657  47.1   </span></span>
-<span><span class="co">#&gt; 17 Kenya      Manyatta, Siaya        location  &lt;tibble&gt; 3.59e-17  1018  1394   376  27.0   </span></span>
-<span><span class="co">#&gt; 18 Kenya      Manyatta, Siaya        religion  &lt;tibble&gt; 7.50e-25   782  1394   612  43.9   </span></span>
-<span><span class="co">#&gt; 19 Kenya      Manyatta, Siaya        season    &lt;tibble&gt; 2.16e- 2  1394  1394     0   0     </span></span>
-<span><span class="co">#&gt; 20 Kenya      Manyatta, Siaya        sex       &lt;tibble&gt; 2.33e- 1  1393  1394     1   0.0717</span></span>
-<span><span class="co">#&gt; 21 Kenya      Manyatta, Siaya        va        &lt;tibble&gt; 7.03e-10   757  1394   637  45.7</span></span></code></pre></div>
-<p>Each row is for one site/factor combination and contains the table of counts (as a nested data frame), the p-value of the chi-square test, and percent missing values.</p>
-<p>To view the table of counts for the first record (Bangladesh/age):</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fac_tbl</span><span class="op">$</span><span class="va">table</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; # A tibble: 4 × 5</span></span>
-<span><span class="co">#&gt;   level      `DSS-only` `non-MITS`  MITS `non-MITS+DSS-only`</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt;           &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;               &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Stillbirth         87        401    31                 488</span></span>
-<span><span class="co">#&gt; 2 Neonate            55        372    51                 427</span></span>
-<span><span class="co">#&gt; 3 Infant             10         82     0                  92</span></span>
-<span><span class="co">#&gt; 4 Child              11         62     1                  73</span></span></code></pre></div>
-<p>To see the table of counts for a specific record (e.g. Bangladesh/location):</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">fac_tbl</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"Bangladesh"</span>, <span class="va">factor</span> <span class="op">==</span> <span class="st">"location"</span><span class="op">)</span><span class="op">$</span><span class="va">table</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 5</span></span>
-<span><span class="co">#&gt;   level     `DSS-only` `non-MITS`  MITS `non-MITS+DSS-only`</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;          &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;               &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 community         58        418     4                 476</span></span>
-<span><span class="co">#&gt; 2 facility         102        492    79                 594</span></span></code></pre></div>
-<p>To look at which sites/factors pass the adjustment criterion, we can filter the table based on these:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">fac_tbl</span>, <span class="va">pval</span> <span class="op">&lt;</span> <span class="fl">0.1</span>, <span class="va">pct_na</span> <span class="op">&lt;</span> <span class="fl">20</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 9 × 9</span></span>
-<span><span class="co">#&gt;   site       catchments             factor    table        pval     n n_tot  n_na pct_na</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;                  &lt;chr&gt;     &lt;list&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Bangladesh Baliakandi             age       &lt;tibble&gt; 2.50e- 5   163   163     0   0   </span></span>
-<span><span class="co">#&gt; 2 Bangladesh Baliakandi             education &lt;tibble&gt; 1.52e- 2   131   163    32  19.6 </span></span>
-<span><span class="co">#&gt; 3 Bangladesh Baliakandi             location  &lt;tibble&gt; 4.36e-15   160   163     3   1.84</span></span>
-<span><span class="co">#&gt; 4 Ethiopia   Haramaya, Harar, Kersa age       &lt;tibble&gt; 1.26e-57  1156  1156     0   0   </span></span>
-<span><span class="co">#&gt; 5 Ethiopia   Haramaya, Harar, Kersa education &lt;tibble&gt; 2.54e-50  1075  1156    81   7.01</span></span>
-<span><span class="co">#&gt; 6 Ethiopia   Haramaya, Harar, Kersa location  &lt;tibble&gt; 8.11e-68   991  1156   165  14.3 </span></span>
-<span><span class="co">#&gt; 7 Ethiopia   Haramaya, Harar, Kersa religion  &lt;tibble&gt; 1.60e-19  1156  1156     0   0   </span></span>
-<span><span class="co">#&gt; 8 Kenya      Manyatta, Siaya        age       &lt;tibble&gt; 5.00e- 4  1394  1394     0   0   </span></span>
-<span><span class="co">#&gt; 9 Kenya      Manyatta, Siaya        season    &lt;tibble&gt; 2.16e- 2  1394  1394     0   0</span></span></code></pre></div>
-<p>Suppose we want to compute the table separately for just one site in Kenya:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># compute just for Kenya/Manyatta</span></span>
-<span><span class="va">ke_man_tbl</span> <span class="op">&lt;-</span> <span class="fu">mits_selection_factor_tables</span><span class="op">(</span><span class="va">dd</span>,</span>
-<span>  sites <span class="op">=</span> <span class="st">"Kenya"</span>,</span>
-<span>  catchments <span class="op">=</span> <span class="st">"Manyatta"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>The by-age table:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ke_man_tbl</span><span class="op">$</span><span class="va">table</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; # A tibble: 4 × 5</span></span>
-<span><span class="co">#&gt;   level      `DSS-only` `non-MITS`  MITS `non-MITS+DSS-only`</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt;           &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;               &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Stillbirth          4          9    69                  13</span></span>
-<span><span class="co">#&gt; 2 Neonate            52         12    95                  64</span></span>
-<span><span class="co">#&gt; 3 Infant             40          3    71                  43</span></span>
-<span><span class="co">#&gt; 4 Child              36          3    43                  39</span></span></code></pre></div>
-</div>
-<div class="section level4">
-<h4 id="tables-of-mits-cases-with-and-without-a-specified-condition-by-factor">Tables of MITS cases with and without a specified condition by factor<a class="anchor" aria-label="anchor" href="#tables-of-mits-cases-with-and-without-a-specified-condition-by-factor"></a>
-</h4>
-<p>Another table used to determine what factors to adjust for is MITS cases with and without the condition for which we are calculating mortality for by factor. This can be computed using <code><a href="reference/cond_factor_tables.html">cond_factor_tables()</a></code>.</p>
-<p>It has the same arguments as the previous function but also has the <code>champs_group</code> argument that we use do define the cause we want to compute the statistics for.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># table of MITS cases with and without a specified condition by factor</span></span>
-<span><span class="va">cbd_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cond_factor_tables.html">cond_factor_tables</a></span><span class="op">(</span><span class="va">dd</span>,</span>
-<span>  sites <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Bangladesh"</span>, <span class="st">"Ethiopia"</span>, <span class="st">"Kenya"</span><span class="op">)</span>,</span>
-<span>  catchments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Baliakandi"</span>, <span class="st">"Haramaya"</span>, <span class="st">"Harar"</span>, <span class="st">"Kersa"</span>,</span>
-<span>    <span class="st">"Manyatta"</span>, <span class="st">"Siaya"</span><span class="op">)</span>,</span>
-<span>  champs_group <span class="op">=</span> <span class="st">"Congenital birth defects"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>The output structure is similar as shown before:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cbd_tbl</span></span>
-<span><span class="co">#&gt; # A tibble: 21 × 8</span></span>
-<span><span class="co">#&gt;    site       catchments             factor    table             pval  n_na     n pct_na</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt;                  &lt;chr&gt;     &lt;list&gt;           &lt;dbl&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 Bangladesh Baliakandi             age       &lt;tibble [3 × 3]&gt; 1         0    83   0   </span></span>
-<span><span class="co">#&gt;  2 Bangladesh Baliakandi             education &lt;tibble [4 × 3]&gt; 0.384    30    83  36.1 </span></span>
-<span><span class="co">#&gt;  3 Bangladesh Baliakandi             location  &lt;tibble [2 × 3]&gt; 1         0    83   0   </span></span>
-<span><span class="co">#&gt;  4 Bangladesh Baliakandi             religion  &lt;tibble [2 × 3]&gt; 0.534     1    83   1.20</span></span>
-<span><span class="co">#&gt;  5 Bangladesh Baliakandi             season    &lt;tibble [2 × 3]&gt; 1         0    83   0   </span></span>
-<span><span class="co">#&gt;  6 Bangladesh Baliakandi             sex       &lt;tibble [2 × 3]&gt; 0.627     0    83   0   </span></span>
-<span><span class="co">#&gt;  7 Bangladesh Baliakandi             va        &lt;tibble [2 × 3]&gt; 1         4    83   4.82</span></span>
-<span><span class="co">#&gt;  8 Ethiopia   Haramaya, Harar, Kersa age       &lt;tibble [4 × 3]&gt; 0.308     0   172   0   </span></span>
-<span><span class="co">#&gt;  9 Ethiopia   Haramaya, Harar, Kersa education &lt;tibble [4 × 3]&gt; 0.601   143   172  83.1 </span></span>
-<span><span class="co">#&gt; 10 Ethiopia   Haramaya, Harar, Kersa location  &lt;tibble [2 × 3]&gt; 0.315     0   172   0   </span></span>
-<span><span class="co">#&gt; # … with 11 more rows</span></span></code></pre></div>
-<p>The table for Bangladesh/age:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cbd_tbl</span><span class="op">$</span><span class="va">table</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
-<span><span class="co">#&gt;   level      `Congenital birth defects+` `Congenital birth defects-`</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt;                            &lt;int&gt;                       &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 Stillbirth                           1                          30</span></span>
-<span><span class="co">#&gt; 2 Neonate                              3                          48</span></span>
-<span><span class="co">#&gt; 3 Child                                0                           1</span></span></code></pre></div>
-<p>Which sites/factors pass the adjustment criterion:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cbd_tbl</span>, <span class="va">pval</span> <span class="op">&lt;</span> <span class="fl">0.1</span>, <span class="va">pct_na</span> <span class="op">&lt;</span> <span class="fl">20</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 4 × 8</span></span>
-<span><span class="co">#&gt;   site     catchments             factor table                pval  n_na     n pct_na</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                  &lt;chr&gt;  &lt;list&gt;              &lt;dbl&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Ethiopia Haramaya, Harar, Kersa sex    &lt;tibble [2 × 3]&gt; 0.00583      0   172   0   </span></span>
-<span><span class="co">#&gt; 2 Ethiopia Haramaya, Harar, Kersa va     &lt;tibble [2 × 3]&gt; 0.0759      15   172   8.72</span></span>
-<span><span class="co">#&gt; 3 Kenya    Manyatta, Siaya        age    &lt;tibble [4 × 3]&gt; 0.000263     0   481   0   </span></span>
-<span><span class="co">#&gt; 4 Kenya    Manyatta, Siaya        va     &lt;tibble [3 × 3]&gt; 0.00338     52   481  10.8</span></span></code></pre></div>
-<p>We can try other causes as well, such as malnutrition:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mal_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cond_factor_tables.html">cond_factor_tables</a></span><span class="op">(</span><span class="va">dd</span>,</span>
-<span>  sites <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Bangladesh"</span>, <span class="st">"Ethiopia"</span>, <span class="st">"Kenya"</span><span class="op">)</span>,</span>
-<span>  catchments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Baliakandi"</span>, <span class="st">"Haramaya"</span>, <span class="st">"Harar"</span>, <span class="st">"Kersa"</span>,</span>
-<span>    <span class="st">"Manyatta"</span>, <span class="st">"Siaya"</span><span class="op">)</span>,</span>
-<span>  champs_group <span class="op">=</span> <span class="st">"Malnutrition"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">mal_tbl</span></span>
-<span><span class="co">#&gt; # A tibble: 21 × 8</span></span>
-<span><span class="co">#&gt;    site       catchments             factor    table                pval  n_na     n pct_na</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt;                  &lt;chr&gt;     &lt;list&gt;              &lt;dbl&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 Bangladesh Baliakandi             age       &lt;tibble [3 × 3]&gt; 1.20e- 2     0    83   0   </span></span>
-<span><span class="co">#&gt;  2 Bangladesh Baliakandi             education &lt;tibble [4 × 3]&gt; 1   e+ 0    30    83  36.1 </span></span>
-<span><span class="co">#&gt;  3 Bangladesh Baliakandi             location  &lt;tibble [2 × 3]&gt; 1   e+ 0     0    83   0   </span></span>
-<span><span class="co">#&gt;  4 Bangladesh Baliakandi             religion  &lt;tibble [2 × 3]&gt; 1   e+ 0     1    83   1.20</span></span>
-<span><span class="co">#&gt;  5 Bangladesh Baliakandi             season    &lt;tibble [2 × 3]&gt; 3.86e- 1     0    83   0   </span></span>
-<span><span class="co">#&gt;  6 Bangladesh Baliakandi             sex       &lt;tibble [2 × 3]&gt; 1   e+ 0     0    83   0   </span></span>
-<span><span class="co">#&gt;  7 Bangladesh Baliakandi             va        &lt;tibble [2 × 3]&gt; 1.27e- 2     4    83   4.82</span></span>
-<span><span class="co">#&gt;  8 Ethiopia   Haramaya, Harar, Kersa age       &lt;tibble [4 × 3]&gt; 4.40e-16     0   172   0   </span></span>
-<span><span class="co">#&gt;  9 Ethiopia   Haramaya, Harar, Kersa education &lt;tibble [4 × 3]&gt; 1.00e+ 0   143   172  83.1 </span></span>
-<span><span class="co">#&gt; 10 Ethiopia   Haramaya, Harar, Kersa location  &lt;tibble [2 × 3]&gt; 9.70e- 6     0   172   0   </span></span>
-<span><span class="co">#&gt; # … with 11 more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mal_tbl</span><span class="op">$</span><span class="va">table</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
-<span><span class="co">#&gt;   level      `Malnutrition+` `Malnutrition-`</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt;                &lt;int&gt;           &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 Stillbirth               0              31</span></span>
-<span><span class="co">#&gt; 2 Neonate                  0              51</span></span>
-<span><span class="co">#&gt; 3 Child                    1               0</span></span></code></pre></div>
-</div>
-<div class="section level4">
-<h4 id="fraction-and-rate-calculation-data">Fraction and rate calculation data<a class="anchor" aria-label="anchor" href="#fraction-and-rate-calculation-data"></a>
-</h4>
-<p>A function, <code>get_rate_data()</code>, is available to compute the frequency of deaths by the categories necessary for computing crude and adjusted mortality rates and fractions (DSS only, CHAMPS, target, MITS, and condition) and broken down by any specified adjustment variables. It returns data sufficient to compute crude and adjusted mortality fractions and rates.</p>
-<p>As inputs, it takes the data returned from <code><a href="reference/process_data.html">process_data()</a></code>, the site(s) and catchment(s) for which we want to compute the rates for, one or both of <code>icd10_regex</code> or <code>condition</code> to specify what condition we are looking at, and <code>adjust_vars</code>, specifying any variables we would like to adjust by.</p>
-<p>For example, to get the rate computation data for Ethiopia/Harar for neural tube defects (defined by the ICD10 regular expression “<sup>Q00|</sup>Q01|^Q05”) with no adjustment variables, we can do the following:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">get_rate_data</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">graf</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span></span>
 <span>  <span class="va">dd</span>,</span>
-<span>  site <span class="op">=</span> <span class="st">"Ethiopia"</span>,</span>
-<span>  catchments <span class="op">=</span> <span class="st">"Harar"</span>,</span>
-<span>  icd10_regex <span class="op">=</span> <span class="st">"^Q00|^Q01|^Q05"</span>,</span>
-<span>  adjust_vars <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; $data</span></span>
-<span><span class="co">#&gt;   dss_only champs target mits condition</span></span>
-<span><span class="co">#&gt; 1       36    104    140   82         5</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $site</span></span>
-<span><span class="co">#&gt; [1] "Ethiopia"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $catchment</span></span>
-<span><span class="co">#&gt; [1] "Harar"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $year_range</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 4</span></span>
-<span><span class="co">#&gt;   site     catchment period_start_year period_end_year</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                 &lt;dbl&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Ethiopia Harar                  2019            2020</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $live_birth_data</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 4</span></span>
-<span><span class="co">#&gt;   site     catchment  year live_births</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Ethiopia Harar      2019         469</span></span>
-<span><span class="co">#&gt; 2 Ethiopia Harar      2020         768</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $total_live_births</span></span>
-<span><span class="co">#&gt; [1] 1237</span></span></code></pre></div>
-<p>This returns a data frame, <code>data</code> containing the pertinent data, the site, catchment, and year range for this data, as well as the total live births relate to these.</p>
-<p>If we want to get the data grouped by age:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">get_rate_data</span><span class="op">(</span></span>
-<span>  <span class="va">dd</span>,</span>
-<span>  site <span class="op">=</span> <span class="st">"Ethiopia"</span>,</span>
-<span>  catchments <span class="op">=</span> <span class="st">"Harar"</span>,</span>
-<span>  icd10_regex <span class="op">=</span> <span class="st">"^Q00|^Q01|^Q05"</span>,</span>
-<span>  adjust_vars <span class="op">=</span> <span class="st">"age"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; $data</span></span>
-<span><span class="co">#&gt; # A tibble: 4 × 6</span></span>
-<span><span class="co">#&gt;   age        dss_only champs target  mits condition</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt;         &lt;dbl&gt;  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt;     &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 Stillbirth       12     53     65    42         2</span></span>
-<span><span class="co">#&gt; 2 Neonate           2     48     50    37         3</span></span>
-<span><span class="co">#&gt; 3 Infant            7      3     10     3         0</span></span>
-<span><span class="co">#&gt; 4 Child            15      0     15     0         0</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $site</span></span>
-<span><span class="co">#&gt; [1] "Ethiopia"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $catchment</span></span>
-<span><span class="co">#&gt; [1] "Harar"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $year_range</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 4</span></span>
-<span><span class="co">#&gt;   site     catchment period_start_year period_end_year</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                 &lt;dbl&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Ethiopia Harar                  2019            2020</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $live_birth_data</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 4</span></span>
-<span><span class="co">#&gt;   site     catchment  year live_births</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Ethiopia Harar      2019         469</span></span>
-<span><span class="co">#&gt; 2 Ethiopia Harar      2020         768</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $total_live_births</span></span>
-<span><span class="co">#&gt; [1] 1237</span></span></code></pre></div>
-<p>Grouped by sex:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">get_rate_data</span><span class="op">(</span></span>
-<span>  <span class="va">dd</span>,</span>
-<span>  site <span class="op">=</span> <span class="st">"Ethiopia"</span>,</span>
-<span>  catchments <span class="op">=</span> <span class="st">"Harar"</span>,</span>
-<span>  icd10_regex <span class="op">=</span> <span class="st">"^Q00|^Q01|^Q05"</span>,</span>
-<span>  adjust_vars <span class="op">=</span> <span class="st">"sex"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; $data</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
-<span><span class="co">#&gt;   sex    dss_only champs target  mits condition</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt;     &lt;dbl&gt;  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt;     &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 Male         17     54     71    44         0</span></span>
-<span><span class="co">#&gt; 2 Female        7     50     57    38         5</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $site</span></span>
-<span><span class="co">#&gt; [1] "Ethiopia"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $catchment</span></span>
-<span><span class="co">#&gt; [1] "Harar"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $year_range</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 4</span></span>
-<span><span class="co">#&gt;   site     catchment period_start_year period_end_year</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                 &lt;dbl&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Ethiopia Harar                  2019            2020</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $live_birth_data</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 4</span></span>
-<span><span class="co">#&gt;   site     catchment  year live_births</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Ethiopia Harar      2019         469</span></span>
-<span><span class="co">#&gt; 2 Ethiopia Harar      2020         768</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $total_live_births</span></span>
-<span><span class="co">#&gt; [1] 1237</span></span></code></pre></div>
-<p>Grouped by age and sex:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">get_rate_data</span><span class="op">(</span></span>
-<span>  <span class="va">dd</span>,</span>
-<span>  site <span class="op">=</span> <span class="st">"Ethiopia"</span>,</span>
-<span>  catchments <span class="op">=</span> <span class="st">"Harar"</span>,</span>
-<span>  icd10_regex <span class="op">=</span> <span class="st">"^Q00|^Q01|^Q05"</span>,</span>
-<span>  adjust_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"sex"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; $data</span></span>
-<span><span class="co">#&gt; # A tibble: 8 × 7</span></span>
-<span><span class="co">#&gt; # Groups:   age [4]</span></span>
-<span><span class="co">#&gt;   age        sex    dss_only champs target  mits condition</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt;      &lt;fct&gt;     &lt;dbl&gt;  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt;     &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 Stillbirth Male          0     26     26    22         0</span></span>
-<span><span class="co">#&gt; 2 Stillbirth Female        0     27     27    20         2</span></span>
-<span><span class="co">#&gt; 3 Neonate    Male          2     26     28    20         0</span></span>
-<span><span class="co">#&gt; 4 Neonate    Female        0     22     22    17         3</span></span>
-<span><span class="co">#&gt; 5 Infant     Male          5      2      7     2         0</span></span>
-<span><span class="co">#&gt; 6 Infant     Female        2      1      3     1         0</span></span>
-<span><span class="co">#&gt; 7 Child      Male         10      0     10     0         0</span></span>
-<span><span class="co">#&gt; 8 Child      Female        5      0      5     0         0</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $site</span></span>
-<span><span class="co">#&gt; [1] "Ethiopia"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $catchment</span></span>
-<span><span class="co">#&gt; [1] "Harar"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $year_range</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 4</span></span>
-<span><span class="co">#&gt;   site     catchment period_start_year period_end_year</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                 &lt;dbl&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Ethiopia Harar                  2019            2020</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $live_birth_data</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 4</span></span>
-<span><span class="co">#&gt;   site     catchment  year live_births</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Ethiopia Harar      2019         469</span></span>
-<span><span class="co">#&gt; 2 Ethiopia Harar      2020         768</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $total_live_births</span></span>
-<span><span class="co">#&gt; [1] 1237</span></span></code></pre></div>
-<p>For congenital birth defects instead of NTDs:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">get_rate_data</span><span class="op">(</span></span>
-<span>  <span class="va">dd</span>,</span>
-<span>  site <span class="op">=</span> <span class="st">"Ethiopia"</span>,</span>
-<span>  catchments <span class="op">=</span> <span class="st">"Harar"</span>,</span>
-<span>  condition <span class="op">=</span> <span class="st">"Congenital birth defects"</span>,</span>
-<span>  adjust_vars <span class="op">=</span> <span class="st">"age"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; $data</span></span>
-<span><span class="co">#&gt; # A tibble: 4 × 6</span></span>
-<span><span class="co">#&gt;   age        dss_only champs target  mits condition</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt;         &lt;dbl&gt;  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt;     &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 Stillbirth       12     53     65    42         2</span></span>
-<span><span class="co">#&gt; 2 Neonate           2     48     50    37         7</span></span>
-<span><span class="co">#&gt; 3 Infant            7      3     10     3         0</span></span>
-<span><span class="co">#&gt; 4 Child            15      0     15     0         0</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $site</span></span>
-<span><span class="co">#&gt; [1] "Ethiopia"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $catchment</span></span>
-<span><span class="co">#&gt; [1] "Harar"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $year_range</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 4</span></span>
-<span><span class="co">#&gt;   site     catchment period_start_year period_end_year</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                 &lt;dbl&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Ethiopia Harar                  2019            2020</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $live_birth_data</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 4</span></span>
-<span><span class="co">#&gt;   site     catchment  year live_births</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Ethiopia Harar      2019         469</span></span>
-<span><span class="co">#&gt; 2 Ethiopia Harar      2020         768</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $total_live_births</span></span>
-<span><span class="co">#&gt; [1] 1237</span></span></code></pre></div>
-<p>Note that we can now use this data to compute the rates and fractions. Currently we show how to do this manually. We are working on more general-purpose functions that will compute the rates automatically.</p>
-<p>Let’s look at NTDs for Ethiopia/Harar adjusted for age. First, we can compute the crude cause-specific mortality, <code>cCSMF</code> as follows. Note that a function <code><a href="reference/get_interval.html">get_interval()</a></code> is made available to compute bayesian credible intervals for the estimate.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">et_harar</span> <span class="op">&lt;-</span> <span class="fu">get_rate_data</span><span class="op">(</span></span>
-<span>  <span class="va">dd</span>,</span>
-<span>  site <span class="op">=</span> <span class="st">"Ethiopia"</span>,</span>
-<span>  catchments <span class="op">=</span> <span class="st">"Harar"</span>,</span>
-<span>  icd10_regex <span class="op">=</span> <span class="st">"^Q00|^Q01|^Q05"</span>,</span>
-<span>  adjust_vars <span class="op">=</span> <span class="st">"age"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">mits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">et_harar</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">mits</span><span class="op">)</span></span>
-<span><span class="va">ntd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">et_harar</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">condition</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">cCSMF</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">ntd</span> <span class="op">/</span> <span class="va">mits</span></span>
-<span><span class="va">cCSMF</span></span>
-<span><span class="co">#&gt; [1] 6.097561</span></span>
-<span></span>
-<span><span class="co"># 90% credible intervals</span></span>
-<span><span class="va">cCSMF_CrI</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_interval.html">get_interval</a></span><span class="op">(</span><span class="va">ntd</span> <span class="op">/</span> <span class="va">mits</span>, <span class="va">mits</span><span class="op">)</span></span>
-<span><span class="va">cCSMF_CrI</span></span>
-<span><span class="co">#&gt; [1]  2.828201 11.610284</span></span></code></pre></div>
-<p>To compute the adjusted fraction, <code>aCSMF</code>, for this data we need to group some of the age groups before making the adjustment due to the zero counts of NTDs in the infant and child groups. We will group infant and child into stillborn as follows:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># combine stillbirth, infant, and child into same group</span></span>
-<span><span class="va">rate_data</span> <span class="op">&lt;-</span> <span class="va">et_harar</span><span class="op">$</span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">age</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html" class="external-link">summarise_all</a></span><span class="op">(</span><span class="va">sum</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">rate_data</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
-<span><span class="co">#&gt;   group dss_only champs target  mits condition</span></span>
-<span><span class="co">#&gt;   &lt;dbl&gt;    &lt;dbl&gt;  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt;     &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1     1       34     56     90    45         2</span></span>
-<span><span class="co">#&gt; 2     2        2     48     50    37         3</span></span></code></pre></div>
-<p>Now we can compute the weights and take the dot product to get the aCSMF:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ns</span> <span class="op">&lt;-</span> <span class="va">rate_data</span><span class="op">$</span><span class="va">mits</span></span>
-<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="va">rate_data</span><span class="op">$</span><span class="va">condition</span></span>
-<span><span class="va">N</span> <span class="op">&lt;-</span> <span class="va">rate_data</span><span class="op">$</span><span class="va">target</span></span>
-<span></span>
-<span><span class="va">aCSMF</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="va">ns</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="op">(</span><span class="va">N</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">aCSMF</span></span>
-<span><span class="co">#&gt; [1] 5.752896</span></span>
-<span></span>
-<span><span class="va">aCSMF_CrI</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_interval.html">get_interval</a></span><span class="op">(</span><span class="va">aCSMF</span> <span class="op">/</span> <span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">aCSMF_CrI</span></span>
-<span><span class="co">#&gt; [1] 3.161020 9.679697</span></span></code></pre></div>
-<p>Now we can use this to get the all-cause total under-5 mortality rate and the cause-specific crude TU5MR and adjusted TU5MR as follows:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># (stillbirths + under-five deaths) / (live-births + stillbirths) x 10,000</span></span>
-<span><span class="va">lb</span> <span class="op">&lt;-</span> <span class="va">et_harar</span><span class="op">$</span><span class="va">total_live_births</span></span>
-<span><span class="va">sb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">et_harar</span><span class="op">$</span><span class="va">data</span>, <span class="va">age</span> <span class="op">==</span> <span class="st">"Stillbirth"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">target</span><span class="op">)</span></span>
-<span><span class="va">u5d_sb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">et_harar</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">target</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">acTU5MR</span> <span class="op">&lt;-</span> <span class="fl">10000</span> <span class="op">*</span> <span class="va">u5d_sb</span> <span class="op">/</span> <span class="op">(</span><span class="va">lb</span> <span class="op">+</span> <span class="va">sb</span><span class="op">)</span></span>
-<span><span class="va">acTU5MR</span></span>
-<span><span class="co">#&gt; [1] 1075.269</span></span>
-<span></span>
-<span><span class="va">cTU5MR</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">cCSMF</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span> <span class="op">*</span> <span class="va">acTU5MR</span></span>
-<span><span class="va">cTU5MR</span></span>
-<span><span class="co">#&gt; [1] 65.56517</span></span>
-<span></span>
-<span><span class="va">cTU5MR_CrI</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">cCSMF_CrI</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span> <span class="op">*</span> <span class="va">acTU5MR</span></span>
-<span><span class="va">cTU5MR_CrI</span></span>
-<span><span class="co">#&gt; [1]  30.41076 124.84176</span></span>
-<span></span>
-<span></span>
-<span><span class="va">aTU5MR</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">aCSMF</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span> <span class="op">*</span> <span class="va">acTU5MR</span></span>
-<span><span class="va">aTU5MR</span></span>
-<span><span class="co">#&gt; [1] 61.85909</span></span>
-<span></span>
-<span><span class="va">aTU5MR_CrI</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">aCSMF_CrI</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span> <span class="op">*</span> <span class="va">acTU5MR</span></span>
-<span><span class="va">aTU5MR_CrI</span></span>
-<span><span class="co">#&gt; [1]  33.98947 104.08276</span></span></code></pre></div>
-<p>A function that provides all of this is in development, but there are difficuties in dealing with how to roll up zero-count categories that are being worked out.</p>
-</div>
-<div class="section level4">
-<h4 id="ad-hoc-computations">Ad hoc computations<a class="anchor" aria-label="anchor" href="#ad-hoc-computations"></a>
-</h4>
-<p>The following code can be used to compute the total number of deaths in Baliakandi Bangladesh, by age and MITS and non-MITS+DSS-only. This is part of the computation that is provided automatically by <code>mits_selection_factor_tables()</code> described above.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
-<span>  <span class="va">dd</span><span class="op">$</span><span class="va">ads</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">site</span> <span class="op">==</span> <span class="st">"Bangladesh"</span>, <span class="va">catchment</span> <span class="op">==</span> <span class="st">"Baliakandi"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">mits_flag</span>, <span class="va">age</span><span class="op">)</span>,</span>
-<span>  <span class="va">dd</span><span class="op">$</span><span class="va">dss</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">site</span> <span class="op">==</span> <span class="st">"Bangladesh"</span>, <span class="va">catchment</span> <span class="op">==</span> <span class="st">"Baliakandi"</span>,</span>
-<span>      <span class="va">factor</span> <span class="op">==</span> <span class="st">"age"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">level</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"level"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>mits_flag <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">mits_flag</span>, <span class="va">age</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 7 × 3</span></span>
-<span><span class="co">#&gt;   mits_flag age            n</span></span>
-<span><span class="co">#&gt;       &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1         0 Child         62</span></span>
-<span><span class="co">#&gt; 2         0 Infant        82</span></span>
-<span><span class="co">#&gt; 3         0 Neonate      372</span></span>
-<span><span class="co">#&gt; 4         0 Stillbirth   401</span></span>
-<span><span class="co">#&gt; 5         1 Child          1</span></span>
-<span><span class="co">#&gt; 6         1 Neonate       51</span></span>
-<span><span class="co">#&gt; 7         1 Stillbirth    31</span></span></code></pre></div>
-<p>The following computes the number of MITS deaths with and without neural tube defects and congenital birth defects by age. This uses functions <code><a href="reference/has_icd10.html">has_icd10()</a></code> to check if neural tube defects are in the causal chain using a regular expression indicating ICD10, and <code><a href="reference/has_champs_group.html">has_champs_group()</a></code> to check if congenital birth defects are in the causal chain using a CHAMPS group.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cbd_ntd</span> <span class="op">&lt;-</span> <span class="va">dd</span><span class="op">$</span><span class="va">ads</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    ntd_cc <span class="op">=</span> <span class="fu"><a href="reference/has_icd10.html">has_icd10</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"^Q00|^Q01|^Q05"</span><span class="op">)</span>,</span>
-<span>    cbd_cc <span class="op">=</span> <span class="fu"><a href="reference/has_champs_group.html">has_champs_group</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Congenital birth defects"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="va">cbd_ntd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">site</span> <span class="op">==</span> <span class="st">"Bangladesh"</span>, <span class="va">catchment</span> <span class="op">==</span> <span class="st">"Baliakandi"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">cbd_cc</span>, <span class="va">age</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">cbd_cc</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">cbd_cc</span>, <span class="va">age</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
-<span><span class="co">#&gt;   cbd_cc age            n</span></span>
-<span><span class="co">#&gt;   &lt;lgl&gt;  &lt;fct&gt;      &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 FALSE  Stillbirth   431</span></span>
-<span><span class="co">#&gt; 2 FALSE  Neonate      420</span></span>
-<span><span class="co">#&gt; 3 FALSE  Infant        82</span></span>
-<span><span class="co">#&gt; 4 FALSE  Child         63</span></span>
-<span><span class="co">#&gt; 5 TRUE   Stillbirth     1</span></span>
-<span><span class="co">#&gt; 6 TRUE   Neonate        3</span></span></code></pre></div>
-<p>This code is part of the calculations of mortality rates and fractions automatically provided by the function <code><a href="reference/cond_factor_tables.html">cond_factor_tables()</a></code> described previously.</p>
-<p>More to come…</p>
-</div>
+<span>  sites <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"S6"</span>, <span class="st">"S5"</span>, <span class="st">"S7"</span><span class="op">)</span>,</span>
+<span>  catchments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C1"</span>, <span class="st">"C4"</span>, <span class="st">"C3"</span>, <span class="st">"C5"</span>, <span class="st">"C6"</span>, <span class="st">"C7"</span><span class="op">)</span>,</span>
+<span>  causal_chain <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  pval_cutoff <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  pct_na_cutoff <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  condition <span class="op">=</span> <span class="st">"Lower respiratory infections"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; S6</span></span>
+<span><span class="co">#&gt; ℹ The following catchments are not found in the data and will be removed from the</span></span>
+<span><span class="co">#&gt; calculations: C4, C3, C5, C6, C7</span></span>
+<span><span class="co">#&gt; ℹ The following catchments are not found in the data and will be removed from the</span></span>
+<span><span class="co">#&gt; calculations: C4, C3, C5, C6, C7</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; ℹ The following catchments are not found in the data and will be removed from the</span></span>
+<span><span class="co">#&gt; calculations: C4, C3, C5, C6, C7</span></span>
+<span><span class="co">#&gt; S5</span></span>
+<span><span class="co">#&gt; ℹ The following catchments are not found in the data and will be removed from the</span></span>
+<span><span class="co">#&gt; calculations: C1, C6, C7</span></span>
+<span><span class="co">#&gt; ℹ The following catchments are not found in the data and will be removed from the</span></span>
+<span><span class="co">#&gt; calculations: C1, C6, C7</span></span>
+<span><span class="co">#&gt;   using adjustment variables: age, location</span></span>
+<span><span class="co">#&gt; ℹ The following catchments are not found in the data and will be removed from the</span></span>
+<span><span class="co">#&gt; calculations: C1, C6, C7</span></span>
+<span><span class="co">#&gt; S7</span></span>
+<span><span class="co">#&gt; ℹ The following catchments are not found in the data and will be removed from the</span></span>
+<span><span class="co">#&gt; calculations: C1, C4, C3, C5</span></span>
+<span><span class="co">#&gt; ℹ The following catchments are not found in the data and will be removed from the</span></span>
+<span><span class="co">#&gt; calculations: C1, C4, C3, C5</span></span>
+<span><span class="co">#&gt;   using adjustment variable: location</span></span>
+<span><span class="co">#&gt;   other significant factors not adjusted for: va</span></span>
+<span><span class="co">#&gt; ℹ The following catchments are not found in the data and will be removed from the</span></span>
+<span><span class="co">#&gt; calculations: C1, C4, C3, C5</span></span></code></pre></div>
+<p>TODO: Much more coming soon…</p>
 </div>
 </div>
 </div>
@@ -791,7 +319,13 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/ki-tools/champs-mortality/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/ki-tools/champs-mortality/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/ki-tools/champs-mortality?branch=main" class="external-link"><img src="https://codecov.io/gh/ki-tools/champs-mortality/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
+</div>
 
   </div>
 </div>
@@ -804,7 +338,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

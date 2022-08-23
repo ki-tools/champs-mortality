@@ -2,14 +2,17 @@
 # dat_folder <- "inst/testdata"
 # path_wide <- "inst/testdata/inputs_wide.csv"
 
-comp <- readRDS("evaluation_results_v1_82022.rds")
+get_file <- function(x)
+  file.path(system.file(package = "champsmortality"), x)
 
-dat_folder <- "../../inst/testdata"
-path_wide <- "../../inst/testdata/inputs_wide.csv"
+comp <- readRDS(get_file("testdata/evaluation_results_v1_82022.rds"))
+
+dat_folder <- get_file("testdata")
+path_wide <- get_file("testdata/inputs_wide.csv")
 sites_use <- c("S6", "S5", "S7")
 catch_use <- c("C1", "C4", "C3", "C5", "C6", "C7")
 
-input_list <- readr::read_csv(path_wide) |>
+input_list <- readr::read_csv(path_wide, show_col_types = FALSE) |>
     purrr::transpose()
 
 test_that("Package works", {
@@ -21,22 +24,22 @@ test_that("Package works", {
   expect_true(
     all(unlist(dd$ads) == unlist(comp$process_data$ads),
     na.rm = TRUE)
-    )
+  )
 
   expect_true(
     all(unlist(dd$dss) == unlist(comp$process_data$dss),
     na.rm = TRUE)
-    )
+  )
 
   expect_true(
     all(unlist(dd$dhs) == unlist(comp$process_data$dhs),
     na.rm = TRUE)
-    )
+  )
 
   expect_true(
     all(unlist(dd$lb) == unlist(comp$process_data$lb),
     na.rm = TRUE)
-    )
+  )
 
   # valid_conditions()
   expect_true(
@@ -116,63 +119,69 @@ test_that("Package works", {
     catchments = catch_use,
     condition = "Malnutrition")
 
-  expect_true(
-    all(unlist(cftb) == unlist(comp$cond_factor_tables_births))
+  # dput(cftb)
+  # dput(comp$cond_factor_tables_births)
+
+  expect_equal(
+    cftb, comp$cond_factor_tables_births, tolerance = 4
   )
 
-  expect_true(
-    all(unlist(cftm) == unlist(comp$cond_factor_tables_m))
+  expect_equal(
+    cftm, comp$cond_factor_tables_m, tolerance = 4
   )
 
-  expect_true(
-    all(unlist(cftb1) == unlist(comp$cond_factor_tables_births1))
+  expect_equal(
+    cftb1, comp$cond_factor_tables_births1, tolerance = 4
   )
 
-  expect_true(
-    all(unlist(mft) == unlist(comp$mits_factor_tables), na.rm = TRUE)
+  expect_equal(
+    mft, comp$mits_factor_tables, tolerance = 4
   )
 
-  expect_true(
-    all(unlist(mft1) == unlist(comp$mits_factor_tables1), na.rm = TRUE)
+  expect_equal(
+    mft1, comp$mits_factor_tables1
   )
 
-  expect_true(
-    all(unlist(combine_decision_tables(list(first = mft, second = cftb))) ==
-      unlist(comp$combine_decion_tables), na.rm = TRUE)
-  )
+  # This is an internal function and is alread tested inside other functions
+  # expect_equal(
+  #   combine_decision_tables(list(first = mft, second = cftb)),
+  #   comp$combine_decion_tables,
+  #   tolerance = 4
+  # )
 
   # get_site_info
-  expect_true(
-    all(unlist(get_site_info(dd) == unlist(comp$get_site_info)))
+  expect_equal(
+    get_site_info(dd), comp$get_site_info, tolerance = 4
   )
 
-  # Get rates and fractions
-  grfd <- get_rate_frac_data(dd,
-            site = sites_use,
-            catchments = catch_use,
-            causal_chain = FALSE,
-            condition = "Lower respiratory infections")
+  # This is an internal function and is alread tested inside other functions
+  # grfd <- get_rate_frac_data(
+  #   dd,
+  #   site = sites_use,
+  #   catchments = catch_use,
+  #   causal_chain = FALSE,
+  #   condition = "Lower respiratory infections")
 
-  graf <- get_rates_and_fractions(dd,
-            sites = sites_use,
-            catchments = catch_use,
-            causal_chain = FALSE, 
-            pval_cutoff = 0.1, #Fixed
-            pct_na_cutoff = 20, #Fixed
-            condition = "Lower respiratory infections")
+  graf <- get_rates_and_fractions(
+    dd,
+    sites = sites_use,
+    catchments = catch_use,
+    causal_chain = FALSE,
+    pval_cutoff = 0.1, #Fixed
+    pct_na_cutoff = 20, #Fixed
+    condition = "Lower respiratory infections")
 
-  expect_true(
-    all(unlist(grfd) == unlist(comp$get_rate_frac_data))
-  )
+  # expect_equal(
+  #   grfd, comp$get_rate_frac_data, tolerance = 4
+  # )
 
-  expect_true(
-    all(unlist(graf) == unlist(comp$get_rate_fractions))
+  expect_equal(
+    graf, comp$get_rates_and_fractions, tolerance = 4
   )
 
   # html tables on mft1 and cftb1
-  expect_true(
-    all(unlist(table_overview(graf)) ==
-      unlist(comp$table_overview), na.rm = TRUE)
+  expect_equal(
+    table_overview(graf), comp$table_overview, tolerance = 4
   )
 
   tfssm <- table_factor_sig_stats(
@@ -187,76 +196,64 @@ test_that("Package works", {
 
   tad <- table_adjust_decision(graf)
 
-  expect_true(
-    all(
-      unlist(tfssm$`_spanners`) ==
-      unlist(comp$table_factor_sig_stats_mits$`_spanners`), 
-      na.rm = TRUE
-    )
+  expect_equal(
+    tfssm$`_spanners`,
+    comp$table_factor_sig_stats_mits$`_spanners`,
+    tolerance = 4
   )
 
-    expect_true(
-    all(
-      unlist(tfssm$`_boxhead`) ==
-      unlist(comp$table_factor_sig_stats_mits$`_boxhead`), 
-      na.rm = TRUE
-    )
+  expect_equal(
+    tfssm$`_boxhead`,
+    comp$table_factor_sig_stats_mits$`_boxhead`,
+    tolerance = 4
   )
 
-  expect_true(
-    all(
-      unlist(tfssc$`_spanners`) ==
-      unlist(comp$table_factor_sig_stats_cond$`_spanners`), 
-      na.rm = TRUE
-    )
+  expect_equal(
+    tfssc$`_spanners`,
+    comp$table_factor_sig_stats_cond$`_spanners`,
+    tolerance = 4
   )
 
-    expect_true(
-    all(
-      unlist(tfssc$`_boxhead`) ==
-      unlist(comp$table_factor_sig_stats_cond$`_boxhead`), 
-      na.rm = TRUE
-    )
+  expect_equal(
+    tfssc$`_boxhead`,
+    comp$table_factor_sig_stats_cond$`_boxhead`,
+    tolerance = 4
   )
 
-  expect_true(
-    all(
-      unlist(tad$`_spanners`) ==
-      unlist(comp$table_factor_adjust_decision$`_spanners`), 
-      na.rm = TRUE
-    )
+  expect_equal(
+    tad$`_spanners`,
+    comp$table_adjust_decision$`_spanners`,
+    tolerance = 4
   )
 
-  expect_true(
-    all(
-      unlist(tad$`_boxhead`) ==
-      unlist(comp$table_adjust_decision$`_boxhead`), 
-      na.rm = TRUE
-    )
+  expect_equal(
+    tad$`_boxhead`,
+    comp$table_adjust_decision$`_boxhead`,
+    tolerance = 4
   )
 
-  #calculate interval
-  expect_true(
-    all(get_interval(1 / 100, 1000, 95) == comp$get_interval)
+  # calculate interval
+  expect_equal(
+    get_interval(1 / 100, 1000, 95),
+    comp$get_interval,
+    tolerance = 4
   )
 
-  #repeat calculation functions
-  expect_true(
-    all(
-      unlist(rates_and_fractions_wide(input_list[[2]], dat = dd)) ==
-      unlist(comp$rates_and_fractions_wide)
-    )
+  # repeat calculation functions
+  expect_equal(
+    rates_and_fractions_wide(input_list[[2]], dd),
+    comp$rates_and_fractions_wide,
+    tolerance = 4
   )
 
-  expect_true(
-    all(
-      unlist(batch_rates_and_fractions(
-        path_wide,
-        dat_folder,
-        start_year = 2017,
-        end_year = 2020)) ==
-      unlist(comp$batch_rates_and_fractions)
-    )
+  expect_equal(
+    suppressMessages(batch_rates_and_fractions(
+      path_wide,
+      dat_folder,
+      start_year = 2017,
+      end_year = 2020
+    )),
+    comp$batch_rates_and_fractions,
+    tolerance = 4
   )
-
 })

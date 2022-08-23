@@ -19,6 +19,8 @@ options(width = 94)
 # champsmortality
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/ki-tools/champs-mortality/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ki-tools/champs-mortality/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/ki-tools/champs-mortality/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ki-tools/champs-mortality?branch=main)
 <!-- badges: end -->
 
 The goal of champsmortality is to provide functions for calculating mortality fractions and rates at CHAMPS sites for various causes.
@@ -53,15 +55,21 @@ This is something that only needs to be done once.
 
 Once this is set up and the appropriate files are placed and mapped in the `config.yaml` file, you can read in the data with the following:
 
-```{r echo=FALSE}
-data_dir <- "_ignore/datasets_unique"
+```{r}
+input_path <- file.path(system.file(package = "champsmortality"), "testdata")
+
+list.files(input_path)
 ```
 
+TODO: Talk about the data in each of these files...
+
 ```{r}
-d <- read_and_validate_data(data_dir)
+d <- read_and_validate_data(input_path)
 ```
 
 This will read in the data files and ensure that all of the variables required to perform the calculations are present. If they are not, you will see an error message and will need to correct the error before being able to use the package.
+
+TODO: Talk about the structure of `d`.
 
 ### Process the data
 
@@ -82,307 +90,17 @@ valid_conditions(dd)
 
 This searches the CHAMPS data and finds all unique condition values found anywhere in the causal chain. A ranking is also provided where a higher ranking indicates that the condition is found more frequently in the data than a condition with a lower ranking.
 
-### Computing statistics
-
-We will use the `dplyr` package for some of the examples below so let's load it:
-
-```{r message=FALSE}
-library(dplyr)
-```
-
-#### Tables of MITS / non-MITS+DSS-only counts by site and factor
-
-A function `mits_selection_factor_tables()` exists in this package that computes tables of MITS / non-MITS+DSS-only counts by site and factor and associated statistics.
-
-This function aims to replicate table 5a in "Supplemental Results (OLD)" as part of determining what factors to adjust for.
-
-To call the function for sites "Bangladesh", "Ethiopia", "Kenya" and their associated catchments:
+### Getting Rates and Fractions
 
 ```{r}
-fac_tbl <- mits_selection_factor_tables(dd,
-  sites = c("Bangladesh", "Ethiopia", "Kenya"),
-  catchments = c("Baliakandi", "Haramaya", "Harar", "Kersa",
-    "Manyatta", "Siaya")
-)
-```
-
-The output looks like this:
-
-```{r}
-print(fac_tbl, n = 21)
-```
-
-Each row is for one site/factor combination and contains the table of counts (as a nested data frame), the p-value of the chi-square test, and percent missing values.
-
-To view the table of counts for the first record (Bangladesh/age):
-
-```{r}
-fac_tbl$table[[1]]
-```
-
-To see the table of counts for a specific record (e.g. Bangladesh/location):
-
-```{r}
-filter(fac_tbl, site == "Bangladesh", factor == "location")$table
-```
-
-To look at which sites/factors pass the adjustment criterion, we can filter the table based on these:
-
-```{r}
-filter(fac_tbl, pval < 0.1, pct_na < 20)
-```
-
-Suppose we want to compute the table separately for just one site in Kenya:
-
-```{r}
-# compute just for Kenya/Manyatta
-ke_man_tbl <- mits_selection_factor_tables(dd,
-  sites = "Kenya",
-  catchments = "Manyatta"
-)
-```
-
-The by-age table:
-
-```{r}
-ke_man_tbl$table[[1]]
-```
-
-#### Tables of MITS cases with and without a specified condition by factor
-
-Another table used to determine what factors to adjust for is MITS cases with and without the condition for which we are calculating mortality for by factor. This can be computed using `cond_factor_tables()`.
-
-It has the same arguments as the previous function but also has the `champs_group` argument that we use do define the cause we want to compute the statistics for.
-
-```{r}
-# table of MITS cases with and without a specified condition by factor
-cbd_tbl <- cond_factor_tables(dd,
-  sites = c("Bangladesh", "Ethiopia", "Kenya"),
-  catchments = c("Baliakandi", "Haramaya", "Harar", "Kersa",
-    "Manyatta", "Siaya"),
-  champs_group = "Congenital birth defects"
-)
-```
-
-The output structure is similar as shown before:
-
-```{r}
-cbd_tbl
-```
-
-The table for Bangladesh/age:
-
-```{r}
-cbd_tbl$table[[1]]
-```
-
-Which sites/factors pass the adjustment criterion:
-
-```{r}
-filter(cbd_tbl, pval < 0.1, pct_na < 20)
-```
-
-We can try other causes as well, such as malnutrition:
-
-```{r}
-mal_tbl <- cond_factor_tables(dd,
-  sites = c("Bangladesh", "Ethiopia", "Kenya"),
-  catchments = c("Baliakandi", "Haramaya", "Harar", "Kersa",
-    "Manyatta", "Siaya"),
-  champs_group = "Malnutrition"
-)
-
-mal_tbl
-```
-
-```{r}
-mal_tbl$table[[1]]
-```
-
-#### Fraction and rate calculation data
-
-A function, `get_rate_data()`, is available to compute the frequency of deaths by the categories necessary for computing crude and adjusted mortality rates and fractions (DSS only, CHAMPS, target, MITS, and condition) and broken down by any specified adjustment variables. It returns data sufficient to compute crude and adjusted mortality fractions and rates.
-
-As inputs, it takes the data returned from `process_data()`, the site(s) and catchment(s) for which we want to compute the rates for, one or both of `icd10_regex` or `condition` to specify what condition we are looking at, and `adjust_vars`, specifying any variables we would like to adjust by.
-
-For example, to get the rate computation data for Ethiopia/Harar for neural tube defects (defined by the ICD10 regular expression "^Q00|^Q01|^Q05") with no adjustment variables, we can do the following:
-
-```{r}
-get_rate_data(
+graf <- get_rates_and_fractions(
   dd,
-  site = "Ethiopia",
-  catchments = "Harar",
-  icd10_regex = "^Q00|^Q01|^Q05",
-  adjust_vars = NULL
-)
+  sites = c("S6", "S5", "S7"),
+  catchments = c("C1", "C4", "C3", "C5", "C6", "C7"),
+  causal_chain = FALSE,
+  pval_cutoff = 0.1,
+  pct_na_cutoff = 20,
+  condition = "Lower respiratory infections")
 ```
 
-This returns a data frame, `data` containing the pertinent data, the site, catchment, and year range for this data, as well as the total live births relate to these.
-
-If we want to get the data grouped by age:
-
-```{r}
-get_rate_data(
-  dd,
-  site = "Ethiopia",
-  catchments = "Harar",
-  icd10_regex = "^Q00|^Q01|^Q05",
-  adjust_vars = "age"
-)
-```
-
-Grouped by sex:
-
-```{r}
-get_rate_data(
-  dd,
-  site = "Ethiopia",
-  catchments = "Harar",
-  icd10_regex = "^Q00|^Q01|^Q05",
-  adjust_vars = "sex"
-)
-```
-
-Grouped by age and sex:
-
-```{r}
-get_rate_data(
-  dd,
-  site = "Ethiopia",
-  catchments = "Harar",
-  icd10_regex = "^Q00|^Q01|^Q05",
-  adjust_vars = c("age", "sex")
-)
-```
-
-For congenital birth defects instead of NTDs:
-
-```{r}
-get_rate_data(
-  dd,
-  site = "Ethiopia",
-  catchments = "Harar",
-  condition = "Congenital birth defects",
-  adjust_vars = "age"
-)
-```
-
-Note that we can now use this data to compute the rates and fractions. Currently we show how to do this manually. We are working on more general-purpose functions that will compute the rates automatically.
-
-Let's look at NTDs for Ethiopia/Harar adjusted for age. First, we can compute the crude cause-specific mortality, `cCSMF` as follows. Note that a function `get_interval()` is made available to compute bayesian credible intervals for the estimate.
-
-```{r}
-et_harar <- get_rate_data(
-  dd,
-  site = "Ethiopia",
-  catchments = "Harar",
-  icd10_regex = "^Q00|^Q01|^Q05",
-  adjust_vars = "age"
-)
-
-mits <- sum(et_harar$data$mits)
-ntd <- sum(et_harar$data$condition)
-
-cCSMF <- 100 * ntd / mits
-cCSMF
-
-# 90% credible intervals
-cCSMF_CrI <- get_interval(ntd / mits, mits)
-cCSMF_CrI
-```
-
-To compute the adjusted fraction, `aCSMF`, for this data we need to group some of the age groups before making the adjustment due to the zero counts of NTDs in the infant and child groups. We will group infant and child into stillborn as follows:
-
-```{r}
-# combine stillbirth, infant, and child into same group
-rate_data <- et_harar$data %>%
-  mutate(group = c(1, 2, 1, 1)) %>%
-  select(-age) %>%
-  group_by(group) %>%
-  summarise_all(sum)
-
-rate_data
-```
-
-Now we can compute the weights and take the dot product to get the aCSMF:
-
-```{r}
-ns <- rate_data$mits
-n <- rate_data$condition
-N <- rate_data$target
-
-aCSMF <- 100 * (n / ns) %*% (N / sum(N)) %>% as.vector()
-aCSMF
-
-aCSMF_CrI <- get_interval(aCSMF / 100, sum(N))
-aCSMF_CrI
-```
-
-Now we can use this to get the all-cause total under-5 mortality rate and the cause-specific crude TU5MR and adjusted TU5MR as follows:
-
-```{r}
-# (stillbirths + under-five deaths) / (live-births + stillbirths) x 10,000
-lb <- et_harar$total_live_births
-sb <- filter(et_harar$data, age == "Stillbirth") %>% pull(target)
-u5d_sb <- sum(et_harar$data$target)
-
-acTU5MR <- 10000 * u5d_sb / (lb + sb)
-acTU5MR
-
-cTU5MR <- (cCSMF / 100) * acTU5MR
-cTU5MR
-
-cTU5MR_CrI <- (cCSMF_CrI / 100) * acTU5MR
-cTU5MR_CrI
-
-
-aTU5MR <- (aCSMF / 100) * acTU5MR
-aTU5MR
-
-aTU5MR_CrI <- (aCSMF_CrI / 100) * acTU5MR
-aTU5MR_CrI
-```
-
-A function that provides all of this is in development, but there are difficuties in dealing with how to roll up zero-count categories that are being worked out.
-
-#### Ad hoc computations
-
-The following code can be used to compute the total number of deaths in Baliakandi Bangladesh, by age and MITS and non-MITS+DSS-only. This is part of the computation that is provided automatically by `mits_selection_factor_tables()` described above.
-
-```{r}
-bind_rows(
-  dd$ads %>%
-    filter(site == "Bangladesh", catchment == "Baliakandi") %>%
-    count(mits_flag, age),
-  dd$dss %>%
-    filter(site == "Bangladesh", catchment == "Baliakandi",
-      factor == "age") %>%
-    group_by(level) %>%
-    summarise(n = sum(n)) %>%
-    rename(age = "level") %>%
-    mutate(mits_flag = 0)
-) %>%
-  group_by(mits_flag, age) %>%
-  summarise(n = sum(n), .groups = "drop")
-```
-
-The following computes the number of MITS deaths with and without neural tube defects and congenital birth defects by age. This uses functions `has_icd10()` to check if neural tube defects are in the causal chain using a regular expression indicating ICD10, and `has_champs_group()` to check if congenital birth defects are in the causal chain using a CHAMPS group.
-
-```{r}
-cbd_ntd <- dd$ads %>%
-  mutate(
-    ntd_cc = has_icd10(., "^Q00|^Q01|^Q05"),
-    cbd_cc = has_champs_group(., "Congenital birth defects")
-  )
-
-cbd_ntd %>%
-  filter(site == "Bangladesh", catchment == "Baliakandi") %>%
-  count(cbd_cc, age) %>%
-  filter(!is.na(cbd_cc)) %>%
-  arrange(cbd_cc, age)
-```
-
-This code is part of the calculations of mortality rates and fractions automatically provided by the function `cond_factor_tables()` described previously.
-
-More to come...
-
+TODO: Much more coming soon...
