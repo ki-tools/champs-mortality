@@ -13,6 +13,9 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/batch_rates_and_fractions.html</loc>
+  </url>
+  <url>
     <loc>/reference/combine_decision_tables.html</loc>
   </url>
   <url>
@@ -65,6 +68,9 @@
   </url>
   <url>
     <loc>/reference/process_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rates_and_fractions_wide.html</loc>
   </url>
   <url>
     <loc>/reference/read_and_validate_data.html</loc>

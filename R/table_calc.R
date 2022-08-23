@@ -388,6 +388,7 @@ cond_factor_tables <- function(
           x[["1"]] <- 0
         if (is.null(x[["0"]]))
           x[["0"]] <- 0
+        x <- x[, rev(sort(names(x)))]
         x <- x %>%
           dplyr::rename(
             "{cond_name_short}+" := "1",
@@ -395,12 +396,9 @@ cond_factor_tables <- function(
         if (fac == "age")
           x$level <- factor(x$level,
             levels = c("Stillbirth", "Neonate", "Infant", "Child"))
-        x <- x %>%
+        x %>%
           dplyr::filter(!is.na(.data$level)) %>%
           dplyr::arrange(.data$level)
-        nms <- names(x)
-        nnms <- c(nms[1], sort(nms[-1], decreasing = TRUE))
-        x[, nnms]
       })
     )
 

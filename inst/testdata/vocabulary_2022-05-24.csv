@@ -1,0 +1,3140 @@
+Champs Local Code,C Name,C Pref Name,C Code
+CH00001,Yes,Yes,CH00001
+CH00002,No,No,CH00002
+CH00003,Unknown,Unknown,CH00003
+CH00004,Not Applicable,Not Applicable,CH00004
+CH00005,Not Answered,Not Answered,CH00005
+CH00006,Do not know,Do not know,CH00006
+CH00007,Refuse,Refuse,CH00007
+CH00008,True,True,CH00008
+CH00009,False,False,CH00009
+CH00010,Other,Other,CH00010
+CH00011,Unsure,Unsure,CH00011
+CH00012,Hospital,Hospital,CH00012
+CH00013,Health Center,Health Center,CH00013
+CH00014,Health Post,Health Post,CH00014
+CH00015,Home (own or other),Home (own or other),CH00015
+CH00016,On the way to health facility,On the way to health facility,CH00016
+CH00017,Other location,Other location,CH00017
+CH00018,Hospital staff or health facility staff,Hospital staff or health facility staff,CH00018
+CH00019,Mortuary,Mortuary,CH00019
+CH00020,Demographic Surveillance System,DSS,CH00020
+CH00021,Community reporter,Community reporter,CH00021
+CH00022,Pregnancy surveillance,Pregnancy surveillance,CH00022
+CH00023,Other source of death report,Other source of death report,CH00023
+CH00024,Christian,Christian,CH00024
+CH00025,Muslim,Muslim,CH00025
+CH00026,Traditional African Religion,Traditional African Religion,CH00026
+CH00027,Hindu,Hindu,CH00027
+CH00028,Buddhist,Buddhist,CH00028
+CH00029,Other religion,Other religion,CH00029
+CH00030,Male,Male,CH00030
+CH00031,Female,Female,CH00031
+CH00032,Indeterminate,Indeterminate or Ambiguous,CH00032
+CH00033,Unknown,Unknown,CH00033
+CH00034,Potentially eligible: Proceeding to eligibility screening,Potentially eligible: Proceeding to eligibility screening,CH00034
+CH00035,Duplicate death notification,Duplicate death notification,CH00035
+CH00036,Not eligible for CHAMPS,Not eligible for CHAMPS,CH00036
+CH00037,Lost to follow-up (unable to reach),Lost to follow-up,CH00037
+CH00038,Mother,Mother,CH00038
+CH00039,Father,Father,CH00039
+CH00040,Aunt or Uncle,Aunt or Uncle,CH00040
+CH00041,Grandparent,Grandparent,CH00041
+CH00042,Cousin,Cousin,CH00042
+CH00043,Sibling,Sibling,CH00043
+CH00044,Other relative or caretaker,Other,CH00044
+CH00045,DSS Individual ID,DSS Individual ID,CH00045
+CH00046,DSS Household ID,DSS Household ID,CH00046
+CH00047,National ID,National ID,CH00047
+CH00048,Person UID,Person UID,CH00048
+CH00049,Other ID,Other ID,CH00049
+CH00050,CHAMPS MITS Mortality Surveillance Consent,MITS Consent,CH00050
+CH00051,CHAMPS Mortality Surveillance Consent (non-MITS),Non-MITS Consent,CH00051
+CH00052,CHAMPS Maternal Abstraction Consent,Maternal Abstraction Consent,CH00052
+CH00053,Religious considerations,Religious considerations,CH00053
+CH00054,Timing concerns,Timing concerns,CH00054
+CH00055,Distrust,Distrust,CH00055
+CH00056,Family disinterest,Family disinterest,CH00056
+CH00057,Body not available,Body not available,CH00057
+CH00058,Consent authorization issues,Consent authorization issues,CH00058
+CH00059,CHAMPS procedure prohibited,CHAMPS procedure prohibited,CH00059
+CH00060,Refusal without reason,Refusal without reason,CH00060
+CH00061,Other Reason,Other Reason,CH00061
+CH00062,January,January,CH00062
+CH00063,February,February,CH00063
+CH00064,March,March,CH00064
+CH00065,April,April,CH00065
+CH00066,May,May,CH00066
+CH00067,June,June,CH00067
+CH00068,July,July,CH00068
+CH00069,August,August,CH00069
+CH00070,September,September,CH00070
+CH00071,October,October,CH00071
+CH00072,November,November,CH00072
+CH00073,December,December,CH00073
+CH00074,Oropharyngeal mucosa,Oropharyngeal mucosa,54933
+CH00075,Nasopharyngeal mucosa,Nasopharyngeal mucosa,54971
+CH00076,Biopsy of Spleen,Spleen,32534001
+CH00077,Whole blood,Whole blood,420135007
+CH00078,Placental biopsy sample,Placenta,309293007
+CH00079,Umbilical cord tissue sample,Umbilical cord,258436001
+CH00080,Hair specimen,Hair,119326000
+CH00081,Plasma or spun blood specimen,Plasma,119361006
+CH00082,Bone marrow specimen,Bone marrow,119359002
+CH00083,Cerebrospinal fluid sample,CSF,258450006
+CH00084,Stool specimen,Stool,119339001
+CH00085,Urine specimen,Urine,122575003
+CH00086,Liver Tissue,Liver,256887000
+CH00087,Skin Tissue,Skin,314818000
+CH00088,Kidney Biopsy,Kidney,7246002
+CH00089,Tissue specimen from lung,Lung,399492000
+CH00090,Brain Tissue,Brain,256865009
+CH00091,Heart Tissue,Heart,386108004
+CH00092,Lymph node tissue,Lymph nodes,256891005
+CH00093,Blood,Blood,87612001
+CH00094,Spun urinary sediment,Urine pellet,258434003
+CH00095,Rectal swab,Rectal swab,258528007
+CH00096,Serum specimen,Serum,119364003
+CH00097,Nucleic acid specimen,Nucleic acid,448789008
+CH00098,Nasopharyngeal and Oropharyngeal swab,Nasopharyngeal and Oropharyngeal swab,433801000124107
+CH00099,Fresh or Frozen Tissue,Fresh or Frozen Tissue,CH00099
+CH00100,Urine Supernatant,Urine Supernatant,CH00100
+CH00101,Microbial culture,Microbial culture,CH00101
+CH00102,Blood in culture media,Blood in culture media,CH00102
+CH00103,CSF in culture media,CSF in culture media,CH00103
+CH00104,Fixed specimen,Fixed tissue specimen,C84514
+CH00105,Cycle threshold,ct,BAO_0002125
+CH00106,Nanogram per Microliter,ng/uL,272082007
+CH00107,Nanogram per Milliliter,ng/ml,258806002
+CH00108,Milligram,mg,C28253
+CH00109,Milliliter,ml,C28254
+CH00110,Microliter,uL,C48153
+CH00111,Gram,g,C48155
+CH00112,Inch,in,C48500
+CH00113,Centimeter,cm,C49668
+CH00114,Parasites per microliter,Parasites/ul,CH00114
+CH00115,Cubic centimeter,cm3,UO_0000097
+CH00116,Volume,Volume,C25335
+CH00117,Enzyme-linked immunosorbent assay,ELISA,76978006
+CH00118,Gram stain method,Gram stain,62777006
+CH00119,Culture,Culture,252398009
+CH00120,Malaria Smear,Malaria Smear,12845003
+CH00121,Hematoxylin and eosin stain,HE stain,104210008
+CH00122,Grocott methenamine silver stain,GMS stain,117310008
+CH00123,Ziehl-Neelsen stain,Ziehl-Neelsen stain,406979008
+CH00124,Analysis using real time polymerase chain reaction technique,RT PCR,444076003
+CH00125,TaqMan Array Card,TaqMan Array Card,CH00125
+CH00126,Roche Amplicor Monitor,Roche Amplicor Monitor,CH00126
+CH00127,BioMerieux NucliSens easyQ,BioMerieux NucliSens easyQ,CH00127
+CH00128,Versant kPCR,Versant kPCR,CH00128
+CH00129,Other instrument,Other instrument,CH00129
+CH00130,GeneXpert,GeneXpert,CH00130
+CH00131,Life Technologies ViiATM 7 Real-Time PCR System,Life Technologies ViiATM 7 Real-Time PCR System,CH00131
+CH00132,LifeTech QS7 Real Time PCR System,LifeTech QS7 Real Time PCR System,CH00132
+CH00133,BD BACTEC,BD BACTEC,CH00133
+CH00134,Advantage,Advantage,CH00134
+CH00135,BinaxNOW,BinaxNOW,CH00135
+CH00136,BioTracer,BioTracer,CH00136
+CH00137,CareStart,CareStart,CH00137
+CH00138,DIAQUICK,DIAQUICK,CH00138
+CH00139,EzDx,EzDx,CH00139
+CH00140,First Response,First Response,CH00140
+CH00141,Humansis,Humansis,CH00141
+CH00142,ICT Diagnostics,ICT Diagnostics,CH00142
+CH00143,BioMerieux BacT/ALERT,BioMerieux BacT/ALERT,CH00143
+CH00144,Maleriscan,Maleriscan,CH00144
+CH00145,One Step,One Step,CH00145
+CH00146,OnSite,OnSite,CH00146
+CH00147,ParaHIT,ParaHIT,CH00147
+CH00148,RapiGen,RapiGen,CH00148
+CH00149,SD Bioline,SD Bioline,CH00149
+CH00150,Trusty,Trusty,CH00150
+CH00151,Abbott m2000,Abbott m2000,CH00151
+CH00152,Roche COBAS TaqMan Analyzer/COBAS TaqMan 48 Analyzer,Roche COBAS TaqMan Analyzer/COBAS TaqMan 48 Analyzer,CH00152
+CH00153,Respiratory TAC,Respiratory TAC,CH00153
+CH00154,Neonatal TAC,Neonatal TAC,CH00154
+CH00155,BloodCSF Tier 1 TAC,BloodCSF1 TAC,CH00155
+CH00156,BloodCSF Tier 2 TAC,BloodCSF2 TAC,CH00156
+CH00157,Diarrheal TAC,Diarrheal TAC,CH00157
+CH00158,Klebsiella pneumoniae,Klebsiella pneumoniae,56415008
+CH00159,Bacillus subtilis,Bacillus subtilis,83512007
+CH00160,Candida albicans,Candida albicans,53326005
+CH00161,Cryptococcus neoformans,Cryptococcus neoformans,67168003
+CH00162,Eikenella corrodens,Eikenella corrodens,52591004
+CH00163,Escherichia coli,Escherichia coli,112283007
+CH00164,Aerococcus viridans,Aerococcus viridans,78803006
+CH00165,Gram-positive cocci single cells,GPC singles,59206002
+CH00166,Haemophilus influenzae,Haemophilus influenzae,44470000
+CH00167,Neissera gonorrhoeae,Neissera gonorrhoeae,68704007
+CH00168,Neisseria meningitidis,Neisseria meningitidis,17872004
+CH00169,Proteus mirabilis,Proteus mirabilis,73457008
+CH00170,Pseudomonas aeruginosa,Pseudomonas aeruginosa,52499004
+CH00171,Staphylococcus aureus,Staphylococcus aureus,3092008
+CH00172,Staphylococcus epidermidis,Staphylococcus epidermidis,60875001
+CH00173,Enterococcus faecalis,Enterococcus faecalis,78065002
+CH00174,Streptococcus pneumoniae,Streptococcus pneumoniae,9861002
+CH00175,Streptococcus pyogenes,Streptococcus pyogenes,80166006
+CH00176,Streptococcus sanguinis,Streptococcus sanguinis,113993000
+CH00177,Enterobacter cloacae,Enterobacter cloacae,14385002
+CH00178,Gram-positive rods,GPR,83514008
+CH00179,Haemophilus influenzae Type B,Haemophilus influenzae Type B,103442008
+CH00180,Negative,Negative,260385009
+CH00181,Kingella kingae,Kingella kingae,90422000
+CH00182,Gram-positive cocci in chains,GPC chains,61609004
+CH00183,Gram-positive cocci in clusters,GPC clusters,70003006
+CH00184,Gram-positive diplococci,GPDC,11471007
+CH00185,Gram-negative cocci,GNC,18383003
+CH00186,Gram-negative diplococci,GNDC,83410001
+CH00187,Alcaligenes faecalis,Alcaligenes faecalis,25223004
+CH00188,Cardiobacterium hominis,Cardiobacterium hominis,7333005
+CH00189,Corynebacterium jeikeium,Corynebacterium jeikeium,63410006
+CH00190,Providencia stuartii,Providencia stuartii,1445008
+CH00191,Haemophilus parainfluenzae,Haemophilus parainfluenzae,51593004
+CH00192,Leuconostoc mesenteroides,Leuconostoc mesenteroides,71403009
+CH00193,Stomatococcus mucilaginosus,Stomatococcus mucilaginosus,416544005
+CH00194,Stenotrophomonas maltophilia,Stenotrophomonas maltophilia,113697002
+CH00195,Candida parapsilosis,Candida parapsilosis,61302002
+CH00196,Candida tropicalis,Candida tropicalis,47885008
+CH00197,Candida glabrata,Candida glabrata,444877006
+CH00198,Acinetobacter lwoffii,Acinetobacter lwoffii,83088009
+CH00199,No organism seen,No organism seen,168230009
+CH00200,Bacterial growth absent,No growth,82120007
+CH00201,Pediococcus acidilactici,Pediococcus acidilactici,243237003
+CH00202,Granulicatella adiacens,Granulicatella adiacens,113713009
+CH00203,Abiotrophia defectiva,Abiotrophia defectiva,113714003
+CH00204,Indeterminate result,Indeterminate result,280416009
+CH00205,Haemophilus influenzae Type A,Haemophilus influenzae Type A,103441001
+CH00206,Not tested,Not tested,C101887
+CH00207,Yeasts and other fungal elements,Yeasts and other fungal elements,115988001
+CH00208,Gram-negative coccobacilli,GNCB,53932007
+CH00209,Gram-negative rods,GNR,87172008
+CH00210,Positive,Positive,10828004
+CH00211,Bacterial growth present,Growth,88458008
+CH00212,Micrococcus luteus,Micrococcus luteus,48299003
+CH00213,Actinobacillus actinomycetemcomitans,Actinobacillus actinomycetemcomitans,442680008
+CH00214,Streptococcus agalactiae,Streptococcus agalactiae,43492007
+CH00215,Interpreted,Interpreted,CH00215
+CH00216,Other,Other,CH00216
+CH00217,Sample quantity not sufficient,Sample quantity not sufficient,281268007
+CH00218,Sample not received or lost,Sample not received or lost,C3845781
+CH00219,Sample mix-up or aliquotting or labeling error,Sample mix-up or aliquotting or labeling error,CH00219
+CH00220,Sample not handled or processed correctly,Sample not handled or processed correctly,CH00220
+CH00221,Wrong test ordered,Wrong test ordered,CH00221
+CH00222,No or Incomplete test run (reagent/instrument/method problem),No or Incomplete test run (reagent/instrument/method problem),CH00222
+CH00223,Invalid test run (QC failure),Invalid test run (QC failure),CH00223
+CH00224,Other reason,Other reason,CH00224
+CH00225,Received in appropriate conditions and timeframe,Received in appropriate conditions and timeframe,CH00225
+CH00226,Received more than 12 hrs after collection,Received more than 12 hrs after collection,CH00226
+CH00227,Problem with tube labeling,Problem with tube labeling,CH00227
+CH00228,Container leaking,Container leaking,CH00228
+CH00229,Wrong type of tube or container,Wrong type of tube or container,CH00229
+CH00230,Inappropriate temperature,Inappropriate temperature,CH00230
+CH00231,Other condition,Other condition,CH00231
+CH00232,CASPIR,CASPIR,CH00232
+CH00233,Central Processing Laboratory,CPL,CH00233
+CH00234,Other facility,Other facility,CH00234
+CH00235,Pax-Gene Tube,Pax-Gene Tube,3664587
+CH00236,Urine Cup,Urine Cup,CH00236
+CH00237,BD Falcon 14 mL,BD Falcon 14 mL,CH00237
+CH00238,BD Falcon 15 mL,BD Falcon 15 mL,CH00238
+CH00239,BD Falcon 50 mL,BD Falcon 50 mL,CH00239
+CH00240,Cryoblock,Cryoblock,CH00240
+CH00241,Cryovial 1.0 mL,Cryovial 1.0 mL,CH00241
+CH00242,Cryovial 2.0 mL,Cryovial 2.0 mL,CH00242
+CH00243,Eppendorf Tube 0.5 mL,Eppendorf Tube 0.5 mL,CH00243
+CH00244,Eppendorf Tube 1.7 mL,Eppendorf Tube 1.7 mL,CH00244
+CH00245,Multi-Well Plate,Multi-Well Plate,CH00245
+CH00246,Formalin-Fixed Paraffin Embedded Block,FFPE Block,CH00246
+CH00247,Plastic Bag (Heat-Sealed),Plastic Bag (Heat-Sealed),CH00247
+CH00248,Plastic Bag (Small),Plastic Bag (Small),CH00248
+CH00249,Screw Top 0.5 mL,Screw Top 0.5 mL,CH00249
+CH00250,Screw Top 2.0 mL,Screw Top 2.0 mL,CH00250
+CH00251,Formalin Jar,Formalin Jar,CH00251
+CH00252,Green Top 10 mL,Green Top 10 mL,CH00252
+CH00253,Green Top 6.0 mL,Green Top 6.0 mL,CH00253
+CH00254,Lav Top 10 mL,Lav Top 10 mL,CH00254
+CH00255,Lav Top 4.0 mL,Lav Top 4.0 mL,CH00255
+CH00256,Red Top 10 mL,Red Top 10 mL,CH00256
+CH00257,Red Top 4.0 mL,Red Top 4.0 mL,CH00257
+CH00258,Specimen Cup,Specimen Cup,CH00258
+CH00259,Yellow Top 8.5 mL,Yellow Top 8.5 mL,CH00259
+CH00260,Cryovial 1.8 mL,Cryovial 1.8 mL,CH00260
+CH00261,Paraformaldehyde,Paraformaldehyde,52836003
+CH00262,Ethanol,Ethanol,419442005
+CH00263,Formalin,Formalin,431510009
+CH00264,OCT Compound,OCT Compound,433469005
+CH00265,EDTA,EDTA,69519002
+CH00266,Periodate-lysine-paraformaldehyde,PLPF,C046311
+CH00267,PLP or Ethanol,PLP or Ethanol,CH00267
+CH00272,Gram Stn Fld,Gram stain,27112-2
+CH00273,Plasmodium Ag Bld EIA.rapid,Plasmodium Ag Rapid EIA,70569-9
+CH00274,Malaria Thick Smear Bld,Malaria thick smear,637-9
+CH00275,Malaria Thin Smear Bld,Malaria thin smear,33271-8
+CH00276,HIV1 RNA XXX Ql PCR,HIV RNA PCR,5018-7
+CH00277,HIV 1 proviral DNA XXX Ql PCR,HIV DNA PCR,74853-3
+CH00278,M TB Cmplx DNA XXX Ql PCR,Mycobacterium tuberculosis PCR,38379-4
+CH00279,M TB rpoB XXX Ql PCR,Mycobacterium tuberculosis rifampin resistance PCR,48176-2
+CH00280,Auxilary Test,Auxilary Test,CH00280
+CH00281,Bordatella spp.,Bordatella spp.,BORD_1
+CH00282,C. difficile,C. difficile,CDIF_1
+CH00283,C. diphtheria,C. diphtheria,CDIP_1
+CH00284,H. influenzae,H. influenzae,HFLU_1
+CH00285,MERS coronavirus,MERS coronavirus,MCOR_1
+CH00286,Salmonella spp.,Salmonella spp.,SALM_1
+CH00287,V. cholerae,V. cholerae,VCHO_1
+CH00288,Acinetobacter baumannii,Acinetobacter baumannii,ABAU_1
+CH00289,Adenovirus,Adenovirus,ADEV_1
+CH00290,Adenovirus 40/41,Adenovirus 40/41,AD4X_1
+CH00291,Aeromonas spp.,Aeromonas spp.,AERO_1
+CH00292,Ascaris lumbricoides,Ascaris lumbricoides,ASLU_1
+CH00293,Astrovirus,Astrovirus,ASTR_1
+CH00294,Bartonella spp.,Bartonella spp.,BART_1
+CH00295,"Bordetella parapertussi, Bordetella bronchiseptica (Insertion sequence IS1001)","Bordetella parapertussi, Bordetella bronchiseptica (Insertion sequence IS1001)",BPAR_1
+CH00296,"Bordetella pertussis, Bordetella holmseii  (Insertion sequence IS481)","Bordetella pertussis, Bordetella holmseii  (Insertion sequence IS481)",BOP1_1
+CH00297,Bordetella pertussis (pertussis toxin),Bordetella pertussis (pertussis toxin),BOP2_1
+CH00298,Brucella spp.,Brucella spp.,BRUC_1
+CH00299,Burkholderia pseudomallei,Burkholderia pseudomallei,BUPS_1
+CH00300,C. difficile paLOC,C. difficile paLOC,CLDP_1
+CH00301,C. difficile tcdA,C. difficile tcdA,CLDA_1
+CH00302,C. difficile tcdB,C. difficile tcdB,CLDB_1
+CH00303,Campylobacter coli,Campylobacter coli,CACO_1
+CH00304,Campylobacter jejuni,Campylobacter jejuni,CAJE_1
+CH00305,Candida albicans,Candida albicans,CAAL_1
+CH00306,Crimean-Congo Hemorrhagic Fever virus (CCHF),Crimean-Congo Hemorrhagic Fever virus (CCHF),CCHF_1
+CH00307,Chikungunya virus,Chikungunya virus,CHIC_1
+CH00308,Chlamydia pneumoniae,Chlamydia pneumoniae,CHPN_1
+CH00309,Chlamydia trachomatis,Chlamydia trachomatis,CHTR_1
+CH00310,Corynebacterium diptheriae,Corynebacterium diptheriae,CODI_1
+CH00311,"Corynebacterium ulcerans, Corynebacterium pseudotuberculosis","Corynebacterium ulcerans, Corynebacterium pseudotuberculosis",COUP_1
+CH00312,Corynebacterium spp. (tox gene),Corynebacterium spp. (tox gene),CTOX_1
+CH00313,Coxiella burnettii,Coxiella burnettii,COBU_1
+CH00314,"Cryptococcus neoformans, Cryptococcus gattii","Cryptococcus neoformans, Cryptococcus gattii",CRNG_1
+CH00316,Cryptosporidium parvum,Cryptosporidium parvum,CRPA_1
+CH00317,Cytomegalovirus (CMV),Cytomegalovirus (CMV),CYMV_1
+CH00318,Dengue (pan),Dengue (pan),DENV_1
+CH00319,Entamoeba histolytica,Entamoeba histolytica,ENHI_1
+CH00320,Escherichia coli (aaiC gene),Escherichia coli (aaiC gene),EAE1_1
+CH00321,Escherichia coli (aatA gene),Escherichia coli  (aatA gene),EAE2_1
+CH00322,Escherichia coli/Shigella (ipaH gene),Escherichia coli/Shigella (ipaH gene),EIES_1
+CH00323,Enterococcus faecium,Enterococcus faecium,ENFM_1
+CH00324,Enterococcus faecalis,Enterococcus faecalis,ENFC_1
+CH00325,Enterovirus,Enterovirus,ENTV_4
+CH00326,Escherichia coli (bfpA gene),Escherichia coli (bfpA gene),EPE2_1
+CH00327,Escherichia coli (eae gene),Escherichia coli (eae gene),EPE1_1
+CH00328,Escherichia coli/Shigella,Escherichia coli/Shigella,ECSH_1
+CH00329,Escherichia coli (heat-labile enterotoxin),Escherichia coli (heat-labile enterotoxin),ETLT_1
+CH00330,Escherichia coli (heat-stable enterotoxin),Escherichia coli (heat-stable enterotoxin),ETST_1
+CH00331,Giardia spp.,Giardia spp.,GIAR_1
+CH00332,Group A Streptococcus,Group A Streptococcus,GAST_2
+CH00333,Group B Streptococcus,Group B Streptococcus,GBST_1
+CH00334,Haemophilus influenza,Haemophilus influenza,HIAT_1
+CH00335,Haemophilus influenzae type B,Haemophilus influenzae type B,HITB_2
+CH00336,Human coronavirus 1 (229E),Human coronavirus 1 (229E),HCV1_1
+CH00337,Human coronavirus 2 (NL63),Human coronavirus 2 (NL63),HCV2_1
+CH00338,Human coronavirus 3 (OC43),Human coronavirus 3 (OC43),HCV3_1
+CH00339,Human coronavirus 4 (HKU1),Human coronavirus 4 (HKU1),HCV4_1
+CH00340,Hepatitis E virus,Hepatitis E virus,HEPE_1
+CH00341,Human metapneumovirus (HMPV),Human metapneumovirus (HMPV),HMPV_1
+CH00342,Herpes simplex virus 1 (HSV1),Herpes simplex virus 1 (HSV1),HSV1_1
+CH00343,Herpes simplex virus 2 (HSV2),Herpes simplex virus 2 (HSV2),HSV2_1
+CH00344,Human nucleic acid control (Rnase P),Human nucleic acid control (Rnase P),RNP3_1
+CH00345,Influenza A,Influenza A,FLUA_1
+CH00346,Influenza B,Influenza B,FLUB_1
+CH00347,Internal Positive Control (IPCO),Internal Positive Control (IPCO),IPCO_1
+CH00348,Japanese encephalitis virus,Japanese encephalitis virus,JENV_1
+CH00349,Klebsiella pneumoniae,Klebsiella pneumoniae,KLPN_1
+CH00350,Leptospira (pan-serovar),Leptospira (pan-serovar),LEPT_1
+CH00351,Listeria monocytogenes,Listeria monocytogenes,LIMO_1
+CH00352,Measles,Measles,MEVS_1
+CH00353,MERS coronavirus (N gene),MERS coronavirus (N gene),MRSN_1
+CH00354,MERS coronavirus (upE gene),MERS coronavirus (upE gene),MRSU_1
+CH00355,Moraxella catarrhalis,Moraxella catarrhalis,MOCA_1
+CH00356,Mumps,Mumps,MUMP_1
+CH00357,MS2 phage for extraction control,MS2 phage for extraction control,MS2P_1
+CH00358,Mycobacterium tuberculosis,Mycobacterium tuberculosis,MYTB_1
+CH00359,Mycoplasma pneumoniae,Mycoplasma pneumoniae,MYPN_1
+CH00360,Neisseria gonorrhoeae,Neisseria gonorrhoeae,NEGO_1
+CH00361,Neisseria meningitidis,Neisseria meningitidis,NMEN_1
+CH00362,Nipah virus,Nipah virus,NIPV_1
+CH00363,Norovirus GI,Norovirus GI,NOR1_1
+CH00364,Norovirus GII,Norovirus GII,NOR2_1
+CH00365,Orientia tsutsugamushi,Orientia tsutsugamushi,ORTS_1
+CH00366,Parechovirus,Parechovirus,HPEV_1
+CH00367,Parvovirus B19,Parvovirus B19,PARV_1
+CH00368,Parainfluenza virus type 1,Parainfluenza virus type 1,PIV1_2
+CH00369,Parainfluenza virus type 2,Parainfluenza virus type 2,PIV2_1
+CH00370,Parainfluenza virus type 3,Parainfluenza virus type 3,PIV3_1
+CH00371,Parainfluenza virus type 4,Parainfluenza virus type 4,PIV4_1
+CH00372,Plasmodium falciparum,Plasmodium falciparum,PLFA_1
+CH00373,Plasmodium vivax,Plasmodium vivax,PLVI_1
+CH00374,Pneumocystis jirovecii,Pneumocystis jirovecii,PNJI_1
+CH00375,Pseudomonas aeruginosa,Pseudomonas aeruginosa,PSAE_1
+CH00376,Respiratory syncytial virus (RSV),Respiratory syncytial virus (RSV),RESV_1
+CH00377,Rhinovirus,Rhinovirus,RHIV_1
+CH00378,Rickettsia spp.,Rickettsia spp.,RICK_1
+CH00379,Rift Valley Fever,Rift Valley Fever,RIVF_1
+CH00380,Rotavirus A,Rotavirus A,ROTA_1
+CH00381,Rotavirus B,Rotavirus B,ROTB_1
+CH00382,Rotavirus C,Rotavirus C,ROTC_1
+CH00383,Rotavirus non-typable,Rotavirus non-typable,ROTN_1
+CH00384,Rubella,Rubella,RUBV_2
+CH00385,Salmonella paratyphi A,Salmonella paratyphi A,SAPA_1
+CH00386,Salmonella spp.,Salmonella spp.,SALS_1
+CH00387,Salmonella typhi,Salmonella typhi,SATY_1
+CH00388,Sapovirus I/II/IV,Sapovirus I/II/IV,SAPX_1
+CH00389,Sapovirus V,Sapovirus V,SAPV_1
+CH00390,Staphylococcus aureus,Staphylococcus aureus,STAU_2
+CH00391,Shiga toxin/Shiga-like toxin 1,Shiga toxin/Shiga-like toxin 1,STX1_1
+CH00392,Shiga-like toxin 2,Shiga-like toxin 2,STX2_1
+CH00393,Streptococcus pneumoniae,Streptococcus pneumoniae,STPN_2
+CH00394,Streptococcus suis,Streptococcus suis,STSU_1
+CH00395,Toxoplasma gondii,Toxoplasma gondii,TOXO_1
+CH00396,Treponema pallidum,Treponema pallidum,TRPA_1
+CH00397,Trichuris trichuria,Trichuris trichuria,TRTR_1
+CH00398,Ureaplasma spp.,Ureaplasma spp.,URUP_1
+CH00399,Varicella zoster virus,Varicella zoster virus,VAZV_1
+CH00400,Vibrio cholerae,Vibrio cholerae,VICH_1
+CH00401,Vibrio cholerae toxigenic,Vibrio cholerae toxigenic,VTOX_1
+CH00402,West Nile Virus,West Nile Virus,WENV_1
+CH00403,Yellow Fever virus,Yellow Fever virus,YEFV_1
+CH00404,Yersinia spp.,Yersinia spp.,YERS_1
+CH00405,Zika,Zika,ZIKA_1
+CH00406,Percent infected red blood cells,Percent infected RBCs,CH00406
+CH00407,Bangladesh,People’s Republic of Bangladesh,BD
+CH00408,Ethiopia,Federal Democratic Republic of Ethiopia,ET
+CH00409,Kenya,Republic of Kenya,KE
+CH00410,Mali,Republic of Mali,ML
+CH00411,Mozambique,Republic of Mozambique,MZ
+CH00412,Sierra Leone,Republic of Sierra Leone,SL
+CH00413,South Africa,Republic of South Africa,ZA
+CH00414,Bandarban,NA,BD-01
+CH00415,Barguna,NA,BD-02
+CH00416,Bogra,NA,BD-03
+CH00417,Brahmanbaria,NA,BD-04
+CH00418,Bagerhat,NA,BD-05
+CH00419,Barisal,NA,BD-06
+CH00420,Bhola,NA,BD-07
+CH00421,Comilla,NA,BD-08
+CH00422,Chandpur,NA,BD-09
+CH00423,Chittagong,NA,BD-10
+CH00424,Cox's Bazar,NA,BD-11
+CH00425,Chuadanga,NA,BD-12
+CH00426,Dhaka,NA,BD-13
+CH00427,Dinajpur,NA,BD-14
+CH00428,Faridpur,NA,BD-15
+CH00429,Feni,NA,BD-16
+CH00430,Gopalganj,NA,BD-17
+CH00431,Gazipur,NA,BD-18
+CH00432,Gaibandha,NA,BD-19
+CH00433,Habiganj,NA,BD-20
+CH00434,Jamalpur,NA,BD-21
+CH00435,Jessore,NA,BD-22
+CH00436,Jhenaidah,NA,BD-23
+CH00437,Jaipurhat,NA,BD-24
+CH00438,Jhalakati,NA,BD-25
+CH00439,Kishoreganj,NA,BD-26
+CH00440,Khulna,NA,BD-27
+CH00441,Kurigram,NA,BD-28
+CH00442,Khagrachari,NA,BD-29
+CH00443,Kushtia,NA,BD-30
+CH00444,Lakshmipur,NA,BD-31
+CH00445,Lalmonirhat,NA,BD-32
+CH00446,Manikganj,NA,BD-33
+CH00447,Mymensingh,NA,BD-34
+CH00448,Munshiganj,NA,BD-35
+CH00449,Madaripur,NA,BD-36
+CH00450,Magura,NA,BD-37
+CH00451,Moulvibazar,NA,BD-38
+CH00452,Meherpur,NA,BD-39
+CH00453,Narayanganj,NA,BD-40
+CH00454,Netrakona,NA,BD-41
+CH00455,Narsingdi,NA,BD-42
+CH00456,Narail,NA,BD-43
+CH00457,Natore,NA,BD-44
+CH00458,Nawabganj,NA,BD-45
+CH00459,Nilphamari,NA,BD-46
+CH00460,Noakhali,NA,BD-47
+CH00461,Naogaon,NA,BD-48
+CH00462,Pabna,NA,BD-49
+CH00463,Pirojpur,NA,BD-50
+CH00464,Patuakhali,NA,BD-51
+CH00465,Panchagarh,NA,BD-52
+CH00466,Rajbari,NA,BD-53
+CH00467,Rajshahi,NA,BD-54
+CH00468,Rangpur,NA,BD-55
+CH00469,Rangamati,NA,BD-56
+CH00470,Sherpur,NA,BD-57
+CH00471,Satkhira,NA,BD-58
+CH00472,Sirajganj,NA,BD-59
+CH00473,Sylhet,NA,BD-60
+CH00474,Sunamganj,NA,BD-61
+CH00475,Shariatpur,NA,BD-62
+CH00476,Tangail,NA,BD-63
+CH00477,Thakurgaon,NA,BD-64
+CH00478,Barisal,NA,BD-A
+CH00479,Chittagong,NA,BD-B
+CH00480,Dhaka,NA,BD-C
+CH00481,Khulna,NA,BD-D
+CH00482,Rajshahi,NA,BD-E
+CH00483,Rangpur,NA,BD-F
+CH00484,Sylhet,NA,BD-G
+CH00485,Addis Ababa,NA,ET-AA
+CH00486,Dire Dawa,NA,ET-DD
+CH00487,Afar,NA,ET-AF
+CH00488,Amara,NA,ET-AM
+CH00489,Benshangul-Gumaz,NA,ET-BE
+CH00490,Gambela Peoples,NA,ET-GA
+CH00491,Harari People,NA,ET-HA
+CH00492,Oromia,NA,ET-OR
+CH00493,"Southern Nations, Nationalities and Peoples",NA,ET-SN
+CH00494,Somali,NA,ET-SO
+CH00495,Tigrai,NA,ET-TI
+CH00496,Baringo,NA,KE-01
+CH00497,Bomet,NA,KE-02
+CH00498,Bungoma,NA,KE-03
+CH00499,Busia,NA,KE-04
+CH00500,Elgeyo/Marakwet,NA,KE-05
+CH00501,Embu,NA,KE-06
+CH00502,Garissa,NA,KE-07
+CH00503,Homa Bay,NA,KE-08
+CH00504,Isiolo,NA,KE-09
+CH00505,Kajiado,NA,KE-10
+CH00506,Kakamega,NA,KE-11
+CH00507,Kericho,NA,KE-12
+CH00508,Kiambu,NA,KE-13
+CH00509,Kilifi,NA,KE-14
+CH00510,Kirinyaga,NA,KE-15
+CH00511,Kisii,NA,KE-16
+CH00512,Kisumu,NA,KE-17
+CH00513,Kitui,NA,KE-18
+CH00514,Kwale,NA,KE-19
+CH00515,Laikipia,NA,KE-20
+CH00516,Lamu,NA,KE-21
+CH00517,Machakos,NA,KE-22
+CH00518,Makueni,NA,KE-23
+CH00519,Mandera,NA,KE-24
+CH00520,Marsabit,NA,KE-25
+CH00521,Meru,NA,KE-26
+CH00522,Migori,NA,KE-27
+CH00523,Mombasa,NA,KE-28
+CH00524,Murang'a,NA,KE-29
+CH00525,Nairobi City,NA,KE-30
+CH00526,Nakuru,NA,KE-31
+CH00527,Nandi,NA,KE-32
+CH00528,Narok,NA,KE-33
+CH00529,Nyamira,NA,KE-34
+CH00530,Nyandarua,NA,KE-35
+CH00531,Nyeri,NA,KE-36
+CH00532,Samburu,NA,KE-37
+CH00533,Siaya,NA,KE-38
+CH00534,Taita/Taveta,NA,KE-39
+CH00535,Tana River,NA,KE-40
+CH00536,Tharaka-Nithi,NA,KE-41
+CH00537,Trans Nzoia,NA,KE-42
+CH00538,Turkana,NA,KE-43
+CH00539,Uasin Gishu,NA,KE-44
+CH00540,Vihiga,NA,KE-45
+CH00541,Wajir,NA,KE-46
+CH00542,West Pokot,NA,KE-47
+CH00543,Bamako,NA,ML-BKO
+CH00544,Kayes,NA,ML-1
+CH00545,Koulikoro,NA,ML-2
+CH00546,Sikasso,NA,ML-3
+CH00547,Ségou,NA,ML-4
+CH00548,Mopti,NA,ML-5
+CH00549,Tombouctou,NA,ML-6
+CH00550,Gao,NA,ML-7
+CH00551,Kidal,NA,ML-8
+CH00552,Maputo,NA,MZ-MPM
+CH00553,Niassa,NA,MZ-A
+CH00554,Manica,NA,MZ-B
+CH00555,Gaza,NA,MZ-G
+CH00556,Inhambane,NA,MZ-I
+CH00557,Maputo,NA,MZ-L
+CH00558,Nampula,NA,MZ-N
+CH00559,Cabo Delgado,NA,MZ-P
+CH00560,Zambézia,NA,MZ-Q
+CH00561,Sofala,NA,MZ-S
+CH00562,Tete,NA,MZ-T
+CH00563,Western Area (Freetown),NA,SL-W
+CH00564,Eastern,NA,SL-E
+CH00565,Northern,NA,SL-N
+CH00566,Southern,NA,SL-S
+CH00567,Eastern Cape,NA,ZA-EC
+CH00568,Free State,NA,ZA-FS
+CH00569,Gauteng,NA,ZA-GT
+CH00570,Limpopo,NA,ZA-LP
+CH00571,Mpumalanga,NA,ZA-MP
+CH00572,Northern Cape,NA,ZA-NC
+CH00573,Kwazulu-Natal,NA,ZA-NL
+CH00574,North-West,NA,ZA-NW
+CH00575,Western Cape,NA,ZA-WC
+CH00576,No Exam,No Exam,CH00576
+CH00577,Privacy concerns,Privacy concerns,CH00577
+CH00578,CHAMPS Mortality Surveillance Protocol,CHAMPS Mortality Surveillance Protocol,CH00578
+CH00579,After consent but prior to MITS specimen collection,After consent but prior to MITS specimen collection,CH00579
+CH00580,During MITS specimen collection,During MITS specimen collection,CH00580
+CH00581,After MITS specimen collection,After MITS specimen collection,CH00581
+CH00582,Consent authorization granted,Consent authorization granted,CH00582
+CH00583,Consent authorization withdrawn,Consent authorization withdrawn,CH00583
+CH00584,Photography,Photography,CH00584
+CH00585,Collection and testing of specimen,Collection and testing of specimen,CH00585
+CH00586,Genetic testing,Genetic testing,CH00586
+CH00587,Long-term storage of specimen,Long-term storage of specimen,CH00587
+CH00588,Shipment of specimen,Shipment of specimen,CH00588
+CH00589,Deceased child clinical data abstraction,Deceased child clinical data abstraction,CH00589
+CH00590,Maternal clinical data abstraction,Maternal clinical data abstraction,CH00590
+CH00591,Re-contact by the study team regarding CHAMPS,Re-contact by the study team regarding CHAMPS,CH00591
+CH00592,Re-contact by the study team regarding other research initiatives (non-CHAMPS),Re-contact by the study team regarding other research initiatives (non-CHAMPS),CH00592
+CH00593,Plasmodium falciparum,P. falciparum,CH00593
+CH00594,Plasmodium vivax,P. vivax,CH00594
+CH00595,Plasmodium ovale,P. ovale,CH00595
+CH00596,Plasmodium malariae,P. malaria,CH00596
+CH00597,Plasmodium knowlesi,P. knowlesi,CH00597
+CH00598,Undetermined Species,Undetermined Species,CH00598
+CH00599,Clear,Clear,CH00599
+CH00600,Turbid,Turbid,CH00600
+CH00601,Purulent,Purulent,CH00601
+CH00602,Hematic,Hematic,CH00602
+CH00603,Microorganism XXX cult,Microorganism culture,11475-1
+CH00604,Microorganism XXX Islt QI Cult,Microorganism isolate,CH00604
+CH00605,Fresh,Fresh,CH00605
+CH00606,Macerated,Macerated,CH00606
+CH00607,Both,Both,CH00607
+CH00608,Not Applicable,Not Applicable,CH00608
+CH00609,Level 1,Level 1 - Maceration,CH00609
+CH00610,Level 2,Level 2 - Maceration,CH00610
+CH00611,Level 3,Level 3 - Maceration,CH00611
+CH00612,Placenta Photo - Maternal Side,Placenta Photo - Maternal Side,CH00612
+CH00613,Placenta Photo - Fetal Side,Placenta Photo - Fetal Side,CH00613
+CH00614,Placenta Photo - Section,Placenta Photo - Section,CH00614
+CH00615,Clavicular,Clavicular,CH00615
+CH00616,Intracardiac,Intracardiac,CH00616
+CH00617,Other,Other,CH00617
+CH00618,Croyovial no. 01,Croyovial no. 01,CH00618
+CH00619,Croyovial no. 02,Croyovial no. 02,CH00619
+CH00620,Croyovial no. 03,Croyovial no. 03,CH00620
+CH00621,Croyovial no. 04,Croyovial no. 04,CH00621
+CH00622,Croyovial no. 05,Croyovial no. 05,CH00622
+CH00623,Croyovial no. 06,Croyovial no. 06,CH00623
+CH00624,Croyovial no. 07,Croyovial no. 07,CH00624
+CH00625,Croyovial no. 08,Croyovial no. 08,CH00625
+CH00626,Croyovial no. 09,Croyovial no. 09,CH00626
+CH00627,Croyovial no. 10,Croyovial no. 10,CH00627
+CH00628,Croyovial no. 11,Croyovial no. 11,CH00628
+CH00629,Croyovial no. 12,Croyovial no. 12,CH00629
+CH00630,Formalin Jar no. 01,Formalin Jar no. 01,CH00630
+CH00631,Formalin Jar no. 02,Formalin Jar no. 02,CH00631
+CH00632,Formalin Jar no. 03,Formalin Jar no. 03,CH00632
+CH00633,Formalin Jar no. 04,Formalin Jar no. 04,CH00633
+CH00634,Formalin Jar no. 05,Formalin Jar no. 05,CH00634
+CH00635,Formalin Jar no. 06,Formalin Jar no. 06,CH00635
+CH00636,Formalin Jar no. 07,Formalin Jar no. 07,CH00636
+CH00637,Formalin Jar no. 08,Formalin Jar no. 08,CH00637
+CH00638,Formalin Jar no. 09,Formalin Jar no. 09,CH00638
+CH00639,Formalin Jar no. 10,Formalin Jar no. 10,CH00639
+CH00640,Formalin Jar no. 11,Formalin Jar no. 11,CH00640
+CH00641,Formalin Jar no. 12,Formalin Jar no. 12,CH00641
+CH00642,Formalin Jar no. 13,Formalin Jar no. 13,CH00642
+CH00643,Croyovial no. 14,Croyovial no. 14 (for PCR),CH00643
+CH00644,No,No,CH00644
+CH00645,Mild,Mild,CH00645
+CH00646,Moderate,Moderate,CH00646
+CH00647,Severe,Severe,CH00647
+CH00648,Liver and Abdominal Organs,Liver and Abdominal Organs (Cassette A),CH00648
+CH00649,Right Lung,Right Lung (Cassette B),CH00649
+CH00650,"Left Thoracic Organs, Left Lung and Heart","Left Thoracic Organs, Left Lung and Heart (Cassette C)",CH00650
+CH00651,"Central Nervous System, Posterior Fossa and Fontanelle","Central Nervous System, Posterior Fossa and Fontanelle (Cassette D)",CH00651
+CH00652,"Central Nervous System, Trans-nasal","Central Nervous System, Trans-nasal (Cassette E)",CH00652
+CH00653,Placenta and Cord,Placenta and Cord (Cassette F),CH00653
+CH00654,Bone Marrow,Bone Marrow (for shipment only) (Cassette G),CH00654
+CH00655,Fixation,Fixation,CH00655
+CH00656,Section,Section,CH00656
+CH00657,Staining,Staining,CH00657
+CH00659,Extramedullary hematopoiesis,Extramedullary hematopoiesis,CH00659
+CH00660,"Steatosis (large droplet, small droplet)","Steatosis (large droplet, small droplet)",CH00660
+CH00661,Sinusoidal leukocytosis,Sinusoidal leukocytosis,CH00661
+CH00662,Sepsis,Sepsis,CH00662
+CH00663,Cholestasis,Cholestasis,CH00663
+CH00664,Viral hepatitis,Viral hepatitis,CH00664
+CH00665,Active hepatitis,Active hepatitis,CH00665
+CH00666,Chronic hepatitis,Chronic hepatitis,CH00666
+CH00667,Neonatal hepatitis,Neonatal hepatitis,CH00667
+CH00669,Paucity of bile ducts,Paucity of bile ducts,CH00669
+CH00670,Fibrosis,Fibrosis,CH00670
+CH00671,Past malaria,Past malaria,CH00671
+CH00672,Active malaria,Active malaria,CH00672
+CH00673,Other,Other,CH00673
+CH00675,Bacterial pneumonia,Bacterial pneumonia,CH00675
+CH00676,Interstitial pneumonitis,Interstitial pneumonitis,CH00676
+CH00677,Hyaline membrane disease,Hyaline membrane disease,CH00677
+CH00678,Diffuse alveolar damage,Diffuse alveolar damage,CH00678
+CH00679,Bronchopneumonia without infectious agents identified,Bronchopneumonia without infectious agents identified,CH00679
+CH00680,Viral pneumonia,Viral pneumonia,CH00680
+CH00681,Fungal pneumonia,Fungal pneumonia,CH00681
+CH00682,Aspiration pneumonia,Aspiration pneumonia,CH00682
+CH00683,"Granulomas, necrotizing","Granulomas, necrotizing",CH00683
+CH00684,"Granulomas, non-necrotizing","Granulomas, non-necrotizing",CH00684
+CH00685,Findings compatible with intrauterine fetal stress,Findings compatible with intrauterine fetal stress,CH00685
+CH00686,Other (Lung),Other (Lung),CH00686
+CH00688,Neutrophilic myocarditis,Neutrophilic myocarditis,CH00688
+CH00689,Lymphocytic myocarditis,Lymphocytic myocarditis,CH00689
+CH00690,Eosinophilic myocarditis,Eosinophilic myocarditis,CH00690
+CH00691,Endocarditis,Endocarditis,CH00691
+CH00692,Pericarditis,Pericarditis,CH00692
+CH00694,Parasites,Parasites,CH00694
+CH00695,Other (Heart),Other (Heart),CH00695
+CH00696,Unremarkable,Unremarkable,CH00696
+CH00697,Neutrophilic meningitis,Neutrophilic meningitis,CH00697
+CH00698,Lymphocytic meningitis,Lymphocytic meningitis,CH00698
+CH00699,Meningoencephalitis,Meningoencephalitis,CH00699
+CH00700,Perivascular inflammation,Perivascular inflammation,CH00700
+CH00701,Viral encephalitis,Viral encephalitis,CH00701
+CH00704,Fungal lesions,Fungal lesions,CH00704
+CH00705,Granulomas,Granulomas,CH00705
+CH00706,"Vasculitus, thrombosis","Vasculitus, thrombosis",CH00706
+CH00707,Other,Other,CH00707
+CH00709,Chorioamnionitis (Placenta/Cord),Chorioamnionitis (Placenta/Cord),CH00709
+CH00710,Infarction (Placenta/Cord),Infarction (Placenta/Cord),CH00710
+CH00711,Villitis (Placenta/Cord),Villitis (Placenta/Cord),CH00711
+CH00713,Past malaria (Placenta/Cord),Past malaria (Placenta/Cord),CH00713
+CH00714,Other (Placenta/Cord),Other (Placenta/Cord),CH00714
+CH00715,Culture Plate,Culture Plate,CH00715
+CH00716,Stillbirth,Stillbirth,CH00716
+CH00717,Neonatal,Neonatal,CH00717
+CH00718,Infant,Infant (28 days to less than 12 months),CH00718
+CH00719,Child,Child (12 months to less than 60 Months),CH00719
+CH00720,Exclude Maternal,Exclude Maternal,CH00720
+CH00721,Include Maternal,Include Maternal,CH00721
+CH00722,1,1,CH00722
+CH00723,2,2,CH00723
+CH00724,3,3,CH00724
+CH00725,Natural,Natural,CH00725
+CH00726,Accident,Accident,CH00726
+CH00727,Homicide,Homicide,CH00727
+CH00728,Suicide,Suicide,CH00728
+CH00729,Undetermined,Undetermined,CH00729
+CH00730,Extremely influential/useful,Extremely influential/useful,CH00730
+CH00731,Influential (or useful),Influential (or useful),CH00731
+CH00732,Neutral,Neutral,CH00732
+CH00733,Not influential/useful,Not influential/useful,CH00733
+CH00734,Not Applicable,Not Applicable,CH00734
+CH00735,Site,Site - Coding performed by Site,CH00735
+CH00736,Other,Other - Coding not performed by Site,CH00736
+CH00737,Unanimous,Unanimous (100% Concensus),CH00737
+CH00738,Majority,Majority  (51 - 99% Concensus),CH00738
+CH00739,Non-Consensus,Non-Consensus,CH00739
+CH00740,Medical or clinical services,Medical or clinical services,CH00740
+CH00741,Public health services,Public health services,CH00741
+CH00742,Sanitation/hygiene services,Sanitation/hygiene services,CH00742
+CH00743,Genetic counseling,Genetic counseling,CH00743
+CH00744,Other,Other,CH00744
+CH00745,Laboratory - Pathology,Laboratory - Pathology,CH00745
+CH00746,Laboratory - Microbiology,Laboratory - Microbiology,CH00746
+CH00747,Laboratory - Molecular,Laboratory - Molecular,CH00747
+CH00748,Laboratory - Clinical,Laboratory - Clinical,CH00748
+CH00749,Antemortem Testing,Antemortem Testing,CH00749
+CH00750,Unknown or Unavailable,Unknown or Unavailable,CH00750
+CH00751,Not Recorded,Not Recorded,CH00751
+CH00752,Not Documented,Not Documented,CH00752
+CH00753,Deceased Child,Deceased Child,CH00753
+CH00754,Mother of deceased child,Mother of deceased child,CH00754
+CH00755,Bordetella spp. (B. parapertussis/B. bronchiseptica),Bordetella spp. (B. parapertussis/B. bronchiseptica),CH00755
+CH00756,B. parapertussis,Bordetella parapertussis,CH00756
+CH00757,Mixed B. pertussis/B. parapertussis specimen,Mixed B. pertussis/B. parapertussis specimen,CH00757
+CH00758,Bordetella spp. (B. parapertussis/B. bronchiseptica/B. pertussis/B. holmseii),Bordetella spp. (B. parapertussis/B. bronchiseptica/B. pertussis/B. holmseii),CH00758
+CH00759,Bordetella spp. (B. pertussis/B. holmseii),Bordetella spp. (B. pertussis/B. holmseii),CH00759
+CH00760,B. pertussis,Bordetella pertussis,CH00760
+CH00761,Presence of pertussis toxin gene,Presence of pertussis toxin gene,CH00761
+CH00762,Negative for Bordetella spp.,Negative for Bordetella spp.,CH00762
+CH00763,Non-toxigenic C. difficile,Non-toxigenic C. difficile,CH00763
+CH00764,toxigenic C. difficile with the toxin A gene tcdA,toxigenic C. difficile with the toxin A gene tcdA,CH00764
+CH00765,toxigenic C. difficile with the toxin A gene tcdA and the toxin B gene tcdB,toxigenic C. difficile with the toxin A gene tcdA and the toxin B gene tcdB,CH00765
+CH00766,toxigenic C. difficile with the toxin B gene tcdB,toxigenic C. difficile with the toxin B gene tcdB,CH00766
+CH00767,Negative for C. difficile,Negative for C. difficile,CH00767
+CH00768,Non-toxigenic C. diphtheriae,Non-toxigenic C. diphtheriae,CH00768
+CH00769,toxigenic C. diphtheriae,toxigenic C. diphtheriae,CH00769
+CH00770,Mixed non-toxigenic C. diptheriae and C. ulcerans/pseudotuberculosis,Mixed non-toxigenic C. diptheriae and C. ulcerans/pseudotuberculosis,CH00770
+CH00771,Mixed C. diptheriae and C. ulcerans/pseudotuberculosis with the presence of the diphtheria toxin gene,Mixed C. diptheriae and C. ulcerans/pseudotuberculosis with the presence of the diphtheria toxin gene,CH00771
+CH00772,Presence of the diphtheria toxin gene,Presence of the diphtheria toxin gene,CH00772
+CH00773,Non-toxigenic C. ulcerans/pseudotuberculosis,Non-toxigenic C. ulcerans/pseudotuberculosis,CH00773
+CH00774,toxigenic C. ulcerans/pseudotuberculosis,toxigenic C. ulcerans/pseudotuberculosis,CH00774
+CH00775,Negative for Corynebacterium,Negative for Corynebacterium,CH00775
+CH00776,"H. influenzae serotype A,B,C,D,E,F, or NT","H. influenzae serotype A,B,C,D,E,F, or NT",CH00776
+CH00777,H. influenzae serotype A or B,H. influenzae serotype A or B,CH00777
+CH00778,H. influenzae serotype A or B,H. influenzae serotype A or B,CH00778
+CH00779,Negative for H. influenzae,Negative for H. influenzae,CH00779
+CH00780,MERS coronavirus,MERS coronavirus,CH00780
+CH00781,MERS coronavirus,MERS coronavirus,CH00781
+CH00782,MERS coronavirus,MERS coronavirus,CH00782
+CH00783,Negative for MERS coronavirus,Negative for MERS coronavirus,CH00783
+CH00784,Salmonella spp.,Salmonella spp.,CH00784
+CH00785,Salmonella enterica sub-species paratyphi A,Salmonella enterica sub-species paratyphi A,CH00785
+CH00786,Salmonella enterica  sub-species typhi,Salmonella enterica  sub-species typhi,CH00786
+CH00787,Mixed Salmonella enterica subspecies paratyphi A/typhi,Mixed Salmonella enterica subspecies paratyphi A/typhi,CH00787
+CH00788,Salmonella enterica  sub-species paratyphi A,Salmonella enterica  sub-species paratyphi A,CH00788
+CH00789,Salmonella enterica  sub-species typhi,Salmonella enterica  sub-species typhi,CH00789
+CH00790,Mixed Salmonella enterica subspecies paratyphi A/typhi,Mixed Salmonella enterica subspecies paratyphi A/typhi,CH00790
+CH00791,Negative for Salmonella spp.,Negative for Salmonella spp.,CH00791
+CH00792,non-toxigenic V. cholerae,non-toxigenic V. cholerae,CH00792
+CH00793,toxigenic V. cholerae,toxigenic V. cholerae,CH00793
+CH00794,Presence of the cholera toxin gene,Presence of the cholera toxin gene,CH00794
+CH00795,Negative for V. cholerae,Negative for V. cholerae,CH00795
+CH00796,Escherichia coli/Shigella spp.,Escherichia coli/Shigella spp.,CH00796
+CH00797,"Presence of Shiga toxin carried by Shigella dysenteriae and/or Shiga-like toxin 1 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus","Presence of Shiga toxin carried by Shigella dysenteriae and/or Shiga-like toxin 1 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus",CH00797
+CH00798,"Presence of Shiga-like toxin 2 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus","Presence of Shiga-like toxin 2 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus",CH00798
+CH00799,Escherichia coli carrying the aaiC virulence gene,Escherichia coli carrying the aaiC virulence gene,CH00799
+CH00800,Escherichia coli carrying the aatA virulence gene,Escherichia coli carrying the aatA virulence gene,CH00800
+CH00801,Escherichia coli carrying the bfpA virulence gene,Escherichia coli carrying the bfpA virulence gene,CH00801
+CH00802,Escherichia coli carrying the eae virulence gene,Escherichia coli carrying the eae virulence gene,CH00802
+CH00803,Escherichia coli carrying the heat-labile entertoxin gene,Escherichia coli carrying the heat-labile entertoxin gene,CH00803
+CH00804,Escherichia coli carrying the heat-stable enterotoxin gene,Escherichia coli carrying the heat-stable enterotoxin gene,CH00804
+CH00805,Escherichia coli/Shigella spp. Carrying the ipaH virulence gene,Escherichia coli/Shigella spp. Carrying the ipaH virulence gene,CH00805
+CH00806,Test not required,Test not required,CH00806
+CH00807,Kilograms,kg,CH00807
+CH00808,Weight,weight,CH00808
+CH00809,Height or length,height or length,CH00809
+CH00810,Mi-upper right arm circumference,MUAC,CH00810
+CH00811,Head circumference,Head circumference,CH00811
+CH00812,Right leg length,Right leg length,CH00812
+CH00813,Right foot length,Right foot length,CH00813
+CH00814,Gross findings,Gross findings,CH00814
+CH00815,Palpation findings,Palpation findings,CH00815
+CH00816,Skin or Mucosal findings,Skin or Mucosal findings,CH00816
+CH00817,Facial abnormalities,Facial abnormalities,CH00817
+CH00818,Umbilicus abnormal,Umbilicus abnormal,CH00818
+CH00819,Other significant gross findings,Other significant gross findings,CH00819
+CH00820,Hepatomegaly,Hepatomegaly,CH00820
+CH00821,Lymph nodes,Lymph nodes,CH00821
+CH00822,Jaundice or icterus,Jaundice or icterus,CH00822
+CH00823,Petechiae,Petechiae,CH00823
+CH00824,Rashes,Rashes,CH00824
+CH00825,Other skin or mucosal abnormalities,Other skin or mucosal abnormalities,CH00825
+CH00826,No Exam,No Exam,CH00826
+CH00827,Bleeding from the mouth,Bleeding from the mouth,CH00827
+CH00828,Bleeding from the ears,Bleeding from the ears,CH00828
+CH00829,Bleeding from the nose,Bleeding from the nose,CH00829
+CH00830,Bleeding from the rectum,Bleeding from the rectum,CH00830
+CH00831,Front Photo,Front Photo,CH00831
+CH00832,Back Photo,Back Photo,CH00832
+CH00833,Side Photo,Side Photo,CH00833
+CH00834,Nails Photo,Nails Photo,CH00834
+CH00835,Indeterminate Result for Bordatella spp.,Indeterminate Result for Bordatella spp.,CH00835
+CH00836,Indeterminate Result for C. difficile,Indeterminate Result for C. difficile,CH00836
+CH00837,Indeterminate Result for Corynebacterium,Indeterminate Result for Corynebacterium,CH00837
+CH00838,Additional photos,Additional photos,CH00838
+CH00839,Photograph of deceased body,Body photograph,CH00839
+CH00840,Document,Document image,CH00840
+CH00841,Body fluid,Body fluid,CH00841
+CH00842,Tissue,Tissue,CH00842
+CH00843,Other specimen,Other spec,CH00843
+CH00844,Millimeter,mm,CH00844
+CH00845,Left Lung Tissue,Left Lung,CH00845
+CH00846,Active malaria,Active malaria,CH00846
+CH00847,Aspirated material,Aspirated material,CH00847
+CH00848,Calcification,Calcification,CH00848
+CH00849,Cerebral malaria,Cerebral malaria,CH00849
+CH00850,Cholestasis,Cholestasis,CH00850
+CH00851,Chorioamnionitis,Chorioamnionitis,CH00851
+CH00852,Congestion,Congestion,CH00852
+CH00853,Edema,Edema,CH00853
+CH00854,Encephalitis,Encephalitis,CH00854
+CH00855,Eosinophilic infiltrate,Eosinophilic infiltrate,CH00855
+CH00856,Fibrin,Fibrin,CH00856
+CH00857,Fibrosis,Fibrosis,CH00857
+CH00858,Fungi,Fungi,CH00858
+CH00859,Glial nodules,Glial nodules,CH00859
+CH00860,Gliosis,Gliosis,CH00860
+CH00861,Granulomas,Granulomas,CH00861
+CH00862,Grey matter present,Grey matter present,CH00862
+CH00863,Histiocytic infiltrate,Histiocytic infiltrate,CH00863
+CH00864,Hyaline membranes,Hyaline membranes,CH00864
+CH00865,Increased alveolar macrophages,Increased alveolar macrophages,CH00865
+CH00866,Infarction,Infarction,CH00866
+CH00867,Interstitial inflammation,Interstitial inflammation,CH00867
+CH00868,Intra-alveolar hemosiderosis,Intra-alveolar hemosiderosis,CH00868
+CH00869,Intraalveolar hemorrhage,Intraalveolar hemorrhage,CH00869
+CH00870,Intraalveolar proteinaceous material,Intraalveolar proteinaceous material,CH00870
+CH00871,Lymphocytic infiltrate,Lymphocytic infiltrate,CH00871
+CH00872,Meninges present,Meninges present,CH00872
+CH00873,"Meningitis, lymphocytic","Meningitis, lymphocytic",CH00873
+CH00874,"Meningitis, neutrophilic","Meningitis, neutrophilic",CH00874
+CH00875,Meningoencephalitis,Meningoencephalitis,CH00875
+CH00876,Nasal content present,Nasal content present,CH00876
+CH00877,Necrosis,Necrosis,CH00877
+CH00878,Necrotizing granulomas,Necrotizing granulomas,CH00878
+CH00879,Neutrophilic infiltrate,Neutrophilic infiltrate,CH00879
+CH00880,Neutrophilic infiltrate in alveoli,Neutrophilic infiltrate in alveoli,CH00880
+CH00881,Non-necrotizing granulomas,Non-necrotizing granulomas,CH00881
+CH00882,Parasites,Parasites,CH00882
+CH00883,Past malaria,Past malaria,CH00883
+CH00884,Pigment in Kupffer cells,Pigment in Kupffer cells,CH00884
+CH00885,Pigment in portal macrophages,Pigment in portal macrophages,CH00885
+CH00886,Portal inflammation,Portal inflammation,CH00886
+CH00887,Sinusoidal inflammation,Sinusoidal inflammation,CH00887
+CH00888,Steatosis,Steatosis,CH00888
+CH00889,Thrombi,Thrombi,CH00889
+CH00890,Viral cytopathic effect,Viral cytopathic effect,CH00890
+CH00891,White matter present,White matter present,CH00891
+CH00892,Other lesion(s),Other lesion(s),CH00892
+CH00893,Other tissue,Other tissue,CH00893
+CH00894,Placenta,Placenta photograph,CH00894
+CH00895,Indeterminate Result for H. influenzae,Indeterminate Result for H. influenzae,CH00895
+CH00896,Indeterminate Result for MERS coronavirus,Indeterminate Result for MERS coronavirus,CH00896
+CH00897,Indeterminate Result for Salmonella spp.,Indeterminate Result for Salmonella spp.,CH00897
+CH00898,Indeterminate Result for V. cholerae,Indeterminate Result for V. cholerae,CH00898
+CH00899,Other language,Other language,CH00899
+CH00900,English,English,CH00900
+CH00901,French,French,CH00901
+CH00902,Portuguese,Portuguese,CH00902
+CH00903,Portuguese (Mozambican),Portuguese (Mozambican),CH00903
+CH00904,Emakhuwa,Emakhuwa,CH00904
+CH00905,Sena,Sena,CH00905
+CH00906,Changana,Changana,CH00906
+CH00907,Elomwe,Elomwe,CH00907
+CH00908,Ronga,Ronga,CH00908
+CH00909,Chope,Chope,CH00909
+CH00910,Other race or ethnicity,Other race or ethnicity,CH00910
+CH00911,Shangaan,Shangaan,CH00911
+CH00912,Tsonga,Tsonga,CH00912
+CH00913,Makhuwa,Makhuwa,CH00913
+CH00914,Sena,Sena,CH00914
+CH00915,Macua,Macua,CH00915
+CH00916,Judaism,Judaism,CH00916
+CH00917,Christian: Catholic,Christian: Catholic,CH00917
+CH00918,Christian: Envagelicos,Christian: Envagelicos,CH00918
+CH00919,Christian: Protestant,Christian: Protestant,CH00919
+CH00920,Christian: Zione,Christian: Zione,CH00920
+CH00921,Traditional African: Zione,Traditional African: Zione,CH00921
+CH00922,Hospital Distrital da Manhica,Hospital Distrital da Manhica,CH00922
+CH00923,Manhica-sede,Manhica-sede,CH00923
+CH00924,Maragra,Maragra,CH00924
+CH00925,Malavele,Malavele,CH00925
+CH00926,Palmeira,Palmeira,CH00926
+CH00927,Taninga,Taninga,CH00927
+CH00928,Ilha Josina,Ilha Josina,CH00928
+CH00929,Hospital Distrital da Manhica - Pediatric,Hospital Distrital da Manhica - Pediatric,CH00929
+CH00930,Hospital Distrital da Manhica - Internal Medicine,Hospital Distrital da Manhica - Internal Medicine,CH00930
+CH00931,Hospital Distrital da Manhica - Maternity,Hospital Distrital da Manhica - Maternity,CH00931
+CH00932,Cambeve,Cambeve,CH00932
+CH00933,Ilha Josina,Ilha Josina,CH00933
+CH00934,Maciana,Maciana,CH00934
+CH00935,Malavela,Malavela,CH00935
+CH00936,Palmeiras,Palmeiras,CH00936
+CH00937,Taninga,Taninga,CH00937
+CH00938,3 de Fevereiro,3 de Fevereiro,CH00938
+CH00939,Calanga,Calanga,CH00939
+CH00940,Chibucutso,Chibucutso,CH00940
+CH00941,Maluana,Maluana,CH00941
+CH00942,Manhica sede,Manhica sede,CH00942
+CH00943,Maragra,Maragra,CH00943
+CH00944,Munguine,Munguine,CH00944
+CH00945,Xinavane,Xinavane,CH00945
+CH00946,District Hospital,District Hospital,CH00946
+CH00947,Hospital,Hospital,CH00947
+CH00948,Health Center,Health Center,CH00948
+CH00949,Health Post,Health Post,CH00949
+CH00950,Clinic,Clinic,CH00950
+CH00951,Ward or Unit,Ward or Unit,CH00951
+CH00952,Not performed,Not performed,CH00952
+CH00953,Normal,Normal,CH00953
+CH00954,Tuberculosis (TB),Tuberculosis (TB),CH00954
+CH00955,Abnormal,Abnormal,CH00955
+CH00956,Abnormal (but TB not mentioned),Abnormal (but TB not mentioned),CH00956
+CH00957,None,None,CH00957
+CH00958,Initial treatment with first-line drugs,Initial treatment with first-line drugs,CH00958
+CH00959,Pretreatment with first-line drugs,Pretreatment with first-line drugs,CH00959
+CH00960,Second-line treatment,Second-line treatment,CH00960
+CH00961,MDR treatment,MDR treatment,CH00961
+CH00962,Other treatment,Other treatment,CH00962
+CH00963,Completed course,Completed course,CH00963
+CH00964,Substituted with another prophylaxis medication,Substituted with another prophylaxis medication,CH00964
+CH00965,Discontinued prophylaxis due to suspected adverse reaction,Discontinued prophylaxis due to suspected adverse reaction,CH00965
+CH00966,Discontinued for other reason,Discontinued for other reason,CH00966
+CH00967,Never received Cotrimoxazole,Never received Cotrimoxazole,CH00967
+CH00968,Receiving ART at time of death,Receiving ART at time of death,CH00968
+CH00969,ART discontinued previous to time of death,ART discontinued previous to time of death,CH00969
+CH00970,ART discontinuation not recorded,ART discontinuation not recorded,CH00970
+CH00971,No HIV infection,No HIV infection,CH00971
+CH00972,HIV-exposed,HIV-exposed,CH00972
+CH00973,HIV-infected,HIV-infected,CH00973
+CH00974,Detectable,Detectable,CH00974
+CH00975,Not detectable,Not detectable,CH00975
+CH00976,400 copies/mL,400 copies/mL,CH00976
+CH00977,50 copies/mL,50 copies/mL,CH00977
+CH00978,20 copies/mL,20 copies/mL,CH00978
+CH00979,Less than 20 copies/mL,Less than 20 copies/mL,CH00979
+CH00980,Laboratory - Hematology,Laboratory - Hematology,CH00980
+CH00981,Laboratory - Bacteriology,Laboratory - Bacteriology,CH00981
+CH00982,Laboratory - Parasitology,Laboratory - Parasitology,CH00982
+CH00983,Laboratory - Immunology,Laboratory - Immunology,CH00983
+CH00984,Exact time recorded,Exact time recorded,CH00984
+CH00985,Estimated time,Estimated time,CH00985
+CH00986,Persistent,Persistent,CH00986
+CH00987,Intermittent,Intermittent,CH00987
+CH00988,Oral,Oral,CH00988
+CH00989,Rectal,Rectal,CH00989
+CH00990,Axillary,Axillary,CH00990
+CH00991,Infrared,Infrared,CH00991
+CH00992,Method not specified,Method not specified,CH00992
+CH00993,Alert,Alert,CH00993
+CH00994,Confused or Agitated or Irritable,Confused or Agitated or Irritable,CH00994
+CH00995,Lethargic,Lethargic,CH00995
+CH00996,"Unconscious, responsive only to painful stimuli","Unconscious, responsive only to painful stimuli",CH00996
+CH00997,Unconscious and non-responsive to painful stimuli,Unconscious and non-responsive to painful stimuli,CH00997
+CH00998,0,0,CH00998
+CH00999,1+,1+,CH00999
+CH01000,2+,2++,CH01000
+CH01001,3+,3+++,CH01001
+CH01002,4+,4++++,CH01002
+CH01003,5+,5+++++,CH01003
+CH01004,Neonatal Intensive Care Unit (NICU),Neonatal Intensive Care Unit (NICU),CH01004
+CH01005,Pediatric Intensive Care Unit (PICU),Pediatric Intensive Care Unit (PICU),CH01005
+CH01006,Vaginal,Vaginal,CH01006
+CH01007,Caesarean section,Caesarean section,CH01007
+CH01008,"Instrumentation (e.g., forceps)","Instrumentation (e.g., forceps)",CH01008
+CH01009,Clear,Clear,CH01009
+CH01010,Port-wine color (brown-red),Port-wine color (brown-red),CH01010
+CH01011,"Yellow, with offensive smell","Yellow, with offensive smell",CH01011
+CH01012,Thin Meconium,Thin Meconium,CH01012
+CH01013,Thick Meconium,Thick Meconium,CH01013
+CH01014,Vaccination record or child health record/card,Vaccination record or child health record/card,CH01014
+CH01015,Medical record,Medical record,CH01015
+CH01016,Immunization program registry,Immunization program registry,CH01016
+CH01017,Caregiver report,Caregiver report,CH01017
+CH01018,Other source,Other source,CH01018
+CH01019,Up to date for age,Up to date for age,CH01019
+CH01020,One or more delayed vaccines,One or more delayed vaccines,CH01020
+CH01021,Unimmunized,Unimmunized,CH01021
+CH01022,Less than 1 second,< 1 second,CH01022
+CH01023,1-2 seconds,1-2 seconds,CH01023
+CH01024,Greater than 2 seconds,>2 seconds,CH01024
+CH01025,Well nourished,Well nourished,CH01025
+CH01026,Wasting or cachexia or marasmus,Wasting or cachexia or marasmus,CH01026
+CH01027,Kwashiorkor,Kwashiorkor,CH01027
+CH01028,Both marasmus and kwashiorkor,Both marasmus and kwashiorkor,CH01028
+CH01029,Obesity,Obesity,CH01029
+CH01030,Only total BCS available (no components),Only total BCS available (no components),CH01030
+CH01031,BCS components documented explicitly,BCS components documented explicitly,CH01031
+CH01032,1-Watches or follows,1-Watches or follows,CH01032
+CH01033,0-Fails to watch or follow,0-Fails to watch or follow,CH01033
+CH01034,2-Localizes painful stimulus,2-Localizes painful stimulus,CH01034
+CH01035,1-Withdraws limb from painful stimulus,1-Withdraws limb from painful stimulus,CH01035
+CH01036,0-No response or inappropriate response,0-No response or inappropriate response,CH01036
+CH01037,"2-Cries appropriately with pain or, if verbal, speaks","2-Cries appropriately with pain or, if verbal, speaks",CH01037
+CH01038,1-Moan or abnormal cry with pain,1-Moan or abnormal cry with pain,CH01038
+CH01039,0-No vocal response to pain,0-No vocal response to pain,CH01039
+CH01040,Normal or flat,Normal or flat,CH01040
+CH01041,Bulging or pulsing or tense,Bulging or pulsing or tense,CH01041
+CH01042,Closed,Closed,CH01042
+CH01043,Sunken or Depressed,Sunken or Depressed,CH01043
+CH01044,Miosis,Miosis,CH01044
+CH01045,Dilation,Dilation,CH01045
+CH01046,Fixed,Fixed,CH01046
+CH01047,Sluggish,Sluggish,CH01047
+CH01048,Other findings,Other findings,CH01048
+CH01049,Within normal limits,Within normal limits,CH01049
+CH01050,Cataract,Cataract,CH01050
+CH01051,Retinal hemorrhage,Retinal hemorrhage,CH01051
+CH01052,Abnormal red reflex,Abnormal red reflex,CH01052
+CH01053,Elevated transaminases,Elevated transaminases,CH01053
+CH01054,Cholestasis,Cholestasis,CH01054
+CH01055,Other abnormality,Other abnormality,CH01055
+CH01056,Renal insufficiency,Renal insufficiency,CH01056
+CH01057,Not tender to palpation,Not tender to palpation,CH01057
+CH01058,Tender to palpation,Tender to palpation,CH01058
+CH01059,Hypotonia,Hypotonia,CH01059
+CH01060,Hypertonia,Hypertonia,CH01060
+CH01061,Increased,Increased,CH01061
+CH01062,Decreased,Decreased,CH01062
+CH01063,Absent,Absent,CH01063
+CH01064,Before pregnancy,Before pregnancy,CH01064
+CH01065,First Trimester,1st Trimester,CH01065
+CH01066,Second Trimester,2nd Trimester,CH01066
+CH01067,Third Trimester,3rd Trimester,CH01067
+CH01068,Diffuse,Diffuse,CH01068
+CH01069,Focal,Focal,CH01069
+CH01070,Cephalic or Vertex,Cephalic or Vertex,CH01070
+CH01071,Breech,Breech,CH01071
+CH01072,"Other malpresentation (includes transverse lie, arm, etc.)","Other malpresentation (includes transverse lie, arm, etc.)",CH01072
+CH01073,Conjugated,Conjugated,CH01073
+CH01074,Unconjugated,Unconjugated,CH01074
+CH01075,No movement,No movement,CH01075
+CH01076,With stimulation,With stimulation,CH01076
+CH01077,Spontaneous,Spontaneous,CH01077
+CH01078,Last Menstrual Period,Last Menstrual Period,CH01078
+CH01079,First Trimester Ultrasound,First Trimester Ultrasound,CH01079
+CH01080,Second Trimester Ultrasound,Second Trimester Ultrasound,CH01080
+CH01081,Third Trimester Ultrasound,Third Trimester Ultrasound,CH01081
+CH01082,Fundal Height,Fundal Height,CH01082
+CH01083,Mother's Recall,Mother's Recall,CH01083
+CH01084,Micromoles per liter,micromol/L,CH01084
+CH01085,Micrograms per deciliter,mg/dL,CH01085
+CH01088,CHAMPS Severely Ill Surveillance Consent,CHAMPS Severely Ill,CH01088
+CH01089,Known age,Known age,CH01089
+CH01090,Estimated age,Estimated age,CH01090
+CH01091,No Education,No Education,CH01091
+CH01092,Primary,Primary Education,CH01092
+CH01093,Secondary,Secondary Education,CH01093
+CH01094,Tertiary,Tertiary Education,CH01094
+CH01095,Currently Married,Currently Married,CH01095
+CH01096,Unmarried,Unmarried,CH01096
+CH01097,Widowed,Widowed,CH01097
+CH01098,Divorced,Divorced,CH01098
+CH01099,Separated,Separated,CH01099
+CH01100,Never in union,Never in union,CH01100
+CH01101,Singleton,Singleton,CH01101
+CH01102,Multiple,Multiple,CH01102
+CH01103,Twins (2),Twins (2),CH01103
+CH01104,Triplets (3),Triplets (3),CH01104
+CH01105,More than 3,More than 3,CH01105
+CH01106,Live birth (single),Live birth (single),CH01106
+CH01107,Stillbirth (single),Stillbirth (single),CH01107
+CH01108,Miscarriage or Abortion (less than 28 weeks),Miscarriage or Abortion (less than 28 weeks),CH01108
+CH01109,Ectopic,Ectopic,CH01109
+CH01110,Multiple live birth (all were live births),Multiple live birth (all were live births),CH01110
+CH01111,Multiple outcome types (at least one live birth and one stillbirth),Multiple outcome types (at least one live birth and one stillbirth),CH01111
+CH01112,Multiple Stillbirth (all stillbirths),Multiple Stillbirth (all stillbirths),CH01112
+CH01113,Hours,Hours,CH01113
+CH01114,Days,Days,CH01114
+CH01115,Weeks,Weeks,CH01115
+CH01116,Months,Months,CH01116
+CH01117,Years,Years,CH01117
+CH01118,Years and Months,Years and Months,CH01118
+CH01119,Stillbirth not otherwise specified,Stillbirth not otherwise specified,CH01119
+CH01120,Other Home (including TBA),Other Home (including TBA),CH01120
+CH01121,Recorded as Unknown,Recorded as Unknown,CH01121
+CH01122,Discharged home,Discharged home,CH01122
+CH01123,Admitted to wards for complications,Admitted to wards for complications,CH01123
+CH01124,Transferred to higher level of care,Transferred to higher level of care,CH01124
+CH01125,Maternal death,Maternal death,CH01125
+CH01126,Maternal death post-discharge,Maternal death post-discharge,CH01126
+CH01127,Death beyond neonatal period (case died at 28 days or older),Death beyond neonatal period (case died at 28 days or older),CH01127
+CH01128,1 Shot,1 Shot,CH01128
+CH01129,2 Shots,2 Shots,CH01129
+CH01130,At booking or first ANC visit,At booking or first ANC visit,CH01130
+CH01131,Other time during pregnancy,Other time during pregnancy,CH01131
+CH01132,Timing not recorded or unknown,Timing not recorded or unknown,CH01132
+CH01133,No exam or nutritional information not recorded,No exam or nutritional information not recorded,CH01133
+CH01134,During pregnancy,During pregnancy,CH01134
+CH01135,In labor and birth,In labor and birth,CH01135
+CH01136,"During pregnancy, labor, and birth","During pregnancy, labor, and birth",CH01136
+CH01137,Postpartum,Postpartum,CH01137
+CH01138,All time periods,All time periods,CH01138
+CH01139,No transfer,No transfer,CH01139
+CH01140,Before,Before,CH01140
+CH01141,During,During,CH01141
+CH01142,After,After,CH01142
+CH01143,Transfer at multiple points,Transfer at multiple points,CH01143
+CH01144,Doctor (specialist),Doctor (specialist),CH01144
+CH01145,"Doctor, Medical officer, Assistant Medical Officer (AMO), Clinical Officer","Doctor, Medical officer, Assistant Medical Officer (AMO), Clinical Officer",CH01145
+CH01146,Nurse,Nurse,CH01146
+CH01147,Midwife,Midwife,CH01147
+CH01148,Traditional birth attendant,Traditional birth attendant,CH01148
+CH01149,Other health professional,Other health professional,CH01149
+CH01150,Forceps or vacuum assisted,Forceps or vacuum assisted,CH01150
+CH01151,Emergency Caesarean section,Emergency Caesarean section,CH01151
+CH01152,Elective Caesarean section,Elective Caesarean section,CH01152
+CH01153,Caesarean section not specified or Unknown,Caesarean section not specified or Unknown,CH01153
+CH01154,Present,Present,CH01154
+CH01155,Fetal stethoscope,Fetal stethoscope,CH01155
+CH01156,Doppler,Doppler,CH01156
+CH01157,Ultrasound,Ultrasound,CH01157
+CH01158,Cardiotocograph (CTG),Cardiotocograph (CTG),CH01158
+CH01159,More than one method,More than one method,CH01159
+CH01160,As a range,As a range,CH01160
+CH01161,Preterm (<37 weeks),Preterm (<37 weeks),CH01161
+CH01162,Term (37-41 completed weeks),Term (37-41 completed weeks),CH01162
+CH01163,Post-term (42 weeks or greater),Post-term (42 weeks or greater),CH01163
+CH01164,Preterm premature rupture of membranes (PPROM) < 37 weeks,Preterm premature rupture of membranes (PPROM) < 37 weeks,CH01164
+CH01165,Premature rupture of membranes (PROM),Premature rupture of membranes (PROM),CH01165
+CH01166,Spontaneous with labor,Spontaneous with labor,CH01166
+CH01167,Artificial (AROM),Artificial (AROM),CH01167
+CH01168,Ruptured at C-section,Ruptured at C-section,CH01168
+CH01169,Meconium - not specified thick or thin,Meconium - not specified thick or thin,CH01169
+CH01170,Pulmonary,Pulmonary,CH01170
+CH01171,Extrapulmonary,Extrapulmonary,CH01171
+CH01172,Both Pulmonary and Extrapulmonary,Both Pulmonary and Extrapulmonary,CH01172
+CH01173,Miliary,Miliary,CH01173
+CH01174,Eccentric,Eccentric,CH01174
+CH01175,Central,Central,CH01175
+CH01176,Marginal,Marginal,CH01176
+CH01177,Velamentous,Velamentous,CH01177
+CH01178,Thin,Thin,CH01178
+CH01179,Thick,Thick,CH01179
+CH01180,Meconium Stained,Meconium Stained,CH01180
+CH01181,Tested,Tested,CH01181
+CH01182,Whole blood,Whole blood,CH01182
+CH01183,Packed red blood cells,Packed red blood cells,CH01183
+CH01184,Plasma,Plasma,CH01184
+CH01185,Platelets,Platelets,CH01185
+CH01186,Before labor and delivery,Before labor and delivery,CH01186
+CH01187,During labor and delivery,During labor and delivery,CH01187
+CH01188,After delivery,After delivery,CH01188
+CH01189,"In pregnancy, but before labor and delivery","In pregnancy, but before labor and delivery",CH01189
+CH01190,In labor and delivery,In labor and delivery,CH01190
+CH01191,Both in pregnancy and in labor and delivery,Both in pregnancy and in labor and delivery,CH01191
+CH01192,"In pregnancy, unknown timing","In pregnancy, unknown timing",CH01192
+CH01193,Smear,Smear,CH01193
+CH01194,Xpert,Xpert,CH01194
+CH01195,Culture,Culture,CH01195
+CH01196,Mycobacterial lipoarabinomannan (LAM) in urine,LAM,CH01196
+CH01197,VDRL,VDRL,CH01197
+CH01198,RPR,RPR,CH01198
+CH01199,Dark phase microscopy,Dark phase microscopy,CH01199
+CH01200,Penicillin Injection(s),Penicillin Injection(s),CH01200
+CH01201,Doxycycline,Doxycycline,CH01201
+CH01202,Hepatitis A,Hepatitis A,CH01202
+CH01203,Hepatitis B,Hepatitis B,CH01203
+CH01204,Hepatitis C,Hepatitis C,CH01204
+CH01205,Hepatitis D,Hepatitis D,CH01205
+CH01206,Hepatitis E,Hepatitis E,CH01206
+CH01207,Antibiotic,Antibiotic,CH01207
+CH01208,Other Medication Type,Other Medication Type,CH01208
+CH01209,Penicillin,Penicillin,CH01209
+CH01210,Ampicillin,Ampicillin,CH01210
+CH01211,Amoxicillin,Amoxicillin,CH01211
+CH01212,Augmentin,Augmentin,CH01212
+CH01213,Gentamicin,Gentamicin,CH01213
+CH01214,Metronidazole,Metronidazole,CH01214
+CH01215,Cefazolin,Cefazolin,CH01215
+CH01216,Erythromycin,Erythromycin,CH01216
+CH01217,Cephalexin,Cephalexin,CH01217
+CH01218,Magnesium sulfate,Magnesium sulfate,CH01218
+CH01219,Oxytocin,Oxytocin,CH01219
+CH01220,Ergometrine,Ergometrine,CH01220
+CH01221,Misoprostol,Misoprostol,CH01221
+CH01222,Iron,Iron,CH01222
+CH01223,"Steroids (Betamethasone, Dexamethasone)","Steroids (Betamethasone, Dexamethasone)",CH01223
+CH01224,Intravenous (IV),Intravenous (IV),CH01224
+CH01225,Intramuscular (IM),Intramuscular (IM),CH01225
+CH01226,Subcutaneous (SC),Subcutaneous (SC),CH01226
+CH01227,per Rectum (PR),per Rectum (PR),CH01227
+CH01228,Oral by Mouth (PO),Oral by Mouth (PO),CH01228
+CH01229,Sublingual (SL),Sublingual (SL),CH01229
+CH01230,QD daily (also QHS nightly),QD daily (also QHS nightly),CH01230
+CH01231,BID twice daily,BID twice daily,CH01231
+CH01232,TID three times a day,TID three times a day,CH01232
+CH01233,QID four times a day,QID four times a day,CH01233
+CH01234,Pre-term labor,Pre-term labor,CH01234
+CH01235,Urinary tract infection or pyelonephritis,Urinary tract infection or pyelonephritis,CH01235
+CH01236,Prolonged Rupture of Membranes,Prolonged Rupture of Membranes,CH01236
+CH01237,Foul discharge or cervicitis,Foul discharge or cervicitis,CH01237
+CH01238,Maternal fever,Maternal fever,CH01238
+CH01239,Suspected amnionitis or chorioamnionitis,Suspected amnionitis or chorioamnionitis,CH01239
+CH01240,Sepsis,Sepsis,CH01240
+CH01241,Preclampsia or eclampsia,Preclampsia or eclampsia,CH01241
+CH01242,Hemorrhage,Hemorrhage,CH01242
+CH01243,Anemia,Anemia,CH01243
+CH01244,Prevention of postpartum hemorrhage,Prevention of postpartum hemorrhage,CH01244
+CH01245,Antepartum (before onset of labor),Antepartum (before onset of labor),CH01245
+CH01246,Intrapartum (during labor),Intrapartum (during labor),CH01246
+CH01247,At time of delivery,At time of delivery,CH01247
+CH01248,Regular nursery,Regular nursery,CH01248
+CH01249,Special care nursery,Special care nursery,CH01249
+CH01250,Large for gestational age,Large for gestational age,CH01250
+CH01251,Small for gestational age - Symmetric,Small for gestational age - Symmetric,CH01251
+CH01252,Small for gestational age - Asymmetric,Small for gestational age - Asymmetric,CH01252
+CH01253,Small for gestational age - not specified if symmetric or asymmetric,Small for gestational age - not specified if symmetric or asymmetric,CH01253
+CH01254,Loose nuchal cord,Loose nuchal cord,CH01254
+CH01255,Tight nuchal cord,Tight nuchal cord,CH01255
+CH01256,1 wrap of nuchal cord,1 wrap of nuchal cord,CH01256
+CH01257,More than 1 wrap of nuchal cord (>1),More than 1 wrap of nuchal cord (>1),CH01257
+CH01258,Movement - not specified if with or without stimulation,Movement - not specified if with or without stimulation,CH01258
+CH01259,Stethoscope,Stethoscope,CH01259
+CH01260,Palpation,Palpation,CH01260
+CH01261,On monitor (pulse-Ox or cariotocograph (CTG)),On monitor (pulse-Ox or cariotocograph (CTG)),CH01261
+CH01262,Organisim found or seen,Organisim found or seen,CH01262
+CH01263,Other specimen type,Other specimen type,CH01263
+CH01264,Other testing method,Other testing method,CH01264
+CH01265,Afrikaans,Afrikaans,CH01265
+CH01266,Ndebele,Ndebele,CH01266
+CH01267,Northern Sotho,Northern Sotho,CH01267
+CH01268,Sesotho,Sesotho,CH01268
+CH01269,Swazi,Swazi,CH01269
+CH01270,Tsonga,Tsonga,CH01270
+CH01271,Tswana,Tswana,CH01271
+CH01272,Venda,Venda,CH01272
+CH01273,Xhosa,Xhosa,CH01273
+CH01274,Zulu,Zulu,CH01274
+CH01275,Africans or Blacks,Africans or Blacks,CH01275
+CH01276,Coloureds,Coloureds,CH01276
+CH01277,Christian: Evangelical Charismatic,Christian: Evangelical Charismatic,CH01277
+CH01278,"Christian: African independent Church (ZCC, Shembe, Apostolic)","Christian: African independent Church (ZCC, Shembe, Apostolic)",CH01278
+CH01279,Traditional African: Ancestral,Traditional African: Ancestral,CH01279
+CH01280,Traditional African: Tribal,Traditional African: Tribal,CH01280
+CH01281,Soweto (JHB-SWT),Soweto (JHB-SWT),CH01281
+CH01282,Orange Farm (JHB-ORGF),Orange Farm (JHB-ORGF),CH01282
+CH01283,Zola Clinic,Zola Clinic,CH01283
+CH01284,Women Plus Clinic,Women Plus Clinic,CH01284
+CH01285,Freedom Park Clinic,Freedom Park Clinic,CH01285
+CH01286,Mandela Sisulu Clinic,Mandela Sisulu Clinic,CH01286
+CH01287,Moroka Clinic,Moroka Clinic,CH01287
+CH01288,Freedom Park Clinic,Freedom Park Clinic,CH01288
+CH01289,Eldorado Park Ext 9,Eldorado Park Ext 9,CH01289
+CH01290,Orlando Clinic,Orlando Clinic,CH01290
+CH01291,Noordgesig Clinic,Noordgesig Clinic,CH01291
+CH01292,Tladi Clinic,Tladi Clinic,CH01292
+CH01293,Protea Glen Clinic,Protea Glen Clinic,CH01293
+CH01294,Zondi Clinic,Zondi Clinic,CH01294
+CH01295,Michael Maponya Clinic,Michael Maponya Clinic,CH01295
+CH01296,Mofolo South Clinic,Mofolo South Clinic,CH01296
+CH01297,Doos Beukes Clinic,Doos Beukes Clinic,CH01297
+CH01298,Jabavu Clinic,Jabavu Clinic,CH01298
+CH01299,Meadowlands Zone 2 Clinic,Meadowlands Zone 2 Clinic,CH01299
+CH01300,Green Village Clinic,Green Village Clinic,CH01300
+CH01301,Sinqobile Clinic,Sinqobile Clinic,CH01301
+CH01302,Women's clinic Protea Glen,Women's clinic Protea Glen,CH01302
+CH01303,Chris Hani Baragwanth Hospital,Chris Hani Baragwanth Hospital,CH01303
+CH01304,Zola-Jabulani Hospital,Zola-Jabulani Hospital,CH01304
+CH01305,Lilian Goyi Clinic,Lilian Goyi Clinic,CH01305
+CH01306,Shanty Family Health,Shanty Family Health,CH01306
+CH01307,Chiawelo Clinic,Chiawelo Clinic,CH01307
+CH01308,Slovoville Clinic,Slovoville Clinic,CH01308
+CH01309,Protea South Clinic,Protea South Clinic,CH01309
+CH01310,Bophelong Clinic,Bophelong Clinic,CH01310
+CH01311,Eldorado Park Ext 2,Eldorado Park Ext 2,CH01311
+CH01312,Mofolo Community Health Centre,Mofolo Community Health Centre,CH01312
+CH01313,Elias Motsoaledi Clinic,Elias Motsoaledi Clinic,CH01313
+CH01314,Kliptown Clinic,Kliptown Clinic,CH01314
+CH01315,Naledi Clinic,Naledi Clinic,CH01315
+CH01316,Lesedi Hospital,Lesedi Hospital,CH01316
+CH01317,Hospital St John Eye,Hospital St John Eye,CH01317
+CH01318,Tshepo Themba,Tshepo Themba,CH01318
+CH01319,Itireleng Clinic,Itireleng Clinic,CH01319
+CH01320,Charles Hurwitz Santa Centre,Charles Hurwitz Santa Centre,CH01320
+CH01321,mmHg,mmHg,CH01321
+CH01322,kPa,kPa,CH01322
+CH01323,Arterial,Arterial,CH01323
+CH01324,Venous,Venous,CH01324
+CH01325,Capilary,Capilary,CH01325
+CH01326,Moist,Moist,CH01326
+CH01327,Slightly dry,Slightly dry,CH01327
+CH01328,Dry,Dry,CH01328
+CH01329,Springs back,Springs back,CH01329
+CH01330,Tents briefly,Tents briefly,CH01330
+CH01331,Prolonged tenting (greater than 2 sec),Prolonged tenting (greater than 2 sec),CH01331
+CH01332,BCG Immunization,BCG,CH01332
+CH01333,Cholera Immunization,Cholera,CH01333
+CH01334,DTP or DTaP Immunization,DTP or DTaP,CH01334
+CH01335,Hepatitis B Immunization,Hepatitis B,CH01335
+CH01336,Polio Immunization,Polio,CH01336
+CH01337,Haemophilus influenzae type b Immunization,Haemophilus influenzae type b,CH01337
+CH01338,Hepatitis A Immunization,Hepatitis A,CH01338
+CH01339,Human papilloma virus Immunization,Human papilloma virus,CH01339
+CH01340,Japanese encephalitis Immunization,Japanese encephalitis,CH01340
+CH01341,Measles Immunization,Measles,CH01341
+CH01342,Meningococcal Immunization,Meningococcal,CH01342
+CH01343,Mumps Immunization,Mumps,CH01343
+CH01344,Pneumoccoccu Immunization,Pneumoccoccu,CH01344
+CH01345,Rotavirus Immunization,Rotavirus,CH01345
+CH01346,Rubella Immunization,Rubella,CH01346
+CH01347,Seasonal influenza Immunization,Seasonal influenza,CH01347
+CH01348,Typhoid Immunization,Typhoid,CH01348
+CH01349,Varicella Immunization,Varicella,CH01349
+CH01350,Yellow fever Immunization,Yellow fever,CH01350
+CH01351,Not at this time,Not at this time,CH01351
+CH01352,Positive for Escherichia coli/Shigella spp.,Positive for Escherichia coli/Shigella spp.,CH01352
+CH01353,Negative for Escherichia coli/Shigella spp.,Negative for Escherichia coli/Shigella spp.,CH01353
+CH01354,Indeterminate for Escherichia coli/Shigella spp.,Indeterminate for Escherichia coli/Shigella spp.,CH01354
+CH01355,"Positive for the presence of Shiga toxin carried by Shigella dysenteriae and/or Shiga-like toxin 1 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus","Positive for the presence of Shiga toxin carried by Shigella dysenteriae and/or Shiga-like toxin 1 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus",CH01355
+CH01356,"Negative for the presence of Shiga toxin carried by Shigella dysenteriae and/or Shiga-like toxin 1 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus","Negative for the presence of Shiga toxin carried by Shigella dysenteriae and/or Shiga-like toxin 1 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus",CH01356
+CH01357,"Indeterminate for the presence of Shiga toxin carried by Shigella dysenteriae and/or Shiga-like toxin 1 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus","Indeterminate for the presence of Shiga toxin carried by Shigella dysenteriae and/or Shiga-like toxin 1 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus",CH01357
+CH01358,"Positive for the presence of Shiga-like toxin 2 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus","Positive for the presence of Shiga-like toxin 2 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus",CH01358
+CH01359,"Negative for the presence of Shiga-like toxin 2 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus","Negative for the presence of Shiga-like toxin 2 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus",CH01359
+CH01360,"Indeterminate for the presence of Shiga-like toxin 2 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus","Indeterminate for the presence of Shiga-like toxin 2 carried by Escherichia, Citrobacter, Aeromonas, Enterobacter genus",CH01360
+CH01361,Positive for Escherichia coli carrying the aaiC virulence gene,Positive for Escherichia coli carrying the aaiC virulence gene,CH01361
+CH01362,Negative for Escherichia coli carrying the aaiC virulence gene,Negative for Escherichia coli carrying the aaiC virulence gene,CH01362
+CH01363,Indeterminate for Escherichia coli carrying the aaiC virulence gene,Indeterminate for Escherichia coli carrying the aaiC virulence gene,CH01363
+CH01364,Positive for Escherichia coli carrying the aatA virulence gene,Positive for Escherichia coli carrying the aatA virulence gene,CH01364
+CH01365,Negative for Escherichia coli carrying the aatA virulence gene,Negative for Escherichia coli carrying the aatA virulence gene,CH01365
+CH01366,Indeterminate for Escherichia coli carrying the aatA virulence gene,Indeterminate for Escherichia coli carrying the aatA virulence gene,CH01366
+CH01367,Positive for Escherichia coli carrying the bfpA virulence gene,Positive for Escherichia coli carrying the bfpA virulence gene,CH01367
+CH01368,Negative for Escherichia coli carrying the bfpA virulence gene,Negative for Escherichia coli carrying the bfpA virulence gene,CH01368
+CH01369,Indeterminate for Escherichia coli carrying the bfpA virulence gene,Indeterminate for Escherichia coli carrying the bfpA virulence gene,CH01369
+CH01370,Positive for Escherichia coli carrying the eae virulence gene,Positive for Escherichia coli carrying the eae virulence gene,CH01370
+CH01371,Negative for Escherichia coli carrying the eae virulence gene,Negative for Escherichia coli carrying the eae virulence gene,CH01371
+CH01372,Indeterminate for Escherichia coli carrying the eae virulence gene,Indeterminate for Escherichia coli carrying the eae virulence gene,CH01372
+CH01373,Positive for Escherichia coli carrying the heat-labile entertoxin gene,Positive for Escherichia coli carrying the heat-labile entertoxin gene,CH01373
+CH01374,Negative for Escherichia coli carrying the heat-labile entertoxin gene,Negative for Escherichia coli carrying the heat-labile entertoxin gene,CH01374
+CH01375,Indeterminate for Escherichia coli carrying the heat-labile entertoxin gene,Indeterminate for Escherichia coli carrying the heat-labile entertoxin gene,CH01375
+CH01376,Positive for Escherichia coli carrying the heat-stable enterotoxin gene,Positive for Escherichia coli carrying the heat-stable enterotoxin gene,CH01376
+CH01377,Negative for Escherichia coli carrying the heat-stable enterotoxin gene,Negative for Escherichia coli carrying the heat-stable enterotoxin gene,CH01377
+CH01378,Indeterminate for Escherichia coli carrying the heat-stable enterotoxin gene,Indeterminate for Escherichia coli carrying the heat-stable enterotoxin gene,CH01378
+CH01379,Positive for Escherichia coli/Shigella spp. Carrying the ipaH virulence gene,Positive for Escherichia coli/Shigella spp. Carrying the ipaH virulence gene,CH01379
+CH01380,Indeterminate for Escherichia coli/Shigella spp. Carrying the ipaH virulence gene,Indeterminate for Escherichia coli/Shigella spp. Carrying the ipaH virulence gene,CH01380
+CH01381,Negative for Escherichia coli/Shigella spp. Carrying the ipaH virulence gene,Negative for Escherichia coli/Shigella spp. Carrying the ipaH virulence gene,CH01381
+CH01382,Placenta,Placenta,CH01382
+CH01383,Cord,Cord,CH01383
+CH01384,Document - Immunization Card,Vaccination Card,CH01384
+CH01385,Document - Growth Chart,Growth Chart,CH01385
+CH01386,Document - Other,Other Document,CH01386
+CH01387,Incomplete Data,Incomplete Data,CH01387
+CH01388,Inconclusive Data,Inconclusive Data,CH01388
+CH01389,Maternal clinical data,Maternal clinical data,CH01389
+CH01390,Case clinical data - including antemortem diagnostic data,Case clinical data - including antemortem diagnostic data,CH01390
+CH01391,Case postmortem microbiology/culture,Case postmortem microbiology/culture,CH01391
+CH01392,Case postmortem molecular diagnostics (TAC),Case postmortem molecular diagnostics (TAC),CH01392
+CH01393,Case postmortem HIV testing,Case postmortem HIV testing,CH01393
+CH01394,Case postmortem TB testing,Case postmortem TB testing,CH01394
+CH01395,Case postmortem malaria testing,Case postmortem malaria testing,CH01395
+CH01396,Verbal autopsy narrative,Verbal autopsy narrative,CH01396
+CH01397,Verbal autopsy list of symptoms/conditions,Verbal autopsy list of symptoms/conditions,CH01397
+CH01398,MITS photography,MITS photography,CH01398
+CH01399,MITS measurements,MITS measurements,CH01399
+CH01400,Pathology- local final report,Pathology- local final report,CH01400
+CH01401,Pathology- CPL diagnosis,Pathology- CPL diagnosis,CH01401
+CH01402,Pathology- CPL immunohistochemistry,Pathology- CPL immunohistochemistry,CH01402
+CH01403,Pathology- CPL PCR,Pathology- CPL PCR,CH01403
+CH01404,Death in the first 24 hours,Death in the first 24 hours,CH01404
+CH01405,Early Neonate (1 to 6 days),Early Neonate (1 to 6 days),CH01405
+CH01406,Late Neonate (7 to 27 days),Late Neonate (7 to 27 days),CH01406
+CH01407,Acinetobacter spp.,Acinetobacter spp.,CH01407
+CH01408,Actinobacillus spp.,Actinobacillus spp.,CH01408
+CH01409,Clostridium difficile,Clostridium difficile,CH01409
+CH01410,Other Etiology/Agent,Other Etiology/Agent,CH01410
+CH01411,Polymicrobial,Polymicrobial,CH01411
+CH01412,Shigella,Shigella,CH01412
+CH01413,Invalid Result,Invalid Result,CH01413
+CH01414,Death in the first 24 hours of life,Death in the first 24 hours of life,CH01414
+CH01415,1 to 6 days old,1 to 6 days old,CH01415
+CH01416,7 to 27 days old,7 to 27 days old,CH01416
+CH01417,28 days old to less than 12 months old,28 days old to less than 12 months old,CH01417
+CH01418,12 months old to less than 60 months old,12 months old to less than 60 months old,CH01418
+CH01419,60 months old or older,60 months old or older,CH01419
+CH01420,Outside of catchment area,Outside of catchment area,CH01420
+CH01421,Does not meet age requirement,Does not meet age requirement,CH01421
+CH01422,Death occurred prior to CHAMPS mortality surveillance initiation,Death occurred prior to CHAMPS mortality surveillance initiation,CH01422
+CH01423,Other reason not eligible,Other reason not eligible,CH01423
+CH01424,Religious leader,Religious leader,CH01424
+CH01425,Potentially eligible: Delaying eligibility screening,Potentially eligible: Delaying eligibility screening,CH01425
+CH01426,Potentially eligible: Not approaching for eligibility screening,Potentially eligible: Not approaching for eligibility screening,CH01426
+CH01427,Cemetery personnel,Cemetery personnel,CH01427
+CH01428,Community health worker,Community health worker,CH01428
+CH01429,Traditional healer,Traditional healer,CH01429
+CH01430,Normal Weight-for-Age,Normal Weight-for-Age (WAZ >= -2 SD),CH01430
+CH01431,Moderate Underweight,Moderate Underweight (-3 SD <= WAZ < -2 SD),CH01431
+CH01432,Severe Underweight,Severe Underweight (WAZ < -3 SD),CH01432
+CH01433,Normal Weight-for-Length,Normal Weight-for-Length,CH01433
+CH01434,Moderate Wasting,Moderate Wasting (-3 SD <= WHZ < -2 SD),CH01434
+CH01435,Severe Wasting,Severe Wasting (WHZ < -3 SD),CH01435
+CH01436,Normal Height-for-Age,Normal Height-for-Age (HAZ >= -2 SD),CH01436
+CH01437,Moderate Stunting,Moderate Stunting (-3 SD <= HAZ < -2 SD),CH01437
+CH01438,Severe Stunting,Severe Stunting (HAZ < -3 SD),CH01438
+CH01439,Immediate Cause of Death,Immediate Cause of Death,CH01439
+CH01440,Morbid Condition 01,Morbid Condition 01,CH01440
+CH01441,Morbid Condition 02,Morbid Condition 02,CH01441
+CH01442,Morbid Condition 03,Morbid Condition 03,CH01442
+CH01443,Morbid Condition 04,Morbid Condition 04,CH01443
+CH01444,Morbid Condition 05,Morbid Condition 05,CH01444
+CH01445,Morbid Condition 06,Morbid Condition 06,CH01445
+CH01446,Morbid Condition 07,Morbid Condition 07,CH01446
+CH01447,Morbid Condition 08,Morbid Condition 08,CH01447
+CH01448,Underlying Cause or Factor,Underlying Cause or Factor,CH01448
+CH01449,Main Maternal Disease or Condition,Main Maternal Disease or Condition,CH01449
+CH01450,Other Maternal Condition 01,Other Maternal Condition 01,CH01450
+CH01451,Other Maternal Condition 02,Other Maternal Condition 02,CH01451
+CH01452,Other Maternal Condition 03,Other Maternal Condition 03,CH01452
+CH01453,Other Maternal Condition 04,Other Maternal Condition 04,CH01453
+CH01454,Other Significant Condition 01,Other Significant Condition 01,CH01454
+CH01455,Other Significant Condition 02,Other Significant Condition 02,CH01455
+CH01456,Other Significant Condition 03,Other Significant Condition 03,CH01456
+CH01457,Other Significant Condition 04,Other Significant Condition 04,CH01457
+CH01458,Other Significant Condition 05,Other Significant Condition 05,CH01458
+CH01459,Other Significant Condition 06,Other Significant Condition 06,CH01459
+CH01460,Other Significant Condition 07,Other Significant Condition 07,CH01460
+CH01461,Other Significant Condition 08,Other Significant Condition 08,CH01461
+CH01462,Other Significant Condition 09,Other Significant Condition 09,CH01462
+CH01463,Other Significant Condition 10,Other Significant Condition 10,CH01463
+CH01464,ASACODJIP,ASACODJIP,CH01464
+CH01465,ASACODJENEKA,ASACODJENEKA,CH01465
+CH01466,Infirmerie Camp Para,Infirmerie Camp Para,CH01466
+CH01467,CSREF 4,CSREF 4,CH01467
+CH01468,Centre El razi,Centre El razi,CH01468
+CH01469,Clinic Lac Tele,Clinic Lac Tele,CH01469
+CH01470,Clinic Source de vie,Clinic Source de vie,CH01470
+CH01471,Clinic Mozar,Clinic Mozar,CH01471
+CH01472,Cabinet Medical RELIEF,Cabinet Medical RELIEF,CH01472
+CH01473,Cabinet Medical DIASAN et Missa,Cabinet Medical DIASAN et Missa,CH01473
+CH01474,Cabinet Medical Major Doumbia,Cabinet Medical Major Doumbia,CH01474
+CH01475,Major DIALLO,Major DIALLO,CH01475
+CH01476,ASACOBA,ASACOBA,CH01476
+CH01477,ASACODJAN,ASACODJAN,CH01477
+CH01478,Centre de sante CHERIFLA,Centre de sante CHERIFLA,CH01478
+CH01479,Centre de sante Sadhia,Centre de sante Sadhia,CH01479
+CH01480,CSREF 1,CSREF 1,CH01480
+CH01481,Cabinet Medical Yattara,Cabinet Medical Yattara,CH01481
+CH01482,Cabinet Medical Luxembourg,Cabinet Medical Luxembourg,CH01482
+CH01483,Cabinet Medical Touba,Cabinet Medical Touba,CH01483
+CH01484,Cabinet Medical Teriya,Cabinet Medical Teriya,CH01484
+CH01485,Cabinet Medical Kassoum Tienou,Cabinet Medical Kassoum Tienou,CH01485
+CH01486,Cabinet Medical Toguna,Cabinet Medical Toguna,CH01486
+CH01487,Cabinet Medical Djiguiya soba,Cabinet Medical Djiguiya soba,CH01487
+CH01488,Cabinet Medical Chouala,Cabinet Medical Chouala,CH01488
+CH01489,Cabinet Medical Batata,Cabinet Medical Batata,CH01489
+CH01490,Cabinet Medical Espoir,Cabinet Medical Espoir,CH01490
+CH01491,Cabinet Medical Mere-enfant,Cabinet Medical Mere-enfant,CH01491
+CH01492,Hospital Gabriel Toure,Hospital Gabriel Toure,CH01492
+CH01493,Bambara,Bambara,CH01493
+CH01494,Malinke,Malinke,CH01494
+CH01495,Sonike,Sonike,CH01495
+CH01496,Peuhl,Peuhl,CH01496
+CH01497,Bobo,Bobo,CH01497
+CH01498,Senoufo,Senoufo,CH01498
+CH01499,Minianka,Minianka,CH01499
+CH01500,Bozo,Bozo,CH01500
+CH01501,Somono,Somono,CH01501
+CH01502,Dogon,Dogon,CH01502
+CH01503,Sonrhai,Sonrhai,CH01503
+CH01504,Maure,Maure,CH01504
+CH01505,Tamachek,Tamachek,CH01505
+CH01506,Samoko,Samoko,CH01506
+CH01507,Dafing,Dafing,CH01507
+CH01508,Pending,Pending,CH01508
+CH01509,Abandoned,Abandoned,CH01509
+CH01510,Withdrawn,Withdrawn,CH01510
+CH01511,Complete,Complete,CH01511
+CH01512,TAC SVP (Site Validation Period),TAC SVP,CH01512
+CH01513,Rajbari District Hospital,Rajbari District Hospital,CH01513
+CH01514,Other District Hospital,Other District Hospital,CH01514
+CH01515,Diabetic Association Medical College Hospital,Diabetic Association Medical College Hospital,CH01515
+CH01516,Dr. Zahed Memorial pediatric hospital,Dr. Zahed Memorial pediatric hospital,CH01516
+CH01517,Faridpur General Hospital,Faridpur General Hospital,CH01517
+CH01518,Faridpur Medical College Hospital,Faridpur Medical College Hospital,CH01518
+CH01519,Other General Hospital,Other General Hospital,CH01519
+CH01520,Other Medical College Hospital,Other Medical College Hospital,CH01520
+CH01521,Other Private medical College Hospital,Other Private medical College Hospital,CH01521
+CH01522,Other Specialized Hospital,Other Specialized Hospital,CH01522
+CH01523,Private clinic/Hospital,Private clinic/Hospital,CH01523
+CH01524,Baliakandi Upazila Health Complex,Baliakandi Upazila Health Complex,CH01524
+CH01525,H&FWC/FWC,H&FWC/FWC,CH01525
+CH01526,Other Maternal and Child Welfare Centre,Other Maternal and Child Welfare Centre,CH01526
+CH01527,Other Upazila Health Complex,Other Upazila Health Complex,CH01527
+CH01528,Rajbari Maternal and Child Welfare Centre,Rajbari Maternal and Child Welfare Centre,CH01528
+CH01529,Community clinic,Community clinic,CH01529
+CH01530,NGO satellite clinic,NGO satellite clinic,CH01530
+CH01531,NGO static clinic,NGO static clinic,CH01531
+CH01532,Satellite clinic/EPI centre,Satellite clinic/EPI centre,CH01532
+CH01533,Healthcare - Other,Healthcare - Other,CH01533
+CH01534,Pharmacy,Pharmacy,CH01534
+CH01535,Traditional doctor,Traditional doctor,CH01535
+CH01536,Qualified doctor's Chamber,Qualified doctor's Chamber,CH01536
+CH01537,BSMMU,BSMMU,CH01537
+CH01538,icddrb,icddrb,CH01538
+CH01539,Laboratory - Other,Laboratory - Other,CH01539
+CH01541,Luo,Luo,CH01541
+CH01542,Luhya,Luhya,CH01542
+CH01543,Kisii,Kisii,CH01543
+CH01544,Kikuyu,Kikuyu,CH01544
+CH01545,Kuria,Kuria,CH01545
+CH01546,Kamba,Kamba,CH01546
+CH01547,Kalenjin,Kalenjin,CH01547
+CH01548,Maasai,Maasai,CH01548
+CH01549,Turkana,Turkana,CH01549
+CH01550,Mijikenda,Mijikenda,CH01550
+CH01551,Samburu,Samburu,CH01551
+CH01552,Meru,Meru,CH01552
+CH01553,Multi_card TAQ_Stack,Multi_card TAQ_Stack,CH01553
+CH01554,toxigenic C. difficile with the toxin A gene tcdA; non-toxigenic C. difficile insertion sequence also detected,toxigenic C. difficile with the toxin A gene tcdA; non-toxigenic C. difficile insertion sequence also detected,CH01554
+CH01555,toxigenic C. difficile with the toxin A gene tcdA and the toxin B gene tcdB; non-toxigenic C. difficile insertion sequence also detected,toxigenic C. difficile with the toxin A gene tcdA and the toxin B gene tcdB; non-toxigenic C. difficile insertion sequence also detected,CH01555
+CH01556,toxigenic C. difficile with the toxin B gene tcdB; non-toxigenic C. difficile insertion sequence also detected,toxigenic C. difficile with the toxin B gene tcdB; non-toxigenic C. difficile insertion sequence also detected,CH01556
+CH01557,Child TAC,Child TAC,CH01557
+CH01558,Makeni Government Hospital,Makeni Government Hospital,CH01558
+CH01559,Magbeneth Community Hospital,Magbeneth Community Hospital,CH01559
+CH01560,Holy Spirit Hospital,Holy Spirit Hospital,CH01560
+CH01561,Garden Clinic,Garden Clinic,CH01561
+CH01562,Arab Clinic,Arab Clinic,CH01562
+CH01563,Modern Clinic,Modern Clinic,CH01563
+CH01564,Gladice Koroma Clinic,Gladice Koroma Clinic,CH01564
+CH01565,Rescue International,Rescue International,CH01565
+CH01566,Loreto Clinic,Loreto Clinic,CH01566
+CH01567,Police Barracks,Police Barracks,CH01567
+CH01568,Red Cross,Red Cross,CH01568
+CH01569,Mabolleh,Mabolleh,CH01569
+CH01570,Masorie,Masorie,CH01570
+CH01571,Robat,Robat,CH01571
+CH01572,Manonkoh,Manonkoh,CH01572
+CH01573,Makump Bana,Makump Bana,CH01573
+CH01574,Rokunta,Rokunta,CH01574
+CH01575,Pate Bana,Pate Bana,CH01575
+CH01576,Teko Baracks,Teko Baracks,CH01576
+CH01577,Makama,Makama,CH01577
+CH01578,Maforay,Maforay,CH01578
+CH01579,Stoko clinic,Stoko clinic,CH01579
+CH01580,Konsho,Konsho,CH01580
+CH01581,Yoni,Yoni,CH01581
+CH01582,Pamlap,Pamlap,CH01582
+CH01583,Masongbo,Masongbo,CH01583
+CH01584,Makarie,Makarie,CH01584
+CH01585,Mangay Loko,Mangay Loko,CH01585
+CH01586,Puntung,Puntung,CH01586
+CH01587,Mabayo,Mabayo,CH01587
+CH01588,Kolisoko,Kolisoko,CH01588
+CH01589,Fullah Town,Fullah Town,CH01589
+CH01590,Yenkasa,Yenkasa,CH01590
+CH01591,Masuba Clinic,Masuba Clinic,CH01591
+CH01592,Magbaikoli,Magbaikoli,CH01592
+CH01593,Mateneh,Mateneh,CH01593
+CH01594,Karefay Loko,Karefay Loko,CH01594
+CH01595,Mapaki,Mapaki,CH01595
+CH01596,Kathatha,Kathatha,CH01596
+CH01597,Masingbi,Masingbi,CH01597
+CH01598,Kathekeya Bole,Kathekeya Bole,CH01598
+CH01599,Makolor,Makolor,CH01599
+CH01600,Makeni Lol,Makeni Lol,CH01600
+CH01601,Masabong Pill,Masabong Pill,CH01601
+CH01602,Binkolo,Binkolo,CH01602
+CH01603,Masongbo Limba,Masongbo Limba,CH01603
+CH01604,Kargbo,Kargbo,CH01604
+CH01605,Kayasi,Kayasi,CH01605
+CH01606,Maseleh,Maseleh,CH01606
+CH01607,Kabombeh,Kabombeh,CH01607
+CH01608,Kapethe,Kapethe,CH01608
+CH01609,Themne,Themne,CH01609
+CH01610,Mende,Mende,CH01610
+CH01611,Limba,Limba,CH01611
+CH01612,Kono,Kono,CH01612
+CH01613,Creole,Creole,CH01613
+CH01614,Mandingo,Mandingo,CH01614
+CH01615,Loko,Loko,CH01615
+CH01616,Fullah,Fullah,CH01616
+CH01617,Susu,Susu,CH01617
+CH01618,Kurankoh,Kurankoh,CH01618
+CH01619,Yalunka,Yalunka,CH01619
+CH01620,Sherbro,Sherbro,CH01620
+CH01621,Blood Culture,Blood Culture,CH01621
+CH01622,Gram Stain from Blood,Gram Stain (Blood),CH01622
+CH01623,Sub-culture from Blood,Sub-culture (Blood),CH01623
+CH01624,CSF Culture,CSF Culture,CH01624
+CH01625,Gram Stain from CSF,Gram Stain (CSF),CH01625
+CH01626,Sub-Culture from CSF,Sub-culture (CSF),CH01626
+CH01627,Polymorphonuclear cells present,Polymorphonuclear cells present,CH01627
+CH01628,Polymorphonuclear cells not present,Polymorphonuclear cells not present,CH01628
+CH01629,Ap Line Dispensary,Ap Line Dispensary,CH01629
+CH01630,Helsamy Medical Clinic,Helsamy Medical Clinic,CH01630
+CH01631,Jalaram Nursing Home,Jalaram Nursing Home,CH01631
+CH01632,Jootrh,Jootrh,CH01632
+CH01633,Kisumu County Hospital,Kisumu County Hospital,CH01633
+CH01634,Kisumu Police Lines Dispensary,Kisumu Police Lines Dispensary,CH01634
+CH01635,Kuoyo Health Center,Kuoyo Health Center,CH01635
+CH01636,Lumumba Sub County Hospital,Lumumba Sub County Hospital,CH01636
+CH01637,Manyatta Community Medical Clinic,Manyatta Community Medical Clinic,CH01637
+CH01638,Marie Stopes Nursing Home (Kisumu),Marie Stopes Nursing Home (Kisumu),CH01638
+CH01639,Migosi Sub County Hospital,Migosi Sub County Hospital,CH01639
+CH01640,Mtc Clinic (Kisumu),Mtc Clinic (Kisumu),CH01640
+CH01641,New Spring Medical Care,New Spring Medical Care,CH01641
+CH01642,Nightingale Medical Centre,Nightingale Medical Centre,CH01642
+CH01643,Nyalenda Health Centre,Nyalenda Health Centre,CH01643
+CH01644,Olps Clinic,Olps Clinic,CH01644
+CH01645,St Jude's Clinic,St Jude's Clinic,CH01645
+CH01646,Star Maternity & Nursing Home,Star Maternity & Nursing Home,CH01646
+CH01647,Stops Medical Clinic Kenya Ltd,Stops Medical Clinic Kenya Ltd,CH01647
+CH01648,Tuungane Youth Centre (Kisumu East),Tuungane Youth Centre (Kisumu East),CH01648
+CH01649,Ashburn Ohuru Clinic,Ashburn Ohuru Clinic,CH01649
+CH01650,Bar Agulu Dispensary,Bar Agulu Dispensary,CH01650
+CH01651,Barding Dispensary,Barding Dispensary,CH01651
+CH01652,Barma Clinic,Barma Clinic,CH01652
+CH01653,Barolengo Dispensary,Barolengo Dispensary,CH01653
+CH01654,Future Life Dispensary,Future Life Dispensary,CH01654
+CH01655,Gok Prison Siaya,Gok Prison Siaya,CH01655
+CH01656,Jalsongo Medical Clinic,Jalsongo Medical Clinic,CH01656
+CH01657,Jamii Clinical Services Clinic,Jamii Clinical Services Clinic,CH01657
+CH01658,Kogelo Dispensary,Kogelo Dispensary,CH01658
+CH01659,Masumbi Dispensary,Masumbi Dispensary,CH01659
+CH01660,Mulaha Dispensary,Mulaha Dispensary,CH01660
+CH01661,Ngiya Health Centre,Ngiya Health Centre,CH01661
+CH01662,Nyathengo Dispensary,Nyathengo Dispensary,CH01662
+CH01663,Paula Nursing Home,Paula Nursing Home,CH01663
+CH01664,Port Florence Clinic,Port Florence Clinic,CH01664
+CH01665,Randago Dispensary,Randago Dispensary,CH01665
+CH01666,Siaya County Hospital,Siaya County Hospital,CH01666
+CH01667,Siaya Medical Centre,Siaya Medical Centre,CH01667
+CH01668,Siwandhe Medical Clinic,Siwandhe Medical Clinic,CH01668
+CH01669,Tingwangi Health Centre,Tingwangi Health Centre,CH01669
+CH01670,Ulafu Dispensary,Ulafu Dispensary,CH01670
+CH01671,Umala Dispensary,Umala Dispensary,CH01671
+CH01672,Respiratory TAC V2,Respiratory TAC V2,CH01672
+CH01673,BloodCSF Tier 1 TAC V2,BloodCSF Tier 1 TAC V2,CH01673
+CH01674,Polymorphonuclear cells present,Polymorphonuclear cells present,CH01674
+CH01675,Polymorphonuclear cells not present,Polymorphonuclear cells not present,CH01675
+CH01676,Histology,Histology,CH01676
+CH01677,Multiple Testing Methods,Multiple Testing Methods,CH01677
+CH01678,Fresh,Fresh,CH01678
+CH01679,Early,Early,CH01679
+CH01680,Old,Old,CH01680
+CH01681,Early and Old,Early and Old,CH01681
+CH01682,Inclusions,Inclusions,CH01682
+CH01683,Viral syncytia,Viral syncytia,CH01683
+CH01684,Cocci,Cocci,CH01684
+CH01685,Rods,Rods,CH01685
+CH01686,Coccobacilli,Coccobacilli,CH01686
+CH01687,Yeast,Yeast,CH01687
+CH01688,Hyphae,Hyphae,CH01688
+CH01689,Helminth,Helminth,CH01689
+CH01690,Protozoa,Protozoa,CH01690
+CH01691,Low grade,Low grade,CH01691
+CH01692,High grade,High grade,CH01692
+CH01693,Sqames,Squames,CH01693
+CH01694,Meconium balls,Meconium balls,CH01694
+CH01695,Fetal stress,Fetal stress,CH01695
+CH01696,Multiple specimens,Multiple specimens,CH01696
+CH01697,Major findings,Major findings,CH01697
+CH01698,Additional stains,Additional stains,CH01698
+CH01699,Other findings,Other findings,CH01699
+CH01700,Streptococcus pneumoniae,Streptococcus pneumoniae,STPN_1
+CH01701,Enrolled in Error,Enrolled in Error,CH01701
+CH01702,Notification Phase,Notification Phase,CH01702
+CH01703,Non-MITS Phase,Non-MITS Phase,CH01703
+CH01704,MITS Phase,MITS Phase,CH01704
+CH01705,Embargo Record - Data Access Plan Restriction,Embargo Record - Data Access Plan Restriction,CH01705
+CH01706,Embargo Record - Highly-Sensitive Result,Embargo Record - Highly-Sensitive Result,CH01706
+CH01707,Possible under certain circumstances,Possible under certain circumstances,CH01707
+CH01708,Healthy mother,Healthy mother,CH01708
+CH01710,Advanced maternal age,Advanced maternal age,CH01710
+CH01711,Young mother,Young mother,CH01711
+CH01712,Home or unattended delivery,Home or unattended delivery,CH01712
+CH01713,No Records Available,No Records Available,CH01713
+CH01714,Y95 Nosocomial condition,Nosocomial condition,Y95
+CH01715,Y97 Environmental-pollution-related condition,Environmental-pollution-related condition,Y97
+CH01716,U82 Resistance to betalactam antibiotics,Resistance to betalactam antibiotics,U82
+CH01717,U82.0 Resistance to penicillin,Resistance to penicillin,U82.0
+CH01718,U82.1 Resistance to methicillin,Resistance to methicillin,U82.1
+CH01719,U82.2 Extended spectrum betalactamase (ESBL) resistance,Extended spectrum betalactamase (ESBL) resistance,U82.2
+CH01720,U82.8 Resistance to other betalactam antibiotics,Resistance to other betalactam antibiotics,U82.8
+CH01721,"U82.9 Resistance to betalactam antibiotics, unspecified","Resistance to betalactam antibiotics, unspecified",U82.9
+CH01722,U83 Resistance to other antibiotics,Resistance to other antibiotics,U83
+CH01723,U83.0 Resistance to vancomycin,Resistance to vancomycin,U83.0
+CH01724,U83.1 Resistance to other vancomycin related antibiotics,Resistance to other vancomycin related antibiotics,U83.1
+CH01725,U83.2 Resistance to quinolones,Resistance to quinolones,U83.2
+CH01726,U83.7 Resistance to multiple antibiotics,Resistance to multiple antibiotics,U83.7
+CH01727,U83.8 Resistance to other single specified antibiotic,Resistance to other single specified antibiotic,U83.8
+CH01728,U83.9 Resistance to unspecified antibiotic,Resistance to unspecified antibiotic,U83.9
+CH01729,U84 Resistance to other antimicrobial drugs,Resistance to other antimicrobial drugs,U84
+CH01730,U84.0 Resistance to antiparasitic drug(s),Resistance to antiparasitic drug(s),U84.0
+CH01731,U84.1 Resistance to antifungal drug(s),Resistance to antifungal drug(s),U84.1
+CH01732,U84.2 Resistance to antiviral drug(s),Resistance to antiviral drug(s),U84.2
+CH01733,U84.3 Resistance to tuberculostatic drug(s),Resistance to tuberculostatic drug(s),U84.3
+CH01734,U84.7 Resistance to multiple antimicrobial drugs,Resistance to multiple antimicrobial drugs,U84.7
+CH01735,U84.8 Resistance to other specified antimicrobial drug,Resistance to other specified antimicrobial drug,U84.8
+CH01736,U84.9 Resistance to unspecified antimicrobial drugs,Resistance to unspecified antimicrobial drugs,U84.9
+CH01737,U85 Resistance to antineoplastic drugs,Resistance to antineoplastic drugs,U85
+CH01738,Bone Marrow Aspirate,Bone Marrow Aspirate,CH01738
+CH01739,Other organism 2,Other organism 2,CH01739
+CH01740,Other organism 3,Other organism 3,CH01740
+CH01741,Other organism 4,Other organism 4,CH01741
+CH01742,Other organism 5,Other organism 5,CH01742
+CH01743,Placenta condition received,Placenta condition received,CH01743
+CH01744,Weight the whole placenta (trimmed of extraplacental membranes and umbilical cord),Weight the whole placenta (trimmed of extraplacental membranes and umbilical cord),CH01744
+CH01745,Prior sampling of microbiology,Placenta prior sampling of microbiology,CH01745
+CH01746,Maximal linear dimension (length),Placenta- maximal linear dimension (length),CH01746
+CH01747,Greatest dimension of the axis perpendicular to this linear measurement (width),Placenta- greatest dimension of the axis perpendicular to this linear measurement (width),CH01747
+CH01748,Mural minimal thickness,Placenta- mural minimal thickness,CH01748
+CH01749,Diameter of the cord,Placenta- diameter of the cord,CH01749
+CH01750,Length of the cord,Placenta- length of the cord,CH01750
+CH01751,Distance between the insertion site and the nearest placental margin,Placenta- distance between the insertion site and the nearest placental margin,CH01751
+CH01752,Velamentous insertion,Placenta - velamentous insertion,CH01752
+CH01753,Presence of strictures,Placenta - presence of strictures,CH01753
+CH01754,Appearance of the cord,Placenta - appearance of the cord,CH01754
+CH01755,Color,Placenta - color,CH01755
+CH01756,Complete membranes,Placenta - complete membranes,CH01756
+CH01757,Circumvallate or circummarginate present,Circumvallate or circummarginate present,CH01757
+CH01758,Number of Infarcts,Placenta - number of Infarcts,CH01758
+CH01759,Infarcts percentage of the total parenchymal volume,Placenta - infarcts percentage of the total parenchymal volume,CH01759
+CH01760,Location of the infarcts,Placenta - location of the infarcts,CH01760
+CH01761,Retroplacental hemorrhage,Placenta - retroplacental hemorrhage,CH01761
+CH01762,Retroplacental hemorrhage length,Placenta - retroplacental hemorrhage length,CH01762
+CH01763,Retroplacental hemorrhage width,Placenta - retroplacental hemorrhage width,CH01763
+CH01764,Retroplacental hemorrhage - percentage of the maternal surface involved,Placenta - retroplacental hemorrhage - percentage of the maternal surface involved,CH01764
+CH01765,Other gross findings,Placenta - other gross findings,CH01765
+CH01766,Histologically normal,Histologically normal,CH01766
+CH01767,Compatible with gestational age,Compatible with gestational age,CH01767
+CH01768,Features of vascular malperfusion in placental bed,Features of vascular malperfusion in placental bed,CH01768
+CH01769,Infarcts chronicity,Infarcts chronicity,CH01769
+CH01770,Retroplacental hemmorrhage,Retroplacental hemmorrhage,CH01770
+CH01771,Distal villous hypoplasia,Distal villous hypoplasia,CH01771
+CH01772,Accelerated villous maturation,Accelerated villous maturation,CH01772
+CH01773,Calcification,Calcification,CH01773
+CH01774,Decidual arteriopathy,Decidual arteriopathy,CH01774
+CH01775,Other maternal vascular malperfusion findings,Other maternal vascular malperfusion findings,CH01775
+CH01776,Features of fetal vascular malperfusion,Features of fetal vascular malperfusion,CH01776
+CH01777,Thrombosis,Thrombosis,CH01777
+CH01778,Avascular villi,Avascular villi,CH01778
+CH01779,Intramural fibrin deposition,Intramural fibrin deposition,CH01779
+CH01780,Villous stomal-vascular kariorrhexis,Villous stomal-vascular kariorrhexis,CH01780
+CH01781,Stem vessel obliteration,Stem vessel obliteration,CH01781
+CH01782,Vascular exstasia,Vascular exstasia,CH01782
+CH01783,Delayed villous maturation,Delayed villous maturation,CH01783
+CH01784,Other fetal vascular malperfusion findings,Other fetal vascular malperfusion findings,CH01784
+CH01785,Villitis,Villitis,CH01785
+CH01786,Funistis,Funistis,CH01786
+CH01787,Chorioamniontis,Chorioamniontis,CH01787
+CH01788,Pigmented macrophages (meconium),Pigmented macrophages (meconium),CH01788
+CH01789,Bacteria (cocci),Bacteria (cocci),CH01789
+CH01790,Bacteria (rods),Bacteria (rods),CH01790
+CH01791,Bacteria (coccobacilli),Bacteria (coccobacilli),CH01791
+CH01792,Fungi (yeast),Fungi (yeast),CH01792
+CH01793,Fungi (hyphae),Fungi (hyphae),CH01793
+CH01794,Parasite (helminth),Parasite (helminth),CH01794
+CH01795,Parasite (protozoa),Parasite (protozoa),CH01795
+CH01796,Virus (inclusions),Virus (inclusions),CH01796
+CH01797,Virus (viral syncytia),Virus (viral syncytia),CH01797
+CH01798,Placenta - Pathology diagnosis,Placenta - Pathology diagnosis,CH01798
+CH01799,Percentage,Percentage,CH01799
+CH01800,Peripheral,Peripheral,CH01800
+CH01801,Central or paracentral,Central or paracentral,CH01801
+CH01802,Normal,Normal,CH01802
+CH01803,Hypercoiled (less than 1 coil per 10 cm),Hypercoiled (less than 1 coil per 10 cm),CH01803
+CH01804,Hypercoiled (greater than 3 coils per 10 cm),Hypercoiled (greater than 3 coils per 10 cm),CH01804
+CH01805,Segmental hypercoiling,Segmental hypercoiling,CH01805
+CH01806,Fresh specimen,Fresh specimen,CH01806
+CH01807,BloodCSF Tier 2 V2,BloodCSF Tier 2 V2,CH01807
+CH01808,Pending,Pending,CH01808
+CH01809,Suspended,Suspended,CH01809
+CH01810,Cleared,Cleared,CH01810
+CH01811,Missing Data,Missing Data,CH01811
+CH01812,Incorrect Data,Incorrect Data,CH01812
+CH01813,Other,Other,CH01813
+CH01814,Site Hold,Site Hold,CH01814
+CH01815,PO Hold,PO Hold,CH01815
+CH01816,Site Release,Site Release,CH01816
+CH01817,PO Release,PO Release,CH01817
+CH01818,Arenavirus,Arenavirus,CH01818
+CH01819,Lassa Fever Virus,Lassa Fever Virus,CH01819
+CH01820,Lassa Fever Virus,Lassa Fever Virus,CH01820
+CH01821,Lassa Fever Virus,Lassa Fever Virus,CH01821
+CH01822,Lassa Fever Virus,Lassa Fever Virus,CH01822
+CH01823,Lassa Fever Virus,Lassa Fever Virus,CH01823
+CH01824,Lassa Fever Virus,Lassa Fever Virus,CH01824
+CH01825,Negative for Lassa Fever Virus,Negative for Lassa Fever Virus,CH01825
+CH01826,Indeterminate for Lassa Fever Virus,Indeterminate for Lassa Fever Virus,CH01826
+CH01827,Lassa Fever Virus target A,Lassa Fever Virus target A,LAVA_1
+CH01828,Lassa Fever Virus target B,Lassa Fever Virus target B,LAVB_1
+CH01829,Arenavirus (Pan Lassa Fever Virus),Arenavirus (Pan Lassa Fever Virus),LAVP_1
+CH01832,Arenavirus/Lassa Fever,Arenavirus/Lassa Fever,LASS_1
+CH01833,Auxiliary Test 1,Auxiliary Test 1,CH01833
+CH01834,Auxiliary Test 2,AuxiliaryTest 2,CH01834
+CH01835,AuxiliaryTest 3,Auxiliary Test 3,CH01835
+CH01836,Auxiliary Test 4,Auxiliary Test 4,CH01836
+CH01837,Auxiliary Test 5,Auxiliary Test 5,CH01837
+CH01838,Lab does not perform this test,Lab does not perform this test,CH01838
+CH01839,From one health facility to another,From one health facility to another,CH01839
+CH01840,Traditional birth attendant place of practice,Traditional birth attendant place of practice,CH01840
+CH01841,Traditional healer place of practice,Traditional healer place of practice,CH01841
+CH01842,Family member,Family member,CH01842
+CH01843,No Religion,No Religion,CH01843
+CH01844,Exact,Exact,CH01844
+CH01845,Approximate,Approximate,CH01845
+CH01846,Late notification (no longer eligible for MITS),Late notification (no longer eligible for MITS),CH01846
+CH01847,Body already buried or cremated,Body already buried or cremated,CH01847
+CH01848,Family wishes to bury body before eligibility screening can be conducted,Family wishes to bury body before eligibility screening can be conducted,CH01848
+CH01849,Logistical and/or CHAMPS staff availability issues,Logistical and/or CHAMPS staff availability issues,CH01849
+CH01850,Consenting party not available,Consenting party not available,CH01850
+CH01851,Site specific MITS exclusion criteria,Site specific MITS exclusion criteria,CH01851
+CH01852,Complex family dynamics or emotional distress,Complex family dynamics or emotional distress,CH01852
+CH01853,Changana,Changana,CH01853
+CH01854,Machangana,Machangana,CH01854
+CH01855,Placental lesion,Placental lesion,CH01855
+CH01856,Intervillositis,Intervillositis,CH01856
+CH01857,Other Health Facility,Other Health Facility,CH01857
+CH01858,Etiology Issue,Etiology Issue,CH01858
+CH01859,Bacillus spp.,Bacillus spp.,CH01859
+CH01860,Coagulase negative Staphylococcus,Coagulase negative Staphylococcus,CH01860
+CH01861,Enterococcus spp.,Enterococcus spp.,CH01861
+CH01862,Klebsiella spp.,Klebsiella spp.,CH01862
+CH01863,Klebsiella terragina,Klebsiella terragina,CH01863
+CH01864,Viridans streptococcus,Viridans streptococcus,CH01864
+CH01865,Streptococcus spp.,Streptococcus spp.,CH01865
+CH01866,Bone Marrow Aspirate in culture media,Bone Marrow Aspirate in culture media,CH01866
+CH01867,Lung tissue in culture media,Lung tissue in culture media,CH01867
+CH01868,Mural maximal thickness,Placenta- mural maximal thickness,CH01868
+CH01869,Family lost to follow-up,Family lost to follow-up,CH01869
+CH01870,Family refused follow-up,Family refused follow-up,CH01870
+CH01871,Multiple unsuccessful attempts and no follow-up session scheduled,Multiple unsuccessful attempts and no follow-up session scheduled,CH01871
+CH01872,Exact cause from DeCode (including if cause was undetermined),Exact cause from DeCode (including if cause was undetermined),CH01872
+CH01873,Simplified cause,Simplified cause,CH01873
+CH01874,No Cause,No Cause,CH01874
+CH01875,Guardian,Guardian,CH01875
+CH01876,Hemolyzed,Hemolyzed,CH01876
+CH01877,Other Unit of Measure,Other Unit of Measure,CH01877
+CH01878,Within Normal MUAC Range (MUACZ ? -2),Within Normal MUAC Range (MUACZ ? -2),CH01878
+CH01879,Moderate Malnutrition (-3? MUACZ < -2),Moderate Malnutrition (-3? MUACZ < -2),CH01879
+CH01880,Severe malnutrition (MUACZ < -3),Severe malnutrition (MUACZ < -3),CH01880
+CH01881,Flat bone,Flat bone,CH01881
+CH01882,Long bone,Long bone,CH01882
+CH01883,Dry Blood Spot,Dry Blood Spot,CH01883
+CH01884,Y66 Nonadministration of surgical and medical care,Nonadministration of surgical and medical care,Y66
+CH01885,Improved infection prevention and control,Improved infection prevention and control,CH01885
+CH01886,Improved HIV prevention and control,Improved HIV prevention and control,CH01886
+CH01887,Improved ANC and obstetric care and management,Improved ANC and obstetric care and management,CH01887
+CH01888,Improved family planning,Improved family planning,CH01888
+CH01889,Improved clinical management and quality of care,Improved clinical management and quality of care,CH01889
+CH01890,"Improved health education [immunizations, preventing malnutrition, diarrhea, burns, poisoning, etc.]","Improved health education [immunizations, preventing malnutrition, diarrhea, burns, poisoning, etc.]",CH01890
+CH01891,Improved health-seeking behavior,Improved health-seeking behavior,CH01891
+CH01892,Improved nutritional support,Improved nutritional support,CH01892
+CH01893,Improved vaccinations,Improved vaccinations,CH01893
+CH01894,Improved transport system,Improved transport system,CH01894
+CH01895,Other recommendation,Other recommendation,CH01895
+CH01896,Local social/cultural concerns,Local social/cultural concerns,CH01896
+CH01897,Aga Khan Hospital,Aga Khan Hospital,CH01897
+CH01898,CVD-Mali Morgue,CVD-Mali Morgue,CH01898
+CH01899,Human Immunodeficiency Virus (HIV),HIV,CH01899
+CH01900,Culture Isolate ID,Culture Isolate ID,CH01900
+CH01901,Champs ID,Champs ID,CH01901
+CH01902,Culture Isolate,Culture Isolate,CH01902
+CH01903,Local identifier,Local identifier,CH01903
+CH01904,Parent identifier,Parent identifier,CH01904
+CH01905,"Granulomas, with giant cells","Granulomas, with giant cells",CH01905
+CH01906,Mononuclear cells for portal inflammation,Mononuclear cells for portal inflammation,CH01906
+CH01907,Mixed inflammation for portal inflammation,Mixed inflammation for portal inflammation,CH01907
+CH01908,Formalin pigment,Formalin pigment,CH01908
+CH01909,Hemosiderin pigment,Hemosiderin pigment,CH01909
+CH01910,Hemozoin pigment,Hemozoin pigment,CH01910
+CH01911,Other pigment,Other pigment,CH01911
+CH01912,"Steatosis, small droplet","Steatosis, small droplet",CH01912
+CH01913,"Steatosis, large droplet","Steatosis, large droplet",CH01913
+CH01914,Periportal steatosis,Periportal steatosis,CH01914
+CH01915,Azonal,Azonal,CH01915
+CH01916,Midzonal,Midzonal,CH01916
+CH01917,Centrilobular,Centrilobular,CH01917
+CH01918,Bridging necrosis,Bridging necrosis,CH01918
+CH01919,Cirrhosis,Cirrhosis,CH01919
+CH01920,Other fibrosis,Other fibrosis,CH01920
+CH01921,Bile ductular reaction,Bile ductular reaction,CH01921
+CH01922,Intravascular leukocytosis,Intravascular leukocytosis,CH01922
+CH01923,Vasculitis,Vasculitis,CH01923
+CH01924,Thrombi,Thrombi,CH01924
+CH01925,"Minimal, non-specific findings","Minimal, non-specific findings",CH01925
+CH01926,Aspirated GI contents,Aspirated GI contents,CH01926
+CH01927,aspiration with inflammation,aspiration with inflammation,CH01927
+CH01928,Aspiration without inflammation,Aspiration without inflammation,CH01928
+CH01929,Pre-term lung,Pre-term lung,CH01929
+CH01930,Parenchymal necrosis,Parenchymal necrosis,CH01930
+CH01931,Neuronal necrosis,Neuronal necrosis,CH01931
+CH01932,Satellitosis,Satellitosis,CH01932
+CH01933,Aspergillus spp.,Aspergillus spp.,CH01933
+CH01934,B. bronchiseptica,Bordetella bronchiseptica,CH01934
+CH01935,B. holmseii,Bordetella holmesii,CH01935
+CH01937,Bordetella spp.,Bordetella spp.,CH01937
+CH01938,Candida spp.,Candida spp.,CH01938
+CH01939,Clostridium spp.,Clostridium spp.,CH01939
+CH01940,Mycobacterium spp.,Mycobacterium spp.,CH01940
+CH01941,Staphylococcus spp.,Staphylococcus spp.,CH01941
+CH01942,Infectious agent,Infectious agent,CH01942
+CH01943,Pigment,Pigment,CH01943
+CH01944,Multinucleated hepatocytes,Multinucleated hepatocytes,CH01944
+CH01945,Neutrophilic infiltrate for portal inflammation,Neutrophilic infiltrate for portal inflammation,CH01945
+CH01946,Neutrophilic infiltrate for sinusoidal inflammation,Neutrophilic infiltrate for sinusoidal inflammation,CH01946
+CH01947,Mononuclear cells for sinusiodal inflammation,Mononuclear cells for sinusiodal inflammation,CH01947
+CH01948,Mixed inflammation for sinusoidal inflammation,Mixed inflammation for sinusoidal inflammation,CH01948
+CH01949,Eosinophilic infiltrate for portal inflammation,Eosinophilic infiltrate for portal inflammation,CH01949
+CH01950,Eosinophilic infiltrate for sinusoidal inflammation,Eosinophilic infiltrate for sinusoidal inflammation,CH01950
+CH01951,Formalin pigment in Kupffer cells,Formalin pigment in Kupffer cells,CH01951
+CH01952,Hemosiderin pigment in Kupffer cells,Hemosiderin pigment in Kupffer cells,CH01952
+CH01953,Hemozoin pigment in Kupffer cells,Hemozoin pigment in Kupffer cells,CH01953
+CH01954,Other pigment in Kupffer cells,Other pigment in Kupffer cells,CH01954
+CH01955,Periportal necrosis,Periportal necrosis,CH01955
+CH01956,Periportal fibrosis,Periportal fibrosis,CH01956
+CH01957,Bridging fibrosis,Bridging fibrosis,CH01957
+CH01958,Formalin pigment in portal macrophages,Formalin pigment in portal macrophages,CH01958
+CH01959,Hemosiderin pigment in portal macrophages,Hemosiderin pigment in portal macrophages,CH01959
+CH01960,Hemozoin pigment in portal macrophages,Hemozoin pigment in portal macrophages,CH01960
+CH01961,Other pigment in portal macrophages,Other pigment in portal macrophages,CH01961
+CH01962,Aspiration material reaction inflammation type,Aspiration material reaction inflammation type,CH01962
+CH01963,Kersa,Kersa,CH01963
+CH01964,Haramaya,Haramaya,CH01964
+CH01965,Harar,Harar,CH01965
+CH01966,Amharic,Amharic,CH01966
+CH01967,Afran-oromo,Afran-oromo,CH01967
+CH01968,Somali,Somali,CH01968
+CH01969,Tigrinya,Tigrinya,CH01969
+CH01970,Sidmao,Sidmao,CH01970
+CH01971,Wolaytta,Wolaytta,CH01971
+CH01972,Gurage,Gurage,CH01972
+CH01973,Afar,Afar,CH01973
+CH01974,Hadyya,Hadyya,CH01974
+CH01975,Gamo/Gofa,Gamo/Gofa,CH01975
+CH01976,Gedeo,Gedeo,CH01976
+CH01977,Kafa,Kafa,CH01977
+CH01978,Adere,Adere,CH01978
+CH01979,Silte,Silte,CH01979
+CH01980,Oromo,Oromo,CH01980
+CH01981,Amhara,Amhara,CH01981
+CH01982,Somali,Somali,CH01982
+CH01983,Tigrayan,Tigrayan,CH01983
+CH01984,Sidama,Sidama,CH01984
+CH01985,Gurage,Gurage,CH01985
+CH01986,Wolayta,Wolayta,CH01986
+CH01987,Hadiya,Hadiya,CH01987
+CH01988,Afar,Afar,CH01988
+CH01990,Adere/Harari,Adere/Harari,CH01990
+CH01991,Silte,Silte,CH01991
+CH01992,Ethiopian Orthodox,Ethiopian Orthodox,CH01992
+CH01993,Waqefeta,Waqefeta,CH01993
+CH01994,Traditional African: Cultural,Traditional African: Cultural,CH01994
+CH01995,Bereka Health Center,Bereka Health Center,CH01995
+CH01996,Dollu Selama Health Center,Dollu Selama Health Center,CH01996
+CH01997,Gola Health Center,Gola Health Center,CH01997
+CH01998,Haramaya District Hospital,Haramaya District Hospital,CH01998
+CH01999,Hararghe Health Research Laboratory,Hararghe Health Research Laboratory,CH01999
+CH02000,Hararghe Health Research Laboratory,Hararghe Health Research Laboratory,CH02000
+CH02001,Hararghe Health Research Laboratory,Hararghe Health Research Laboratory,CH02001
+CH02002,Hiwot Fana Hospital,Hiwot Fana Hospital,CH02002
+CH02003,Hiwot Fana Hospital - Paediatric,Hiwot Fana Hospital - Paediatric,CH02003
+CH02004,Hiwot Fana Hospital - Maternity,Hiwot Fana Hospital - Maternity,CH02004
+CH02005,Hiwot Fana Hospital - NICU,Hiwot Fana Hospital - NICU,CH02005
+CH02006,Hiwot Fana Hospital - Laboratory:Histology/Pathology,Hiwot Fana Hospital - Laboratory:Histology/Pathology,CH02006
+CH02007,Kersa Health Center,Kersa Health Center,CH02007
+CH02008,Lange Health Center,Lange Health Center,CH02008
+CH02009,Weter Health Center,Weter Health Center,CH02009
+CH02010,Nasopharyngeal and Oropharyngeal mucosa,Nasopharyngeal and Oropharyngeal mucosa,CH02010
+CH02011,Count,Count,CH02011
+CH02012,Vicum storage media,Vicum storage media,CH02012
+CH02013,Lysis buffer,Lysis buffer,CH02013
+CH02014,Formalin-fixed paraffin embedded tissue,Formalin-fixed paraffin embedded tissue,CH02014
+CH02015,Glycerol,Glycerol,CH02015
+CH02016,Dimethyl Sulfoxide (DMSO),Dimethyl Sulfoxide (DMSO),CH02016
+CH02017,Protocol Deviation,Protocol Deviation,CH02017
+CH02018,Adverse Event,Adverse Event,CH02018
+CH02019,Consent related,Consent related,CH02019
+CH02020,Enrollment related,Enrollment related,CH02020
+CH02021,Breach of privacy/confidentiality,Breach of privacy/confidentiality,CH02021
+CH02022,Verbal Autopsy Consent,Verbal Autopsy Consent,CH02022
+CH02023,Not determined,Not determined,CH02023
+CH02024,Definitely yes,Definitely yes,CH02024
+CH02025,Possibly yes,Possibly yes,CH02025
+CH02026,Probably no,Probably no,CH02026
+CH02027,Definitely no,Definitely no,CH02027
+CH02028,In progress,In progress,CH02028
+CH02029,To be determined,To be determined,CH02029
+CH02030,Standard Operating Procedures (SOPs),Standard Operating Procedures (SOPs),CH02030
+CH02031,Protocols,Protocols,CH02031
+CH02032,ICF (Informed Consent Form),ICF (Informed Consent Form),CH02032
+CH02033,None of the above,None of the above,CH02033
+CH02034,Immediately,Immediately,CH02034
+CH02035,In yearly continuing review,In yearly continuing review,CH02035
+CH02036,Bitonga,Bitonga,CH02036
+CH02037,Chope,Chope,CH02037
+CH02038,Chuabo,Chuabo,CH02038
+CH02039,Emakhuwa,Emakhuwa,CH02039
+CH02040,Lomue,Lomue,CH02040
+CH02041,Machope,Machope,CH02041
+CH02042,Makonde,Makonde,CH02042
+CH02043,Manhaua,Manhaua,CH02043
+CH02044,Marenge,Marenge,CH02044
+CH02045,Maronga,Maronga,CH02045
+CH02046,Matswa,Matswa,CH02046
+CH02047,Mwani,Mwani,CH02047
+CH02048,Ndau,Ndau,CH02048
+CH02049,Nguni,Nguni,CH02049
+CH02050,Nsenga,Nsenga,CH02050
+CH02051,Nyanja,Nyanja,CH02051
+CH02052,Nyungwe,Nyungwe,CH02052
+CH02053,Pimbwe,Pimbwe,CH02053
+CH02054,Shona,Shona,CH02054
+CH02055,Yao,Yao,CH02055
+CH02056,Atheism,Atheism,CH02056
+CH02057,Indu,Indu,CH02057
+CH02058,Universal Church,Universal Church,CH02058
+CH02059,Apostolic Church,Apostolic Church,CH02059
+CH02060,Hospital Rural de Xinavane,Hospital Rural de Xinavane,CH02060
+CH02061,Maluana,Maluana,CH02061
+CH02062,Maragra,Maragra,CH02062
+CH02063,QUELIMANE DISTRICT: Urban 1: Hospital Central de Quelimane,QUELIMANE DISTRICT: Urban 1: Hospital Central de Quelimane,CH02063
+CH02064,QUELIMANE DISTRICT: Urban 1: HG de Quelimane,QUELIMANE DISTRICT: Urban 1: HG de Quelimane,CH02064
+CH02065,QUELIMANE DISTRICT: Urban 4: CS  17 de Setembro,QUELIMANE DISTRICT: Urban 4: CS  17 de Setembro,CH02065
+CH02066,QUELIMANE DISTRICT: Urban 1: CS  24 de Julho,QUELIMANE DISTRICT: Urban 1: CS  24 de Julho,CH02066
+CH02067,QUELIMANE DISTRICT: Urban 3: CS de Coalane,QUELIMANE DISTRICT: Urban 3: CS de Coalane,CH02067
+CH02068,QUELIMANE DISTRICT: Maquival: CS de Varela,QUELIMANE DISTRICT: Maquival: CS de Varela,CH02068
+CH02069,QUELIMANE DISTRICT: Urban 1: CS  4 de Dezembro,QUELIMANE DISTRICT: Urban 1: CS  4 de Dezembro,CH02069
+CH02070,QUELIMANE DISTRICT: Urban 1: PS Cadeia Civil,QUELIMANE DISTRICT: Urban 1: PS Cadeia Civil,CH02070
+CH02071,QUELIMANE DISTRICT: Urban 3: CS  de Namuinho,QUELIMANE DISTRICT: Urban 3: CS  de Namuinho,CH02071
+CH02072,QUELIMANE DISTRICT: Urban 2: CS de Sangariveira,QUELIMANE DISTRICT: Urban 2: CS de Sangariveira,CH02072
+CH02073,QUELIMANE DISTRICT: Urban 3: PS de Zalala Mar,QUELIMANE DISTRICT: Urban 3: PS de Zalala Mar,CH02073
+CH02074,QUELIMANE DISTRICT: Urban 1: PS Militar,QUELIMANE DISTRICT: Urban 1: PS Militar,CH02074
+CH02075,QUELIMANE DISTRICT: Urban 4: CS de  Chabeco,QUELIMANE DISTRICT: Urban 4: CS de  Chabeco,CH02075
+CH02076,QUELIMANE DISTRICT: Urban 2: CS  de  Incidua,QUELIMANE DISTRICT: Urban 2: CS  de  Incidua,CH02076
+CH02077,QUELIMANE DISTRICT: Urban 5: CS  de Micajune,QUELIMANE DISTRICT: Urban 5: CS  de Micajune,CH02077
+CH02078,QUELIMANE DISTRICT: Maquival: CS de Inhangulue,QUELIMANE DISTRICT: Maquival: CS de Inhangulue,CH02078
+CH02079,QUELIMANE DISTRICT: Maquival: C.S. Estação Malanha,QUELIMANE DISTRICT: Maquival: C.S. Estação Malanha,CH02079
+CH02080,QUELIMANE DISTRICT: Maquival: CS de Ionge,QUELIMANE DISTRICT: Maquival: CS de Ionge,CH02080
+CH02081,QUELIMANE DISTRICT: Maquival: CS de Maquival-Rio,QUELIMANE DISTRICT: Maquival: CS de Maquival-Rio,CH02081
+CH02082,QUELIMANE DISTRICT: Maquival: CS de Maquival Sede,QUELIMANE DISTRICT: Maquival: CS de Maquival Sede,CH02082
+CH02083,QUELIMANE DISTRICT: Maquival: PS de Marrongane,QUELIMANE DISTRICT: Maquival: PS de Marrongane,CH02083
+CH02084,QUELIMANE DISTRICT: Maquival: CS. Madal,QUELIMANE DISTRICT: Maquival: CS. Madal,CH02084
+CH02085,CLINICS  QUELIMANE DISTRICT: Urban 1: Clinica Bons Sinais,CLINICS  QUELIMANE DISTRICT: Urban 1: Clinica Bons Sinais,CH02085
+CH02086,CLINICS  QUELIMANE DISTRICT: Urban 1: Clinica Boa Esperanca,CLINICS  QUELIMANE DISTRICT: Urban 1: Clinica Boa Esperanca,CH02086
+CH02087,CLINICS  QUELIMANE DISTRICT: Urban 1: Clinica VWT,CLINICS  QUELIMANE DISTRICT: Urban 1: Clinica VWT,CH02087
+CH02088,CLINICS  QUELIMANE DISTRICT: Urban 1: Clinica do Hospital Central de Quelimane,CLINICS  QUELIMANE DISTRICT: Urban 1: Clinica do Hospital Central de Quelimane,CH02088
+CH02089,CLINICS  QUELIMANE DISTRICT: Urban 1: Clinia Santa Victoria,CLINICS  QUELIMANE DISTRICT: Urban 1: Clinia Santa Victoria,CH02089
+CH02090,CLINICS  QUELIMANE DISTRICT: Urban 1: CS Dream (PRIVADO),CLINICS  QUELIMANE DISTRICT: Urban 1: CS Dream (PRIVADO),CH02090
+CH02091,NICOADALA: Nicoadala Sede: CS  Nicoadala-Sede,NICOADALA: Nicoadala Sede: CS  Nicoadala-Sede,CH02091
+CH02092,NICOADALA: Nicoadala Sede: CS de Licuar,NICOADALA: Nicoadala Sede: CS de Licuar,CH02092
+CH02093,NICOADALA: Nicoadala Sede: CS de Namacata,NICOADALA: Nicoadala Sede: CS de Namacata,CH02093
+CH02094,NICOADALA: Nicoadala Sede: CS Amorro,NICOADALA: Nicoadala Sede: CS Amorro,CH02094
+CH02095,NICOADALA: Nicoadala Sede: CS Quinta Girassol,NICOADALA: Nicoadala Sede: CS Quinta Girassol,CH02095
+CH02096,NICOADALA: Nicoadala Sede: PS Domela,NICOADALA: Nicoadala Sede: PS Domela,CH02096
+CH02097,NICOADALA: Nicoadala Sede: CS de Ilalane,NICOADALA: Nicoadala Sede: CS de Ilalane,CH02097
+CH02098,"NAMACURRA: Namacurra-Sede : CS de Namacurra","NAMACURRA: Namacurra-Sede : CS de Namacurra",CH02098
+CH02099,"NAMACURRA: Macuse Sede: CS de Macuse","NAMACURRA: Macuse Sede: CS de Macuse",CH02099
+CH02100,"NAMACURRA: Namacurra-Sede : CS  Malei","NAMACURRA: Namacurra-Sede : CS  Malei",CH02100
+CH02101,"NAMACURRA: Macuse Sede: CSde Mexixine","NAMACURRA: Macuse Sede: CSde Mexixine",CH02101
+CH02102,"NAMACURRA: Namacurra-Sede : PS de Naciaia","NAMACURRA: Namacurra-Sede : PS de Naciaia",CH02102
+CH02103,"NAMACURRA: Macuse Sede: CS de Mbawa","NAMACURRA: Macuse Sede: CS de Mbawa",CH02103
+CH02104,"NAMACURRA: Namacurra-Sede : CS de Muebele","NAMACURRA: Namacurra-Sede : CS de Muebele",CH02104
+CH02105,"NAMACURRA: Namacurra-Sede : CS de Mutange","NAMACURRA: Namacurra-Sede : CS de Mutange",CH02105
+CH02106,"NAMACURRA: Macuse : CS de Muceliua","NAMACURRA: Macuse : CS de Muceliua",CH02106
+CH02107,"NAMACURRA: Macuse : PS Militar","NAMACURRA: Macuse : PS Militar",CH02107
+CH02108,"NAMACURRA: Macuse : CS Furquia","NAMACURRA: Macuse : CS Furquia",CH02108
+CH02109,"NAMACURRA: Namacurra-Sede : CS de Mugubia","NAMACURRA: Namacurra-Sede : CS de Mugubia",CH02109
+CH02110,MOPEIA: Mopeia Sede: CS de Mopeia-Sede,MOPEIA: Mopeia Sede: CS de Mopeia-Sede,CH02110
+CH02111,MOPEIA: Mopeia Sede: CS de Chimuara,MOPEIA: Mopeia Sede: CS de Chimuara,CH02111
+CH02112,MOPEIA: Campo: CS de  Lua-Lua,MOPEIA: Campo: CS de  Lua-Lua,CH02112
+CH02113,MOPEIA: Campo: CS Posto Campo,MOPEIA: Campo: CS Posto Campo,CH02113
+CH02114,INHASSUNGE: Mucupia Sede: CS Bingagira,INHASSUNGE: Mucupia Sede: CS Bingagira,CH02114
+CH02115,INHASSUNGE: Mucupia Sede: CS Chirimane,INHASSUNGE: Mucupia Sede: CS Chirimane,CH02115
+CH02116,INHASSUNGE: Gonhane: CS Gonhane,INHASSUNGE: Gonhane: CS Gonhane,CH02116
+CH02117,INHASSUNGE: Mucupia Sede: CS Ilova,INHASSUNGE: Mucupia Sede: CS Ilova,CH02117
+CH02118,INHASSUNGE: Mucupia Sede: CS Inhassunge-Sede,INHASSUNGE: Mucupia Sede: CS Inhassunge-Sede,CH02118
+CH02119,INHASSUNGE: Mucupia Sede: CS Olinda,INHASSUNGE: Mucupia Sede: CS Olinda,CH02119
+CH02120,INHASSUNGE: Mucupia Sede: CS Palane-Mucula,INHASSUNGE: Mucupia Sede: CS Palane-Mucula,CH02120
+CH02121,LUABO: Luabo: CS Luabo,LUABO: Luabo: CS Luabo,CH02121
+CH02122,DERRE: Derre Sede: CS Derre,DERRE: Derre Sede: CS Derre,CH02122
+CH02123,DERRE: Derre Sede: CS Guerissa,DERRE: Derre Sede: CS Guerissa,CH02123
+CH02124,DERRE: Derre Sede: CS Machindo,DERRE: Derre Sede: CS Machindo,CH02124
+CH02125,MORRUMBALA: Morrumbala Sede: HD Morrumbala,MORRUMBALA: Morrumbala Sede: HD Morrumbala,CH02125
+CH02126,CHINDE: Chinde - Sede: CS Chinde - Sede,CHINDE: Chinde - Sede: CS Chinde - Sede,CH02126
+CH02127,CHINDE: Micaune: CS Madal,CHINDE: Micaune: CS Madal,CH02127
+CH02128,CHINDE: Micaune: CS Micaune,CHINDE: Micaune: CS Micaune,CH02128
+CH02129,ALTO MOLÓCUÈ: Alto Molocue: CS Alto Molócuè,ALTO MOLÓCUÈ: Alto Molocue: CS Alto Molócuè,CH02129
+CH02130,GILÉ: Gile Sede: HD de Gile,GILÉ: Gile Sede: HD de Gile,CH02130
+CH02131,GURUÉ:  Gurue Sede: CS Gurue,GURUÉ:  Gurue Sede: CS Gurue,CH02131
+CH02132,ILE: Ile Sede: CS de Ile-Sede,ILE: Ile Sede: CS de Ile-Sede,CH02132
+CH02133,LUGELA: Lugela Sede: CS Lugela-Sede,LUGELA: Lugela Sede: CS Lugela-Sede,CH02133
+CH02134,MAGANJA DA COSTA: Maganja da Costa: CS Maganja da Costa,MAGANJA DA COSTA: Maganja da Costa: CS Maganja da Costa,CH02134
+CH02135,MILANGE: Milange Sede: CS Milange,MILANGE: Milange Sede: CS Milange,CH02135
+CH02136,MOCUBA:  Mocuba City: HD de Mocuba,MOCUBA:  Mocuba City: HD de Mocuba,CH02136
+CH02137,MOCUBELA: Mocubela: CS Mocubela,MOCUBELA: Mocubela: CS Mocubela,CH02137
+CH02138,MOLUMBO: Molumbo: CS de Molumbo,MOLUMBO: Molumbo: CS de Molumbo,CH02138
+CH02139,MULEVALA: Mulevala: CS de Mulevala,MULEVALA: Mulevala: CS de Mulevala,CH02139
+CH02140,"NAMARROI: Namarroi Sede: CS Namarroi-Sede","NAMARROI: Namarroi Sede: CS Namarroi-Sede",CH02140
+CH02141,PEBANE: Pebane Sede: CS de Pebane-Sede,PEBANE: Pebane Sede: CS de Pebane-Sede,CH02141
+CH02142,CAIA: Caia Sede: HD de Caia,CAIA: Caia Sede: HD de Caia,CH02142
+CH02143,CHBAH (Chris Hani Baragwanath Academic Hospital) Mortuary,CHBAH (Chris Hani Baragwanath Academic Hospital) Mortuary,CH02143
+CH02144,FPS (Forensic Pathology Services) Diepkloof,FPS (Forensic Pathology Services) Diepkloof,CH02144
+CH02145,BMH (Bheki Mlangeni Hospital) Mortuary,BMH (Bheki Mlangeni Hospital) Mortuary,CH02145
+CH02146,RMH (Rahima Moosa Hospital) Mortuary,RMH (Rahima Moosa Hospital) Mortuary,CH02146
+CH02147,Braamfischerville Ext 12 Undertakers’ Mortuary,Braamfischerville Ext 12 Undertakers’ Mortuary,CH02147
+CH02148,Emdeni Undertakers’ Mortuary,Emdeni Undertakers’ Mortuary,CH02148
+CH02149,Meadowlands Zone 4 Undertakers’ Mortuary,Meadowlands Zone 4 Undertakers’ Mortuary,CH02149
+CH02150,Meadowlands Zone 5 Undertakers’ Mortuary,Meadowlands Zone 5 Undertakers’ Mortuary,CH02150
+CH02151,Mapetla Undertakers’ Mortuary,Mapetla Undertakers’ Mortuary,CH02151
+CH02152,Mofolo North Undertakers’ Mortuary,Mofolo North Undertakers’ Mortuary,CH02152
+CH02153,Phiri/Senaone Undertakers’ Mortuary,Phiri/Senaone Undertakers’ Mortuary,CH02153
+CH02154,Thulani Undertakers’ Mortuary,Thulani Undertakers’ Mortuary,CH02154
+CH02155,Thembelilhle Undertakers’ Mortuary,Thembelilhle Undertakers’ Mortuary,CH02155
+CH02156,Lenasia South Undertakers’ Mortuary,Lenasia South Undertakers’ Mortuary,CH02156
+CH02157,CHB Hospital - Respiratory and Meningeal Pathogens Research Unit (RMPRU),CHB Hospital - Respiratory and Meningeal Pathogens Research Unit (RMPRU),CH02157
+CH02158,CVD-Mali  Laboratory of Microbiology Molecular Biology,CVD-Mali  Laboratory of Microbiology Molecular Biology,CH02158
+CH02159,KEMRI CGHR_Kenya,KEMRI CGHR_Kenya,CH02159
+CH02160,Makeni Regional Hospital - MRH Lab,Makeni Regional Hospital - MRH Lab,CH02160
+CH02161,CISM  (Manhiça Health Research Centre),CISM  (Manhiça Health Research Centre),CH02161
+CH02162,Avenue Hospital,Avenue Hospital,CH02162
+CH02163,SPN Serotype 1,SPN Serotype 1,S01_1
+CH02164,SPN Serotype 2,SPN Serotype 2,S02_1
+CH02165,SPN Serotype 3,SPN Serotype 3,S03_1
+CH02166,SPN Serotype 4,SPN Serotype 4,S04_1
+CH02167,SPN Serotype 5,SPN Serotype 5,S05_1
+CH02168,SPN Serotype 6ABCD,SPN Serotype 6A/6B/6C/6D,S06_1
+CH02169,SPN Serotype 6CD,SPN Serotype 6C/6D,S06_2
+CH02170,SPN Serotype 6AB,SPN Serotype 6A/6B,S06_3
+CH02171,SPN Serotype 6BD,SPN Serotype 6B/6D,S06_4
+CH02172,SPN Serotype7B/7C,SPN Serotype7B/7C1,S07_1
+CH02173,SPN Serotype7B/7C,SPN Serotype7B/7C2,S07_2
+CH02174,SPN Serotype 7F/7A,SPN Serotype7F/7A,S07_3
+CH02175,SPN Serotype 7B/7C/40,SPN Serotype 7B/7C/40,S07_4
+CH02176,SPN Serotype 8,SPN Serotype 8,S08_1
+CH02177,SPN Serotype 9L/9N,SPN Serotype 9L/9N,S09_1
+CH02178,SPN Serotype 9V/9A,SPN Serotype 9V/9A,S09_2
+CH02179,SPN Serotype 10A,SPN Serotype 10A,S10_1
+CH02180,SPN Serotype 10B,SPN Serotype 10B,S10_2
+CH02181,SPN Serotype 10C/10F,SPN Serotype 10C/10F,S10_3
+CH02182,SPN Serotype 10F,SPN Serotype 10F,S10_4
+CH02183,SPN Serotype 11A/11D/11E,SPN Serotype 11A/11D/11E,S11_1
+CH02184,SPN Serotype 11B/11C,SPN Serotype 11B/11C,S11_2
+CH02185,SPN Serotype 11F,SPN Serotype 11F,S11_3
+CH02186,SPN Serotype 12A/12B/46,SPN Serotype 12A/12B/46,S12_1
+CH02187,SPN Serotype 12F/44,SPN Serotype 12F/44,S12_2
+CH02188,SPN Serotype 13,SPN Serotype 13,S13_1
+CH02189,SPN Serotype 14,SPN Serotype 14,S14_1
+CH02190,SPN Serotype 15A/15F,SPN Serotype 15A/15F,S15_1
+CH02191,SPN Serotype 15B/15C,SPN Serotype 15B/15C,S15_2
+CH02192,SPN Serotype 16A,SPN Serotype 16A,S16_1
+CH02193,SPN Serotype 16F,SPN Serotype 16F,S16_2
+CH02194,SPN Serotype 17A,SPN Serotype 17A,S17_1
+CH02195,SPN Serotype 17F,SPN Serotype 17F,S17_2
+CH02196,SPN Serotype 18C/18F/18B/18A,SPN Serotype 18C/18F/18B/18A,S18_1
+CH02197,SPN Serotype 19A,SPN Serotype 19A,S19_1
+CH02198,SPN Serotype 19B/19F,SPN Serotype 19B/19F,S19_2
+CH02199,SPN Serotype 19C,SPN Serotype 19C,S19_3
+CH02200,SPN Serotype 19F,SPN Serotype 19F,S19_4
+CH02201,SPN Serotype 19F,SPN Serotype 19F-Var,S19_5
+CH02202,SPN Serotype 20,SPN Serotype 20,S20_1
+CH02203,SPN Serotype 21,SPN Serotype 21,S21_1
+CH02204,SPN Serotype 22A/22F,SPN Serotype 22A/22F,S22_1
+CH02205,SPN Serotype 22A,SPN Serotype 22A,S22_2
+CH02206,SPN Serotype 22F,SPN Serotype 22F,S22_3
+CH02207,SPN Serotype 23A,SPN Serotype 23A,S23_1
+CH02208,SPN Serotype 23B,SPN Serotype 23B,S23_2
+CH02209,SPN Serotype 23F,SPN Serotype 23F,S23_3
+CH02210,SPN Serotype 24A,SPN Serotype 24A,S24_1
+CH02211,SPN Serotype 24B/24F,SPN Serotype 24B/24F,S24_2
+CH02212,SPN Serotype 25A/25F,SPN Serotype 25A/25F,S25_1
+CH02213,SPN Serotype 27,SPN Serotype 27,S27_1
+CH02214,SPN Serotype 28F/28A,SPN Serotype 28F/28A,S28_1
+CH02215,SPN Serotype 29,SPN Serotype 29,S29_1
+CH02216,SPN Serotype 31,SPN Serotype 31,S31_1
+CH02217,SPN Serotype 32A/32F,SPN Serotype 32A/32F,S32_1
+CH02218,SPN Serotype 33A/33F/37,SPN Serotype 33A/33F/37,S33_1
+CH02219,SPN Serotype 33B,SPN Serotype 33B,S33_2
+CH02220,SPN Serotype 33C,SPN Serotype 33C,S33_3
+CH02221,SPN Serotype 33D,SPN Serotype 33D,S33_4
+CH02222,SPN Serotype 34,SPN Serotype 34,S34_1
+CH02223,SPN Serotype 35A,SPN Serotype 35A,S35_1
+CH02224,SPN Serotype 35B,SPN Serotype 35B,S35_2
+CH02225,SPN Serotype 35C/42,SPN Serotype 35C/42,S35_3
+CH02226,SPN Serotype 35F,SPN Serotype 35F,S35_4
+CH02227,SPN Serotype 35F/47F,SPN Serotype 35F/47F,S35_5
+CH02228,SPN Serotype 36,SPN Serotype 36,S36_1
+CH02229,SPN Serotype 37,SPN Serotype 37,S37_1
+CH02230,SPN Serotype 38,SPN Serotype 38,S38_1
+CH02231,SPN Serotype 39,SPN Serotype 39,S39_1
+CH02232,SPN Serotype 41A,SPN Serotype 41A,S41_1
+CH02233,SPN Serotype 41F,SPN Serotype 41F,S41_2
+CH02234,SPN Serotype 43,SPN Serotype 43,S43_1
+CH02235,SPN Serotype 45,SPN Serotype 45,S45_1
+CH02236,SPN Serotype 47F/47A,SPN Serotype 47F/47A,S47_1
+CH02237,SPN Serotype 48,SPN Serotype 48,S48_1
+CH02238,SPN Pilus 1,SPN Pilus 1,SPI_1
+CH02239,SPN Pilus 2,SPN Pilus 2,SPI_2
+CH02240,SPN Chloramphenicol resistance,SPN cat,SAR_1
+CH02241,SPN Erythromycin and Clindamycin resistance,SPN ermB,SAR_2
+CH02242,SPN Erythromycin resistance,SPN mef,SAR_3
+CH02243,SPN Penicillin susceptibility,SPN pbp2B,SAR_4
+CH02244,SPN Tetracycline resistance,SPN tetM,SAR_5
+CH02245,SPN species identification,SPN lytA gene,SLYT
+CH02246,SPN species identification,SPN piaB gene,SPIA
+CH02247,Conjunctival swab R,Conjunctival swab R,CH02247
+CH02248,Vitreous R,Vitreous R,CH02248
+CH02249,Aqueous ocular fluid R,Aqueous ocular fluid R,CH02249
+CH02250,Conjunctival swab L,Conjunctival swab L,CH02250
+CH02251,Vitreous L,Vitreous L,CH02251
+CH02252,Aqueous ocular fluid L,Aqueous ocular fluid L,CH02252
+CH02253,SPN Serotype 19B,SPN Serotype 19B,CH02253
+CH02254,SPN Serotype 19F,SPN Serotype 19F,CH02254
+CH02255,SPN Serotype 19F-Var,SPN Serotype 19F-Var,CH02255
+CH02256,SPN Serotype7B/7C1,SPN Serotype7B/7C1,CH02256
+CH02257,SPN Serotype 7C,SPN Serotype 7C,CH02257
+CH02258,SPN Serotype 7B,SPN Serotype 7B,CH02258
+CH02259,SPN Serotype7B/7C2,SPN Serotype7B/7C2,CH02259
+CH02260,SPN Serotype 40,SPN Serotype 40,CH02260
+CH02261,SPN Serotype 6A/6B/6C/6D,SPN Serotype 6A/6B/6C/6D,CH02261
+CH02262,SPN Serotype 6C,SPN Serotype 6C,CH02262
+CH02263,SPN Serotype 6D,SPN Serotype 6D,CH02263
+CH02264,SPN Serotype 6A,SPN Serotype 6A,CH02264
+CH02265,SPN Serotype 6B,SPN Serotype 6B,CH02265
+CH02266,SPN Serotype 6C/6D,SPN Serotype 6C/6D,CH02266
+CH02267,SPN Serotype 6A/6B,SPN Serotype 6A/6B,CH02267
+CH02268,SPN Serotype 6B/6D,SPN Serotype 6B/6D,CH02268
+CH02269,SPN Serotype 22A/22F,SPN Serotype 22A/22F,CH02269
+CH02270,SPN Serotype 22A,SPN Serotype 22A,CH02270
+CH02271,SPN Serotype 22F,SPN Serotype 22F,CH02271
+CH02272,SPN Serotype 35F,SPN Serotype 35F,CH02272
+CH02273,SPN Serotype 47F,SPN Serotype 47F,CH02273
+CH02274,SPN Serotype 47A,SPN Serotype 47A,CH02274
+CH02275,SPN Serotype 35F/47F,SPN Serotype 35F/47F,CH02275
+CH02276,SPN Sertotype 33A/33F,SPN Sertotype 33A/33F,CH02276
+CH02277,SPN Serotype 37,SPN Serotype 37,CH02277
+CH02278,SPN Sertotype 10C/10F,SPN Sertotype 10C/10F,CH02278
+CH02279,SPN Serotype 10F,SPN Serotype 10F,CH02279
+CH02280,Uninterpreted,Uninterpreted,CH02280
+CH02281,SPN Serotyping,SPN Serotyping,CH02281
+CH02282,Culture isolate from Blood,Culture isolate from Blood,CH02282
+CH02283,Culture isolate from CSF,Culture isolate from CSF,CH02283
+CH02284,Culture isolate from Lung,Culture isolate from Lung,CH02284
+CH02285,SPN Serogroup S19,SPN Serogroup S19,S19_0
+CH02286,SPN Serogroup S07,SPN Serogroup S07,S07_0
+CH02287,SPN Serogroup S06,SPN Serogroup S06,S06_0
+CH02288,SPN Serogroup S22,SPN Serogroup S22,S22_0
+CH02289,SPN Serogroup S35/47,SPN Serogroup S35/47,S35_0
+CH02290,SPN Serogroup S33/37,SPN Serogroup S33/37,S33_0
+CH02291,SPN Serogroup S10,SPN Serogroup S10,S10_0
+CH02292,Resistant,Resistant,CH02292
+CH02293,Susceptible,Susceptible,CH02293
+CH02294,Indeterminate Organism Identification,Indeterminate Organism Identification,CH02294
+CH02295,Sickle Cell Assay,Sickle Cell Assay,CH02295
+CH02296,CHAMPS Pregnancy Surveillance Consent,CHAMPS Pregnancy Surveillance Consent,CH02296
+CH02297,Potentially pregnant,Potentially pregnant,CH02297
+CH02298,Confirmed pregnancy prior to delivery,Confirmed pregnancy prior to delivery,CH02298
+CH02299,Notification of recent delivery (within past 42 days),Notification of recent delivery (within past 42 days),CH02299
+CH02300,Notification of birth within the past year (43 days - 1 year),Notification of birth within the past year (43 days - 1 year),CH02300
+CH02301,Self,Self,CH02301
+CH02302,Pregnancy Surveillance Staff/Site LMP (last menstrual period) tracking,Pregnancy Surveillance Staff/Site LMP (last menstrual period) tracking,CH02302
+CH02303,"Unable to talk now, willing to talk at later date","Unable to talk now, willing to talk at later date",CH02303
+CH02304,Not attempted/Unable to follow-up,Not attempted/Unable to follow-up,CH02304
+CH02305,Yes-Married,Yes-Married,CH02305
+CH02306,Yes-Living with a man as if married,Yes-Living with a man as if married,CH02306
+CH02307,Post-Secondary,Post-Secondary,CH02307
+CH02308,Unable to determine eligibility,Unable to determine eligibility,CH02308
+CH02309,Female is pregnant and has not yet delivered,Female is pregnant and has not yet delivered,CH02309
+CH02310,Female delivered baby within allowable time-frame,Female delivered baby within allowable time-frame,CH02310
+CH02311,Female is not pregnant and has not delivered a baby within the past year,Female is not pregnant and has not delivered a baby within the past year,CH02311
+CH02312,Date of delivery not within eligible time frame,Date of delivery not within eligible time frame,CH02312
+CH02313,Duplicate detection record,Duplicate detection record,CH02313
+CH02314,Living with partner as if married,Living with partner as if married,CH02314
+CH02315,REDCap Instance - CHAMPS Emory,REDCap Instance - CHAMPS Emory,CH02315
+CH02316,REDCap Instance - South Africa WITS,REDCap Instance - South Africa WITS,CH02316
+CH02317,REDCap Instance - Mail CVD-Bamako,REDCap Instance - Mail CVD-Bamako,CH02317
+CH02318,REDCap Instance - Mozambique Manhica CISM,REDCap Instance - Mozambique Manhica CISM,CH02318
+CH02319,REDCap Instance - Mozambique Quelimane,REDCap Instance - Mozambique Quelimane,CH02319
+CH02320,QED Form System - Kenya KEMRI,QED Form System - Kenya KEMRI,CH02320
+CH02321,REDCap Instance - Ethiopia LSTM,REDCap Instance - Ethiopia LSTM,CH02321
+CH02322,REDCap Instance - Bangladesh ICDDRB,REDCap Instance - Bangladesh ICDDRB,CH02322
+CH02323,REDCap Instance - Sierra Leone ICAP,REDCap Instance - Sierra Leone ICAP,CH02323
+CH02324,AMR Indeterminate,AMR Indeterminate,CH02324
+CH02325,Indeterminate for SPN Serogroup S19,Indeterminate for SPN Serogroup S19,CH02325
+CH02326,Indeterminate for SPN Serogroup S07,Indeterminate for SPN Serogroup S07,CH02326
+CH02327,Indeterminate for SPN Serogroup S06,Indeterminate for SPN Serogroup S06,CH02327
+CH02328,Indeterminate for SPN Serogroup S22,Indeterminate for SPN Serogroup S22,CH02328
+CH02329,Indeterminate for SPN Serogroup S35/47,Indeterminate for SPN Serogroup S35/47,CH02329
+CH02330,Indeterminate for SPN Serogroup S33/37,Indeterminate for SPN Serogroup S33/37,CH02330
+CH02331,Indeterminate for SPN Serogroup S10,Indeterminate for SPN Serogroup S10,CH02331
+CH02332,Known,Known,CH02332
+CH02333,Gram per deciliter,g/dL,CH02333
+CH02334,Millimole per liter,mmol/L,CH02334
+CH02335,Take care of the home without any outside job,Take care of the home without any outside job,CH02335
+CH02336,Agriculture/farming,Agriculture/farming,CH02336
+CH02337,Industry/manufacturing,Industry/manufacturing,CH02337
+CH02338,Service/work in an office,Service/work in an office,CH02338
+CH02339,Sales/vendor,Sales/vendor,CH02339
+CH02340,Student,Student,CH02340
+CH02341,Not currently working,Not currently working,CH02341
+CH02342,Other vocation,Other vocation,CH02342
+CH02343,Electric stove,Electric stove,CH02343
+CH02344,Solar cooker,Solar cooker,CH02344
+CH02345,Liquefied petroleum gas/cooking gas stove,Liquefied petroleum gas/cooking gas stove,CH02345
+CH02346,Other liquid fuel stove,Other liquid fuel stove,CH02346
+CH02347,Piped natural gas stove,Piped natural gas stove,CH02347
+CH02348,Biogas stove,Biogas stove,CH02348
+CH02349,Manufactured solid fuel stove,Manufactured solid fuel stove,CH02349
+CH02350,Traditional solid fuel stove,Traditional solid fuel stove,CH02350
+CH02351,Three stone stove/open fire,Three stone stove/open fire,CH02351
+CH02352,No food cooked in household,No food cooked in household,CH02352
+CH02353,Other cooking method,Other cooking method,CH02353
+CH02354,Alcohol/ethanol,Alcohol/ethanol,CH02354
+CH02355,Gasoline/diesel,Gasoline/diesel,CH02355
+CH02356,Kerosene/paraffin,Kerosene/paraffin,CH02356
+CH02357,Coal/lignite,Coal/lignite,CH02357
+CH02358,Charcoal,Charcoal,CH02358
+CH02359,Wood,Wood,CH02359
+CH02360,Straw/shrubs/grass,Straw/shrubs/grass,CH02360
+CH02361,Agricultural crop,Agricultural crop,CH02361
+CH02362,Animal dung/waste,Animal dung/waste,CH02362
+CH02363,Processed biomass (pellets) or woodchips,Processed biomass (pellets) or woodchips,CH02363
+CH02364,Garbage/plastic,Garbage/plastic,CH02364
+CH02365,Sawdust,Sawdust,CH02365
+CH02366,Biogas,Biogas,CH02366
+CH02367,Natural gas,Natural gas,CH02367
+CH02368,Other fuel,Other fuel,CH02368
+CH02369,In the house,In the house,CH02369
+CH02370,In separate building,In separate building,CH02370
+CH02371,Outdoors,Outdoors,CH02371
+CH02372,Measured in field,Measured in field,CH02372
+CH02373,From health documents,From health documents,CH02373
+CH02374,Self-report,Self-report,CH02374
+CH02375,Maternal health card,Maternal health card,CH02375
+CH02376,Antenatal care records,Antenatal care records,CH02376
+CH02377,Delivery records,Delivery records,CH02377
+CH02378,Interview with mother or family,Interview with mother or family,CH02378
+CH02379,Clinical exam,Clinical exam,CH02379
+CH02380,Husband,Husband,CH02380
+CH02381,Child,Child,CH02381
+CH02382,Mother-in-law,Mother-in-law,CH02382
+CH02383,Father-in-law,Father-in-law,CH02383
+CH02384,Health facility,Health facility,CH02384
+CH02385,Child clinical record,Child clinical record,CH02385
+CH02386,After consent but prior to prenatal visit,After consent but prior to prenatal visit,CH02386
+CH02387,After prenatal visit and before day 01 visit,After prenatal visit and before day 01 visit,CH02387
+CH02388,After day 01 visit and before day 42 visit,After day 01 visit and before day 42 visit,CH02388
+CH02389,Termination - lost to follow-up,Termination - lost to follow-up,CH02389
+CH02390,Withdrawal of consent,Withdrawal of consent,CH02390
+CH02391,Undelivered,Undelivered,CH02391
+CH02392,Pre-labor Preterm ROM (PPROM) (GA < 37 weeks and prior to onset of labor),Pre-labor Preterm ROM (PPROM) (GA < 37 weeks and prior to onset of labor),CH02392
+CH02393,Spontaneous Preterm ROM (SPROM) (GA < 37 weeks but after onset of labor),Spontaneous Preterm ROM (SPROM) (GA < 37 weeks but after onset of labor),CH02393
+CH02394,"Pre-labor, term ROM (occurring before labor onset with GA >=37)","Pre-labor, term ROM (occurring before labor onset with GA >=37)",CH02394
+CH02395,Spontaneous after onset of labor (with GA >=37 weeks),Spontaneous after onset of labor (with GA >=37 weeks),CH02395
+CH02396,Specialist doctor/Obstetrician,Specialist doctor/Obstetrician,CH02396
+CH02397,Non-Obstetrician Physician,Non-Obstetrician Physician,CH02397
+CH02398,Assistant Medical Officer or Medical Assistant,Assistant Medical Officer or Medical Assistant,CH02398
+CH02399,"Health Provider, Unknown Cadre","Health Provider, Unknown Cadre",CH02399
+CH02400,Family member (not a health provider),Family member (not a health provider),CH02400
+CH02401,Unattended/Self Delivery,Unattended/Self Delivery,CH02401
+CH02402,Mother is alive,Mother is alive,CH02402
+CH02403,Mother is deceased,Mother is deceased,CH02403
+CH02404,Alive and well,Alive and well,CH02404
+CH02405,Alive with health problems,Alive with health problems,CH02405
+CH02406,Deceased,Deceased,CH02406
+CH02407,Clinical record,Clinical record,CH02407
+CH02408,Death certificate,Death certificate,CH02408
+CH02409,Verbal autopsy,Verbal autopsy,CH02409
+CH02410,Morning,Morning,CH02410
+CH02411,Afternoon,Afternoon,CH02411
+CH02412,Evening,Evening,CH02412
+CH02413,A (-),A (-),CH02413
+CH02414,A (+),A (+),CH02414
+CH02415,AB (-),AB (-),CH02415
+CH02416,AB (+),AB (+),CH02416
+CH02417,B (-),B (-),CH02417
+CH02418,B (+),B (+),CH02418
+CH02419,O (-),O (-),CH02419
+CH02420,O (+),O (+),CH02420
+CH02421,Not at the same time as any other form,Not at the same time as any other form,CH02421
+CH02422,At same time as Prenatal AND Day 01 forms,At same time as Prenatal AND Day 01 forms,CH02422
+CH02423,At same time as Day 01 forms only,At same time as Day 01 forms only,CH02423
+CH02424,Within 6 weeks of delivery,Within 6 weeks of delivery,CH02424
+CH02425,6 weeks or more after delivery,6 weeks or more after delivery,CH02425
+CH02426,"Died before labor (Antepartum, Undelivered)","Died before labor (Antepartum, Undelivered)",CH02426
+CH02427,"Died during labor (Intrapartum, Undelivered)","Died during labor (Intrapartum, Undelivered)",CH02427
+CH02428,"Died after labor (Postpartum, Delivered)","Died after labor (Postpartum, Delivered)",CH02428
+CH02429,Prematurity,Prematurity,CH02429
+CH02430,Asphyxia,Asphyxia,CH02430
+CH02431,Sepsis,Sepsis,CH02431
+CH02432,Congenital defects,Congenital defects,CH02432
+CH02433,Other Cause of Death,Other Cause of Death,CH02433
+CH02434,No official cause of death assigned,No official cause of death assigned,CH02434
+CH02435,Home,Home,CH02435
+CH02436,Hospital or Health facility,Hospital or Health facility,CH02436
+CH02437,Not being treated,Not being treated,CH02437
+CH02438,Very small (< 1000g),Very small (< 1000g),CH02438
+CH02439,Small (1000 - 1499g),Small (1000 - 1499g),CH02439
+CH02440,Small to normal (1500 - 2499g),Small to normal (1500 - 2499g),CH02440
+CH02441,Normal (2500g or larger),Normal (2500g or larger),CH02441
+CH02442,Ectopic pregnancy,Ectopic pregnancy,CH02442
+CH02443,Miscarriage weeks (< 20 weeks),Miscarriage weeks (< 20 weeks),CH02443
+CH02444,Miscarriage weeks (20 to < 28 weeks),Miscarriage weeks (20 to < 28 weeks),CH02444
+CH02445,Medically terminated pregnancy,Medically terminated pregnancy,CH02445
+CH02446,Stillbirth - Macerated,Stillbirth - Macerated,CH02446
+CH02447,"Stillbirth - Fresh (no movement, heartbeat or gasping)","Stillbirth - Fresh (no movement, heartbeat or gasping)",CH02447
+CH02448,Born alive,Born alive,CH02448
+CH02449,Infection,Infection,CH02449
+CH02450,Homicide,Homicide,CH02450
+CH02451,Obstructed/Prolonged Labor,Obstructed/Prolonged Labor,CH02451
+CH02452,Non-emergent but medically necessary caesarean section,Non-emergent but medically necessary caesarean section,CH02452
+CH02453,amikacin,amikacin,CH02453
+CH02454,amoxicillin + clavulanic acid,amoxicillin + clavulanic acid,CH02454
+CH02455,ampicillin-cloxacillin,ampicillin-cloxacillin,CH02455
+CH02456,azithromycin,azithromycin,CH02456
+CH02457,cefadroxil,cefadroxil,CH02457
+CH02458,cefixime,cefixime,CH02458
+CH02459,cefotaxime,cefotaxime,CH02459
+CH02460,cefradine/cephradine,cefradine/cephradine,CH02460
+CH02461,ceftazidime,ceftazidime,CH02461
+CH02462,ceftriaxone,ceftriaxone,CH02462
+CH02463,cefuroxime,cefuroxime,CH02463
+CH02464,cefuroxime + clavulinic acid,cefuroxime + clavulinic acid,CH02464
+CH02465,chloramphenicol,chloramphenicol,CH02465
+CH02466,ciprofloxacin,ciprofloxacin,CH02466
+CH02467,clarithromycin,clarithromycin,CH02467
+CH02468,clindamycin,clindamycin,CH02468
+CH02469,cloxacillin,cloxacillin,CH02469
+CH02470,colistimethate Sodium,colistimethate Sodium,CH02470
+CH02471,colistin/polymixin,colistin/polymixin,CH02471
+CH02472,co-trimoxazole,co-trimoxazole,CH02472
+CH02473,faropenem,faropenem,CH02473
+CH02474,flucloxacillin/floxacillin,flucloxacillin/floxacillin,CH02474
+CH02475,fusidic acid/fusidin,fusidic acid/fusidin,CH02475
+CH02476,imipenem + cilastatin,imipenem + cilastatin,CH02476
+CH02477,levofloxacin,levofloxacin,CH02477
+CH02478,lincomycin,lincomycin,CH02478
+CH02479,meropenem,meropenem,CH02479
+CH02480,moxifloxacin,moxifloxacin,CH02480
+CH02481,nalidixic acid,nalidixic acid,CH02481
+CH02482,nitrofurantoin,nitrofurantoin,CH02482
+CH02483,norfloxacin,norfloxacin,CH02483
+CH02484,oxacillin,oxacillin,CH02484
+CH02485,piperacillin+tazobactam,piperacillin+tazobactam,CH02485
+CH02486,spectinomycin,spectinomycin,CH02486
+CH02487,sulfamethoxazole + trimethoprim,sulfamethoxazole + trimethoprim,CH02487
+CH02488,tazobactam,tazobactam,CH02488
+CH02489,teicoplanin,teicoplanin,CH02489
+CH02490,tetracycline,tetracycline,CH02490
+CH02491,vancomycin,vancomycin,CH02491
+CH02492,GMS,GMS,CH02492
+CH02493,L-T Gram,L-T Gram,CH02493
+CH02494,Trichrome,Trichrome,CH02494
+CH02495,ZN AF,ZN AF,CH02495
+CH02496,Adenoviruses (0633),Adenoviruses (0633),CH02496
+CH02497,Bordetella pertussis & B. bronchiseptica (1091),Bordetella pertussis & B. bronchiseptica (1091),CH02497
+CH02498,Candida species (1639),Candida species (1639),CH02498
+CH02499,CD20 (1689),CD20 (1689),CH02499
+CH02500,CD3 (1688),CD3 (1688),CH02500
+CH02501,CD45 (1690),CD45 (1690),CH02501
+CH02502,Chlamydia spp. (0513),Chlamydia spp. (0513),CH02502
+CH02503,Clostridium spp. (0592),Clostridium spp. (0592),CH02503
+CH02504,Enterococcus spp. (1667),Enterococcus spp. (1667),CH02504
+CH02505,Enteroviruses (1026),Enteroviruses (1026),CH02505
+CH02506,Escherichia coli (0818),Escherichia coli (0818),CH02506
+CH02507,Haemophilus spp. (1141),Haemophilus spp. (1141),CH02507
+CH02508,Hepatitis B virus core antigen (1205),Hepatitis B virus core antigen (1205),CH02508
+CH02509,Hepatitis B virus surface antigen (1204),Hepatitis B virus surface antigen (1204),CH02509
+CH02510,Human herpesvirus 3 (VZV) (0790),Human herpesvirus 3 (VZV) (0790),CH02510
+CH02511,Human herpesvirus 5 (CMV) (0441),Human herpesvirus 5 (CMV) (0441),CH02511
+CH02512,Human herpesviruses 1 and 2 (HSV1/2) (0191),Human herpesviruses 1 and 2 (HSV1/2) (0191),CH02512
+CH02513,Human immunodeficiency virus p24 & p55 (0516),Human immunodeficiency virus p24 & p55 (0516),CH02513
+CH02514,Influenza A viruses (0186),Influenza A viruses (0186),CH02514
+CH02515,Influenza B virus (0185),Influenza B virus (0185),CH02515
+CH02516,Listeria monocytogenes (1587),Listeria monocytogenes (1587),CH02516
+CH02517,Measles virus (0055b),Measles virus (0055b),CH02517
+CH02518,"Metapneumovirus, human Anti-HMPV (1582)","Metapneumovirus, human Anti-HMPV (1582)",CH02518
+CH02519,Mucormycete fungus (0679),Mucormycete fungus (0679),CH02519
+CH02520,Mycobacterium species (1687),Mycobacterium species (1687),CH02520
+CH02521,Neisseria meningitidis group C (0336),Neisseria meningitidis group C (0336),CH02521
+CH02522,Neisseria meningitidis groups A/B/C/W/Y (0710),Neisseria meningitidis groups A/B/C/W/Y (0710),CH02522
+CH02523,Parainfluenza virus types 2 & 3 (0805),Parainfluenza virus types 2 & 3 (0805),CH02523
+CH02524,Plasmodium falciparum (1094),Plasmodium falciparum (1094),CH02524
+CH02525,Pneumocystis jiroveci (1683),Pneumocystis jiroveci (1683),CH02525
+CH02526,Pneumocystis jirovecii (1539),Pneumocystis jirovecii (1539),CH02526
+CH02527,Polybacterial Ab (1479),Polybacterial Ab (1479),CH02527
+CH02528,Pseudomonas aeruginosa (1033),Pseudomonas aeruginosa (1033),CH02528
+CH02529,Respiratory syncytial virus (1227),Respiratory syncytial virus (1227),CH02529
+CH02530,Rubella virus (1287),Rubella virus (1287),CH02530
+CH02531,Salmonella Dublin Group D1 (1355),Salmonella Dublin Group D1 (1355),CH02531
+CH02532,Salmonella Group D O:9 (1362),Salmonella Group D O:9 (1362),CH02532
+CH02533,"Salmonella Vi, typhi (1366)","Salmonella Vi, typhi (1366)",CH02533
+CH02534,Select gram-negative bacteria (1606),Select gram-negative bacteria (1606),CH02534
+CH02535,Spirochaetaceae (Borrelia) (1498),Spirochaetaceae (Borrelia) (1498),CH02535
+CH02536,Staphylococcus aureus (0829),Staphylococcus aureus (0829),CH02536
+CH02537,Staphylococcus species (0986),Staphylococcus species (0986),CH02537
+CH02538,Streptococcus agalactiae (GBS) (0518),Streptococcus agalactiae (GBS) (0518),CH02538
+CH02539,Streptococcus pyogenes (GAS) (0517),Streptococcus pyogenes (GAS) (0517),CH02539
+CH02540,Streptococcus species (1707),Streptococcus species (1707),CH02540
+CH02541,Streptococcus spp. (non-pneumococcal) (1579),Streptococcus spp. (non-pneumococcal) (1579),CH02541
+CH02542,Toxoplasma gondii (1123),Toxoplasma gondii (1123),CH02542
+CH02543,Zika virus (1576),Zika virus (1576),CH02543
+CH02544,16S rRNA gene (Paneubacteria),16S rRNA gene (Paneubacteria),CH02544
+CH02545,A. baumannii,A. baumannii,CH02545
+CH02546,Adenovirus group specific / Hexon / 96-bp,Adenovirus group specific / Hexon / 96-bp,CH02546
+CH02547,Bordetella pertussis,Bordetella pertussis,CH02547
+CH02548,Bordetella species,Bordetella species,CH02548
+CH02549,"E coli, Salmonella, and Shigella Multiplex","E coli, Salmonella, and Shigella Multiplex",CH02549
+CH02550,Enterobacteriaceae 23S rRNA gene,Enterobacteriaceae 23S rRNA gene,CH02550
+CH02551,Enterovirus grp. RT-PCR,Enterovirus grp. RT-PCR,CH02551
+CH02552,Escherichia coli,Escherichia coli,CH02552
+CH02553,Fusobacterium,Fusobacterium,CH02553
+CH02554,"Gram-negative bacteria 16S rRNA gene PCR
+specific","Gram-negative bacteria 16S rRNA gene PCR
+specific",CH02554
+CH02555,Gram-positive bacteria 16S rRNA gene PCR,Gram-positive bacteria 16S rRNA gene PCR,CH02555
+CH02556,Haemophilus influenzae P6,Haemophilus influenzae P6,CH02556
+CH02557,HMPV Real-time RT-PCR,HMPV Real-time RT-PCR,CH02557
+CH02558,Human parainfluenza virus (1-4),Human parainfluenza virus (1-4),CH02558
+CH02559,Influenza A/Influenza B,Influenza A/Influenza B,CH02559
+CH02560,Klebsiella (16S-23S),Klebsiella (16S-23S),CH02560
+CH02561,Klebsiella pneumoniae (16S-23S),Klebsiella pneumoniae (16S-23S),CH02561
+CH02562,Listeria,Listeria,CH02562
+CH02563,Mycobacterium genus 16S rRNA,Mycobacterium genus 16S rRNA,CH02563
+CH02564,Mycobacterium tuberculosis complex IS6110,Mycobacterium tuberculosis complex IS6110,CH02564
+CH02565,Neisseria meningitidis group,Neisseria meningitidis group,CH02565
+CH02566,Plasmodium falciparum,Plasmodium falciparum,CH02566
+CH02567,Pseudomonas aeruginosa,Pseudomonas aeruginosa,CH02567
+CH02568,Pseudomonas species,Pseudomonas species,CH02568
+CH02569,Respiratory syncytial virus,Respiratory syncytial virus,CH02569
+CH02570,Rhinovirus RT-PCR,Rhinovirus RT-PCR,CH02570
+CH02571,Rickettsia species (gltA),Rickettsia species (gltA),CH02571
+CH02572,Staphyloccocal species (16S),Staphyloccocal species (16S),CH02572
+CH02573,Staphylococci toxin multiplex real-time,Staphylococci toxin multiplex real-time,CH02573
+CH02574,Staphylococcus species,Staphylococcus species,CH02574
+CH02575,Streptococcus (autolysin),Streptococcus (autolysin),CH02575
+CH02576,Streptococcus (pneumolysin),Streptococcus (pneumolysin),CH02576
+CH02577,Streptococcus pneumoniae (piaB),Streptococcus pneumoniae (piaB),CH02577
+CH02578,Streptococcus species,Streptococcus species,CH02578
+CH02579,Zika virus NS5 gene (127-bp) RT-PCR,Zika virus NS5 gene (127-bp) RT-PCR,CH02579
+CH02580,Peds,Peds (CPL case type),CH02580
+CH02581,Hepatocellular necrosis,Hepatocellular necrosis,CH02581
+CH02582,Inadequate,Inadequate,CH02582
+CH02583,Intravascular leukocytosis,Intravascular leukocytosis,CH02583
+CH02584,Special Stains,Special Stains,CH02584
+CH02585,IHC,IHC,CH02585
+CH02586,PCR,PCR,CH02586
+CH02587,Non-contributory,Non-contributory,CH02587
+CH02588,Immunoreactive,Immunoreactive,CH02588
+CH02589,Not Reviewed,Not Reviewed,CH02589
+CH02590,Right Kidney,Right Kidney,CH02590
+CH02591,Left Kidney,Left Kidney,CH02591
+CH02592,Other CDC CPL Test Type (SS),Other CDC CPL Test Type (SS),CH02592
+CH02593,Other CDC CPL Test Type (IHC),Other CDC CPL Test Type (IHC),CH02593
+CH02594,Other CDC CPL Test Type (PCR),Other CDC CPL Test Type (PCR),CH02594
+CH02595,Antimicrobial Susceptibility Testing (AST) - Generic,Antimicrobial Susceptibility Testing (AST) - Generic,CH02595
+CH02596,Isoelectric focusing (IEF),IEF,CH02596
+CH02597,Analysis using polymerase chain reaction technique,PCR,CH02597
+CH02598,Agar Dilution Assay,Agar Dilution Assay,CH02583
+CH02599,BD Phoenix,BD Phoenix,CH02584
+CH02600,Broth Dilution Assay,Broth Dilution Assay,CH02585
+CH02601,Disk Diffusion,Disk Diffusion,CH02586
+CH02602,E-test,E-test,CH02587
+CH02603,MicroScan WalkAway,MicroScan WalkAway,CH02588
+CH02604,Sensititire,Sensititire,CH02589
+CH02605,Vitek-1/Vitek-2,Vitek-1/Vitek-2,CH02605
+CH02606,SickleScan,SickleScan,CH02606
+CH02607,Gazelle,Gazelle,CH02607
+CH02608,Sickle Cell - Invalid,Sickle Cell - Invalid,CH02608
+CH02609,Sickle Cell - Normal (HbAA),Sickle Cell - Normal (HbAA),CH02609
+CH02610,Sickle Cell - Carrier (HbAS),Sickle Cell - Carrier (HbAS),CH02610
+CH02611,Sickle Cell - Carrier (HbAC),Sickle Cell - Carrier (HbAC),CH02611
+CH02612,Sickle Cell - Carrier (HbAE),Sickle Cell - Carrier (HbAE),CH02612
+CH02613,Sickle Cell - HbSS Disease (HbSS),Sickle Cell - HbSS Disease (HbSS),CH02613
+CH02614,Sickle Cell - HbSC Disease (HbSC),Sickle Cell - HbSC Disease (HbSC),CH02614
+CH02615,Sickle Cell - HbSF,Sickle Cell - HbSF,CH02615
+CH02616,Sickle Cell - HbSBeta-thal,Sickle Cell - HbSBeta-thal,CH02616
+CH02617,Sickle Cell - Other,Sickle Cell - Other,CH02617
+CH02618,Streptococcus spp. (non-pyogenic) (0436),Streptococcus spp. (non-pyogenic) (0436),CH02618
+CH02619,Hararghe Health Research Laboratory Freezer Room,Hararghe Health Research Laboratory Freezer Room,CH02619
+CH02620,-80C,-80C,CH02620
+CH02621,-20C,-20C,CH02621
+CH02622,Ambient,Ambient,CH02622
+CH02623,Sweden,Sweden,SE
+CH02624,Djibouti,Djibouti,DJ
+CH02625,Eritrea,Eritrea,ER
+CH02626,Saudi Arabia,Saudi Arabia,SA
+CH02627,Somalia,Somalia,SO
+CH02628,South Sudan,South Sudan,SS
+CH02629,Sudan,Sudan,SD
+CH02630,Uganda,Uganda,UG
+CH02631,United States of America,United States of America,US
+CH02632,Yemen,Yemen,YE
+CH02633,Jegula Hospital,Jegula Hospital,CH02633
+CH02634,Amir Nur Health Center,Amir Nur Health Center,CH02634
+CH02635,Abadir Health Center,Abadir Health Center,CH02635
+CH02636,Shenkor Health Center,Shenkor Health Center,CH02636
+CH02637,Aboker Health Center,Aboker Health Center,CH02637
+CH02638,Jinela Health Center,Jinela Health Center,CH02638
+CH02639,Hakim Health Center,Hakim Health Center,CH02639
+CH02640,Harar General Hospital,Harar General Hospital,CH02640
+CH02641,Yimaj Hospital,Yimaj Hospital,CH02641
+CH02642,Federal Police Hospital,Federal Police Hospital,CH02642
+CH02643,Army Hospital,Army Hospital,CH02643
+CH02644,Marry Clinic,Marry Clinic,CH02644
+CH02645,Yabeta Selama Health Center,Yabeta Selama Health Center,CH02645
+CH02646,Finkile Health Center,Finkile Health Center,CH02646
+CH02647,Damota Health Center,Damota Health Center,CH02647
+CH02648,Adele Weltaha Health Cetner,Adele Weltaha Health Cetner,CH02648
+CH02649,Sherif Kalid Health Center,Sherif Kalid Health Center,CH02649
+CH02650,Ugaz Health Center,Ugaz Health Center,CH02650
+CH02651,Karodada Health Ceneter,Karodada Health Ceneter,CH02651
+CH02652,Bala bekelcha Health Center,Bala bekelcha Health Center,CH02652
+CH02653,Damota Health Center,Damota Health Center,CH02653
+CH02654,Awumara Health Ceneter,Awumara Health Ceneter,CH02654
+CH02655,Kersa Town,Kersa Town,CH02655
+CH02656,Meteqoma,Meteqoma,CH02656
+CH02657,Yabeta Lencha,Yabeta Lencha,CH02657
+CH02658,Ifa Jalela,Ifa Jalela,CH02658
+CH02659,Mede Oda,Mede Oda,CH02659
+CH02660,Weter town,Weter town,CH02660
+CH02661,Handhura Kossum,Handhura Kossum,CH02661
+CH02662,Tolla,Tolla,CH02662
+CH02663,Gola Belina,Gola Belina,CH02663
+CH02664,Bereka,Bereka,CH02664
+CH02665,Welteha Bilisuma,Welteha Bilisuma,CH02665
+CH02666,Adele Key Key,Adele Key Key,CH02666
+CH02667,Lange Town,Lange Town,CH02667
+CH02668,Bela Lange,Bela Lange,CH02668
+CH02669,Harro Arba,Harro Arba,CH02669
+CH02670,Sodu,Sodu,CH02670
+CH02671,Jeba Weter,Jeba Weter,CH02671
+CH02672,Rameta,Rameta,CH02672
+CH02673,Burka Weter,Burka Weter,CH02673
+CH02674,Gole Wachu,Gole Wachu,CH02674
+CH02675,Lencha Wajira,Lencha Wajira,CH02675
+CH02676,Belina,Belina,CH02676
+CH02677,Gale Mirga,Gale Mirga,CH02677
+CH02678,Dolu Selama,Dolu Selama,CH02678
+CH02679,Amuma,Amuma,CH02679
+CH02680,Keransa,Keransa,CH02680
+CH02681,Kuro,Kuro,CH02681
+CH02682,Finkille,Finkille,CH02682
+CH02683,Bachake,Bachake,CH02683
+CH02684,Damota,Damota,CH02684
+CH02685,Biftu Goda,Biftu Goda,CH02685
+CH02686,Ifa Haramaya,Ifa Haramaya,CH02686
+CH02687,Adale walecha,Adale walecha,CH02687
+CH02688,Gobe Chala,Gobe Chala,CH02688
+CH02689,Negaya,Negaya,CH02689
+CH02690,Fendishe Lenche,Fendishe Lenche,CH02690
+CH02691,Kebele 1,Kebele 1,CH02691
+CH02692,Kebele 2,Kebele 2,CH02692
+CH02693,Kebele 4,Kebele 4,CH02693
+CH02694,Kebele 5,Kebele 5,CH02694
+CH02695,Kebele 8,Kebele 8,CH02695
+CH02696,Kebele10,Kebele10,CH02696
+CH02697,Kebele 12,Kebele 12,CH02697
+CH02698,Kebele13,Kebele13,CH02698
+CH02699,Kebele15,Kebele15,CH02699
+CH02700,Kebele16,Kebele16,CH02700
+CH02701,Kebele17,Kebele17,CH02701
+CH02702,Kebele18,Kebele18,CH02702
+CH02703,Centre Iranien,Centre Iranien,CH02702
+CH02704,Maternité de Hamdallaye,Maternité de Hamdallaye,CH02703
+CH02705,Djicoroni,Djicoroni,CH02704
+CH02706,Banconi,Banconi,CH02705
+CH02707,Bamako City (excluding the DSS),Bamako City (excluding the DSS),CH02706
+CH02708,Senegal,Republic of Senegal,SN
+CH02709,Guinea-Bissau,Republic of Guinea-Bissau,GW
+CH02710,Guinea,Republic of Guinea,GN
+CH02711,Liberia,Republic of Liberia,LR
+CH02712,Cote d'Ivoire,Republic of Côte d'Ivoire,CI
+CH02713,Ghana,Republic of Ghana,GH
+CH02714,Togo,Togolese Republic,TG
+CH02715,Benin,Republic of Benin,BJ
+CH02716,Burkina Faso,Burkina Faso,BF
+CH02717,Niger,Republic of the Niger,NE
+CH02718,Nigeria,Federal Republic of Nigeria,NG
+CH02719,Mauritania,Islamic Republic of Mauritania,MR
+CH02720,Algeria,People's Democratic Republic of Algeria,DZ
+CH02721,Angola,Republic of Angola,AO
+CH02722,Congo,Democratic Republic of the Congo,CD
+CH02723,Gambia,Republic of the Gambia,GM
+CH02724,France,French Republic,FR
+CH02725,High Performance Liquid Chromatography,HLPC,75890000
+CH02726,Klebsiella (1604),Klebsiella (1604),CH02726
+CH02727,Polyfungal (1484),Polyfungal (1484),CH02727
+CH02728,Mycobacterium spp. (0440),Mycobacterium spp. (0440),CH02728
+CH02729,Plasmodium spp. (1152),Plasmodium spp. (1152),CH02729
+CH02730,Ifa Oromia Health Center,Ifa Oromia Health Center,CH02730
+CH02731,"Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2, COVID19)","Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2, COVID19)",COV2_1
+CH02732,Influenza A,Influenza A,FLUA_2
+CH02733,MERS coronavirus,MERS coronavirus,MERS_1
+CH02734,Severe Acute Respiratory Syndrome Coronavirus (SARS-CoV-1),Severe Acute Respiratory Syndrome Coronavirus (SARS-CoV-1),SARS_1
+CH02735,Ureaplasma parvum,Ureaplasma parvum,URPA_1
+CH02736,Ureaplasma urealyticum,Ureaplasma urealyticum,URUR_1
+CH02737,Respiratory TAC V3,Respiratory TAC V3,CH02737
+CH02738,Central Nervous System,Central Nervous System,CH02738
+CH02739,Bo-Government Hospital,Bo-Government Hospital,CH02739
+CH02740,Bo-Agape CHC,Bo-Agape CHC,CH02740
+CH02741,Bo-Child Resue Center,Bo-Child Resue Center,CH02741
+CH02742,Bo-Children Hospital,Bo-Children Hospital,CH02742
+CH02743,Bo-Favour MCHP,Bo-Favour MCHP,CH02743
+CH02744,Bo-Gender MCHP,Bo-Gender MCHP,CH02744
+CH02745,Bo-Gila's Hospital,Bo-Gila's Hospital,CH02745
+CH02746,Bo-Haikel CHC,Bo-Haikel CHC,CH02746
+CH02747,Bo-Kindoya Hospital,Bo-Kindoya Hospital,CH02747
+CH02748,Bo-Lewadu CHC,Bo-Lewadu CHC,CH02748
+CH02749,Bo-M. M. Maternity MCHP,Bo-M. M. Maternity MCHP,CH02749
+CH02750,Bo-MCH (Kakua) Static,Bo-MCH (Kakua) Static,CH02750
+CH02751,Bo-Mercy Hospital,Bo-Mercy Hospital,CH02751
+CH02752,Bo-Needy CHC,Bo-Needy CHC,CH02752
+CH02753,Bo-New Police Barracks CHC,Bo-New Police Barracks CHC,CH02753
+CH02754,Bo-Praise Foundation CHC,Bo-Praise Foundation CHC,CH02754
+CH02755,Bo-Simbo Town CHP,Bo-Simbo Town CHP,CH02755
+CH02756,Bo-SLRCS (Bo) Clinic CHC,Bo-SLRCS (Bo) Clinic CHC,CH02756
+CH02757,Bo-Tikonko CHC,Bo-Tikonko CHC,CH02757
+CH02758,Bo-UNIMUS MCHP,Bo-UNIMUS MCHP,CH02758
+CH02759,Bo-Yemmu Town CHC,Bo-Yemmu Town CHC,CH02759
+CH02760,Bo-Zaion (Bendawa) CHC,Bo-Zaion (Bendawa) CHC,CH02760
+CH02761,Vai,Vai,CH02761
+CH02762,Kissi,Kissi,CH02762
+CH02763,Data lost or not in expected location,Data lost or not in expected location,CH02763
+CH02764,Records damaged,Records damaged,CH02764
+CH02765,Records illegible,Records illegible,CH02765
+CH02766,Discordant records/cannot confirm identity,Discordant records/cannot confirm identity,CH02766
+CH02767,Could not obtain permission from facility to review records,Could not obtain permission from facility to review records,CH02767
+CH02768,Data in offsite location,Data in offsite location,CH02768
+CH02769,Data in locked location,Data in locked location,CH02769
+CH02770,Records under review by another entity,Records under review by another entity,CH02770
+CH02771,Deciding to seek care,Deciding to seek care,CH02771
+CH02772,Reaching the facility,Reaching the facility,CH02772
+CH02773,Abstracted,Abstracted,CH02773
+CH02774,Composed by abstractor,Composed by abstractor,CH02774
+CH02775,Composed from interview or other,Composed from interview or other,CH02775
+CH02776,Unavailable,Unavailable,CH02776
+CH02777,Room air,Room air,CH02777
+CH02778,Oxygen and/or ventilation,Oxygen and/or ventilation,CH02778
+CH02779,Unconscious,Unconscious,CH02779
+CH02780,Exclusively,Exclusively,CH02780
+CH02781,Partially,Partially,CH02781
+CH02782,Never,Never,CH02782
+CH02783,One or more missing vaccines,One or more missing vaccines,CH02783
+CH02784,Documented/Recorded,Documented/Recorded,CH02784
+CH02785,Neural tube defects,Neural tube defects,CH02785
+CH02786,Abdominal wall defects,Abdominal wall defects,CH02786
+CH02787,Facial dysmorphisms,Facial dysmorphisms,CH02787
+CH02788,< 24 hours of life,< 24 hours of life,CH02788
+CH02789,24-48 hours of life,24-48 hours of life,CH02789
+CH02790,>48 hours of life,>48 hours of life,CH02790
+CH02791,Nevirapine,Nevirapine,CH02791
+CH02792,Zidovudine (AZT),Zidovudine (AZT),CH02792
+CH02793,Discharged home with kangaroo care,Discharged home with kangaroo care,CH02793
+CH02794,Neonatal death prior to admission,Neonatal death prior to admission,CH02794
+CH02795,On an ongoing basis for chronic illness,On an ongoing basis for chronic illness,CH02795
+CH02796,For acute illness as an outpatient (Prior to admission),For acute illness as an outpatient (Prior to admission),CH02796
+CH02797,In transport,In transport,CH02797
+CH02798,During hospitalization (including Emergency Room),During hospitalization (including Emergency Room),CH02798
+CH02799,Both prior to admission and during hospitalization,Both prior to admission and during hospitalization,CH02799
+CH02800,HIV prophylaxis,HIV prophylaxis,CH02800
+CH02801,PCP prophylaxis,PCP prophylaxis,CH02801
+CH02802,TB Prophylaxis,TB Prophylaxis,CH02802
+CH02803,Latent TB,Latent TB,CH02803
+CH02804,Active TB,Active TB,CH02804
+CH02805,Syphilis,Syphilis,CH02805
+CH02806,Other acute infection,Other acute infection,CH02806
+CH02807,Oral by Nasogastric Tube,Oral by Nasogastric Tube,CH02807
+CH02808,Topical (top),Topical (top),CH02808
+CH02809,Inhalation,Inhalation,CH02809
+CH02810,Ocular,Ocular,CH02810
+CH02811,Tetanus toxoid (TT),Tetanus toxoid (TT),CH02811
+CH02812,Pentavalent (DTP-HiB-HepB),Pentavalent (DTP-HiB-HepB),CH02812
+CH02813,Hexavalent (DTaP-HiB-HepB-IPV),Hexavalent (DTaP-HiB-HepB-IPV),CH02813
+CH02814,Pneumoccoccal conjugate,Pneumoccoccal conjugate,CH02814
+CH02815,Measles and Rubella,Measles and Rubella,CH02815
+CH02816,Meningococcal A,Meningococcal A,CH02816
+CH02817,>4,>4,CH02817
+CH02818,3 or more shots,3 or more shots,CH02818
+CH02819,Trace,Trace,CH02819
+CH02820,Disseminated,Disseminated,CH02820
+CH02821,Rapid Syphilis Test (RST),Rapid Syphilis Test (RST),CH02821
+CH02822,Wassermann Test,Wassermann Test,CH02822
+CH02823,Hepatitis B with D co-infection,Hepatitis B with D co-infection,CH02823
+CH02824,Diabetes prior to pregnancy,Diabetes prior to pregnancy,CH02824
+CH02825,Gestational diabetes,Gestational diabetes,CH02825
+CH02826,Insulin started prior to case pregnancy,Insulin started prior to case pregnancy,CH02826
+CH02827,Insulin started during the case pregnancy,Insulin started during the case pregnancy,CH02827
+CH02828,No insulin,No insulin,CH02828
+CH02829,Present and then absent,Present and then absent,CH02829
+CH02830,Spontaneous vaginal delivery,Spontaneous vaginal delivery,CH02830
+CH02831,Forceps-assisted vaginal delivery,Forceps-assisted vaginal delivery,CH02831
+CH02832,Vacuum-assisted vaginal delivery,Vacuum-assisted vaginal delivery,CH02832
+CH02833,Unknown type of Caesarean section,Unknown type of Caesarean section,CH02833
+CH02834,Failure to progress in labor,Failure to progress in labor,CH02834
+CH02835,Fetal malpresentation,Fetal malpresentation,CH02835
+CH02836,Multiple gestation,Multiple gestation,CH02836
+CH02837,Fetal distress,Fetal distress,CH02837
+CH02838,Severe maternal hypertension (including eclampsia),Severe maternal hypertension (including eclampsia),CH02838
+CH02839,Maternal infection,Maternal infection,CH02839
+CH02840,Maternal hemorrhage,Maternal hemorrhage,CH02840
+CH02841,Amniotic fluid,Amniotic fluid,CH02841
+CH02842,Other body fluid,Other body fluid,CH02842
+CH02843,Placental abruption,Placental abruption,CH02843
+CH02844,Placenta previa,Placenta previa,CH02844
+CH02845,Uterine atony,Uterine atony,CH02845
+CH02846,Retained placenta,Retained placenta,CH02846
+CH02847,Uterine rupture,Uterine rupture,CH02847
+CH02848,Cervical/vaginal laceration,Cervical/vaginal laceration,CH02848
+CH02849,Maternal death during labor,Maternal death during labor,CH02849
+CH02850,Maternal death after labor and delivery,Maternal death after labor and delivery,CH02850
+CH02851,At delivery,At delivery,CH02851
+CH02852,Neural tube defects,Neural tube defects,CH02852
+CH02853,Abdominal wall defects,Abdominal wall defects,CH02853
+CH02854,Electrophoresis (Cellulose Acetate),Electrophoresis (Cellulose Acetate),CH02854
+CH02855,Lateral Flow Immunoassay (LFIA),LFIA,CH02855
+CH02856,SEREFO,SEREFO,CH02856
+CH02857,National Health Laboratory Service,NHLS,CH02857
+CH02858,Hospital Central de Quelimane,Hospital Central de Quelimane,CH02858
+CH02859,COVID-19 PCR,COVID-19 PCR,CH02859
+CH02860,Amikacin - AST Testing,Amikacin,CH02860
+CH02861,Amoxicillin - AST Testing,Amoxicillin,CH02861
+CH02862,Amoxicillin +Clavulanic acid - AST Testing,Amoxicillin +Clavulanic acid,CH02862
+CH02863,Amphotericin-B - AST Testing,Amphotericin-B,CH02863
+CH02864,Ampicillin - AST Testing,Ampicillin,CH02864
+CH02865,Ampicillin-Cloxacillin - AST Testing,Ampicillin-Cloxacillin,CH02865
+CH02866,Azithromycin - AST Testing,Azithromycin,CH02866
+CH02867,Aztreonam - AST Testing,Aztreonam,CH02867
+CH02868,Caspofungin - AST Testing,Caspofungin,CH02868
+CH02869,Cefadroxil - AST Testing,Cefadroxil,CH02869
+CH02870,Cefazolin - AST Testing,Cefazolin,CH02870
+CH02871,Cefepime - AST Testing,Cefepime,CH02871
+CH02872,Cefixime - AST Testing,Cefixime,CH02872
+CH02873,Ceforperazone-salbactum - AST Testing,Ceforperazone-salbactum,CH02873
+CH02874,Cefotaxime - AST Testing,Cefotaxime,CH02874
+CH02876,Cefradine/cephradine - AST Testing,Cefradine/cephradine,CH02876
+CH02877,Ceftazidime - AST Testing,Ceftazidime,CH02877
+CH02878,Ceftriaxone - AST Testing,Ceftriaxone,CH02878
+CH02879,Cefuroxime - AST Testing,Cefuroxime,CH02879
+CH02880,Cefuroxime + Clavulinic acid,Cefuroxime + Clavulinic acid,CH02880
+CH02881,Cephalexin - AST Testing,Cephalexin,CH02881
+CH02882,Chloramphenicol - AST Testing,Chloramphenicol,CH02882
+CH02883,Ciprofloxacin - AST Testing,Ciprofloxacin,CH02883
+CH02884,Clarithromycin - AST Testing,Clarithromycin,CH02884
+CH02885,Clindamycin - AST Testing,Clindamycin,CH02885
+CH02886,Cloxacillin - AST Testing,Cloxacillin,CH02886
+CH02887,Co-trimoxazole - AST Testing,Co-trimoxazole,CH02887
+CH02888,Colistimethate Sodium - AST Testing,Colistimethate Sodium,CH02888
+CH02889,Colistin/polymixin - AST Testing,Colistin/polymixin,CH02889
+CH02890,Cotrimoxazole - AST Testing,Cotrimoxazole,CH02890
+CH02891,Daptomycin - AST Testing,Daptomycin,CH02891
+CH02892,Doripenem - AST Testing,Doripenem,CH02892
+CH02893,Doxycycline - AST Testing,Doxycycline,CH02893
+CH02894,Ertapenem - AST Testing,Ertapenem,CH02894
+CH02895,Erythromycin - AST Testing,Erythromycin,CH02895
+CH02896,Faropenem - AST Testing,Faropenem,CH02896
+CH02897,Flucloxacillin/Floxacillin - AST Testing,Flucloxacillin/Floxacillin,CH02897
+CH02898,Flucocanozole - AST Testing,Flucocanozole,CH02898
+CH02899,Flucytosine - AST Testing,Flucytosine,CH02899
+CH02900,Fusidic acid/Fusidin - AST Testing,Fusidic acid/Fusidin,CH02900
+CH02901,Gentamicin - AST Testing,Gentamicin,CH02901
+CH02902,Imipenem - AST Testing,Imipenem,CH02902
+CH02903,Imipenem + Cilastatin - AST Testing,Imipenem + Cilastatin,CH02903
+CH02904,Levofloxacin - AST Testing,Levofloxacin,CH02904
+CH02905,Lincomycin - AST Testing,Lincomycin,CH02905
+CH02906,Linezolid - AST Testing,Linezolid,CH02906
+CH02907,Meropenem - AST Testing,Meropenem,CH02907
+CH02908,Metronidazole - AST Testing,Metronidazole,CH02908
+CH02909,Micafungin - AST Testing,Micafungin,CH02909
+CH02910,Minocycline - AST Testing,Minocycline,CH02910
+CH02911,Minocycline - AST Testing,Minocycline,CH02911
+CH02912,Moxifloxacin - AST Testing,Moxifloxacin,CH02912
+CH02913,Nalidixic acid - AST Testing,Nalidixic acid,CH02913
+CH02914,Netimicin - AST Testing,Netimicin,CH02914
+CH02915,Nitrofurantoin - AST Testing,Nitrofurantoin,CH02915
+CH02916,Norfloxacin - AST Testing,Norfloxacin,CH02916
+CH02917,Ofloxacin - AST Testing,Ofloxacin,CH02917
+CH02918,Oxacillin - AST Testing,Oxacillin,CH02918
+CH02919,Penicillin - AST Testing,Penicillin,CH02919
+CH02920,Piperacillin+Tazobactam - AST Testing,Piperacillin+Tazobactam,CH02920
+CH02921,Polymixin-B - AST Testing,Polymixin-B,CH02921
+CH02922,Rifampin - AST Testing,Rifampin,CH02922
+CH02923,Spectinomycin - AST Testing,Spectinomycin,CH02923
+CH02924,Sulfamethoxazole + trimethoprim - AST Testing,Sulfamethoxazole + trimethoprim,CH02924
+CH02925,Sulfisoxazole - AST Testing,Sulfisoxazole,CH02925
+CH02926,Tazobactam - AST Testing,Tazobactam,CH02926
+CH02927,Teicoplanin  - AST Testing,Teicoplanin,CH02927
+CH02928,Tetracycline  - AST Testing,Tetracycline,CH02928
+CH02929,Ticarcillin-Clavulanic-acid - AST Testing,Ticarcillin-Clavulanic-acid,CH02929
+CH02930,Tigecycline - AST Testing,Tigecycline,CH02930
+CH02931,Tobramycin - AST Testing,Tobramycin,CH02931
+CH02932,Vancomycin - AST Testing,Vancomycin,CH02932
+CH02933,Antimicrobial Other 1- AST Testing,Antimicrobial Other 1,CH02933
+CH02934,Antimicrobial Other 2- AST Testing,Antimicrobial Other 2,CH02934
+CH02935,Antimicrobial Other 3- AST Testing,Antimicrobial Other 3,CH02935
+CH02936,"Abacavir (Abc, Zigen)","Abacavir (Abc, Zigen)",CH02936
+CH02937,Acylovir,Acylovir,CH02937
+CH02938,Albendazole,Albendazole,CH02938
+CH02939,Amodiaquine,Amodiaquine,CH02939
+CH02940,Amphotericin B,Amphotericin B,CH02940
+CH02941,Artemether,Artemether,CH02941
+CH02942,Artemether-Lumefantrine,Artemether-Lumefantrine,CH02942
+CH02943,Artesunate,Artesunate,CH02943
+CH02944,Artesunate-Amodiaquine,Artesunate-Amodiaquine,CH02944
+CH02945,Artesunate-Mefloquine,Artesunate-Mefloquine,CH02945
+CH02946,Artesunate-Sulfadoxine-Pyrimethamine (Sp),Artesunate-Sulfadoxine-Pyrimethamine (Sp),CH02946
+CH02947,Atazanavir,Atazanavir,CH02947
+CH02948,Atovaquone-Proguanil,Atovaquone-Proguanil,CH02948
+CH02949,Benzoic Acid + Salicylic Acid,Benzoic Acid + Salicylic Acid,CH02949
+CH02950,Capreomycin,Capreomycin,CH02950
+CH02951,Caspofungin,Caspofungin,CH02951
+CH02952,Chloroquine,Chloroquine,CH02952
+CH02953,Clotrimazole,Clotrimazole,CH02953
+CH02954,Cobicistat,Cobicistat,CH02954
+CH02955,Cycloserine,Cycloserine,CH02955
+CH02956,Darunavir (Drv),Darunavir (Drv),CH02956
+CH02957,"Didanosine (Ddi, Videx)","Didanosine (Ddi, Videx)",CH02957
+CH02958,Diethylcarbamazine,Diethylcarbamazine,CH02958
+CH02959,Dihydroartemisinin And Piperaquine (Dha/Ppq),Dihydroartemisinin And Piperaquine (Dha/Ppq),CH02959
+CH02960,Dolutegravir,Dolutegravir,CH02960
+CH02961,"Efavirenz (Efv, Sustiva, Stocrin)","Efavirenz (Efv, Sustiva, Stocrin)",CH02961
+CH02962,Elvitegravir,Elvitegravir,CH02962
+CH02963,"Emtricitabine (Ftc, Emtriva)","Emtricitabine (Ftc, Emtriva)",CH02963
+CH02964,Enfuvirtide,Enfuvirtide,CH02964
+CH02965,Ethambutol,Ethambutol,CH02965
+CH02966,Etravirine,Etravirine,CH02966
+CH02967,Fluconazole,Fluconazole,CH02967
+CH02968,Flucytosine,Flucytosine,CH02968
+CH02969,Fosamprenavir,Fosamprenavir,CH02969
+CH02970,Ganciclovir,Ganciclovir,CH02970
+CH02971,Griseofulvin,Griseofulvin,CH02971
+CH02972,Halofantrine,Halofantrine,CH02972
+CH02973,Indinavir,Indinavir,CH02973
+CH02974,Isoniazid,Isoniazid,CH02974
+CH02975,Itraconazole,Itraconazole,CH02975
+CH02976,Ivermectin,Ivermectin,CH02976
+CH02977,Kanamycin,Kanamycin,CH02977
+CH02978,Ketoconazole,Ketoconazole,CH02978
+CH02979,"Lamivudine (3Tc, Epivir)","Lamivudine (3Tc, Epivir)",CH02979
+CH02980,Levamisole,Levamisole,CH02980
+CH02981,"Lopinavir/Ritonavir (Lpv/Rit, Kaletra)","Lopinavir/Ritonavir (Lpv/Rit, Kaletra)",CH02981
+CH02982,Maraviroc,Maraviroc,CH02982
+CH02983,Mebendazole,Mebendazole,CH02983
+CH02984,Mefloquine,Mefloquine,CH02984
+CH02985,Micafungin,Micafungin,CH02985
+CH02986,Miconazole,Miconazole,CH02986
+CH02987,"Nelfinavir (Nfv, Viracept)","Nelfinavir (Nfv, Viracept)",CH02987
+CH02988,"Nevirapine (Nvp, Viramune)","Nevirapine (Nvp, Viramune)",CH02988
+CH02989,Niclosamide,Niclosamide,CH02989
+CH02990,Nystatin,Nystatin,CH02990
+CH02991,Ofloxacin,Ofloxacin,CH02991
+CH02992,Para-Aminosalicylic Acid (Pas),Para-Aminosalicylic Acid (Pas),CH02992
+CH02993,Praziquantel,Praziquantel,CH02993
+CH02994,Primaquine,Primaquine,CH02994
+CH02995,Proguanil,Proguanil,CH02995
+CH02996,Protionamide,Protionamide,CH02996
+CH02997,Pyrantel,Pyrantel,CH02997
+CH02998,Pyrazinamide,Pyrazinamide,CH02998
+CH02999,Quinidine Gluconate,Quinidine Gluconate,CH02999
+CH03000,Quinine Sulphate,Quinine Sulphate,CH03000
+CH03001,Quinine-Quinidine-Cinchonin,Quinine-Quinidine-Cinchonin,CH03001
+CH03002,Raltegravir,Raltegravir,CH03002
+CH03003,Rifabutin,Rifabutin,CH03003
+CH03004,Rifampin (Rifampicin),Rifampin (Rifampicin),CH03004
+CH03005,Rilpivirine,Rilpivirine,CH03005
+CH03006,"Ritonavir (Rtv, Norvir)","Ritonavir (Rtv, Norvir)",CH03006
+CH03007,Saquinavir,Saquinavir,CH03007
+CH03008,"Stavudine (D4T, Zerit)","Stavudine (D4T, Zerit)",CH03008
+CH03009,Streptomycin,Streptomycin,CH03009
+CH03010,Sulfadoxine-Pyrimethamine (Sp),Sulfadoxine-Pyrimethamine (Sp),CH03010
+CH03011,Sulfadoxine-Pyrimethamine (Sp)-Amodiaquine,Sulfadoxine-Pyrimethamine (Sp)-Amodiaquine,CH03011
+CH03012,"Tenofovir (Tnf, Tdf)","Tenofovir (Tnf, Tdf)",CH03012
+CH03013,Terbinafine,Terbinafine,CH03013
+CH03014,Terizidone,Terizidone,CH03014
+CH03015,Thionamide,Thionamide,CH03015
+CH03016,Tipranavir,Tipranavir,CH03016
+CH03017,Valacyclovir,Valacyclovir,CH03017
+CH03018,Valganciclovir,Valganciclovir,CH03018
+CH03019,Voriconazole,Voriconazole,CH03019
+CH03020,Antimicrobials,Antimicrobials,CH03020
+CH03021,Antifungals,Antifungals,CH03021
+CH03022,Other antivirals,Other antivirals,CH03022
+CH03023,Antihelmenthic,Antihelmenthic,CH03023
+CH03024,L/min,L/min,CH03025
+CH03025,Suspected TB disease,Suspected TB disease,CH03026
+CH03026,Unsure what type of diagnosis,Unsure what type of diagnosis,CH03027
+CH03027,Adult COVID MITS,Adult COVID MITS,CH03027
+CH03028,Hemoglobin estimation postmortem,HGB postmortem,CH03028
+CH03029,Copper sulfate technique,Copper sulfate technique,CH03029
+CH03030,Cyanmethomoglobin,Cyanmethomoglobin,CH03030
+CH03031,Automated hematology analyzers,Automated hematology analyzers,CH03031
+CH03032,WHO Color Scale,WHO Color Scale,CH03032
+CH03033,Invasive photometric point of care analyzers,Invasive photometric point of care analyzers,CH03033
+CH03034,Paper/color based analytical devices,Paper/color based analytical devices,CH03034
+CH03035,Carboxyhemoglobin,Carboxyhemoglobin,CH03035
+CH03036,HemoCue,HemoCue,CH03036
+CH03037,Hemo-Control,Hemo-Control,CH03037
+CH03038,Hb-Quick,Hb-Quick,CH03038
+CH03039,TrueHb,TrueHb,CH03039
+CH03040,DisSpect,DisSpect,CH03040
+CH03041,URIT,URIT,CH03041
+CH03042,mPADs,mPADs,CH03042
+CH03043,Color-based filter test,Color-based filter test,CH03043
+CH03044,Radical-7,Radical-7,CH03044
+CH03045,ToucHb,ToucHb,CH03045
+CH03046, Co-oximeter, Co-oximeter,CH03046
+CH03047,Noninvasive point of care,Noninvasive point of care,CH03047
+CH03048,Not Applicable (NA),NA,CH03048
+CH03049,Overweight,Overweight,CH03049
+CH03050,Obese,Obese,CH03050
+CH03051,Severe acute malnutrition,Severe acute malnutrition,CH03051
+CH03052,Moderate manlnutrition,Moderate manlnutrition,CH03052
+CH03053,Normal MUAC,Normal MUAC,CH03053
+CH03054,High MUAC-for-age,High MUAC-for-age,CH03054
+CH03055,Severe microcephaly,Severe microcephaly,CH03055
+CH03056,Microcephaly,Microcephaly,CH03056
+CH03057,Normal head circumference for age,Normal head circumference for age,CH03057
+CH03058,Macrocephaly,Macrocephaly,CH03058
+CH03059,High length/height-for age,High length/height-for age,CH03059
+CH03060,Possible risk of overweight,Possible risk of overweight,CH03060
+CH03061,Burundi,Burundi,BI
+CH03062,Congo,Democratic Republic of Congo,CD
+CH03063,Rwanda,Rwanda,RW
+CH03064,Tanzania,Tanzania,TZ
+CH03065,Fetal Membrane,Fetal Membrane,CH03065
+CH03066,Adrenal Gland,Adrenal Gland,CH03066
+CH03067,Cefoxitin,Cefoxitin,CH03067
+CH03068,Intermediate,Intermediate,CH03068
+CH03069,Burkholderia cepacia,Burkholderia cepacia,CH03069
+CH03070,Enterobacter spp.,Enterobacter spp.,CH03070
+CH03071,Micrococcus spp.,Micrococcus spp.,CH03071
+CH03072,Proteus spp.,Proteus spp.,CH03072
+CH03073,Pooled aqueous fluids (right eye and left eye),Pooled aqueous fluids (right eye and left eye),CH03073
+CH03074,Pooled vitreous fluids (right eye and left eye),Pooled vitreous fluids (right eye and left eye),CH03074
+CH03075,"Adarsha Clinic, Rajbari","Adarsha Clinic, Rajbari",CH03075
+CH03076,"Adhunik Clinic and Diagnostic Centre, Pangsha","Adhunik Clinic and Diagnostic Centre, Pangsha",CH03076
+CH03077,"Al Madina Clinic, Magura","Al Madina Clinic, Magura",CH03077
+CH03078,"Apollo Specialized Hospital, Faridpur","Apollo Specialized Hospital, Faridpur",CH03078
+CH03079,"Aroggo Clinic, Rajbari","Aroggo Clinic, Rajbari",CH03079
+CH03080,"Aroggo Sadan Private Hospital, Faridpur","Aroggo Sadan Private Hospital, Faridpur",CH03080
+CH03081,"Babu Memorial Hospital and Diagnostic Center, Madhukhali","Babu Memorial Hospital and Diagnostic Center, Madhukhali",CH03081
+CH03082,"Baliakandi Clinic and Diagnostic Center, Baliakandi","Baliakandi Clinic and Diagnostic Center, Baliakandi",CH03082
+CH03083,Baliakandi Upazila Health Complex,Baliakandi Upazila Health Complex,CH03083
+CH03084,Chondona Diagnostic Centre and Doctors Chamber,Chondona Diagnostic Centre and Doctors Chamber,CH03084
+CH03085,"Diabetic Association Medical College Hospital, Faridpur","Diabetic Association Medical College Hospital, Faridpur",CH03085
+CH03086,"District Hospital, Magura","District Hospital, Magura",CH03086
+CH03087,"District Hospital, Rajbari","District Hospital, Rajbari",CH03087
+CH03088,"Dr. Roton Clinic, Rajbari","Dr. Roton Clinic, Rajbari",CH03088
+CH03089,"District Hospital, Faridpur","District Hospital, Faridpur",CH03089
+CH03090,Faridpur Medical College Hospital,Faridpur Medical College Hospital,CH03090
+CH03091,"Green View Diagnostic Complex and Private Hospital, Magura","Green View Diagnostic Complex and Private Hospital, Magura",CH03091
+CH03092,"Islami Bank Community Hospital, Faridpur","Islami Bank Community Hospital, Faridpur",CH03092
+CH03093,Jamalpur UH and FWC,Jamalpur UH and FWC,CH03093
+CH03094,Jangal UH and FWC,Jangal UH and FWC,CH03094
+CH03095,"Jonony Clinic and Diagnostic Centre, Baliakandi","Jonony Clinic and Diagnostic Centre, Baliakandi",CH03095
+CH03096,"Kabita Clinic and Diagnostic Center, Madhukhali","Kabita Clinic and Diagnostic Center, Madhukhali",CH03096
+CH03097,"Lily Private Hospital and Diagnostic Center, Faridpur","Lily Private Hospital and Diagnostic Center, Faridpur",CH03097
+CH03098,"Liza Health Care, Pangsha","Liza Health Care, Pangsha",CH03098
+CH03099,Madhukhali Upazila Health Complex,Madhukhali Upazila Health Complex,CH03099
+CH03100,"Madina Clinic and Diagnostic Center, Pangsha","Madina Clinic and Diagnostic Center, Pangsha",CH03100
+CH03101,"MCWC, Rajbari","MCWC, Rajbari",CH03101
+CH03102,"Medicure Hospital and Diagnostic Center, Madhukhali","Medicure Hospital and Diagnostic Center, Madhukhali",CH03102
+CH03103,"Mediland Hospital and Diagnostic Center, Pangsha","Mediland Hospital and Diagnostic Center, Pangsha",CH03103
+CH03104,Narua UH and FWC,Narua UH and FWC,CH03104
+CH03105,Nawabpur UH and FWC,Nawabpur UH and FWC,CH03105
+CH03106,"Neuro Clinic and Diagnostic Centre, Pangsha","Neuro Clinic and Diagnostic Centre, Pangsha",CH03106
+CH03107,"New Shapla Clinic and Diagnostic Centre, Baliakandi","New Shapla Clinic and Diagnostic Centre, Baliakandi",CH03107
+CH03108,"Niramoy Clinic, Rajbari","Niramoy Clinic, Rajbari",CH03108
+CH03109,"Popular Clinic, Rajbari","Popular Clinic, Rajbari",CH03109
+CH03110,"Popular Medical and Diagnostic Center, Baliakandi","Popular Medical and Diagnostic Center, Baliakandi",CH03110
+CH03111,"Rabeya (Pvt.) Hospital, Rajbari","Rabeya (Pvt.) Hospital, Rajbari",CH03111
+CH03112,"Rajbari Clinic, Rajbari","Rajbari Clinic, Rajbari",CH03112
+CH03113,"Rajbari Medical Centre and Hospital, Rajbari","Rajbari Medical Centre and Hospital, Rajbari",CH03113
+CH03114,"Sagorika Clinic and Diagnostic Center, Magura","Sagorika Clinic and Diagnostic Center, Magura",CH03114
+CH03115,"Sanjida Pvt. Clinic and Nursing Home, Madhukhali","Sanjida Pvt. Clinic and Nursing Home, Madhukhali",CH03115
+CH03116,"Saudi-Bangla Private Hospital, Faridpur","Saudi-Bangla Private Hospital, Faridpur",CH03116
+CH03117,"Shanti Pvt. Hospital and Diagnostic Center, Magura","Shanti Pvt. Hospital and Diagnostic Center, Magura",CH03117
+CH03118,"Shapla Clinic and Diagnostic Centre, Baliakandi","Shapla Clinic and Diagnostic Centre, Baliakandi",CH03118
+CH03119,"Sheba Medical and Diagnostic Center, Baliakandi","Sheba Medical and Diagnostic Center, Baliakandi",CH03119
+CH03120,"Surjer Hasi Clinic, Baliakandi","Surjer Hasi Clinic, Baliakandi",CH03120
+CH03121,"Upasham Clinic and Diagnostic Center, Madhukhali","Upasham Clinic and Diagnostic Center, Madhukhali",CH03121
+CH03122,"Zahed Memorial Child Hospital, Faridpur","Zahed Memorial Child Hospital, Faridpur",CH03122
+CH03123,Kaunnair Community Clinic,Kaunnair Community Clinic,CH03123
+CH03124,Baharpur UH and FWC,Baharpur UH and FWC,CH03124
+CH03125,Beradanga Community Clinic,Beradanga Community Clinic,CH03125
+CH03126,Konagram Community Clinic,Konagram Community Clinic,CH03126
+CH03127,Rajdharpur Sub-Center,Rajdharpur Sub-Center,CH03127
+CH03128,Rajdharpur Community Clinic,Rajdharpur Community Clinic,CH03128
+CH03129,Sonapur Community Clinic,Sonapur Community Clinic,CH03129
+CH03130,Sarutia Community Clinic,Sarutia Community Clinic,CH03130
+CH03131,Pakalia Community Clinic,Pakalia Community Clinic,CH03131
+CH03132,Khurda Ramdi Community Clinic,Khurda Ramdi Community Clinic,CH03132
+CH03133,Arkandi Sub-Center,Arkandi Sub-Center,CH03133
+CH03134,Padamdi Community Clinic,Padamdi Community Clinic,CH03134
+CH03135,Barugram Community Clinic,Barugram Community Clinic,CH03135
+CH03136,Kumardia Community Clinic,Kumardia Community Clinic,CH03136
+CH03137,Sanghora Community Clinic,Sanghora Community Clinic,CH03137
+CH03138,Hatimohon Community Clinic,Hatimohon Community Clinic,CH03138
+CH03139,Baraichara Community Clinic,Baraichara Community Clinic,CH03139
+CH03140,Baduli Khalkula Community Clinic,Baduli Khalkula Community Clinic,CH03140
+CH03141,Paikandi Community Clinic,Paikandi Community Clinic,CH03141
+CH03142,Indurdi Community Clinic,Indurdi Community Clinic,CH03142
+CH03143,Chamta Community Clinic,Chamta Community Clinic,CH03143
+CH03144,Ag Potra Community Clinic,Ag Potra Community Clinic,CH03144
+CH03145,Salmara Community Clinic,Salmara Community Clinic,CH03145
+CH03146,Delua Community Clinic,Delua Community Clinic,CH03146
+CH03147,Boro Ghikamal Community Clinic,Boro Ghikamal Community Clinic,CH03147
+CH03148,Sonaidanga Community Clinic,Sonaidanga Community Clinic,CH03148
+CH03149,Jamalpur Sub-Center,Jamalpur Sub-Center,CH03149
+CH03150,"Paricharja Hospital Limited, Faridpur","Paricharja Hospital Limited, Faridpur",CH03150
+CH03151,"The Popular Diagnostic Center, Madhukhali","The Popular Diagnostic Center, Madhukhali",CH03151
+CH03152,Obese* confirm with all available data,Obese* confirm with all available data,CH03152
+CH03153,Severely wasted* confirm with all available data,Severely wasted* confirm with all available data,CH03153
+CH03154,Z-score cannot be calculated because child has a length below 45 cm; consider classifying nutritional status using gestational age,Z-score cannot be calculated because child has a length below 45 cm; consider classifying nutritional status using gestational age,CH03154
+CH03155,Severely underweight* confirm with all available data,Severely underweight* confirm with all available data,CH03155
+CH03156,Biologically implausible high length/height-for-age* confirm with all available data,Biologically implausible high length/height-for-age* confirm with all available data,CH03156
+CH03157,Severely stunted* confirm with all available data,Severely stunted* confirm with all available data,CH03157
+CH03158,Macrocephaly* confirm with all available data,Macrocephaly* confirm with all available data,CH03158
+CH03159,Severe microcephaly* confirm with all available data,Severe microcephaly* confirm with all available data,CH03159
+CH03160,Severe malnutrition* confirm with all available data,Severe malnutrition* confirm with all available data,CH03160

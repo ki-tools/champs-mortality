@@ -315,17 +315,17 @@ combine_decision_tables <- function(tables_dat) {
     dplyr::left_join(t2, by = join_cols)
 }
 
-
 # hack from old gt function as the new one is not
 # working
 # Old function from
 # https://github.com/rstudio/gt/blob/8a306326cd63de71c7d887dc3706fc0ec1c553c9/R/tab_create_modify.R
-tab_spanner_delim_old <- function(data,
-                              delim,
-                              columns = everything(),
-                              gather = TRUE,
-                              split = c("last", "first")) {
-
+tab_spanner_delim_old <- function(
+  data,
+  delim,
+  columns = dplyr::everything(),
+  gather = TRUE,
+  split = c("last", "first")
+) {
   # Perform input object validation
   gt:::stop_if_not_gt(data = data)
 
