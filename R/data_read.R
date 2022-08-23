@@ -29,7 +29,8 @@ read_and_validate_data <- function(data_path) {
   dss  <- read_file(data_path, cfg, dss_names,  "dss_dataset")
   seas <- read_file(data_path, cfg, seas_names, "season_lookup")
   # rlgn <- read_file(data_path, cfg, rlgn_names, "religion_lookup")
-  catlkp <- read_file(data_path, cfg, catlkp_names, "catchment_lookup")
+  catlkp <- read_file(data_path, cfg, catlkp_names, "catchment_lookup",
+    col_types = list(catchment_id = readr::col_character()))
   lb <- read_file(data_path, cfg, live_birth_names, "live_births_dataset")
   dhs <- read_file(data_path, cfg, dhs_names, "dhs_dataset")
 
@@ -52,7 +53,7 @@ read_and_validate_data <- function(data_path) {
 #' @importFrom readr read_csv
 #' @importFrom readxl read_excel
 #' @importFrom snakecase to_snake_case
-read_file <- function(data_path, cfg, nms, ds_name) {
+read_file <- function(data_path, cfg, nms, ds_name, col_types = NULL) {
   path <- file.path(data_path, cfg[[ds_name]])
 
   assertthat::assert_that(file.exists(path),
@@ -66,7 +67,8 @@ read_file <- function(data_path, cfg, nms, ds_name) {
       "File must have extension 'csv', 'xlsx', or 'xls': {path}"))
 
   if (ext == "csv") {
-    x <- readr::read_csv(path, show_col_types = FALSE, guess_max = 1e6)
+    x <- readr::read_csv(path, show_col_types = FALSE, guess_max = 1e6,
+      col_types = col_types)
   } else {
     x <- readxl::read_excel(path, guess_max = 1e6)
   }
