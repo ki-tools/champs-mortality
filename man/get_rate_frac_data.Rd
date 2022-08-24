@@ -38,6 +38,8 @@ FALSE, the underlying cause is searched}
 \item{adjust_vars}{a vector of variables to adjust by}
 
 \item{factor_groups}{A named list that specifies how to group factors}
+
+\item{ctch_info}{An object that tracks information about catchments in the data.}
 }
 \description{
 Get data necessary to compute adjusted mortality fractions and rates

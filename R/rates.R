@@ -327,6 +327,7 @@ get_rates_and_fractions_site <- function(
 #' FALSE, the underlying cause is searched
 #' @param adjust_vars a vector of variables to adjust by
 #' @param factor_groups A named list that specifies how to group factors
+#' @param ctch_info An object that tracks information about catchments in the data.
 #' @note One or both of `icd10_regex` and `condition` must be specified
 # @export
 get_rate_frac_data <- function(x,

@@ -5,7 +5,7 @@
 #' @param catchments A vector of catchments to include in the calculations.
 #' If NULL, all catchments with data will be used.
 #' @param factor_groups A named list that specifies how to group factors
-#' @param ctch An object that tracks information about catchments in the data.
+#' @param ctch_info An object that tracks information about catchments in the data.
 #' This is used internally and should be ignored by users.
 #' @importFrom dplyr relocate group_by_at full_join n
 #' @importFrom purrr map2 map_dbl

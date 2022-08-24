@@ -23,7 +23,7 @@ If NULL, all catchments with data will be used.}
 
 \item{factor_groups}{A named list that specifies how to group factors}
 
-\item{ctch}{An object that tracks information about catchments in the data.
+\item{ctch_info}{An object that tracks information about catchments in the data.
 This is used internally and should be ignored by users.}
 }
 \description{
