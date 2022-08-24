@@ -35,4 +35,8 @@ Imports:
     yaml
 Suggests: 
     covr,
+    knitr,
+    rmarkdown,
     testthat
+URL: https://ki-tools.github.io/champs-mortality/
+VignetteBuilder: knitr

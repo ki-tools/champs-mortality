@@ -36,6 +36,10 @@ remotes::install_github("ki-tools/champs-mortality")
 
 ## Example
 
+This is a high-level walkthrough of some of the major pacakge functionality and workflow. Read the additional [articles](TODO) for more depth.
+
+This package is most useful with real data obtainable from [CHAMPS](https://champshealth.org/data/). For the purposes of documentation and examples, the package ships with synthetic datasets. As such, keep in mind that the results of the examples in this documentation not meaningful.
+
 ```{r}
 library(champsmortality)
 ```
@@ -49,31 +53,27 @@ data_dir <- tempfile()
 create_dataset_directory(data_dir)
 ```
 
-This is something that only needs to be done once.
+This is something that only needs to be done once. Public data that comes with the package will be placed here, and additional private datasets will need to be added. More about the required datasets and expected formats can be found [in this article](TODO).
+
+For the purpose of these examples, we will change `data_dir` to point to a directory containing synthetic data. SKIP THIS STEP IF YOU ARE WORKING WITH REAL DATA.
+
+```{r}
+data_dir <- file.path(system.file(package = "champsmortality"), "testdata")
+```
 
 ### Read the data
 
 Once this is set up and the appropriate files are placed and mapped in the `config.yaml` file, you can read in the data with the following:
 
 ```{r}
-input_path <- file.path(system.file(package = "champsmortality"), "testdata")
-
-list.files(input_path)
-```
-
-TODO: Talk about the data in each of these files...
-
-```{r}
-d <- read_and_validate_data(input_path)
+d <- read_and_validate_data(data_dir)
 ```
 
 This will read in the data files and ensure that all of the variables required to perform the calculations are present. If they are not, you will see an error message and will need to correct the error before being able to use the package.
 
-TODO: Talk about the structure of `d`.
-
 ### Process the data
 
-A function, `process_data()` takes the data that has been read and joins it together to create an analysis dataset and DSS dataset ready for analysis.
+A function, `process_data()` takes the data that has been read and joins it together to create a dataset ready analysis.
 ```{r}
 dd <- process_data(d, start_year = 2017, end_year = 2020)
 ```
@@ -92,6 +92,8 @@ This searches the CHAMPS data and finds all unique condition values found anywhe
 
 ### Getting Rates and Fractions
 
+The main function of this package computes factor-adjusted mortality rates and fractions for a specified set of sites and catchments. More details about the methodology can be found [in this article](TODO).
+
 ```{r}
 graf <- get_rates_and_fractions(
   dd,
@@ -103,4 +105,11 @@ graf <- get_rates_and_fractions(
   condition = "Lower respiratory infections")
 ```
 
-TODO: Much more coming soon...
+The output of this function contains many pieces of information for each site including underlying statistics that went into the calculations, but the most interesting outputs are the rates and fractions.
+
+For site S6, for example, we can extract the computed rates and fractions with the following:
+
+```{r}
+graf$S6$rate
+graf$S6$frac
+```

@@ -26,6 +26,16 @@ remotes::install_github("ki-tools/champs-mortality")
 
 ## Example
 
+This is a high-level walkthrough of some of the major pacakge
+functionality and workflow. Read the additional [articles](TODO) for
+more depth.
+
+This package is most useful with real data obtainable from
+[CHAMPS](https://champshealth.org/data/). For the purposes of
+documentation and examples, the package ships with synthetic datasets.
+As such, keep in mind that the results of the examples in this
+documentation not meaningful.
+
 ``` r
 library(champsmortality)
 ```
@@ -41,9 +51,9 @@ provided to help get this set up.
 data_dir <- tempfile()
 create_dataset_directory(data_dir)
 #> ✔ The directory
-#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6' is ready
-#>   for the appropriate data files to be placed in it. The following datasets should be placed
-#>   in this directory:
+#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf' is ready for
+#>   the appropriate data files to be placed in it. The following datasets should be placed in
+#>   this directory:
 #> 
 #> 1. CHAMPS Analytics Dataset: This dataset is available as a downloadable file from LabKey and
 #>    is continuously updated. It contains most of the CHAMPS variables that are needed for the
@@ -60,27 +70,27 @@ create_dataset_directory(data_dir)
 #> 5. Season definition: This dataset is a csv file containing rainy and dry season date ranges
 #>    for each site, which will be used to classify the season in which each case occurs. A
 #>    dataset with known season definitions,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6/seasons.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/seasons.csv',
 #>    has been provided. Please update that file if necessary.
 #> 6. Catchment lookup: This dataset is a csv file containing mappings from catchment codes to
 #>    catchment names, used to link the DSS data, which uses catchment names, to the CHAMPS
 #>    analysis dataset, which uses catchment IDs. A dataset with known catchment lookups,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6/catchment_lookup.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/catchment_lookup.csv',
 #>    has been provided. Please update that file if necessary.
 #> 7. Live births: This dataset is a csv file containing yearly live births by site and
 #>    catchment from DSS. A dataset with known live birth statistics by site, catchment, and
 #>    year,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6/live_births.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/live_births.csv',
 #>    has been provided. Please update that file if necessary.
 #> 8. Live births: This dataset is a csv file containing yearly DHS all-cause mortality data by
 #>    site and catchment from DSS. A dataset with known DHS statistics by site, catchment, year,
 #>    and age,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6/dhs.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/dhs.csv',
 #>    has been provided. Please update that file if necessary.
 #> 
 #> → Once the files are in place, edit the file
-#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpZ6gJzc/file2de12881bbc6/config.yaml
-#>   to provide the file names corresponding to each of these datasets.
+#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/config.yaml to
+#>   provide the file names corresponding to each of these datasets.
 #> 
 #> The config.yaml template looks like this:
 #>     ┌──────────────────────────────────────────┐
@@ -102,7 +112,18 @@ create_dataset_directory(data_dir)
 #>     └─────────────────────────────────────────────────────────────────┘
 ```
 
-This is something that only needs to be done once.
+This is something that only needs to be done once. Public data that
+comes with the package will be placed here, and additional private
+datasets will need to be added. More about the required datasets and
+expected formats can be found [in this article](TODO).
+
+For the purpose of these examples, we will change `data_dir` to point to
+a directory containing synthetic data. SKIP THIS STEP IF YOU ARE WORKING
+WITH REAL DATA.
+
+``` r
+data_dir <- file.path(system.file(package = "champsmortality"), "testdata")
+```
 
 ### Read the data
 
@@ -110,27 +131,15 @@ Once this is set up and the appropriate files are placed and mapped in
 the `config.yaml` file, you can read in the data with the following:
 
 ``` r
-input_path <- file.path(system.file(package = "champsmortality"), "testdata")
-
-list.files(input_path)
-#>  [1] "analytics_2022-05-24.csv"  "catchment_lookup.csv"      "config.yaml"              
-#>  [4] "dhs.csv"                   "dss_2022-05-24.csv"        "inputs_wide.csv"          
-#>  [7] "live_births.csv"           "registry_2022-05-24.csv"   "seasons.csv"              
-#> [10] "version.txt"               "vocabulary_2022-05-24.csv"
-```
-
-TODO: Talk about the data in each of these files…
-
-``` r
-d <- read_and_validate_data(input_path)
-#> ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/analytics_2022-05-24.csv
-#> ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/vocabulary_2022-05-24.csv
-#> ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/registry_2022-05-24.csv
-#> ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/dss_2022-05-24.csv
-#> ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/seasons.csv
-#> ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/catchment_lookup.csv
-#> ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/live_births.csv
-#> ✔ /private/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T/RtmpaoR18B/temp_libpath25c661c1f9d0/champsmortality/testdata/dhs.csv
+d <- read_and_validate_data(data_dir)
+#> ✔ analytics_2022-05-24.csv
+#> ✔ vocabulary_2022-05-24.csv
+#> ✔ registry_2022-05-24.csv
+#> ✔ dss_2022-05-24.csv
+#> ✔ seasons.csv
+#> ✔ catchment_lookup.csv
+#> ✔ live_births.csv
+#> ✔ dhs.csv
 ```
 
 This will read in the data files and ensure that all of the variables
@@ -138,13 +147,10 @@ required to perform the calculations are present. If they are not, you
 will see an error message and will need to correct the error before
 being able to use the package.
 
-TODO: Talk about the structure of `d`.
-
 ### Process the data
 
 A function, `process_data()` takes the data that has been read and joins
-it together to create an analysis dataset and DSS dataset ready for
-analysis.
+it together to create a dataset ready analysis.
 
 ``` r
 dd <- process_data(d, start_year = 2017, end_year = 2020)
@@ -240,6 +246,10 @@ the data than a condition with a lower ranking.
 
 ### Getting Rates and Fractions
 
+The main function of this package computes factor-adjusted mortality
+rates and fractions for a specified set of sites and catchments. More
+details about the methodology can be found [in this article](TODO).
+
 ``` r
 graf <- get_rates_and_fractions(
   dd,
@@ -249,31 +259,40 @@ graf <- get_rates_and_fractions(
   pval_cutoff = 0.1,
   pct_na_cutoff = 20,
   condition = "Lower respiratory infections")
-#> S6
-#> ℹ The following catchments are not found in the data and will be removed from the
-#> calculations: C4, C3, C5, C6, C7
-#> ℹ The following catchments are not found in the data and will be removed from the
-#> calculations: C4, C3, C5, C6, C7
+#> Processing site:  S6
+#> ℹ The following catchments are not found in the data for site S6 and will be removed from the
+#> calculations for this site: C4, C3, C5, C6, C7
 #>   no adjustment variables
-#> ℹ The following catchments are not found in the data and will be removed from the
-#> calculations: C4, C3, C5, C6, C7
-#> S5
-#> ℹ The following catchments are not found in the data and will be removed from the
-#> calculations: C1, C6, C7
-#> ℹ The following catchments are not found in the data and will be removed from the
-#> calculations: C1, C6, C7
+#> Processing site:  S5
+#> ℹ The following catchments are not found in the data for site S5 and will be removed from the
+#> calculations for this site: C1, C6, C7
 #>   using adjustment variables: age, location
-#> ℹ The following catchments are not found in the data and will be removed from the
-#> calculations: C1, C6, C7
-#> S7
-#> ℹ The following catchments are not found in the data and will be removed from the
-#> calculations: C1, C4, C3, C5
-#> ℹ The following catchments are not found in the data and will be removed from the
-#> calculations: C1, C4, C3, C5
+#> Processing site:  S7
+#> ℹ The following catchments are not found in the data for site S7 and will be removed from the
+#> calculations for this site: C1, C4, C3, C5
 #>   using adjustment variable: location
 #>   other significant factors not adjusted for: va
-#> ℹ The following catchments are not found in the data and will be removed from the
-#> calculations: C1, C4, C3, C5
 ```
 
-TODO: Much more coming soon…
+The output of this function contains many pieces of information for each
+site including underlying statistics that went into the calculations,
+but the most interesting outputs are the rates and fractions.
+
+For site S6, for example, we can extract the computed rates and
+fractions with the following:
+
+``` r
+graf$S6$rate
+#> # A tibble: 2 × 8
+#>   site  catchments var    label                                 allcauseMR   est  lower upper
+#>   <chr> <chr>      <chr>  <chr>                                      <dbl> <dbl>  <dbl> <dbl>
+#> 1 S6    C1         cTU5MR Crude total under-5 mortality rate          591.     0 0.0140  13.5
+#> 2 S6    C1         aTU5MR Adjusted total under-5 mortality rate       591.     0 0.0140  13.5
+graf$S6$frac
+#> # A tibble: 2 × 9
+#>   site  catchments var   label                              decode condi…¹   est   lower upper
+#>   <chr> <chr>      <chr> <chr>                               <int>   <int> <dbl>   <dbl> <dbl>
+#> 1 S6    C1         cCSMF Crude cause-specific mortality fr…     83       0     0 0.00236  2.28
+#> 2 S6    C1         aCSMF Adjusted cause-specific mortality…     83       0     0 0.00236  2.28
+#> # … with abbreviated variable name ¹​condition
+```
