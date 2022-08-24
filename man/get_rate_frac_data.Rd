@@ -13,7 +13,8 @@ get_rate_frac_data(
   maternal = FALSE,
   causal_chain = TRUE,
   adjust_vars = NULL,
-  factor_groups = NULL
+  factor_groups = NULL,
+  ctch_info = NULL
 )
 }
 \arguments{

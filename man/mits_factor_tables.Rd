@@ -4,7 +4,13 @@
 \alias{mits_factor_tables}
 \title{Compute counts of MITS and non-MITS+DSS-only deaths by factors}
 \usage{
-mits_factor_tables(x, sites = NULL, catchments = NULL, factor_groups = NULL)
+mits_factor_tables(
+  x,
+  sites = NULL,
+  catchments = NULL,
+  factor_groups = NULL,
+  ctch_info = NULL
+)
 }
 \arguments{
 \item{x}{Processed CHAMPS dataset.}
@@ -16,6 +22,9 @@ all sites with data will be used.}
 If NULL, all catchments with data will be used.}
 
 \item{factor_groups}{A named list that specifies how to group factors}
+
+\item{ctch}{An object that tracks information about catchments in the data.
+This is used internally and should be ignored by users.}
 }
 \description{
 Compute counts of MITS and non-MITS+DSS-only deaths by factors
