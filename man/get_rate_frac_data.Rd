@@ -13,7 +13,8 @@ get_rate_frac_data(
   maternal = FALSE,
   causal_chain = TRUE,
   adjust_vars = NULL,
-  factor_groups = NULL
+  factor_groups = NULL,
+  ctch_info = NULL
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ FALSE, the underlying cause is searched}
 \item{adjust_vars}{a vector of variables to adjust by}
 
 \item{factor_groups}{A named list that specifies how to group factors}
+
+\item{ctch_info}{An object that tracks information about catchments in the data.}
 }
 \description{
 Get data necessary to compute adjusted mortality fractions and rates

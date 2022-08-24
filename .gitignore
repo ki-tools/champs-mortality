@@ -1,2 +1,5 @@
 _ignore
 .DS_Store
+docs
+inst/doc
+*.code-workspace

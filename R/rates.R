@@ -83,7 +83,7 @@ get_rates_and_fractions <- function(
 
   res <- lapply(sites, function(st) {
     if (length(sites) > 1)
-      message(st)
+      message(paste("Processing site: ", st))
     get_rates_and_fractions_site(x,
       sites = st,
       catchments = catchments,
@@ -123,11 +123,19 @@ get_rates_and_fractions_site <- function(
   pct_na_cutoff = 20,
   per = 10000
 ) {
+  ctch_info <- get_ctch(x, sites, catchments)
+  sites <- ctch_info$sites
+  ctch <- ctch_info$ctch
+  catchments <- ctch_info$catchments
+  gctch <- ctch_info$gctch
+  can_use_dss <- ctch_info$can_use_dss
+
   tbl1 <- mits_factor_tables(x,
     sites = sites,
     catchments = catchments,
     # group_catchments = group_catchments,
-    factor_groups = factor_groups
+    factor_groups = factor_groups,
+    ctch_info = ctch_info
   )
 
   tbl2 <- cond_factor_tables(x,
@@ -139,7 +147,8 @@ get_rates_and_fractions_site <- function(
     icd10_regex = icd10_regex,
     maternal = maternal,
     cond_name_short = cond_name_short,
-    causal_chain = causal_chain
+    causal_chain = causal_chain,
+    ctch_info = ctch_info
   )
 
   vars <- c("site", "catchment", "factor", "pval", "pct_na")
@@ -206,7 +215,8 @@ get_rates_and_fractions_site <- function(
     maternal = maternal,
     causal_chain = causal_chain,
     factor_groups = factor_groups,
-    adjust_vars = adjust_vars
+    adjust_vars = adjust_vars,
+    ctch_info = ctch_info
   )
 
   # if a mix of DSS/non-DSS, calculate for DSS and use DHS for non-DSS and avg
@@ -317,6 +327,7 @@ get_rates_and_fractions_site <- function(
 #' FALSE, the underlying cause is searched
 #' @param adjust_vars a vector of variables to adjust by
 #' @param factor_groups A named list that specifies how to group factors
+#' @param ctch_info An object that tracks information about catchments in the data.
 #' @note One or both of `icd10_regex` and `condition` must be specified
 # @export
 get_rate_frac_data <- function(x,
@@ -327,7 +338,8 @@ get_rate_frac_data <- function(x,
   maternal = FALSE,
   causal_chain = TRUE,
   adjust_vars = NULL,
-  factor_groups = NULL
+  factor_groups = NULL,
+  ctch_info = NULL
 ) {
   assertthat::assert_that(inherits(x, "champs_processed"),
     msg = cli::format_error("Data must come from process_data()")
@@ -337,6 +349,15 @@ get_rate_frac_data <- function(x,
     msg = cli::format_error("Must specify at least one of 'condition' \\
       and icd10_regex")
   )
+
+  if (is.null(ctch_info) || !inherits(ctch_info, "get_ctch"))
+    ctch_info <- get_ctch(x, site, catchments)
+
+  sites <- ctch_info$sites
+  ctch <- ctch_info$ctch
+  catchments <- ctch_info$catchments
+  gctch <- ctch_info$gctch
+  can_use_dss <- ctch_info$can_use_dss
 
   if (!is.null(condition)) {
     # assertthat::assert_that(length(condition) == 1)
@@ -350,13 +371,6 @@ get_rate_frac_data <- function(x,
         valid_conditions() for a list.")
     )
   }
-
-  obj <- get_ctch(x, site, catchments)
-  sites <- obj$sites
-  ctch <- obj$ctch
-  catchments <- obj$catchments
-  gctch <- obj$gctch
-  use_dss <- obj$can_use_dss
 
   assertthat::assert_that(length(adjust_vars) <= 2,
     msg = cli::format_error("Can only provide up to two adjustment variables.")
@@ -378,7 +392,7 @@ get_rate_frac_data <- function(x,
   }
 
   if (is.null(adjust_vars)) {
-    if (use_dss) {
+    if (can_use_dss) {
       # use the max counts within each factor to get total
       dss_only <- x$dss %>%
         dplyr::filter(
@@ -395,7 +409,7 @@ get_rate_frac_data <- function(x,
     }
   } else if (length(adjust_vars) == 1) {
     if (adjust_vars[1] == "age") {
-      if (use_dss) {
+      if (can_use_dss) {
         dss_only <- x$dss %>%
           dplyr::filter(
             .data$site %in% sites,
@@ -410,7 +424,7 @@ get_rate_frac_data <- function(x,
         dss_only <- dplyr::tibble(age = levels(x$ads$age), dss_only = 0)
       }
     } else {
-      if (use_dss) {
+      if (can_use_dss) {
         dss_only <- x$dss %>%
           dplyr::filter(
             .data$site %in% sites,
@@ -429,7 +443,7 @@ get_rate_frac_data <- function(x,
       }
     }
   } else {
-    if (use_dss) {
+    if (can_use_dss) {
       dss_only <- x$dss %>%
         dplyr::filter(
           .data$site %in% sites,

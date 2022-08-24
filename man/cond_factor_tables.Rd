@@ -13,7 +13,8 @@ cond_factor_tables(
   icd10_regex = NULL,
   maternal = FALSE,
   cond_name_short = condition[1],
-  causal_chain = TRUE
+  causal_chain = TRUE,
+  ctch_info = NULL
 )
 }
 \arguments{
@@ -42,6 +43,9 @@ Defaults to value of \code{condition} if not specified. Required if only
 
 \item{causal_chain}{if TRUE, the causal chain is searched, if
 FALSE, the underlying cause is searched}
+
+\item{ctch_info}{An object that tracks information about catchments in the data.
+This is used internally and should be ignored by users.}
 }
 \description{
 Compute counts of MITS cases and non-cases for a given condition by factors

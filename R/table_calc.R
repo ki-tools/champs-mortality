@@ -5,12 +5,14 @@
 #' @param catchments A vector of catchments to include in the calculations.
 #' If NULL, all catchments with data will be used.
 #' @param factor_groups A named list that specifies how to group factors
+#' @param ctch_info An object that tracks information about catchments in the data.
+#' This is used internally and should be ignored by users.
 #' @importFrom dplyr relocate group_by_at full_join n
 #' @importFrom purrr map2 map_dbl
 #' @importFrom tidyr pivot_longer pivot_wider nest
 #' @export
 mits_factor_tables <- function(
-  x, sites = NULL, catchments = NULL, factor_groups = NULL
+  x, sites = NULL, catchments = NULL, factor_groups = NULL, ctch_info = NULL
 ) {
   assertthat::assert_that(inherits(x, "champs_processed"),
     msg = cli::format_error("Data must come from process_data()")
@@ -18,12 +20,14 @@ mits_factor_tables <- function(
   dss <- dss_transform(x$dss)
   group_catchments <- TRUE # used to be a parameter
 
-  obj <- get_ctch(x, sites, catchments)
-  sites <- obj$sites
-  ctch <- obj$ctch
-  catchments <- obj$catchments
-  gctch <- obj$gctch
-  can_use_dss <- obj$can_use_dss
+  if (is.null(ctch_info) || !inherits(ctch_info, "get_ctch"))
+    ctch_info <- get_ctch(x, sites, catchments)
+
+  sites <- ctch_info$sites
+  ctch <- ctch_info$ctch
+  catchments <- ctch_info$catchments
+  gctch <- ctch_info$gctch
+  can_use_dss <- ctch_info$can_use_dss
 
   group_vars <- c(
     "site",
@@ -280,13 +284,16 @@ mits_factor_tables <- function(
 #' `icd10_regex` is specified.
 #' @param causal_chain if TRUE, the causal chain is searched, if
 #' FALSE, the underlying cause is searched
+#' @param ctch_info An object that tracks information about catchments in the data.
+#' This is used internally and should be ignored by users.
 #' @export
 cond_factor_tables <- function(
   x, sites = NULL, catchments = NULL,
   factor_groups = NULL,
   condition = NULL, icd10_regex = NULL, maternal = FALSE,
   cond_name_short = condition[1],
-  causal_chain = TRUE
+  causal_chain = TRUE,
+  ctch_info = NULL
 ) {
   group_catchments <- TRUE
 
@@ -316,12 +323,14 @@ cond_factor_tables <- function(
     msg = cli::format_error("Must specify cond_name_short")
   )
 
-  obj <- get_ctch(x, sites, catchments)
-  sites <- obj$sites
-  ctch <- obj$ctch
-  catchments <- obj$catchments
-  gctch <- obj$gctch
-  can_use_dss <- obj$can_use_dss
+  if (is.null(ctch_info) || !inherits(ctch_info, "get_ctch"))
+    ctch_info <- get_ctch(x, sites, catchments)
+
+  sites <- ctch_info$sites
+  ctch <- ctch_info$ctch
+  catchments <- ctch_info$catchments
+  gctch <- ctch_info$gctch
+  can_use_dss <- ctch_info$can_use_dss
 
   group_vars <- c(
     "site",
@@ -428,6 +437,7 @@ cond_factor_tables <- function(
 
   tblsn$pval[is.na(tblsn$pval)] <- 1
   attr(tblsn, "factor_groups") <- factor_groups
+  attr(tblsn, "cm_class") <- c("factor_table", "cond_factor_table")
 
   tblsn
 }
@@ -456,8 +466,8 @@ get_ctch <- function(x, sites = NULL, catchments = NULL) {
     not_supported <- setdiff(catchments, c(dss_ucatch, non_dss_ucatch))
     if (length(not_supported) > 0)
       cli::cli_alert_info("The following catchments are not found in the data \\
-        and will be removed from the calculations: \\
-        {paste(not_supported, collapse = ', ')}", wrap = TRUE)
+        for site {sites} and will be removed from the calculations \\
+        for this site: {paste(not_supported, collapse = ', ')}", wrap = TRUE)
     catchments <- intersect(catchments, c(dss_ucatch, non_dss_ucatch))
   }
 
@@ -527,7 +537,7 @@ get_ctch <- function(x, sites = NULL, catchments = NULL) {
     can_use_dss = can_use_dss
   )
 
-  attr(res, "cm_class") <- c("factor_table", "cond_factor_table")
+  class(res) <- c("list", "get_ctch")
 
   res
 }

@@ -82,7 +82,7 @@ read_file <- function(data_path, cfg, nms, ds_name, col_types = NULL) {
     msg = cli::format_error(
       "Expecting variables like the following in {path}:\n{vars}"))
 
-  cli::cli_alert_success(path)
+  cli::cli_alert_success(basename(path))
 
   x
 }
