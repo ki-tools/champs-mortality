@@ -41,7 +41,11 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/getting-started.html">getting-started</a>
+    <a class="dropdown-item" href="articles/getting-started.html">Getting Started</a>
+    <a class="dropdown-item" href="articles/datasets.html">Datasets</a>
+    <a class="dropdown-item" href="articles/analysis.html">Computing Adjusted Rates and Fractions</a>
+    <a class="dropdown-item" href="articles/reports.html">Creating Reports</a>
+    <a class="dropdown-item" href="articles/methodology.html">Methodology</a>
   </div>
 </li>
       </ul>
@@ -61,6 +65,14 @@
 </h1></div>
 <!-- badges: start -->
 <p>The goal of champsmortality is to provide functions for calculating mortality fractions and rates at CHAMPS sites for various causes.</p>
+<p>Below is a high-level walkthrough of some of the major pacakge functionality and workflow. Read the additional articles for more depth:</p>
+<ul>
+<li><a href="articles/getting-started.html">Getting Started</a></li>
+<li><a href="articles/datasets.html">Datasets</a></li>
+<li><a href="articles/analysis.html">Computing Adjusted Rates and Fractions</a></li>
+<li><a href="articles/reports.html">Creating Reports</a></li>
+<li><a href="articles/methodology.html">Methodology</a></li>
+</ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -72,7 +84,6 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a high-level walkthrough of some of the major pacakge functionality and workflow. Read the additional <a href="TODO">articles</a> for more depth.</p>
 <p>This package is most useful with real data obtainable from <a href="https://champshealth.org/data/" class="external-link">CHAMPS</a>. For the purposes of documentation and examples, the package ships with synthetic datasets. As such, keep in mind that the results of the examples in this documentation not meaningful.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ki-tools.github.io/champs-mortality/">champsmortality</a></span><span class="op">)</span></span></code></pre></div>
@@ -84,9 +95,9 @@
 <code class="sourceCode R"><span><span class="va">data_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/create_dataset_directory.html">create_dataset_directory</a></span><span class="op">(</span><span class="va">data_dir</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ✔ The directory</span></span>
-<span><span class="co">#&gt;   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf' is ready for</span></span>
-<span><span class="co">#&gt;   the appropriate data files to be placed in it. The following datasets should be placed in</span></span>
-<span><span class="co">#&gt;   this directory:</span></span>
+<span><span class="co">#&gt;   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775' is ready</span></span>
+<span><span class="co">#&gt;   for the appropriate data files to be placed in it. The following datasets should be placed</span></span>
+<span><span class="co">#&gt;   in this directory:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 1. CHAMPS Analytics Dataset: This dataset is available as a downloadable file from LabKey and</span></span>
 <span><span class="co">#&gt;    is continuously updated. It contains most of the CHAMPS variables that are needed for the</span></span>
@@ -103,27 +114,27 @@
 <span><span class="co">#&gt; 5. Season definition: This dataset is a csv file containing rainy and dry season date ranges</span></span>
 <span><span class="co">#&gt;    for each site, which will be used to classify the season in which each case occurs. A</span></span>
 <span><span class="co">#&gt;    dataset with known season definitions,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/seasons.csv',</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/seasons.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
 <span><span class="co">#&gt; 6. Catchment lookup: This dataset is a csv file containing mappings from catchment codes to</span></span>
 <span><span class="co">#&gt;    catchment names, used to link the DSS data, which uses catchment names, to the CHAMPS</span></span>
 <span><span class="co">#&gt;    analysis dataset, which uses catchment IDs. A dataset with known catchment lookups,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/catchment_lookup.csv',</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/catchment_lookup.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
 <span><span class="co">#&gt; 7. Live births: This dataset is a csv file containing yearly live births by site and</span></span>
 <span><span class="co">#&gt;    catchment from DSS. A dataset with known live birth statistics by site, catchment, and</span></span>
 <span><span class="co">#&gt;    year,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/live_births.csv',</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/live_births.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
 <span><span class="co">#&gt; 8. Live births: This dataset is a csv file containing yearly DHS all-cause mortality data by</span></span>
 <span><span class="co">#&gt;    site and catchment from DSS. A dataset with known DHS statistics by site, catchment, year,</span></span>
 <span><span class="co">#&gt;    and age,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/dhs.csv',</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/dhs.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; → Once the files are in place, edit the file</span></span>
-<span><span class="co">#&gt;   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/config.yaml to</span></span>
-<span><span class="co">#&gt;   provide the file names corresponding to each of these datasets.</span></span>
+<span><span class="co">#&gt;   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/config.yaml</span></span>
+<span><span class="co">#&gt;   to provide the file names corresponding to each of these datasets.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; The config.yaml template looks like this:</span></span>
 <span><span class="co">#&gt;     ┌──────────────────────────────────────────┐</span></span>
@@ -143,7 +154,7 @@
 <span><span class="co">#&gt;     ┌─────────────────────────────────────────────────────────────────┐</span></span>
 <span><span class="co">#&gt;     │  champs_analytics_dataset: 'Analytics_Dataset_2021-09-01.xlsx'  │</span></span>
 <span><span class="co">#&gt;     └─────────────────────────────────────────────────────────────────┘</span></span></code></pre></div>
-<p>This is something that only needs to be done once. Public data that comes with the package will be placed here, and additional private datasets will need to be added. More about the required datasets and expected formats can be found <a href="TODO">in this article</a>.</p>
+<p>This is something that only needs to be done once. Public data that comes with the package will be placed here, and additional private datasets will need to be added. More about the required datasets and expected formats can be found <a href="articles/datasets.html">in this article</a>.</p>
 <p>For the purpose of these examples, we will change <code>data_dir</code> to point to a directory containing synthetic data. SKIP THIS STEP IF YOU ARE WORKING WITH REAL DATA.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"champsmortality"</span><span class="op">)</span>, <span class="st">"testdata"</span><span class="op">)</span></span></code></pre></div>
@@ -250,7 +261,7 @@
 <div class="section level3">
 <h3 id="getting-rates-and-fractions">Getting Rates and Fractions<a class="anchor" aria-label="anchor" href="#getting-rates-and-fractions"></a>
 </h3>
-<p>The main function of this package computes factor-adjusted mortality rates and fractions for a specified set of sites and catchments. More details about the methodology can be found <a href="TODO">in this article</a>.</p>
+<p>The main function of this package computes factor-adjusted mortality rates and fractions for a specified set of sites and catchments. More details about the methodology can be found <a href="methodology.html">in this article</a>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graf</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span></span>
 <span>  <span class="va">dd</span>,</span>
