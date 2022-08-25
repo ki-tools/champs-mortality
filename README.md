@@ -14,6 +14,15 @@ coverage](https://codecov.io/gh/ki-tools/champs-mortality/branch/main/graph/badg
 The goal of champsmortality is to provide functions for calculating
 mortality fractions and rates at CHAMPS sites for various causes.
 
+Below is a high-level walkthrough of some of the major pacakge
+functionality and workflow. Read the additional articles for more depth:
+
+-   [Getting Started](articles/getting-started.html)
+-   [Datasets](articles/datasets.html)
+-   [Computing Adjusted Rates and Fractions](articles/analysis.html)
+-   [Creating Reports](articles/reports.html)
+-   [Methodology](articles/methodology.html)
+
 ## Installation
 
 You can install the development version of champsmortality with the
@@ -25,10 +34,6 @@ remotes::install_github("ki-tools/champs-mortality")
 ```
 
 ## Example
-
-This is a high-level walkthrough of some of the major pacakge
-functionality and workflow. Read the additional [articles](TODO) for
-more depth.
 
 This package is most useful with real data obtainable from
 [CHAMPS](https://champshealth.org/data/). For the purposes of
@@ -51,9 +56,9 @@ provided to help get this set up.
 data_dir <- tempfile()
 create_dataset_directory(data_dir)
 #> ✔ The directory
-#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf' is ready for
-#>   the appropriate data files to be placed in it. The following datasets should be placed in
-#>   this directory:
+#>   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775' is ready
+#>   for the appropriate data files to be placed in it. The following datasets should be placed
+#>   in this directory:
 #> 
 #> 1. CHAMPS Analytics Dataset: This dataset is available as a downloadable file from LabKey and
 #>    is continuously updated. It contains most of the CHAMPS variables that are needed for the
@@ -70,27 +75,27 @@ create_dataset_directory(data_dir)
 #> 5. Season definition: This dataset is a csv file containing rainy and dry season date ranges
 #>    for each site, which will be used to classify the season in which each case occurs. A
 #>    dataset with known season definitions,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/seasons.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/seasons.csv',
 #>    has been provided. Please update that file if necessary.
 #> 6. Catchment lookup: This dataset is a csv file containing mappings from catchment codes to
 #>    catchment names, used to link the DSS data, which uses catchment names, to the CHAMPS
 #>    analysis dataset, which uses catchment IDs. A dataset with known catchment lookups,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/catchment_lookup.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/catchment_lookup.csv',
 #>    has been provided. Please update that file if necessary.
 #> 7. Live births: This dataset is a csv file containing yearly live births by site and
 #>    catchment from DSS. A dataset with known live birth statistics by site, catchment, and
 #>    year,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/live_births.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/live_births.csv',
 #>    has been provided. Please update that file if necessary.
 #> 8. Live births: This dataset is a csv file containing yearly DHS all-cause mortality data by
 #>    site and catchment from DSS. A dataset with known DHS statistics by site, catchment, year,
 #>    and age,
-#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/dhs.csv',
+#>    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/dhs.csv',
 #>    has been provided. Please update that file if necessary.
 #> 
 #> → Once the files are in place, edit the file
-#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//Rtmp7hilHE/file34a64efeadf/config.yaml to
-#>   provide the file names corresponding to each of these datasets.
+#>   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/config.yaml
+#>   to provide the file names corresponding to each of these datasets.
 #> 
 #> The config.yaml template looks like this:
 #>     ┌──────────────────────────────────────────┐
@@ -115,7 +120,7 @@ create_dataset_directory(data_dir)
 This is something that only needs to be done once. Public data that
 comes with the package will be placed here, and additional private
 datasets will need to be added. More about the required datasets and
-expected formats can be found [in this article](TODO).
+expected formats can be found [in this article](articles/datasets.html).
 
 For the purpose of these examples, we will change `data_dir` to point to
 a directory containing synthetic data. SKIP THIS STEP IF YOU ARE WORKING
@@ -248,7 +253,8 @@ the data than a condition with a lower ranking.
 
 The main function of this package computes factor-adjusted mortality
 rates and fractions for a specified set of sites and catchments. More
-details about the methodology can be found [in this article](TODO).
+details about the methodology can be found [in this
+article](methodology.html).
 
 ``` r
 graf <- get_rates_and_fractions(

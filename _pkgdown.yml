@@ -1,3 +1,18 @@
 url: https://ki-tools.github.io/champs-mortality/
 template:
   bootstrap: 5
+navbar:
+  components:
+    articles:
+      text: Articles
+      menu:
+      - text: Getting Started
+        href: articles/getting-started.html
+      - text: Datasets
+        href: articles/datasets.html
+      - text: Computing Adjusted Rates and Fractions
+        href: articles/analysis.html
+      - text: Creating Reports
+        href: articles/reports.html
+      - text: Methodology
+        href: articles/methodology.html
