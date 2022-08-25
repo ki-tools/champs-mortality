@@ -67,11 +67,11 @@
 <p>The goal of champsmortality is to provide functions for calculating mortality fractions and rates at CHAMPS sites for various causes.</p>
 <p>Below is a high-level walkthrough of some of the major pacakge functionality and workflow. Read the additional articles for more depth:</p>
 <ul>
-<li><a href="articles/getting-started.html">Getting Started</a></li>
-<li><a href="articles/datasets.html">Datasets</a></li>
-<li><a href="articles/analysis.html">Computing Adjusted Rates and Fractions</a></li>
-<li><a href="articles/reports.html">Creating Reports</a></li>
-<li><a href="articles/methodology.html">Methodology</a></li>
+<li><a href="https://ki-tools.github.io/champs-mortality/articles/getting-started.html">Getting Started</a></li>
+<li><a href="https://ki-tools.github.io/champs-mortality/articles/datasets.html">Datasets</a></li>
+<li><a href="https://ki-tools.github.io/champs-mortality/articles/analysis.html">Computing Adjusted Rates and Fractions</a></li>
+<li><a href="https://ki-tools.github.io/champs-mortality/articles/reports.html">Creating Reports</a></li>
+<li><a href="https://ki-tools.github.io/champs-mortality/articles/methodology.html">Methodology</a></li>
 </ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -95,7 +95,7 @@
 <code class="sourceCode R"><span><span class="va">data_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/create_dataset_directory.html">create_dataset_directory</a></span><span class="op">(</span><span class="va">data_dir</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ✔ The directory</span></span>
-<span><span class="co">#&gt;   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775' is ready</span></span>
+<span><span class="co">#&gt;   '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpJ41PFB/file80d045c5ad26' is ready</span></span>
 <span><span class="co">#&gt;   for the appropriate data files to be placed in it. The following datasets should be placed</span></span>
 <span><span class="co">#&gt;   in this directory:</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -114,26 +114,26 @@
 <span><span class="co">#&gt; 5. Season definition: This dataset is a csv file containing rainy and dry season date ranges</span></span>
 <span><span class="co">#&gt;    for each site, which will be used to classify the season in which each case occurs. A</span></span>
 <span><span class="co">#&gt;    dataset with known season definitions,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/seasons.csv',</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpJ41PFB/file80d045c5ad26/seasons.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
 <span><span class="co">#&gt; 6. Catchment lookup: This dataset is a csv file containing mappings from catchment codes to</span></span>
 <span><span class="co">#&gt;    catchment names, used to link the DSS data, which uses catchment names, to the CHAMPS</span></span>
 <span><span class="co">#&gt;    analysis dataset, which uses catchment IDs. A dataset with known catchment lookups,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/catchment_lookup.csv',</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpJ41PFB/file80d045c5ad26/catchment_lookup.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
 <span><span class="co">#&gt; 7. Live births: This dataset is a csv file containing yearly live births by site and</span></span>
 <span><span class="co">#&gt;    catchment from DSS. A dataset with known live birth statistics by site, catchment, and</span></span>
 <span><span class="co">#&gt;    year,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/live_births.csv',</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpJ41PFB/file80d045c5ad26/live_births.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
 <span><span class="co">#&gt; 8. Live births: This dataset is a csv file containing yearly DHS all-cause mortality data by</span></span>
 <span><span class="co">#&gt;    site and catchment from DSS. A dataset with known DHS statistics by site, catchment, year,</span></span>
 <span><span class="co">#&gt;    and age,</span></span>
-<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/dhs.csv',</span></span>
+<span><span class="co">#&gt;    '/var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpJ41PFB/file80d045c5ad26/dhs.csv',</span></span>
 <span><span class="co">#&gt;    has been provided. Please update that file if necessary.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; → Once the files are in place, edit the file</span></span>
-<span><span class="co">#&gt;   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpLqJRct/file7b0142e76775/config.yaml</span></span>
+<span><span class="co">#&gt;   /var/folders/7b/thg__1xx7w98wc4rs8t3djrw0000gn/T//RtmpJ41PFB/file80d045c5ad26/config.yaml</span></span>
 <span><span class="co">#&gt;   to provide the file names corresponding to each of these datasets.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; The config.yaml template looks like this:</span></span>
