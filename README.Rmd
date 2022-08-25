@@ -25,6 +25,14 @@ options(width = 94)
 
 The goal of champsmortality is to provide functions for calculating mortality fractions and rates at CHAMPS sites for various causes.
 
+Below is a high-level walkthrough of some of the major pacakge functionality and workflow. Read the additional articles for more depth:
+
+- [Getting Started](articles/getting-started.html)
+- [Datasets](articles/datasets.html)
+- [Computing Adjusted Rates and Fractions](articles/analysis.html)
+- [Creating Reports](articles/reports.html)
+- [Methodology](articles/methodology.html)
+
 ## Installation
 
 You can install the development version of champsmortality with the following:
@@ -35,8 +43,6 @@ remotes::install_github("ki-tools/champs-mortality")
 ```
 
 ## Example
-
-This is a high-level walkthrough of some of the major pacakge functionality and workflow. Read the additional [articles](TODO) for more depth.
 
 This package is most useful with real data obtainable from [CHAMPS](https://champshealth.org/data/). For the purposes of documentation and examples, the package ships with synthetic datasets. As such, keep in mind that the results of the examples in this documentation not meaningful.
 
@@ -53,7 +59,7 @@ data_dir <- tempfile()
 create_dataset_directory(data_dir)
 ```
 
-This is something that only needs to be done once. Public data that comes with the package will be placed here, and additional private datasets will need to be added. More about the required datasets and expected formats can be found [in this article](TODO).
+This is something that only needs to be done once. Public data that comes with the package will be placed here, and additional private datasets will need to be added. More about the required datasets and expected formats can be found [in this article](articles/datasets.html).
 
 For the purpose of these examples, we will change `data_dir` to point to a directory containing synthetic data. SKIP THIS STEP IF YOU ARE WORKING WITH REAL DATA.
 
@@ -92,7 +98,7 @@ This searches the CHAMPS data and finds all unique condition values found anywhe
 
 ### Getting Rates and Fractions
 
-The main function of this package computes factor-adjusted mortality rates and fractions for a specified set of sites and catchments. More details about the methodology can be found [in this article](TODO).
+The main function of this package computes factor-adjusted mortality rates and fractions for a specified set of sites and catchments. More details about the methodology can be found [in this article](methodology.html).
 
 ```{r}
 graf <- get_rates_and_fractions(

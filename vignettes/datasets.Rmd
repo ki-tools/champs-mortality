@@ -1,0 +1,149 @@
+---
+title: "Datasets"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{datasets}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+To use this package, many of the required datasets need to be provided by the user. This is due to the sensitive nature of individual-level data. This requirement can lead to many issues as the package expects variables to be present and in specific formats, and without control over this, there can be problems.
+
+This package tries to be as helpful as possible in ensuring the data conforms to the required formats. When reading the data in, many checks are made and helpful error messages are provided when things do not check out. However, these functions are not fool-proof and great care should be taken by the user in ensuring the data conform with the required formats.
+
+The datasets that do not come with the package can be obtained from [CHAMPS](https://champshealth.org/data/). The package is designed to work with these files *as-is*, which should help the user avoid any issues. However, simple things like opening, editing, and closing an excel file can possibly change the data, such as re-coding dates in formats that R doesn't recognize as a date, etc.
+
+In addition to the datasets that don't come with the package, it's important to understand the format of those that do come with the package, as it may become necessary to udpate these files as time progresses and new data comes in.
+
+In this article we will describe the purpose and format of each dataset required by the package. For more detail on how the datasets are used to perform calculations in the package, please read the [methodology](methodology.html) article.
+
+## CHAMPS Analytics Dataset
+
+This dataset does not come with the package and can be obtained from CHAMPS LabKey under the name "CHAMPS Analytics Dataset". It contains information about each individual case including demographics and cause of death.
+
+There are many variables in the dataset but only the following are used by this package:
+
+- **Champsid**: CHAMPS ID
+- **Site Name**: Site name
+- **Catchment Id**: Catchment ID
+- **Calc Location**: Location of death (community / facility / other)
+- **Calc Sex**: The sex of the child (coded with CHAMPS codes)
+- **Age Group**: The age group of the child (coded with CHAMPS codes)
+- **IC Champs Group Desc**: CHAMPS category for immediate cause of death
+- **UC Champs Group Desc**: CHAMPS category for underlying cause of death
+- **Morbid Cond 01 Champs Group Desc**: CHAMPS category for morbid condition 1
+- **Morbid Cond 02 Champs Group Desc**: CHAMPS category for morbid condition 2
+- **Morbid Cond 03 Champs Group Desc**: CHAMPS category for morbid condition 3
+- **Morbid Cond 04 Champs Group Desc**: CHAMPS category for morbid condition 4
+- **Morbid Cond 05 Champs Group Desc**: CHAMPS category for morbid condition 5
+- **Morbid Cond 06 Champs Group Desc**: CHAMPS category for morbid condition 6
+- **Morbid Cond 07 Champs Group Desc**: CHAMPS category for morbid condition 7
+- **Morbid Cond 08 Champs Group Desc**: CHAMPS category for morbid condition 8
+- **Underlying Cause Calc**: ICD10 code of underlying cause of death
+- **Immediate COD**: ICD10 code of immediate cause of death
+- **Morbid Condition 01**: ICD10 code of morbid condition 1
+- **Morbid Condition 02**: ICD10 code of morbid condition 2
+- **Morbid Condition 03**: ICD10 code of morbid condition 3
+- **Morbid Condition 04**: ICD10 code of morbid condition 4
+- **Morbid Condition 05**: ICD10 code of morbid condition 5
+- **Morbid Condition 06**: ICD10 code of morbid condition 6
+- **Morbid Condition 07**: ICD10 code of morbid condition 7
+- **Morbid Condition 08**: ICD10 code of morbid condition 8
+- **Main Maternal Disease Condition**: ICD10 code of main maternal condition
+- **Main Maternal Champs Group Desc**: CHAMPS category for main maternal condition
+- **MITS Flag**: Was MITS procedure completed? (0/1)
+- **M00060**: Was this case DeCoDed? (0/1)
+- **Calc Dod**: Date of death
+- **Caretakers Religion**: Caretaker's religion
+- **VA Cause1 Iva**: Verbal Autopsy Inter-VA Cause 1 - ICD10 code (used to classify trauma or infection)
+
+Note that the column names should be as listed here, or a matching [snake case](https://en.wikipedia.org/wiki/Snake_case) (e.g. Calc Dod -> calc_dod) version. If they do not match what is expected, the code in this package will return an error.
+
+## Maternal Registry Dataset
+
+The maternal registry dataset also does not come with the package and is available from LabKey under the name "2.	"Maternal Registry Forms table". It is mainly used to link the mother's education to the cases in the analytics dataset.
+
+The following variables are used by this package:
+
+- **Mort Id**: CHAMPS ID
+- **Mat 0010**: estimated maternal age
+- **Mat 0011**: known maternal age
+- **Mat 0013**: maternal education (coded with CHAMPS codes)
+
+## Champs Vocabulary
+
+The previous two datasets have some variables that are coded as CHAMPS codes, which are not meaningful to present to users. The CHAMPS vocabulary file maps CHAMPS codes to user-friendly names. This is available from LabKey or from a [CHAMPS de-identified data request](https://champshealth.org/data/).
+
+- **champs_local_code**: CHAMPS code
+- **c_name**: name associated with code
+- **c_pref_name**: preferred name associated with code
+
+## DSS
+
+In addition to data about specific CHAMPS cases, the methods in the package also need information about non-CHAMPS child mortality in CHAMPS catchments. Data from the Demographic Surveillance Sites (DSS) has been tabulated by CHAMPS in a way that it can be easily used by this package. This data, although not individual-level data, must be obtained directly from CHAMPS.
+
+The aggregate data contains tabulations of deaths from each site broken down by all of the other factors ("sex", "education", "season", "location", "va").
+
+- **site**: site name
+- **catchment**: catchment name
+- **age**: age group - one of "Stillbirth", "Neonate", "Infant", "Child"
+- **factor**: factor name (e.g. sex)
+- **level**: factor level
+- **n**: number of deaths
+- **period_start_year**: period start year
+- **period_end_year**: period end year
+
+Note: Due to the nature of this dataset being aggregated by age crossed with other factors, we can at most adjust for one factor or age + one other factor. Also since the statistics are aggregated across the whole time period (multiple years), we currently cannot compute statistics broken down by year.
+
+## DHS
+
+The following catchments do not have DSS data:
+
+- Bangladesh, Faridpur
+- Mali, Bamako
+- Sierra Leone, Makeni
+- Mozambique, Quelimane
+
+For these catchments, we use alternate surveillance nubmers from [DHS](https://dhsprogram.com), particularly as calculated at [globaldatalab.org](https://globaldatalab.org/areadata/2020/child-mortality/BGD+MLI+MOZ+SLE). This dataset was manually put together by pulling statistics from this site. It contains the following variables:
+
+- **site**: site name
+- **catchment**: catchment name
+- **year**: year
+- **age**: one of "U5", "Neonate", "Infant", "Child", "Neonate + Infant" (these are the options provided on this site and are translated accordingly in the package calculations)
+- **rate**: mortality rate for the specified age group in the specified year, per 10k live births
+- **note**: extra notes about the data point
+
+## Live Births
+
+The total number of live births is required in the mortality rate and fraction calculations. This dataset has been manually constructed and has the following variables:
+
+- **site**: site name
+- **catchment**: catchment name
+- **year**: year
+- **live_births**: number of live births according to DSS
+
+## Season Lookup
+
+The season lookup table is used to determine which season (rainy or dry) a case occured in. This comes with the package and was manually constructed using literature as a resource for season start and end dates at each location.
+
+- **site**: site name
+- **season**: season - one of "Dry" or "Rainy"
+- **start**: season start date
+- **end**: season end date
+
+## Catchment Lookup
+
+Catchments in the analytics dataset are coded with an identifier. This lookup table is used to translate that identifier into a meaningful catchment name.
+
+- **site_name**: site name
+- **catchment**: catchment name
+- **catchment_id**: catchment ID - a three digit string padded with zeros, e.g. "001"
+
+

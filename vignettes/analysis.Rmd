@@ -1,0 +1,90 @@
+---
+title: "Computing Adjusted Rates and Fractions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This article provides examples and explanations of computations that can be done with this package.
+
+In the previous articles we described how to get set up with all of the required datasets.
+
+## Setup
+
+To start, we will load the package and create a variable that points to the data directory that we have set up.
+
+```{r setup}
+library(champsmortality)
+
+data_dir <- file.path(system.file(package = "champsmortality"), "testdata")
+```
+
+Note that this directory fully populated with synthetic data and comes with the package for the purposes of documentation and examples. This package is most useful with real data obtainable from [CHAMPS](https://champshealth.org/data/). **As such, keep in mind that the results of the examples in this documentation not meaningful.**
+
+## Read the data
+
+We can read the all the datasets in and validate their structure with the following:
+
+```{r}
+d <- read_and_validate_data(data_dir)
+```
+
+The validation ensures that all of the variables required to perform the calculations are present along with additional checks for the content of some of the variables. If there are any issues, you will see an error message and will need to correct the error before being able to use the package with your data.
+
+## Process the data
+
+A function, `process_data()` takes the data that has been read and joins it together to create a dataset ready analysis.
+```{r}
+dd <- process_data(d, start_year = 2017, end_year = 2020)
+```
+
+## Valid conditions
+
+Computations with this data have the goal of finding adjusted mortality fractions and rates for a given condition found in the causal chain. As you will see, these can be specified by either using the condition name or a [regular expression](https://www.sitepoint.com/learn-regex/) indicating ICD10 codes that indicate the condition.
+
+A convenience function that lists all available conditions in the data is provided, `valid_conditions()`:
+
+```{r}
+valid_conditions(dd)
+```
+
+This searches the CHAMPS data and finds all unique condition values found anywhere in the causal chain. A ranking is also provided where a higher ranking indicates that the condition is found more frequently in the data than a condition with a lower ranking.
+
+## Getting Rates and Fractions
+
+The main function of this package computes factor-adjusted mortality rates and fractions for a specified set of sites and catchments. More details about the methodology can be found [in this article](methodology.html).
+
+The function is `get_rates_and_fractions()`. It takes several parameters, many with defaults, and details about these parameters can be found in the function reference on this site. This article will cover many examples that illustrate all of the different ways this function can be used.
+
+As an example, suppose we wish to calculate rates and fractions for sites "S6", "S5", "S7" and their corresponding catchments "C1", "C4", "C3", "C5", "C6", "C7" for the condition "Lower respiratory infections", not in the causal chain:
+
+```{r}
+graf <- get_rates_and_fractions(
+  dd,
+  sites = c("S6", "S5", "S7"),
+  catchments = c("C1", "C4", "C3", "C5", "C6", "C7"),
+  causal_chain = FALSE,
+  condition = "Lower respiratory infections")
+```
+
+Many more examples to come...
+
+### Examining the Output
+
+The output of this function contains many pieces of information for each site including underlying statistics that went into the calculations, but the most interesting outputs are the rates and fractions.
+
+For site S6, for example, we can extract the computed rates and fractions with the following:
+
+```{r}
+graf$S6$rate
+graf$S6$frac
+```
