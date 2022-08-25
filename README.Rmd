@@ -27,11 +27,11 @@ The goal of champsmortality is to provide functions for calculating mortality fr
 
 Below is a high-level walkthrough of some of the major pacakge functionality and workflow. Read the additional articles for more depth:
 
-- [Getting Started](articles/getting-started.html)
-- [Datasets](articles/datasets.html)
-- [Computing Adjusted Rates and Fractions](articles/analysis.html)
-- [Creating Reports](articles/reports.html)
-- [Methodology](articles/methodology.html)
+- [Getting Started](https://ki-tools.github.io/champs-mortality/articles/getting-started.html)
+- [Datasets](https://ki-tools.github.io/champs-mortality/articles/datasets.html)
+- [Computing Adjusted Rates and Fractions](https://ki-tools.github.io/champs-mortality/articles/analysis.html)
+- [Creating Reports](https://ki-tools.github.io/champs-mortality/articles/reports.html)
+- [Methodology](https://ki-tools.github.io/champs-mortality/articles/methodology.html)
 
 ## Installation
 
