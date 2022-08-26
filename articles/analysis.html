@@ -167,11 +167,33 @@
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checked that values for 'va' in the DSS data are correct</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="site-and-catchment-listing">Site and catchment listing<a class="anchor" aria-label="anchor" href="#site-and-catchment-listing"></a>
+</h2>
+<p>It is convenient to view a list of all sites and catchments that are available in the data. A simple utiltiy function, <code><a href="../reference/get_site_info.html">get_site_info()</a></code> can provide this:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_site_info.html">get_site_info</a></span><span class="op">(</span><span class="va">dd</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 4</span></span></span>
+<span><span class="co">#&gt;    site  catchment min_year max_year</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> S1    C11           <span style="text-decoration: underline;">2</span>018     <span style="text-decoration: underline;">2</span>020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> S2    C8            <span style="text-decoration: underline;">2</span>017     <span style="text-decoration: underline;">2</span>020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> S3    C10           <span style="text-decoration: underline;">2</span>019     <span style="text-decoration: underline;">2</span>020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> S3    C9            <span style="text-decoration: underline;">2</span>017     <span style="text-decoration: underline;">2</span>020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> S4    C12           <span style="text-decoration: underline;">2</span>017     <span style="text-decoration: underline;">2</span>020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> S5    C3            <span style="text-decoration: underline;">2</span>019     <span style="text-decoration: underline;">2</span>020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> S5    C4            <span style="text-decoration: underline;">2</span>019     <span style="text-decoration: underline;">2</span>020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> S5    C5            <span style="text-decoration: underline;">2</span>019     <span style="text-decoration: underline;">2</span>020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> S6    C1            <span style="text-decoration: underline;">2</span>017     <span style="text-decoration: underline;">2</span>020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> S6    C2            <span style="text-decoration: underline;">2</span>018     <span style="text-decoration: underline;">2</span>020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> S7    C6            <span style="text-decoration: underline;">2</span>017     <span style="text-decoration: underline;">2</span>020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> S7    C7            <span style="text-decoration: underline;">2</span>017     <span style="text-decoration: underline;">2</span>020</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="valid-conditions">Valid conditions<a class="anchor" aria-label="anchor" href="#valid-conditions"></a>
 </h2>
 <p>Computations with this data have the goal of finding adjusted mortality fractions and rates for a given condition found in the causal chain. As you will see, these can be specified by either using the condition name or a <a href="https://www.sitepoint.com/learn-regex/" class="external-link">regular expression</a> indicating ICD10 codes that indicate the condition.</p>
 <p>A convenience function that lists all available conditions in the data is provided, <code><a href="../reference/valid_conditions.html">valid_conditions()</a></code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/valid_conditions.html">valid_conditions</a></span><span class="op">(</span><span class="va">dd</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 54 × 2</span></span></span>
 <span><span class="co">#&gt;    condition                            `causal chain rank`</span></span>
@@ -194,48 +216,351 @@
 </h2>
 <p>The main function of this package computes factor-adjusted mortality rates and fractions for a specified set of sites and catchments. More details about the methodology can be found <a href="methodology.html">in this article</a>.</p>
 <p>The function is <code><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions()</a></code>. It takes several parameters, many with defaults, and details about these parameters can be found in the function reference on this site. This article will cover many examples that illustrate all of the different ways this function can be used.</p>
-<p>As an example, suppose we wish to calculate rates and fractions for sites “S6”, “S5”, “S7” and their corresponding catchments “C1”, “C4”, “C3”, “C5”, “C6”, “C7” for the condition “Lower respiratory infections”, not in the causal chain:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>Below is a very simple example for getting rates and fractions for the condition “Lower respiratory infections”:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span></span>
 <span>  <span class="va">dd</span>,</span>
-<span>  sites <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"S6"</span>, <span class="st">"S5"</span>, <span class="st">"S7"</span><span class="op">)</span>,</span>
-<span>  catchments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C1"</span>, <span class="st">"C4"</span>, <span class="st">"C3"</span>, <span class="st">"C5"</span>, <span class="st">"C6"</span>, <span class="st">"C7"</span><span class="op">)</span>,</span>
-<span>  causal_chain <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  condition <span class="op">=</span> <span class="st">"Lower respiratory infections"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Processing site:  S6</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The following catchments are not found in the data for site S6 and will be</span></span>
-<span><span class="co">#&gt; removed from the calculations for this site: C4, C3, C5, C6, C7</span></span>
+<span>  condition <span class="op">=</span> <span class="st">"Lower respiratory infections"</span>,</span>
+<span>  cond_name_short <span class="op">=</span> <span class="st">"LRI"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Processing site:  S1</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S2</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S3</span></span>
+<span><span class="co">#&gt;   using adjustment variable: location</span></span>
+<span><span class="co">#&gt; Processing site:  S4</span></span>
 <span><span class="co">#&gt;   no adjustment variables</span></span>
 <span><span class="co">#&gt; Processing site:  S5</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The following catchments are not found in the data for site S5 and will be</span></span>
-<span><span class="co">#&gt; removed from the calculations for this site: C1, C6, C7</span></span>
-<span><span class="co">#&gt;   using adjustment variables: age, location</span></span>
+<span><span class="co">#&gt;   using adjustment variable: location</span></span>
+<span><span class="co">#&gt; Processing site:  S6</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
 <span><span class="co">#&gt; Processing site:  S7</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The following catchments are not found in the data for site S7 and will be</span></span>
-<span><span class="co">#&gt; removed from the calculations for this site: C1, C4, C3, C5</span></span>
 <span><span class="co">#&gt;   using adjustment variable: location</span></span>
 <span><span class="co">#&gt;   other significant factors not adjusted for: va</span></span></code></pre></div>
-<p>Many more examples to come…</p>
+<p>This applies the calculations to each site independently. For each site, data for all catchments are combined. We will show how to get results for individual catchments later. The main arguments are the input data, <code>dd</code> and the condition. Here we specify the optional parameter <code>cond_name_short</code> to be “LRI”. This is used in some of the tabular and graphical outputs.</p>
+<p>As seen in the printed output, some sites have no adjustment variables while others are adjusted on location. For site “S7”, both “location” and “va” were significant but we can only adjust for one variable or two variables if one of them is “age”, so just “location” is chosen.</p>
 <div class="section level3">
 <h3 id="examining-the-output">Examining the Output<a class="anchor" aria-label="anchor" href="#examining-the-output"></a>
 </h3>
-<p>The output of this function contains many pieces of information for each site including underlying statistics that went into the calculations, but the most interesting outputs are the rates and fractions.</p>
-<p>For site S6, for example, we can extract the computed rates and fractions with the following:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>The output of this function is a named list for each site, and contains many pieces of information for each site including underlying statistics that went into the calculations.</p>
+<p>Note: Great care has gone into validating the outputs of the functions in this package, but we strongly encourage the user to examine the underlying statistics and assumptions to ensure the results are correct.</p>
+<p>Let’s examine at a high level what is returned by this function for site S6:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">graf</span><span class="op">$</span><span class="va">S6</span>, max.level <span class="op">=</span> <span class="fl">1</span>, give.attr <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 15</span></span>
+<span><span class="co">#&gt;  $ site             : chr "S6"</span></span>
+<span><span class="co">#&gt;  $ catchments       : chr [1:2] "C1" "C2"</span></span>
+<span><span class="co">#&gt;  $ inputs           :List of 10</span></span>
+<span><span class="co">#&gt;  $ mits             : tibble [6 × 16] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ cond             : tibble [6 × 10] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ pop_mits         : tibble [1 × 3] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ crude_decoded    : int 211</span></span>
+<span><span class="co">#&gt;  $ crude_condition  : int 3</span></span>
+<span><span class="co">#&gt;  $ can_use_dss      : logi FALSE</span></span>
+<span><span class="co">#&gt;  $ acMR_dss         : num 574</span></span>
+<span><span class="co">#&gt;  $ acMR_dhs         : num 340</span></span>
+<span><span class="co">#&gt;  $ frac             : tibble [2 × 9] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ rate             : tibble [2 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ rate_data        :List of 6</span></span>
+<span><span class="co">#&gt;  $ rate_data_grouped:'data.frame':   1 obs. of  5 variables:</span></span></code></pre></div>
+<p>The first few elements are simply documenting the input parameters that went into the calculations. Specifically:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">graf</span><span class="op">$</span><span class="va">S6</span><span class="op">$</span><span class="va">inputs</span></span>
+<span><span class="co">#&gt; $condition</span></span>
+<span><span class="co">#&gt; [1] "Lower respiratory infections"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $icd10_regex</span></span>
+<span><span class="co">#&gt; NULL</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $maternal</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $cond_name_short</span></span>
+<span><span class="co">#&gt; [1] "LRI"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $causal_chain</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $adjust_vars</span></span>
+<span><span class="co">#&gt; NULL</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $factor_groups</span></span>
+<span><span class="co">#&gt; NULL</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $pval_cutoff</span></span>
+<span><span class="co">#&gt; [1] 0.1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $pct_na_cutoff</span></span>
+<span><span class="co">#&gt; [1] 20</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $per</span></span>
+<span><span class="co">#&gt; [1] 10000</span></span></code></pre></div>
+<p>Many of these inputs are defaults that we didn’t specify.</p>
+<p>The elements <code>mits</code> and <code>cond</code> are tables that capture information that is used in deciding whether any factors should be adjusted for. They contain one row for each factor, e.g.:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">graf</span><span class="op">$</span><span class="va">S6</span><span class="op">$</span><span class="va">mits</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 16</span></span></span>
+<span><span class="co">#&gt;   site  catchment factor   start…¹ end_y…² table        pval n_dss na_dss n_mits</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S6    C1, C2    age         <span style="text-decoration: underline;">2</span>017    <span style="text-decoration: underline;">2</span>020 &lt;tibble&gt; 9.21<span style="color: #949494;">e</span><span style="color: #BB0000;">- 4</span>     0      0    212</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> S6    C1, C2    sex         <span style="text-decoration: underline;">2</span>017    <span style="text-decoration: underline;">2</span>020 &lt;tibble&gt; 4.89<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>     0      0    211</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> S6    C1, C2    educati…    <span style="text-decoration: underline;">2</span>017    <span style="text-decoration: underline;">2</span>020 &lt;tibble&gt; 9.56<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>     0      0     89</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> S6    C1, C2    season      <span style="text-decoration: underline;">2</span>017    <span style="text-decoration: underline;">2</span>020 &lt;tibble&gt; 1.08<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>     0      0    212</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> S6    C1, C2    location    <span style="text-decoration: underline;">2</span>017    <span style="text-decoration: underline;">2</span>020 &lt;tibble&gt; 2.57<span style="color: #949494;">e</span><span style="color: #BB0000;">-37</span>     0      0    212</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> S6    C1, C2    va          <span style="text-decoration: underline;">2</span>017    <span style="text-decoration: underline;">2</span>020 &lt;tibble&gt; 1.32<span style="color: #949494;">e</span><span style="color: #BB0000;">- 5</span>     0      0    201</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: n_non_mits &lt;int&gt;, na_mits &lt;int&gt;, na_non_mits &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   n_na &lt;dbl&gt;, n_tot &lt;dbl&gt;, pct_na &lt;dbl&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​start_year, ²​end_year</span></span></span></code></pre></div>
+<p>Each row contains information that went into the calculation of whether the factor is statistically significantly associated with MITS consent.</p>
+<p>The <code>table</code> element contains . For example, for the factor <code>age</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">graf</span><span class="op">$</span><span class="va">S6</span><span class="op">$</span><span class="va">mits</span><span class="op">$</span><span class="va">table</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;   level       MITS `non-MITS`</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Stillbirth   106        393</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Neonate       93        376</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Infant         9         81</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Child          4         66</span></span></code></pre></div>
+<p>We see counts of MITS vs. non-MITS broken down by age. A chi-square test is carried out on this table to determine a p-value. If a factor is significant and has sufficiently non-missing data (default is 20%), it is a candidate for adjustment.</p>
+<p>The <code>pop_mits</code> output reports statistics of number of stillbirths and under-5 deaths plus stillbirths for each catchment in the site.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">graf</span><span class="op">$</span><span class="va">S6</span><span class="op">$</span><span class="va">pop_mits</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   site  stillbirths u5d_sb</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S6            499   <span style="text-decoration: underline;">1</span>128</span></span></code></pre></div>
+<p>The output <code>can_use_dss</code> specifies whether the site consists of all-DSS sites and helps determine how to combine statistics across sites, as described in more detail <a href="methodology.html">here</a>.</p>
+<p>The outputs <code>acMR_*</code> provide the all-cause mortality rate from the DSS and DHS data sources that were used in the calculations.</p>
+<p>The most interesting outputs are the rates and fractions:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graf</span><span class="op">$</span><span class="va">S6</span><span class="op">$</span><span class="va">rate</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 8</span></span></span>
-<span><span class="co">#&gt;   site  catchments var    label                       allca…¹   est  lower upper</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S6    C1         cTU5MR Crude total under-5 mortal…    591.     0 0.014<span style="text-decoration: underline;">0</span>  13.5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> S6    C1         aTU5MR Adjusted total under-5 mor…    591.     0 0.014<span style="text-decoration: underline;">0</span>  13.5</span></span>
+<span><span class="co">#&gt;   site  catchments var    label                        allca…¹   est lower upper</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S6    C1, C2     cTU5MR Crude total under-5 mortali…    457.  6.50  2.36  15.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> S6    C1, C2     aTU5MR Adjusted total under-5 mort…    457.  6.50  2.36  15.1</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable name ¹​allcauseMR</span></span></span>
 <span><span class="va">graf</span><span class="op">$</span><span class="va">S6</span><span class="op">$</span><span class="va">frac</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 9</span></span></span>
-<span><span class="co">#&gt;   site  catchments var   label                decode condi…¹   est   lower upper</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S6    C1         cCSMF Crude cause-specifi…     83       0     0 0.002<span style="text-decoration: underline;">36</span>  2.28</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> S6    C1         aCSMF Adjusted cause-spec…     83       0     0 0.002<span style="text-decoration: underline;">36</span>  2.28</span></span>
+<span><span class="co">#&gt;   site  catchments var   label                  decode condi…¹   est lower upper</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S6    C1, C2     cCSMF Crude cause-specific …    211       3  1.42 0.515  3.30</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> S6    C1, C2     aCSMF Adjusted cause-specif…    211       3  1.42 0.515  3.30</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable name ¹​condition</span></span></span></code></pre></div>
+<p>The additional outputs <code>rate_*</code> provide additional information about what went into the rate and fraction calculations.</p>
+</div>
+<div class="section level3">
+<h3 id="additional-inputs-to-get_rates_and_fractions">Additional inputs to get_rates_and_fractions()<a class="anchor" aria-label="anchor" href="#additional-inputs-to-get_rates_and_fractions"></a>
+</h3>
+<p>There are other noteworthy inputs to <code><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions()</a></code>. For full documentation you can refer to the function reference on this site.</p>
+<p>Suppose we want to calculate rates and fractions for just site “S6” for the condition malaria, not in the causal chain. In this case, we don’t want to consider data from stillbirths:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span></span>
+<span>  <span class="va">dd</span>,</span>
+<span>  sites <span class="op">=</span> <span class="st">"S6"</span>,</span>
+<span>  causal_chain <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  condition <span class="op">=</span> <span class="st">"Malaria"</span>,</span>
+<span>  factor_groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    Neonate <span class="op">=</span> <span class="st">"Neonate"</span>,</span>
+<span>    Infant <span class="op">=</span> <span class="st">"Infant"</span>,</span>
+<span>    Child <span class="op">=</span> <span class="st">"Child"</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span></code></pre></div>
+<p>Here, to specify that we are not looking in the causal chain, we set <code>causal_chain = FALSE</code> (default is <code>TRUE</code>).</p>
+<div class="section level4">
+<h4 id="recoding-factor-groups">Recoding factor groups<a class="anchor" aria-label="anchor" href="#recoding-factor-groups"></a>
+</h4>
+<p>To specify that we do not want to include stillbirths, in the previous example we provided an argument <code>factor_groups</code>. This argument is taken as a named list, with each possible entry relating to one of the factors. Inside the list, a mapping can be made with the left-hand-side indicating the name of the new factor level and the right-hand-side indicating what levels of the original factor to include in that calculation.</p>
+<p>For example, we could specify that we want to define a new breakdown of age with one category being “Infant” that includes “Neonate” and “Infant” and another, “Child” that maps to the existing category “Child”. Additionally, suppose we want to break education down into two groups, “Lower” - comprised of “None” and “Primary”, and “Upper” - comprised of “Secondary” and “Tertiary”. We could do this by specifying the following as the input for <code>factor_groups</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    Infant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Neonate"</span>, <span class="st">"Infant"</span><span class="op">)</span>,</span>
+<span>    Child <span class="op">=</span> <span class="st">"Child"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  education <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Lower"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="st">"Primary"</span><span class="op">)</span>,</span>
+<span>    <span class="st">"Upper"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Secondary"</span>, <span class="st">"Tertiary"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; $age</span></span>
+<span><span class="co">#&gt; $age$Infant</span></span>
+<span><span class="co">#&gt; [1] "Neonate" "Infant" </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $age$Child</span></span>
+<span><span class="co">#&gt; [1] "Child"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $education</span></span>
+<span><span class="co">#&gt; $education$Lower</span></span>
+<span><span class="co">#&gt; [1] "None"    "Primary"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $education$Upper</span></span>
+<span><span class="co">#&gt; [1] "Secondary" "Tertiary"</span></span></code></pre></div>
+<p>Such groupings can be useful if dealing with a condition that has very low counts.</p>
+<p>If a category of one of the factors is not provided in the specification, cases with that factor level are excluded from the analysis. For example, in the previous examples, the calculations will not include stillbirths.</p>
+<p>In this example, we are only looking at neonates:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">npbc_cc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span><span class="va">dd</span>,</span>
+<span>  sites <span class="op">=</span> <span class="st">"S1"</span>,</span>
+<span>  condition <span class="op">=</span> <span class="st">"Neonatal preterm birth complications"</span>,</span>
+<span>  cond_name <span class="op">=</span> <span class="st">"NPBC"</span>,</span>
+<span>  causal_chain <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  factor_groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Neonate <span class="op">=</span> <span class="st">"Neonate"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="calculating-for-subset-of-sites-and-catchments">Calculating for subset of sites and catchments<a class="anchor" aria-label="anchor" href="#calculating-for-subset-of-sites-and-catchments"></a>
+</h4>
+<p>In the previous examples, results have been applied to all catchments within each site. If we wish to perform the initial analysis but only obtain estimates for one catchment, “C1” of site “S6”:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">graf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span></span>
+<span>  <span class="va">dd</span>,</span>
+<span>  sites <span class="op">=</span> <span class="st">"S6"</span>,</span>
+<span>  catchments <span class="op">=</span> <span class="st">"C1"</span>,</span>
+<span>  condition <span class="op">=</span> <span class="st">"Lower respiratory infections"</span>,</span>
+<span>  cond_name_short <span class="op">=</span> <span class="st">"LRI"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span></code></pre></div>
+<p>Suppose we want to obtain results for just a subset of sites and catchments:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">graf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span></span>
+<span>  <span class="va">dd</span>,</span>
+<span>  sites <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"S5"</span>, <span class="st">"S6"</span><span class="op">)</span>,</span>
+<span>  catchments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C1"</span>, <span class="st">"C4"</span>, <span class="st">"C5"</span><span class="op">)</span>,</span>
+<span>  condition <span class="op">=</span> <span class="st">"Lower respiratory infections"</span>,</span>
+<span>  cond_name_short <span class="op">=</span> <span class="st">"LRI"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Processing site:  S5</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The following catchments are not found in the data for site S5 and will be</span></span>
+<span><span class="co">#&gt; removed from the calculations for this site: C1</span></span>
+<span><span class="co">#&gt;   using adjustment variable: location</span></span>
+<span><span class="co">#&gt; Processing site:  S6</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The following catchments are not found in the data for site S6 and will be</span></span>
+<span><span class="co">#&gt; removed from the calculations for this site: C4, C5</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="overriding-adjustment-variables">Overriding adjustment variables<a class="anchor" aria-label="anchor" href="#overriding-adjustment-variables"></a>
+</h4>
+<p>Suppose you have calculated rates and fractions and examined the underlying data and determined that even though a factor wasn’t significant, it is close enough and you want to force the computations to adjust for the factor, you can use the <code>adjust_vars_override</code> argument. For example, suppose we want to force one of our previous examples to adjust on “age” and “location”:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">graf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span></span>
+<span>  <span class="va">dd</span>,</span>
+<span>  sites <span class="op">=</span> <span class="st">"S6"</span>,</span>
+<span>  catchments <span class="op">=</span> <span class="st">"C1"</span>,</span>
+<span>  condition <span class="op">=</span> <span class="st">"Lower respiratory infections"</span>,</span>
+<span>  cond_name_short <span class="op">=</span> <span class="st">"LRI"</span>,</span>
+<span>  adjust_vars_override <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"location"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;   using override adjustment variables:age, location</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="finer-control-over-condition-specification">Finer control over condition specification<a class="anchor" aria-label="anchor" href="#finer-control-over-condition-specification"></a>
+</h4>
+<p>Conditions can be specified by using a valid value from <code>valid_conditions(dd)</code> or through a <a href="https://en.wikipedia.org/wiki/Regular_expression" class="external-link">regular expression</a> specifying ICD10 codes that define the condition, or both.</p>
+<p>If <code>causal_chain = TRUE</code>, the condition of ICD10 codes are checked against underlying, immediate, and morbid conditions. If <code>FALSE</code>, just the underlying is checked.</p>
+<p>For example, to get statistics for neural tube defects, we can specify a search for all cases with ICD10 codes that begin with “Q00”, “Q01”, or “Q05”. To specify this as a regular expression, we can provide a string “<sup>Q00|</sup>Q01|^Q05”. Here, “^” means “starts-with”, and “|” means “or”.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ntd_cc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span></span>
+<span>  <span class="va">dd</span>,</span>
+<span>  icd10_regex <span class="op">=</span> <span class="st">"^Q00|^Q01|^Q05"</span>,</span>
+<span>  cond_name <span class="op">=</span> <span class="st">"NTD+CBD"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Processing site:  S1</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S2</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S3</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S4</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S5</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S6</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S7</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span></code></pre></div>
+<p>If both <code>condition</code> and <code>icd10_regex</code> are provided, they are both searched for and all cases that meet either the condition or the ICD10 specification are included. So for example if we wanted to look at rates and fractions for cases where the underlying cause is either the condition “Congenital birth defects” or NTD, we can do the following:</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ntd_cbd_cc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span></span>
+<span>  <span class="va">dd</span>,</span>
+<span>  condition <span class="op">=</span> <span class="st">"Congenital birth defects"</span>,</span>
+<span>  icd10_regex <span class="op">=</span> <span class="st">"^Q00|^Q01|^Q05"</span>,</span>
+<span>  cond_name <span class="op">=</span> <span class="st">"NTD+CBD"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Processing site:  S1</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S2</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S3</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S4</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S5</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S6</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt; Processing site:  S7</span></span>
+<span><span class="co">#&gt;   using adjustment variable: va</span></span></code></pre></div>
+<p>Note that you can also provide multiple conditions, in which case the calculation will be for cases that have <em>any</em> of the specified conditions:</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sep_uc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span></span>
+<span>  <span class="va">dd</span>,</span>
+<span>  sites <span class="op">=</span> <span class="st">"S1"</span>,</span>
+<span>  causal_chain <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepsis"</span>, <span class="st">"Neonatal sepsis"</span><span class="op">)</span>,</span>
+<span>  cond_name <span class="op">=</span> <span class="st">"Sepsis"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="maternal-conditions">Maternal conditions<a class="anchor" aria-label="anchor" href="#maternal-conditions"></a>
+</h4>
+<p>We can also calculate rates and fractions for maternal conditions. A list of valid maternal conditions can be obtained with the following:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/valid_maternal_conditions.html">valid_maternal_conditions</a></span><span class="op">(</span><span class="va">dd</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 39 × 2</span></span></span>
+<span><span class="co">#&gt;    condition                                    rank</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Maternal hypertension                           1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Placental complications                         2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Other labor and delivery complications          3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Chorioamnionitis and membrane complications     4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Obstructed labor and fetal malpresentation      5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Other maternal factor                           6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Multiple gestation                              7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Umbilical cord complications                    8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Premature Rupture of membranes                  9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> HIV                                            10</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 29 more rows</span></span></span></code></pre></div>
+<p>Suppose we want to calculate statistics for “Maternal hypertension”. To do this, we simply provide this as the <code>condition</code> and specify <code>maternal = TRUE</code>. This lets the function know to look in the maternal conditions. Note that in this case, the value of <code>causal_chain</code> does not apply and is ignored.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">htn_s1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions</a></span><span class="op">(</span><span class="va">dd</span>,</span>
+<span>  sites <span class="op">=</span> <span class="st">"S1"</span>,</span>
+<span>  condition <span class="op">=</span> <span class="st">"Maternal hypertension"</span>,</span>
+<span>  maternal <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  cond_name <span class="op">=</span> <span class="st">"HTN"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="batch-rates-and-fractions">Batch rates and fractions<a class="anchor" aria-label="anchor" href="#batch-rates-and-fractions"></a>
+</h3>
+<p>In the case that you would like to compute rates and fractions for a large number of site/catchment/condition/etc. combinations, you can use a function <code><a href="../reference/batch_rates_and_fractions.html">batch_rates_and_fractions()</a></code>. This takes an input csv</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="st">"Site,Catchment,Age,Condition,UC_or_CC,DSS</span></span>
+<span><span class="st">S6,C1,Stillbirth,Perinatal asphyxia/hypoxia,UC,Yes</span></span>
+<span><span class="st">S6,C1,Stillbirth,Congenital birth defects,UC,Yes</span></span>
+<span><span class="st">S6,C1,Stillbirth,Other neonatal disorders,UC,Yes</span></span>
+<span><span class="st">"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># a &lt;- batch_rates_and_fractions(dd, params)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
