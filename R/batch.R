@@ -5,14 +5,13 @@
 #' `batch_rates_and_fractions()`.
 #' @export
 rates_and_fractions_table <- function(dat) {
-  if (inherits(dat, "rate_frac_site"))
+
+  if (inherits(dat, "rate_frac_site")) {
     dat <- list(dat)
+    class(dat) <- c("list", "rate_frac_multi_site")
+  }
 
-  cls <- sapply(dat, function(x) inherits(x, "rate_frac_site"))
-
-  if (!all(cls))
-    stop("Input to rates_and_fractions_wide() must come from ",
-      "get_rates_and_fractions() or batch_get_rates_and_fractions()")
+  check_multi_site_output(dat, "rates_and_fractions_table()")
 
   collapse_vec <- function(x) {
     ifelse(is.null(x), "None", paste(x, collapse = ","))
@@ -145,9 +144,13 @@ batch_rates_and_fractions <- function(
       causal_chain = x$causal_chain,
       condition = x$condition,
       icd10_regex = x$icd10_regex,
-      factor_groups = list(age = x$age)
+      factor_groups = list(age = x$age),
+      maternal = x$maternal
     )
   })
 
-  unlist(res, recursive = FALSE)
+  res <- unlist(res, recursive = FALSE)
+  class(res) <- c("list", "rate_frac_multi_site")
+
+  res
 }

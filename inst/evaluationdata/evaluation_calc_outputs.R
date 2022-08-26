@@ -58,41 +58,46 @@ dr$mits_factor_tables <- mft
 dr$mits_factor_tables1 <- mft1
 
 # cond_factor_tables
-cftb <- cond_factor_tables(dd,
-    sites = sites_use,
-    catchments = catch_use,
-    condition = "Congenital birth defects")
+cftb <- cond_factor_tables(
+  dd,
+  sites = sites_use,
+  catchments = catch_use,
+  condition = "Congenital birth defects")
 
-cftb1 <- cond_factor_tables(dd,
-    sites = sites_use[1],
-    catchments = catch_use[1],
-    condition = "Congenital birth defects")
+cftb1 <- cond_factor_tables(
+  dd,
+  sites = sites_use[1],
+  catchments = catch_use[1],
+  condition = "Congenital birth defects")
 
 dr$cond_factor_tables_births <- cftb
 dr$cond_factor_tables_births1 <- cftb1
 
-dr$cond_factor_tables_m <- cond_factor_tables(dd,
-    sites = sites_use,
-    catchments = catch_use,
-    condition = "Malnutrition")
+dr$cond_factor_tables_m <- cond_factor_tables(
+  dd,
+  sites = sites_use,
+  catchments = catch_use,
+  condition = "Malnutrition")
 
 dr$combine_decion_tables <- combine_decision_tables(
   list(first = mft, second = cftb))
 
-dr$get_rate_frac_data <- get_rate_frac_data(dd,
-            site = sites_use,
-            catchments = catch_use,
-            causal_chain = FALSE,
-            condition = "Lower respiratory infections")
+dr$get_rate_frac_data <- get_rate_frac_data(
+  dd,
+  site = sites_use,
+  catchments = catch_use,
+  causal_chain = FALSE,
+  condition = "Lower respiratory infections")
 
 # get_rates_and_fractions
-graf <- get_rates_and_fractions(dd,
-            sites = sites_use,
-            catchments = catch_use,
-            causal_chain = FALSE, 
-            pval_cutoff = 0.1, #Fixed
-            pct_na_cutoff = 20, #Fixed
-            condition = "Lower respiratory infections")
+graf <- get_rates_and_fractions(
+  dd,
+  sites = sites_use,
+  catchments = catch_use,
+  causal_chain = FALSE, 
+  pval_cutoff = 0.1, #Fixed
+  pct_na_cutoff = 20, #Fixed
+  condition = "Lower respiratory infections")
 
 dr$get_rates_and_fractions <- graf
 

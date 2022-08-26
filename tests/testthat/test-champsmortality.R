@@ -243,9 +243,9 @@ test_that("Package works", {
 
   expect_equal(bat1, comp$bat1)
 
-  inputs2 <- I("site,catchment,age,condition,icd10_regex,causal_chain
-S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE
-S6,C1,Stillbirth,Congenital birth defects,,FALSE
+  inputs2 <- I("site,catchment,age,condition,icd10_regex,causal_chain,maternal
+S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE,FALSE
+S6,C1,Stillbirth,Congenital birth defects,,FALSE,FALSE
 ")
 
   bat2 <- batch_rates_and_fractions(dd, inputs2)
@@ -257,7 +257,8 @@ S6,C1,Stillbirth,Congenital birth defects,,FALSE
       age = c("Neonate", "Infant", "Child"),
       condition = "Perinatal asphyxia/hypoxia",
       icd10_regex = NULL,
-      causal_chain = TRUE
+      causal_chain = TRUE,
+      maternal = FALSE
     ),
     list(
       site = "S6",
@@ -265,7 +266,8 @@ S6,C1,Stillbirth,Congenital birth defects,,FALSE
       age = "Stillbirth",
       condition = "Congenital birth defects",
       icd10_regex = NULL,
-      causal_chain = FALSE
+      causal_chain = FALSE,
+      maternal = FALSE
     )
   )
 

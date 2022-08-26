@@ -305,9 +305,9 @@ In the case that you would like to compute rates and fractions for a large numbe
 ```{r}
 inputs_csv <- tempfile(fileext = ".csv")
 writeLines(c(
-  "site,catchment,age,condition,icd10_regex,causal_chain",
-  "S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE",
-  "S6,C1,Stillbirth,Congenital birth defects,,FALSE"
+  "site,catchment,age,condition,icd10_regex,causal_chain,maternal",
+  "S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE,FALSE",
+  "S6,C1,Stillbirth,Congenital birth defects,,FALSE,FALSE"
   ),
   inputs_csv
 )
@@ -333,7 +333,8 @@ inputs2 <- list(
     age = c("Neonate", "Infant", "Child"),
     condition = "Perinatal asphyxia/hypoxia",
     icd10_regex = NULL,
-    causal_chain = TRUE
+    causal_chain = TRUE,
+    maternal = FALSE
   ),
   list(
     site = "S6",
@@ -341,7 +342,8 @@ inputs2 <- list(
     age = "Stillbirth",
     condition = "Congenital birth defects",
     icd10_regex = NULL,
-    causal_chain = FALSE
+    causal_chain = FALSE,
+    maternal = FALSE
   )
 )
 
