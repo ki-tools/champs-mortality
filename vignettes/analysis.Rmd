@@ -47,6 +47,14 @@ A function, `process_data()` takes the data that has been read and joins it toge
 dd <- process_data(d, start_year = 2017, end_year = 2020)
 ```
 
+## Site and catchment listing
+
+It is convenient to view a list of all sites and catchments that are available in the data. A simple utiltiy function, `get_site_info()` can provide this:
+
+```{r}
+get_site_info(dd)
+```
+
 ## Valid conditions
 
 Computations with this data have the goal of finding adjusted mortality fractions and rates for a given condition found in the causal chain. As you will see, these can be specified by either using the condition name or a [regular expression](https://www.sitepoint.com/learn-regex/) indicating ICD10 codes that indicate the condition.
@@ -198,7 +206,7 @@ In the previous examples, results have been applied to all catchments within eac
 ```{r}
 graf <- get_rates_and_fractions(
   dd,
-  sites = "C6",
+  sites = "S6",
   catchments = "C1",
   condition = "Lower respiratory infections",
   cond_name_short = "LRI"
@@ -210,7 +218,7 @@ Suppose we want to obtain results for just a subset of sites and catchments:
 ```{r}
 graf <- get_rates_and_fractions(
   dd,
-  sites = c("C5", "C6"),
+  sites = c("S5", "S6"),
   catchments = c("C1", "C4", "C5"),
   condition = "Lower respiratory infections",
   cond_name_short = "LRI"
@@ -224,7 +232,7 @@ Suppose you have calculated rates and fractions and examined the underlying data
 ```{r}
 graf <- get_rates_and_fractions(
   dd,
-  sites = "C6",
+  sites = "S6",
   catchments = "C1",
   condition = "Lower respiratory infections",
   cond_name_short = "LRI",
@@ -295,10 +303,10 @@ htn_s1 <- get_rates_and_fractions(dd,
 In the case that you would like to compute rates and fractions for a large number of site/catchment/condition/etc. combinations, you can use a function `batch_rates_and_fractions()`. This takes an input csv 
 
 ```{r}
-params <- I("Catchment,Site,Age,Condition,UC_or_CC,DSS
-C1,S6,Stillbirth,Perinatal asphyxia/hypoxia,UC,Yes
-C1,S6,Stillbirth,Congenital birth defects,UC,Yes
-C1,S6,Stillbirth,Other neonatal disorders,UC,Yes
+params <- I("Site,Catchment,Age,Condition,UC_or_CC,DSS
+S6,C1,Stillbirth,Perinatal asphyxia/hypoxia,UC,Yes
+S6,C1,Stillbirth,Congenital birth defects,UC,Yes
+S6,C1,Stillbirth,Other neonatal disorders,UC,Yes
 ")
 
 a <- batch_rates_and_fractions(dd, params)

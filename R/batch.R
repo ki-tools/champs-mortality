@@ -55,7 +55,7 @@ rates_and_fractions_wide <- function(inputs, dat) {
     pct_na_cutoff = 20, # Fixed
     condition = inputs$Condition # Condition name
   )
-  # not sure how ajdust vars is reported. May not need collapse
+  # not sure how adjust vars is reported. May not need collapse
   ivars <- dat_calc[[inputs$Site]][["adjust_vars"]]
   if (is.null(ivars)) {
     adjust_vars <- "None"
