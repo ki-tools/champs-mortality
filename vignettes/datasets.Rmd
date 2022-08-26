@@ -122,12 +122,14 @@ For these catchments, we use alternate surveillance nubmers from [DHS](https://d
 
 ## Live Births
 
-The total number of live births is required in the mortality rate and fraction calculations. This dataset has been manually constructed and has the following variables:
+The total number of live births is required in the mortality rate and fraction calculations. This dataset has been manually constructed from DSS data and has the following variables:
 
 - **site**: site name
 - **catchment**: catchment name
 - **year**: year
 - **live_births**: number of live births according to DSS
+
+This data, although not individual-level data, must be obtained directly from CHAMPS.
 
 ## Season Lookup
 

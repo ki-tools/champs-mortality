@@ -56,4 +56,4 @@ The `config.yaml` file contains pointers to each dataset that is required for an
 cat(paste(readLines(file.path(data_dir, "config.yaml")), collapse = "\n"))
 ```
 
-Each entry specifies the file name of each required data file. Note the four datasets that already exist and an additional 4 that don't come with the package due to their sensitive nature. These datasets can be obtained from [CHAMPS](https://champshealth.org/data/) and more information about their contents and structure will be provided in the [next section](datasets.html).
+Each entry specifies the file name of each required data file. Note the three datasets that already exist and an additional 5 that don't come with the package due to their sensitive nature. These datasets can be obtained from [CHAMPS](https://champshealth.org/data/) and more information about their contents and structure will be provided in the [next section](datasets.html).
