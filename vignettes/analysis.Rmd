@@ -2,7 +2,7 @@
 title: "Computing Adjusted Rates and Fractions"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{analysis}
+  %\VignetteIndexEntry{Computing Adjusted Rates and Fractions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -309,5 +309,5 @@ S6,C1,Stillbirth,Congenital birth defects,UC,Yes
 S6,C1,Stillbirth,Other neonatal disorders,UC,Yes
 ")
 
-a <- batch_rates_and_fractions(dd, params)
+# a <- batch_rates_and_fractions(dd, params)
 ```

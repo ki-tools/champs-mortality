@@ -9,52 +9,7 @@
 #' @export
 rates_and_fractions_wide <- function(inputs, dat) {
 
-  # handle manual or lists of lists from purrr
-  if (length(inputs) == 1) {
-    inputs <- inputs[[1]]
-    if (length(inputs) != 6) stop("Inputs more than six")
-  } else if (length(inputs) != 6) {
-    stop("Inputs more than six")
-  }
 
-  # Expand semi-colon seperated vars
-  icatchments <- inputs$Age %>%
-    strsplit(";") %>%
-    unlist() %>%
-    trimws()
-
-  icatchments <- inputs$Catchment %>%
-    strsplit(";") %>%
-    unlist() %>%
-    trimws()
-
-  isites <- inputs$Site %>%
-    strsplit(";") %>%
-    unlist() %>%
-    trimws()
-
-  # filter to age group
-  dat$ads <- filter(dat$ads, .data$age == inputs$Age)
-  dat$dss <- filter(dat$dss, .data$age == inputs$Age)
-
-  # causal chain input
-  if (inputs$UC_or_CC == "CC") {
-    ccp <- TRUE
-  } else if (inputs$UC_or_CC == "UC") {
-    ccp <- FALSE
-  } else {
-    stop("UC_or_CC not one of 'UC' or 'CC'")
-  }
-
-  # Do calculations
-  dat_calc <- get_rates_and_fractions(dat,
-    sites = isites,
-    catchments = icatchments,
-    causal_chain = ccp, # FALSE if underlying
-    pval_cutoff = 0.1, # Fixed
-    pct_na_cutoff = 20, # Fixed
-    condition = inputs$Condition # Condition name
-  )
   # not sure how adjust vars is reported. May not need collapse
   ivars <- dat_calc[[inputs$Site]][["adjust_vars"]]
   if (is.null(ivars)) {

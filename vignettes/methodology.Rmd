@@ -2,7 +2,7 @@
 title: "Methodology"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{methodology}
+  %\VignetteIndexEntry{Methodology}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -40,7 +40,7 @@ table_adjust_decision <- function(
           dplyr::mutate(dss = x$can_use_dss) }) %>%
       dplyr::bind_rows() %>%
       dplyr::arrange_at(c("site", "catchment"))
-    cond_name_short <- obj[[1]]$cond_name_short
+    cond_name_short <- obj[[1]]$inputs$cond_name_short
   } else {
     stop("'obj' must come from get_rates_and_fractions()")
   }
