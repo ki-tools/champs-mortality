@@ -8,12 +8,8 @@ get_file <- function(x)
 comp <- readRDS(get_file("evaluationdata/evaluation_results_v1_82022.rds"))
 
 dat_folder <- get_file("testdata")
-path_wide <- get_file("testdata/inputs_wide.csv")
 sites_use <- c("S6", "S5", "S7")
 catch_use <- c("C1", "C4", "C3", "C5", "C6", "C7")
-
-input_list <- readr::read_csv(path_wide, show_col_types = FALSE) |>
-    purrr::transpose()
 
 test_that("Package works", {
 
@@ -241,6 +237,41 @@ test_that("Package works", {
     comp$get_interval,
     tolerance = 4
   )
+
+  inputs1 <- get_file("testdata/inputs.csv")
+  bat1 <- batch_rates_and_fractions(dd, inputs1)
+
+  expect_equal(bat1, comp$bat1)
+
+  inputs2 <- I("site,catchment,age,condition,icd10_regex,causal_chain
+S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE
+S6,C1,Stillbirth,Congenital birth defects,,FALSE
+")
+
+  bat2 <- batch_rates_and_fractions(dd, inputs2)
+
+  inputs3 <- list(
+    list(
+      site = "S6",
+      catchment = c("C1", "C2"),
+      age = c("Neonate", "Infant", "Child"),
+      condition = "Perinatal asphyxia/hypoxia",
+      icd10_regex = NULL,
+      causal_chain = TRUE
+    ),
+    list(
+      site = "S6",
+      catchment = "C1",
+      age = "Stillbirth",
+      condition = "Congenital birth defects",
+      icd10_regex = NULL,
+      causal_chain = FALSE
+    )
+  )
+
+  bat3 <- batch_rates_and_fractions(dd, inputs3)
+
+  expect_equal(bat2, bat3, tolerance = 4)
 
   # # repeat calculation functions
   # expect_equal(
