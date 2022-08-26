@@ -300,14 +300,75 @@ htn_s1 <- get_rates_and_fractions(dd,
 
 ### Batch rates and fractions
 
-In the case that you would like to compute rates and fractions for a large number of site/catchment/condition/etc. combinations, you can use a function `batch_rates_and_fractions()`. This takes an input csv 
+In the case that you would like to compute rates and fractions for a large number of site/catchment/condition/etc. combinations, you can use a function `batch_rates_and_fractions()`. This takes an input csv such as the following:
 
 ```{r}
-params <- I("Site,Catchment,Age,Condition,UC_or_CC,DSS
-S6,C1,Stillbirth,Perinatal asphyxia/hypoxia,UC,Yes
-S6,C1,Stillbirth,Congenital birth defects,UC,Yes
-S6,C1,Stillbirth,Other neonatal disorders,UC,Yes
-")
-
-# a <- batch_rates_and_fractions(dd, params)
+inputs_csv <- tempfile(fileext = ".csv")
+writeLines(c(
+  "site,catchment,age,condition,icd10_regex,causal_chain",
+  "S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE",
+  "S6,C1,Stillbirth,Congenital birth defects,,FALSE"
+  ),
+  inputs_csv
+)
 ```
+
+This identifies two scenarios we want to run, the first being Perinatal asphyxia/hypoxia for age groups "Neonate", "Infant", and "Child" in the causal chain for site "S6" and only its catchments "C1" and "C2". Note that when an input has multiple values, we concatenate them with a semicolon.
+
+The function `batch_rates_and_fractions()` takes these inputs and runs them through `get_rates_and_fractions()`.
+
+```{r}
+bat1 <- batch_rates_and_fractions(dd, inputs_csv)
+```
+
+The output is a list of results of the type we have seen previously.
+
+The csv approach can be nice for succinctly identifying a large number of scenarios to run, particularly if we want to get rates and fractions for each individual catchment of several sites, or if we want to look at several conditions, such as the top 10.
+
+```{r}
+inputs2 <- list(
+  list(
+    site = "S6",
+    catchment = c("C1", "C2"),
+    age = c("Neonate", "Infant", "Child"),
+    condition = "Perinatal asphyxia/hypoxia",
+    icd10_regex = NULL,
+    causal_chain = TRUE
+  ),
+  list(
+    site = "S6",
+    catchment = "C1",
+    age = "Stillbirth",
+    condition = "Congenital birth defects",
+    icd10_regex = NULL,
+    causal_chain = FALSE
+  )
+)
+
+bat2 <- batch_rates_and_fractions(dd, inputs2)
+```
+
+A drawback of the batch processing approach is that we do not quite have full control over all input parameters, such as custom factor groupings, etc. One could write their own custom script to iterate through scenarios in the rare occasions that more detailed specification is required.
+
+## Postprocessing
+
+After we have processed several scenarios, it can be useful to conslidate the output into a simple table with one row per scenario and all of the relevant statistics. This can be done with a function `rates_and_fractions_table()`.
+
+For example, to turn our previous batch processing result into a table, we can do the following
+
+```{r}
+tbl <- rates_and_fractions_table(bat1)
+dplyr::glimpse(tbl)
+```
+
+Note that in addition to results of batch processing, we can also apply this function to the results of `get_rates_and_fractions()`.
+
+For example, in our first example of this article, we calculated LRI statistics for every site and catchment and stored the result in an object named `graf`.
+
+We can consolidate this output with the following:
+
+```{r}
+rates_and_fractions_table(graf)
+```
+
+

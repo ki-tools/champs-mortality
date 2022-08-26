@@ -120,8 +120,9 @@ dr$table_adjust_decision <- table_adjust_decision(graf)
 
 
 ### Added functions for repeat calculations
-input_list <- read_csv("inst/testdata/inputs_wide.csv") |>
-    purrr::transpose()
+inputs1 <- "inst/testdata/inputs.csv"
+
+dr$bat1 <- batch_rates_and_fractions(dd, inputs1)
 
 # # may need to check function uses subsets
 # dr$rates_and_fractions_wide <- rates_and_fractions_wide(
@@ -134,7 +135,6 @@ input_list <- read_csv("inst/testdata/inputs_wide.csv") |>
 #   start_year = 2017,
 #   end_year = 2020
 #   )
-
 
 ### Calculations
 # should get interval check for one input on each

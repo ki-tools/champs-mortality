@@ -11,7 +11,7 @@
 #' @param rgx regular expression representing ICD10 codes
 #' @param cc if TRUE: searches across causal chain, if FALSE: searches in
 #' underlying cause only
-#' @export
+# @export
 has_icd10 <- function(ads, rgx, cc = TRUE) {
   if (cc) {
     grepl(rgx, ads$underlying_cause_calc) %or%
@@ -34,7 +34,7 @@ has_icd10 <- function(ads, rgx, cc = TRUE) {
 #' @param group string representing a CHAMPS group
 #' @param cc if TRUE: searches across causal chain, if FALSE: searches in
 #' underlying cause only
-#' @export
+# @export
 has_champs_group <- function(ads, group, cc = TRUE) {
   if (cc) {
     (ads$ic_champs_group_desc %in% group) %or%
@@ -55,7 +55,7 @@ has_champs_group <- function(ads, group, cc = TRUE) {
 #' Check to see if an ICD10 regular expression is in the main maternal cause
 #' @param ads CHAMPS analysis dataset
 #' @param rgx regular expression representing ICD10 codes
-#' @export
+# @export
 has_maternal_icd10 <- function(ads, rgx) {
   grepl(rgx, ads$main_maternal_disease_condition)
 }
@@ -63,7 +63,7 @@ has_maternal_icd10 <- function(ads, rgx) {
 #' Check to see if a CHAMPS group is in the main maternal cause
 #' @param ads CHAMPS analysis dataset
 #' @param group string representing a CHAMPS group
-#' @export
+# @export
 has_maternal_champs_group <- function(ads, group) {
   ads$main_maternal_champs_group_desc %in% group
 }
