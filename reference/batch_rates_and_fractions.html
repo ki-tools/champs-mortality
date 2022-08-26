@@ -58,17 +58,23 @@ with the output returned in one row per set of inputs.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">batch_rates_and_fractions</span><span class="op">(</span><span class="va">x</span>, <span class="va">inputs_csv</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">batch_rates_and_fractions</span><span class="op">(</span><span class="va">dat</span>, <span class="va">inputs</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>x</dt>
+    <dl><dt>dat</dt>
 <dd><p>Processed CHAMPS dataset.</p></dd>
 
 
-<dt>inputs_csv</dt>
-<dd><p>Path to a csv file specifying each scenario to run.</p></dd>
+<dt>inputs</dt>
+<dd><p>Path to a csv file specifying each scenario to run with
+columns 'site','catchment', 'age', 'condition', 'icd10_regex',
+'causal_chain'. The columns 'age', 'condition' ,'site', and 'catchment'
+can have multiple values separated by a semicolon. These variables
+specify parameters that will be passed to <code><a href="get_rates_and_fractions.html">get_rates_and_fractions()</a></code>
+Alternately, this can be a list of named lists of parameters with the
+same names of the csv file. See examples below.</p></dd>
 
 </dl></div>
 

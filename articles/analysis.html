@@ -248,10 +248,11 @@
 <p>Let’s examine at a high level what is returned by this function for site S6:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">graf</span><span class="op">$</span><span class="va">S6</span>, max.level <span class="op">=</span> <span class="fl">1</span>, give.attr <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; List of 15</span></span>
+<span><span class="co">#&gt; List of 16</span></span>
 <span><span class="co">#&gt;  $ site             : chr "S6"</span></span>
 <span><span class="co">#&gt;  $ catchments       : chr [1:2] "C1" "C2"</span></span>
 <span><span class="co">#&gt;  $ inputs           :List of 10</span></span>
+<span><span class="co">#&gt;  $ adjust_vars      : NULL</span></span>
 <span><span class="co">#&gt;  $ mits             : tibble [6 × 16] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ cond             : tibble [6 × 10] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ pop_mits         : tibble [1 × 3] (S3: tbl_df/tbl/data.frame)</span></span>
@@ -282,9 +283,6 @@
 <span><span class="co">#&gt; $causal_chain</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $adjust_vars</span></span>
-<span><span class="co">#&gt; NULL</span></span>
-<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $factor_groups</span></span>
 <span><span class="co">#&gt; NULL</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -293,6 +291,9 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $pct_na_cutoff</span></span>
 <span><span class="co">#&gt; [1] 20</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $adjust_vars_override</span></span>
+<span><span class="co">#&gt; NULL</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $per</span></span>
 <span><span class="co">#&gt; [1] 10000</span></span></code></pre></div>
@@ -552,16 +553,94 @@
 <div class="section level3">
 <h3 id="batch-rates-and-fractions">Batch rates and fractions<a class="anchor" aria-label="anchor" href="#batch-rates-and-fractions"></a>
 </h3>
-<p>In the case that you would like to compute rates and fractions for a large number of site/catchment/condition/etc. combinations, you can use a function <code><a href="../reference/batch_rates_and_fractions.html">batch_rates_and_fractions()</a></code>. This takes an input csv</p>
+<p>In the case that you would like to compute rates and fractions for a large number of site/catchment/condition/etc. combinations, you can use a function <code><a href="../reference/batch_rates_and_fractions.html">batch_rates_and_fractions()</a></code>. This takes an input csv such as the following:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="st">"Site,Catchment,Age,Condition,UC_or_CC,DSS</span></span>
-<span><span class="st">S6,C1,Stillbirth,Perinatal asphyxia/hypoxia,UC,Yes</span></span>
-<span><span class="st">S6,C1,Stillbirth,Congenital birth defects,UC,Yes</span></span>
-<span><span class="st">S6,C1,Stillbirth,Other neonatal disorders,UC,Yes</span></span>
-<span><span class="st">"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">inputs_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".csv"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"site,catchment,age,condition,icd10_regex,causal_chain"</span>,</span>
+<span>  <span class="st">"S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE"</span>,</span>
+<span>  <span class="st">"S6,C1,Stillbirth,Congenital birth defects,,FALSE"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="va">inputs_csv</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>This identifies two scenarios we want to run, the first being Perinatal asphyxia/hypoxia for age groups “Neonate”, “Infant”, and “Child” in the causal chain for site “S6” and only its catchments “C1” and “C2”. Note that when an input has multiple values, we concatenate them with a semicolon.</p>
+<p>The function <code><a href="../reference/batch_rates_and_fractions.html">batch_rates_and_fractions()</a></code> takes these inputs and runs them through <code><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions()</a></code>.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bat1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/batch_rates_and_fractions.html">batch_rates_and_fractions</a></span><span class="op">(</span><span class="va">dd</span>, <span class="va">inputs_csv</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span></code></pre></div>
+<p>The output is a list of results of the type we have seen previously.</p>
+<p>The csv approach can be nice for succinctly identifying a large number of scenarios to run, particularly if we want to get rates and fractions for each individual catchment of several sites, or if we want to look at several conditions, such as the top 10.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">inputs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    site <span class="op">=</span> <span class="st">"S6"</span>,</span>
+<span>    catchment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C1"</span>, <span class="st">"C2"</span><span class="op">)</span>,</span>
+<span>    age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Neonate"</span>, <span class="st">"Infant"</span>, <span class="st">"Child"</span><span class="op">)</span>,</span>
+<span>    condition <span class="op">=</span> <span class="st">"Perinatal asphyxia/hypoxia"</span>,</span>
+<span>    icd10_regex <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    causal_chain <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    site <span class="op">=</span> <span class="st">"S6"</span>,</span>
+<span>    catchment <span class="op">=</span> <span class="st">"C1"</span>,</span>
+<span>    age <span class="op">=</span> <span class="st">"Stillbirth"</span>,</span>
+<span>    condition <span class="op">=</span> <span class="st">"Congenital birth defects"</span>,</span>
+<span>    icd10_regex <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    causal_chain <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># a &lt;- batch_rates_and_fractions(dd, params)</span></span></code></pre></div>
+<span><span class="va">bat2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/batch_rates_and_fractions.html">batch_rates_and_fractions</a></span><span class="op">(</span><span class="va">dd</span>, <span class="va">inputs2</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span>
+<span><span class="co">#&gt;   no adjustment variables</span></span></code></pre></div>
+<p>A drawback of the batch processing approach is that we do not quite have full control over all input parameters, such as custom factor groupings, etc. One could write their own custom script to iterate through scenarios in the rare occasions that more detailed specification is required.</p>
 </div>
+</div>
+<div class="section level2">
+<h2 id="postprocessing">Postprocessing<a class="anchor" aria-label="anchor" href="#postprocessing"></a>
+</h2>
+<p>After we have processed several scenarios, it can be useful to conslidate the output into a simple table with one row per scenario and all of the relevant statistics. This can be done with a function <code><a href="../reference/rates_and_fractions_table.html">rates_and_fractions_table()</a></code>.</p>
+<p>For example, to turn our previous batch processing result into a table, we can do the following</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rates_and_fractions_table.html">rates_and_fractions_table</a></span><span class="op">(</span><span class="va">bat1</span><span class="op">)</span></span>
+<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 2</span></span>
+<span><span class="co">#&gt; Columns: 21</span></span>
+<span><span class="co">#&gt; $ site            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "S6", "S6"</span></span>
+<span><span class="co">#&gt; $ catchments      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "C1,C2", "C1"</span></span>
+<span><span class="co">#&gt; $ age             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Neonate,Infant,Child", "Stillbirth"</span></span>
+<span><span class="co">#&gt; $ condition       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Perinatal asphyxia/hypoxia", "Congenital birth defect…</span></span>
+<span><span class="co">#&gt; $ cond_name_short <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Perinatal asphyxia/hypoxia", "Congenital birth defect…</span></span>
+<span><span class="co">#&gt; $ dss_only        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, TRUE</span></span>
+<span><span class="co">#&gt; $ DeCoDe          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 105, 38</span></span>
+<span><span class="co">#&gt; $ n               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 79, 0</span></span>
+<span><span class="co">#&gt; $ cCSMF           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 75.2381, 0.0000</span></span>
+<span><span class="co">#&gt; $ cCSMF_LL        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 67.85097235, 0.00513981</span></span>
+<span><span class="co">#&gt; $ cCSMF_UL        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 81.610365, 4.897288</span></span>
+<span><span class="co">#&gt; $ aCSMF           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 75.2381, 0.0000</span></span>
+<span><span class="co">#&gt; $ aCSMF_LL        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 67.85097235, 0.00513981</span></span>
+<span><span class="co">#&gt; $ aCSMF_UL        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 81.610365, 4.897288</span></span>
+<span><span class="co">#&gt; $ cCSMR           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 251.481, 0.000</span></span>
+<span><span class="co">#&gt; $ cCSMR_LL        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 226.7897844, 0.0135382</span></span>
+<span><span class="co">#&gt; $ cCSMR_UL        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 272.7801, 12.8994</span></span>
+<span><span class="co">#&gt; $ aCSMR           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 251.481, 0.000</span></span>
+<span><span class="co">#&gt; $ aCSMR_LL        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 226.7897844, 0.0135382</span></span>
+<span><span class="co">#&gt; $ aCSMR_UL        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 272.7801, 12.8994</span></span>
+<span><span class="co">#&gt; $ adj_factors     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "None", "None"</span></span></code></pre></div>
+<p>Note that in addition to results of batch processing, we can also apply this function to the results of <code><a href="../reference/get_rates_and_fractions.html">get_rates_and_fractions()</a></code>.</p>
+<p>For example, in our first example of this article, we calculated LRI statistics for every site and catchment and stored the result in an object named <code>graf</code>.</p>
+<p>We can consolidate this output with the following:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rates_and_fractions_table.html">rates_and_fractions_table</a></span><span class="op">(</span><span class="va">graf</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 21</span></span></span>
+<span><span class="co">#&gt;   site  catch…¹ age   condi…² cond_…³ dss_o…⁴ DeCoDe     n cCSMF cCSMF…⁵ cCSMF…⁶</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> S6    C1      Stil… Lower … LRI     TRUE        83     3  3.61    1.32    8.25</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 10 more variables: aCSMF &lt;dbl&gt;, aCSMF_LL &lt;dbl&gt;, aCSMF_UL &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   cCSMR &lt;dbl&gt;, cCSMR_LL &lt;dbl&gt;, cCSMR_UL &lt;dbl&gt;, aCSMR &lt;dbl&gt;, aCSMR_LL &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   aCSMR_UL &lt;dbl&gt;, adj_factors &lt;chr&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​catchments, ²​condition, ³​cond_name_short, ⁴​dss_only, ⁵​cCSMF_LL, ⁶​cCSMF_UL</span></span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
