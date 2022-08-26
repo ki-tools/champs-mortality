@@ -53,7 +53,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/tidyverse/tidytemplate/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -68,7 +75,7 @@
       <img src="" class="logo" alt=""><h1>Getting Started</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tidytemplate/blob/HEAD/vignettes/getting-started.Rmd" class="external-link"><code>vignettes/getting-started.Rmd</code></a></small>
       <div class="d-none name"><code>getting-started.Rmd</code></div>
     </div>
 
@@ -93,7 +100,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/create_dataset_directory.html">create_dataset_directory</a></span><span class="op">(</span><span class="va">data_dir</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> The directory '/tmp/RtmpcG6CO9/file2c4525054b44' is ready for the appropriate</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> The directory '/tmp/RtmpJduxdz/file2ca76bce69a8' is ready for the appropriate</span></span>
 <span><span class="co">#&gt;   data files to be placed in it. The following datasets should be placed in</span></span>
 <span><span class="co">#&gt;   this directory:</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -114,27 +121,27 @@
 <span><span class="co">#&gt; 5. Season definition: This dataset is a csv file containing rainy and dry</span></span>
 <span><span class="co">#&gt;    season date ranges for each site, which will be used to classify the season</span></span>
 <span><span class="co">#&gt;    in which each case occurs. A dataset with known season definitions,</span></span>
-<span><span class="co">#&gt;    '/tmp/RtmpcG6CO9/file2c4525054b44/seasons.csv', has been provided. Please</span></span>
+<span><span class="co">#&gt;    '/tmp/RtmpJduxdz/file2ca76bce69a8/seasons.csv', has been provided. Please</span></span>
 <span><span class="co">#&gt;    update that file if necessary.</span></span>
 <span><span class="co">#&gt; 6. Catchment lookup: This dataset is a csv file containing mappings from</span></span>
 <span><span class="co">#&gt;    catchment codes to catchment names, used to link the DSS data, which uses</span></span>
 <span><span class="co">#&gt;    catchment names, to the CHAMPS analysis dataset, which uses catchment IDs. A</span></span>
 <span><span class="co">#&gt;    dataset with known catchment lookups,</span></span>
-<span><span class="co">#&gt;    '/tmp/RtmpcG6CO9/file2c4525054b44/catchment_lookup.csv', has been provided.</span></span>
+<span><span class="co">#&gt;    '/tmp/RtmpJduxdz/file2ca76bce69a8/catchment_lookup.csv', has been provided.</span></span>
 <span><span class="co">#&gt;    Please update that file if necessary.</span></span>
 <span><span class="co">#&gt; 7. Live births: This dataset is a csv file containing yearly live births by</span></span>
 <span><span class="co">#&gt;    site and catchment from DSS. A dataset with known live birth statistics by</span></span>
 <span><span class="co">#&gt;    site, catchment, and year,</span></span>
-<span><span class="co">#&gt;    '/tmp/RtmpcG6CO9/file2c4525054b44/live_births.csv', has been provided.</span></span>
+<span><span class="co">#&gt;    '/tmp/RtmpJduxdz/file2ca76bce69a8/live_births.csv', has been provided.</span></span>
 <span><span class="co">#&gt;    Please update that file if necessary.</span></span>
 <span><span class="co">#&gt; 8. Live births: This dataset is a csv file containing yearly DHS all-cause</span></span>
 <span><span class="co">#&gt;    mortality data by site and catchment from DSS. A dataset with known DHS</span></span>
 <span><span class="co">#&gt;    statistics by site, catchment, year, and age,</span></span>
-<span><span class="co">#&gt;    '/tmp/RtmpcG6CO9/file2c4525054b44/dhs.csv', has been provided. Please update</span></span>
+<span><span class="co">#&gt;    '/tmp/RtmpJduxdz/file2ca76bce69a8/dhs.csv', has been provided. Please update</span></span>
 <span><span class="co">#&gt;    that file if necessary.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; → Once the files are in place, edit the file</span></span>
-<span><span class="co">#&gt;   /tmp/RtmpcG6CO9/file2c4525054b44/config.yaml to provide the file names</span></span>
+<span><span class="co">#&gt;   /tmp/RtmpJduxdz/file2ca76bce69a8/config.yaml to provide the file names</span></span>
 <span><span class="co">#&gt;   corresponding to each of these datasets.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; The config.yaml template looks like this:</span></span>
@@ -159,7 +166,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">data_dir</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "catchment_lookup.csv" "config.yaml"          "dhs.csv"             </span></span>
-<span><span class="co">#&gt; [4] "live_births.csv"      "seasons.csv"</span></span></code></pre></div>
+<span><span class="co">#&gt; [4] "seasons.csv"</span></span></code></pre></div>
 <p>These files come with the package. They will be described in greater detail in the <a href="datasets.html">next article</a>.</p>
 <p>The <code>config.yaml</code> file contains pointers to each dataset that is required for analysis:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -172,7 +179,7 @@
 <span><span class="co">#&gt; catchment_lookup: catchment_lookup.csv</span></span>
 <span><span class="co">#&gt; live_births_dataset: live_births.csv</span></span>
 <span><span class="co">#&gt; dhs_dataset: dhs.csv</span></span></code></pre></div>
-<p>Each entry specifies the file name of each required data file. Note the four datasets that already exist and an additional 4 that don’t come with the package due to their sensitive nature. These datasets can be obtained from <a href="https://champshealth.org/data/" class="external-link">CHAMPS</a> and more information about their contents and structure will be provided in the <a href="datasets.html">next section</a>.</p>
+<p>Each entry specifies the file name of each required data file. Note the three datasets that already exist and an additional 5 that don’t come with the package due to their sensitive nature. These datasets can be obtained from <a href="https://champshealth.org/data/" class="external-link">CHAMPS</a> and more information about their contents and structure will be provided in the <a href="datasets.html">next section</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
