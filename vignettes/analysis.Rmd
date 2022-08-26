@@ -2,7 +2,7 @@
 title: "Computing Adjusted Rates and Fractions"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{analysis}
+  %\VignetteIndexEntry{Computing Adjusted Rates and Fractions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -47,6 +47,14 @@ A function, `process_data()` takes the data that has been read and joins it toge
 dd <- process_data(d, start_year = 2017, end_year = 2020)
 ```
 
+## Site and catchment listing
+
+It is convenient to view a list of all sites and catchments that are available in the data. A simple utiltiy function, `get_site_info()` can provide this:
+
+```{r}
+get_site_info(dd)
+```
+
 ## Valid conditions
 
 Computations with this data have the goal of finding adjusted mortality fractions and rates for a given condition found in the causal chain. As you will see, these can be specified by either using the condition name or a [regular expression](https://www.sitepoint.com/learn-regex/) indicating ICD10 codes that indicate the condition.
@@ -65,26 +73,241 @@ The main function of this package computes factor-adjusted mortality rates and f
 
 The function is `get_rates_and_fractions()`. It takes several parameters, many with defaults, and details about these parameters can be found in the function reference on this site. This article will cover many examples that illustrate all of the different ways this function can be used.
 
-As an example, suppose we wish to calculate rates and fractions for sites "S6", "S5", "S7" and their corresponding catchments "C1", "C4", "C3", "C5", "C6", "C7" for the condition "Lower respiratory infections", not in the causal chain:
+Below is a very simple example for getting rates and fractions for the condition "Lower respiratory infections":
 
 ```{r}
 graf <- get_rates_and_fractions(
   dd,
-  sites = c("S6", "S5", "S7"),
-  catchments = c("C1", "C4", "C3", "C5", "C6", "C7"),
-  causal_chain = FALSE,
-  condition = "Lower respiratory infections")
+  condition = "Lower respiratory infections",
+  cond_name_short = "LRI"
+)
 ```
 
-Many more examples to come...
+This applies the calculations to each site independently. For each site, data for all catchments are combined. We will show how to get results for individual catchments later. The main arguments are the input data, `dd` and the condition. Here we specify the optional parameter `cond_name_short` to be "LRI". This is used in some of the tabular and graphical outputs.
+
+As seen in the printed output, some sites have no adjustment variables while others are adjusted on location. For site "S7", both "location" and "va" were significant but we can only adjust for one variable or two variables if one of them is "age", so just "location" is chosen.
 
 ### Examining the Output
 
-The output of this function contains many pieces of information for each site including underlying statistics that went into the calculations, but the most interesting outputs are the rates and fractions.
+The output of this function is a named list for each site, and contains many pieces of information for each site including underlying statistics that went into the calculations.
 
-For site S6, for example, we can extract the computed rates and fractions with the following:
+Note: Great care has gone into validating the outputs of the functions in this package, but we strongly encourage the user to examine the underlying statistics and assumptions to ensure the results are correct.
+
+Let's examine at a high level what is returned by this function for site S6:
+
+```{r}
+str(graf$S6, max.level = 1, give.attr = FALSE)
+```
+
+The first few elements are simply documenting the input parameters that went into the calculations. Specifically:
+
+```{r}
+graf$S6$inputs
+```
+
+Many of these inputs are defaults that we didn't specify.
+
+The elements `mits` and `cond` are tables that capture information that is used in deciding whether any factors should be adjusted for. They contain one row for each factor, e.g.:
+
+```{r}
+graf$S6$mits
+```
+
+Each row contains information that went into the calculation of whether the factor is statistically significantly associated with MITS consent.
+
+The `table` element contains . For example, for the factor `age`:
+
+```{r}
+graf$S6$mits$table[[1]]
+```
+
+We see counts of MITS vs. non-MITS broken down by age. A chi-square test is carried out on this table to determine a p-value. If a factor is significant and has sufficiently non-missing data (default is 20%), it is a candidate for adjustment.
+
+The `pop_mits` output reports statistics of number of stillbirths and under-5 deaths plus stillbirths for each catchment in the site.
+
+```{r}
+graf$S6$pop_mits
+```
+
+The output `can_use_dss` specifies whether the site consists of all-DSS sites and helps determine how to combine statistics across sites, as described in more detail [here](methodology.html).
+
+The outputs `acMR_*` provide the all-cause mortality rate from the DSS and DHS data sources that were used in the calculations.
+
+The most interesting outputs are the rates and fractions:
 
 ```{r}
 graf$S6$rate
 graf$S6$frac
+```
+
+The additional outputs `rate_*` provide additional information about what went into the rate and fraction calculations.
+
+### Additional inputs to get_rates_and_fractions()
+
+There are other noteworthy inputs to `get_rates_and_fractions()`. For full documentation you can refer to the function reference on this site.
+
+Suppose we want to calculate rates and fractions for just site "S6" for the condition malaria, not in the causal chain. In this case, we don't want to consider data from stillbirths:
+
+```{r}
+res <- get_rates_and_fractions(
+  dd,
+  sites = "S6",
+  causal_chain = FALSE,
+  condition = "Malaria",
+  factor_groups = list(age = list(
+    Neonate = "Neonate",
+    Infant = "Infant",
+    Child = "Child"
+  ))
+)
+```
+
+Here, to specify that we are not looking in the causal chain, we set `causal_chain = FALSE` (default is `TRUE`).
+
+#### Recoding factor groups
+
+To specify that we do not want to include stillbirths, in the previous example we provided an argument `factor_groups`. This argument is taken as a named list, with each possible entry relating to one of the factors. Inside the list, a mapping can be made with the left-hand-side indicating the name of the new factor level and the right-hand-side indicating what levels of the original factor to include in that calculation.
+
+For example, we could specify that we want to define a new breakdown of age with one category being "Infant" that includes "Neonate" and "Infant" and another, "Child" that maps to the existing category "Child". Additionally, suppose we want to break education down into two groups, "Lower" - comprised of "None" and "Primary", and "Upper" - comprised of "Secondary" and "Tertiary". We could do this by specifying the following as the input for `factor_groups`:
+
+```{r}
+list(
+  age = list(
+    Infant = c("Neonate", "Infant"),
+    Child = "Child"
+  ),
+  education = list(
+    "Lower" = c("None", "Primary"),
+    "Upper" = c("Secondary", "Tertiary")
+  )
+)
+```
+
+Such groupings can be useful if dealing with a condition that has very low counts.
+
+If a category of one of the factors is not provided in the specification, cases with that factor level are excluded from the analysis. For example, in the previous examples, the calculations will not include stillbirths.
+
+In this example, we are only looking at neonates:
+
+```{r}
+npbc_cc <- get_rates_and_fractions(dd,
+  sites = "S1",
+  condition = "Neonatal preterm birth complications",
+  cond_name = "NPBC",
+  causal_chain = TRUE,
+  factor_groups = list(age = list(Neonate = "Neonate"))
+)
+```
+
+#### Calculating for subset of sites and catchments
+
+In the previous examples, results have been applied to all catchments within each site. If we wish to perform the initial analysis but only obtain estimates for one catchment, "C1" of site "S6":
+
+```{r}
+graf <- get_rates_and_fractions(
+  dd,
+  sites = "S6",
+  catchments = "C1",
+  condition = "Lower respiratory infections",
+  cond_name_short = "LRI"
+)
+```
+
+Suppose we want to obtain results for just a subset of sites and catchments:
+
+```{r}
+graf <- get_rates_and_fractions(
+  dd,
+  sites = c("S5", "S6"),
+  catchments = c("C1", "C4", "C5"),
+  condition = "Lower respiratory infections",
+  cond_name_short = "LRI"
+)
+```
+
+#### Overriding adjustment variables
+
+Suppose you have calculated rates and fractions and examined the underlying data and determined that even though a factor wasn't significant, it is close enough and you want to force the computations to adjust for the factor, you can use the `adjust_vars_override` argument. For example, suppose we want to force one of our previous examples to adjust on "age" and "location":
+
+```{r}
+graf <- get_rates_and_fractions(
+  dd,
+  sites = "S6",
+  catchments = "C1",
+  condition = "Lower respiratory infections",
+  cond_name_short = "LRI",
+  adjust_vars_override = c("age", "location")
+)
+```
+
+#### Finer control over condition specification
+
+Conditions can be specified by using a valid value from `valid_conditions(dd)` or through a [regular expression](https://en.wikipedia.org/wiki/Regular_expression) specifying ICD10 codes that define the condition, or both.
+
+If `causal_chain = TRUE`, the condition of ICD10 codes are checked against underlying, immediate, and morbid conditions. If `FALSE`, just the underlying is checked.
+
+For example, to get statistics for neural tube defects, we can specify a search for all cases with ICD10 codes that begin with "Q00", "Q01", or "Q05". To specify this as a regular expression, we can provide a string "^Q00|^Q01|^Q05". Here, "^" means "starts-with", and "|" means "or".
+
+```{r}
+ntd_cc <- get_rates_and_fractions(
+  dd,
+  icd10_regex = "^Q00|^Q01|^Q05",
+  cond_name = "NTD+CBD"
+)
+```
+
+If both `condition` and `icd10_regex` are provided, they are both searched for and all cases that meet either the condition or the ICD10 specification are included. So for example if we wanted to look at rates and fractions for cases where the underlying cause is either the condition "Congenital birth defects" or NTD, we can do the following:
+
+```{r}
+ntd_cbd_cc <- get_rates_and_fractions(
+  dd,
+  condition = "Congenital birth defects",
+  icd10_regex = "^Q00|^Q01|^Q05",
+  cond_name = "NTD+CBD"
+)
+```
+
+Note that you can also provide multiple conditions, in which case the calculation will be for cases that have *any* of the specified conditions:
+
+```{r}
+sep_uc <- get_rates_and_fractions(
+  dd,
+  sites = "S1",
+  causal_chain = FALSE,
+  condition = c("Sepsis", "Neonatal sepsis"),
+  cond_name = "Sepsis"
+)
+```
+
+#### Maternal conditions
+
+We can also calculate rates and fractions for maternal conditions. A list of valid maternal conditions can be obtained with the following:
+
+```{r}
+valid_maternal_conditions(dd)
+```
+
+Suppose we want to calculate statistics for "Maternal hypertension". To do this, we simply provide this as the `condition` and specify `maternal = TRUE`. This lets the function know to look in the maternal conditions. Note that in this case, the value of `causal_chain` does not apply and is ignored.
+
+```{r}
+htn_s1 <- get_rates_and_fractions(dd,
+  sites = "S1",
+  condition = "Maternal hypertension",
+  maternal = TRUE,
+  cond_name = "HTN"
+)
+```
+
+### Batch rates and fractions
+
+In the case that you would like to compute rates and fractions for a large number of site/catchment/condition/etc. combinations, you can use a function `batch_rates_and_fractions()`. This takes an input csv 
+
+```{r}
+params <- I("Site,Catchment,Age,Condition,UC_or_CC,DSS
+S6,C1,Stillbirth,Perinatal asphyxia/hypoxia,UC,Yes
+S6,C1,Stillbirth,Congenital birth defects,UC,Yes
+S6,C1,Stillbirth,Other neonatal disorders,UC,Yes
+")
+
+# a <- batch_rates_and_fractions(dd, params)
 ```

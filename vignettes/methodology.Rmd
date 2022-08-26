@@ -2,7 +2,7 @@
 title: "Methodology"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{methodology}
+  %\VignetteIndexEntry{Methodology}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,4 +14,26 @@ knitr::opts_chunk$set(
 )
 ```
 
-TODO
+## Child Health and Mortality Prevention Surveillance
+
+The Child Health and Mortality Prevention Surveillance (CHAMPS) Network collects accurate and comprehensive cause of death data for stillbirths and children under five years of age in 12 surveillance sites in seven countries throughout Sub-Saharan Africa and South Asia: Baliakandi and Faridpur, Bangladesh; Harar, Kersa and Haramaya, Ethiopia; Siaya and Kisumu, Kenya; Bamako, Mali; Manhiça and Quelimane, Mozambique; Bombali, Sierra Leone; and Soweto, South Africa. The CHAMPS site in Mozambique began enrolment in 2016; sites in South Africa, Kenya, Mali, and Bangladesh began in 2017;  and Sierra Leone and Ethiopia began in 2019. All sites had under-five mortality rates (U5MR) greater than 50 per 1,000 live-births at the time of site selection in 2015.
+
+## Demographic Surveillance System
+
+Most sites - except Sierra Leone, Quelimane in Mozambique, and Faridpur in Bangladesh - carried out mortality surveillance within a health and demographic surveillance system (DSS) which captures sociodemographic data and other major events such as births, deaths, pregnancies, and in- and out-migration episodes within a geographically defined area to estimate the size and structure of a population. DSS platforms vary in maturity throughout CHAMPS network and some were new during the study period.
+
+## [Cause of Death]
+
+All CHAMPS deaths, excluding stillbirths, whose families consented to minimally invasive tissue sampling (MITS) between 1st January 2017 and 31st December 2020, and were assigned a cause of death by a Determination of Cause of Death (DeCoDe) panel as of August 23, 2022 were included. Cases were determined to have died due to [cause] if they were assigned one of the following International Classification of Diseases, Revision 10 (ICD-10) codes: [list of ICD-10 codes]. [cause] was classified as either the underlying cause of death or as being anywhere in the causal chain (immediate, underlying, and/or comorbid causes). 
+
+## Cause-Specific Mortality Fractions
+
+Crude cause-specific mortality fractions (cCSMF) were calculated for each catchment and site as the proportion of deaths attributed to [cause] among all MITS deaths reviewed by the DeCoDe panels. To calculate adjusted cause-specific mortality fractions (aCSMF), factors hypothesized to affect selection (age of the child, sex of the child, location of death, season of death, and verbal autopsy [VA] cause of death) had to meet four a priori criteria for adjustment: (1) statistically significantly associated with MITS consent (p<0.10) by chi-square tests; (2) missing <20% data when comparing MITS and non-MITS deaths; (3) statistically significantly associated with [cause] as the cause of death (p<0.10) by chi-square tests; and (4) missing <20% data when comparing [cause] and non-[cause] deaths. If one or at most two (due to data limitations) met all four criteria they were selected for adjustment. CHAMPS deaths (non-MITS and MITS), MITS deaths, and deaths in the target population were stratified by the factors that met selection. Selection probabilities were calculated as the proportion of MITS deaths among all eligible deaths in the target population for each strata. Due to sparse data, if a stratum had zero [cause] deaths, it was combined with another stratum with the closest selection probability. Direct standardization was then performed. The target population for most sites was all eligible deaths ascertained in the DSS in each respective catchment area or site. However, for sites or catchments where DSS data were unavailable, the target population consists of all CHAMPS deaths regardless of MITS consent.
+
+## Cause-Specific Mortality Rates
+
+Crude and adjusted cause-specific mortality rates (cCSMR and aCSMR) were calculated as the product of the cCSMF or aCSMF and the all-cause U5MR, respectively. Where DSS data were available, the all-cause U5MR in the target population was calculated as the number of under-five deaths among all live-births. Where DSS data were unavailable, the all-cause U5MR in the target population was sourced from the Demographic and Health Surveys (DHS) Program; in which case, the all-cause U5MR may represent a larger geographic region than the catchment itself, and the year of data collection may not exactly coincide with that of CHAMPS. 
+
+Due to sparse data and better coverage properties, 90% Bayesian credible intervals (CrI) based on a non-informative prior distribution were calculated for all estimates. Analyses were performed in R 4.2.1 (R Core Team, Vienna, Austria). The CHAMPS protocol has been approved by ethics committees in all sites and at Emory University.
+
+

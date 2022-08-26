@@ -9,48 +9,8 @@
 #' @export
 rates_and_fractions_wide <- function(inputs, dat) {
 
-  # handle manual or lists of lists from purrr
-  if (length(inputs) == 1) {
-    inputs <- inputs[[1]]
-    if (length(inputs) != 6) stop("Inputs more than six")
-  } else if (length(inputs) != 6) {
-    stop("Inputs more than six")
-  }
 
-  # filter to age group
-  dat$ads <- filter(dat$ads, .data$age == inputs$Age)
-  dat$dss <- filter(dat$dss, .data$age == inputs$Age)
-
-  # causal chain input
-  if (inputs$UC_or_CC == "CC") {
-    ccp <- TRUE
-  } else if (inputs$UC_or_CC == "UC") {
-    ccp <- FALSE
-  } else {
-    stop("UC_or_CC not one of 'UC' or 'CC'")
-  }
-
-  # Expand semi-colon seperated vars
-  icatchments <- inputs$Catchment %>%
-    strsplit(";") %>%
-    unlist() %>%
-    trimws()
-
-  isites <- inputs$Site %>%
-    strsplit(";") %>%
-    unlist() %>%
-    trimws()
-
-  # Do calculations
-  dat_calc <- get_rates_and_fractions(dat,
-    sites = isites,
-    catchments = icatchments,
-    causal_chain = ccp, # FALSE if underlying
-    pval_cutoff = 0.1, # Fixed
-    pct_na_cutoff = 20, # Fixed
-    condition = inputs$Condition # Condition name
-  )
-  # not sure how ajdust vars is reported. May not need collapse
+  # not sure how adjust vars is reported. May not need collapse
   ivars <- dat_calc[[inputs$Site]][["adjust_vars"]]
   if (is.null(ivars)) {
     adjust_vars <- "None"
@@ -119,26 +79,18 @@ rates_and_fractions_wide <- function(inputs, dat) {
 
 #' @title Calculate rates and fraction of an input list of values.
 #' @description Allows user to provide an input table in CSV format
-#' to itteratively calculate results using get_rates_and_fractions()
+#' to iteratively calculate results using get_rates_and_fractions()
 #' with the output returned in one row per set of inputs.
-#' @param inputs_csv is a path to your file.
-#' @param dat_folder is a path for use with read_and_validate_data()
-#' @param start_year is the start_year argument passed to
-#' read_and_validate_data()
-#' @param end_year is the end_year argument passed to
-#' read_and_validate_data()
+#' @param x Processed CHAMPS dataset.
+#' @param inputs_csv Path to a csv file specifying each scenario to run.
 #' @export
 batch_rates_and_fractions <- function(
-  inputs_csv,
-  dat_folder,
-  start_year, end_year
+  x,
+  inputs_csv
 ) {
-  input_list <- read_csv(inputs_csv) %>%
+  input_list <- readr::read_csv(inputs_csv, show_col_types = FALSE) %>%
     purrr::transpose()
 
-  d <- read_and_validate_data(dat_folder) %>%
-    process_data(start_year = start_year, end_year = end_year)
-
-  out_df <- purrr::map_df(input_list, rates_and_fractions_wide, dat = d)
+  out_df <- purrr::map_df(input_list, rates_and_fractions_wide, dat = x)
   out_df
 }

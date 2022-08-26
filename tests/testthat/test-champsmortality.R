@@ -242,21 +242,21 @@ test_that("Package works", {
     tolerance = 4
   )
 
-  # repeat calculation functions
-  expect_equal(
-    rates_and_fractions_wide(input_list[[2]], dd),
-    comp$rates_and_fractions_wide,
-    tolerance = 4
-  )
+  # # repeat calculation functions
+  # expect_equal(
+  #   rates_and_fractions_wide(input_list[[2]], dd),
+  #   comp$rates_and_fractions_wide,
+  #   tolerance = 4
+  # )
 
-  expect_equal(
-    suppressMessages(batch_rates_and_fractions(
-      path_wide,
-      dat_folder,
-      start_year = 2017,
-      end_year = 2020
-    )),
-    comp$batch_rates_and_fractions,
-    tolerance = 4
-  )
+  # expect_equal(
+  #   suppressMessages(batch_rates_and_fractions(
+  #     path_wide,
+  #     dat_folder,
+  #     start_year = 2017,
+  #     end_year = 2020
+  #   )),
+  #   comp$batch_rates_and_fractions,
+  #   tolerance = 4
+  # )
 })

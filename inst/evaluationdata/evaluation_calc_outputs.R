@@ -28,7 +28,7 @@ dr$has_champs_group_malaria <- has_champs_group(d$ads, group =  "Malaria")
 # has_maternal_champs_group
 dr$has_maternal_champs_group_s <- has_maternal_champs_group(
   d$ads, group = "Sepsis")
-dr$has_meaternal_champs_group_m <- has_maternal_champs_group(
+dr$has_maternal_champs_group_m <- has_maternal_champs_group(
   d$ads, group =  "Malaria")
 
 # has_icd10
@@ -122,17 +122,18 @@ dr$table_adjust_decision <- table_adjust_decision(graf)
 ### Added functions for repeat calculations
 input_list <- read_csv("inst/testdata/inputs_wide.csv") |>
     purrr::transpose()
-# may need to check function uses subsets
-dr$rates_and_fractions_wide <- rates_and_fractions_wide(
-  input_list[[2]],
-  dat = dd)
 
-dr$batch_rates_and_fractions <- batch_rates_and_fractions(
-  "inst/testdata/inputs_wide.csv",
-  "inst/testdata",
-  start_year = 2017,
-  end_year = 2020
-  )
+# # may need to check function uses subsets
+# dr$rates_and_fractions_wide <- rates_and_fractions_wide(
+#   input_list[[2]],
+#   dat = dd)
+
+# dr$batch_rates_and_fractions <- batch_rates_and_fractions(
+#   "inst/testdata/inputs_wide.csv",
+#   "inst/testdata",
+#   start_year = 2017,
+#   end_year = 2020
+#   )
 
 
 ### Calculations
