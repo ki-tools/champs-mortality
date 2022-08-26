@@ -17,6 +17,22 @@ rates_and_fractions_wide <- function(inputs, dat) {
     stop("Inputs more than six")
   }
 
+  # Expand semi-colon seperated vars
+  icatchments <- inputs$Age %>%
+    strsplit(";") %>%
+    unlist() %>%
+    trimws()
+
+  icatchments <- inputs$Catchment %>%
+    strsplit(";") %>%
+    unlist() %>%
+    trimws()
+
+  isites <- inputs$Site %>%
+    strsplit(";") %>%
+    unlist() %>%
+    trimws()
+
   # filter to age group
   dat$ads <- filter(dat$ads, .data$age == inputs$Age)
   dat$dss <- filter(dat$dss, .data$age == inputs$Age)
@@ -29,17 +45,6 @@ rates_and_fractions_wide <- function(inputs, dat) {
   } else {
     stop("UC_or_CC not one of 'UC' or 'CC'")
   }
-
-  # Expand semi-colon seperated vars
-  icatchments <- inputs$Catchment %>%
-    strsplit(";") %>%
-    unlist() %>%
-    trimws()
-
-  isites <- inputs$Site %>%
-    strsplit(";") %>%
-    unlist() %>%
-    trimws()
 
   # Do calculations
   dat_calc <- get_rates_and_fractions(dat,
@@ -119,26 +124,18 @@ rates_and_fractions_wide <- function(inputs, dat) {
 
 #' @title Calculate rates and fraction of an input list of values.
 #' @description Allows user to provide an input table in CSV format
-#' to itteratively calculate results using get_rates_and_fractions()
+#' to iteratively calculate results using get_rates_and_fractions()
 #' with the output returned in one row per set of inputs.
-#' @param inputs_csv is a path to your file.
-#' @param dat_folder is a path for use with read_and_validate_data()
-#' @param start_year is the start_year argument passed to
-#' read_and_validate_data()
-#' @param end_year is the end_year argument passed to
-#' read_and_validate_data()
+#' @param x Processed CHAMPS dataset.
+#' @param inputs_csv Path to a csv file specifying each scenario to run.
 #' @export
 batch_rates_and_fractions <- function(
-  inputs_csv,
-  dat_folder,
-  start_year, end_year
+  x,
+  inputs_csv
 ) {
-  input_list <- read_csv(inputs_csv) %>%
+  input_list <- readr::read_csv(inputs_csv, show_col_types = FALSE) %>%
     purrr::transpose()
 
-  d <- read_and_validate_data(dat_folder) %>%
-    process_data(start_year = start_year, end_year = end_year)
-
-  out_df <- purrr::map_df(input_list, rates_and_fractions_wide, dat = d)
+  out_df <- purrr::map_df(input_list, rates_and_fractions_wide, dat = x)
   out_df
 }

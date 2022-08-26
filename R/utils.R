@@ -127,7 +127,7 @@ combine_levels <- function(x, level_definitions = NULL,
   if (is.null(level_definitions)) {
     out <- x
     warning("No updated levels defined.\
-         Using default levels from the input data.")
+          Using default levels from the input data.")
   } else {
     out <- level_definitions %>%
       purrr::map(~ tibble::as_tibble_col(.x, column_name = "level")) %>%

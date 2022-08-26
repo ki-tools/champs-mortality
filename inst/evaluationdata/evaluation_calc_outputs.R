@@ -28,7 +28,7 @@ dr$has_champs_group_malaria <- has_champs_group(d$ads, group =  "Malaria")
 # has_maternal_champs_group
 dr$has_maternal_champs_group_s <- has_maternal_champs_group(
   d$ads, group = "Sepsis")
-dr$has_meaternal_champs_group_m <- has_maternal_champs_group(
+dr$has_maternal_champs_group_m <- has_maternal_champs_group(
   d$ads, group =  "Malaria")
 
 # has_icd10
