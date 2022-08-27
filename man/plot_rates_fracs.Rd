@@ -4,12 +4,22 @@
 \alias{plot_rates_fracs}
 \title{Create a plot of rates or fractions}
 \usage{
-plot_rates_fracs(obj, type = "frac", plotly = TRUE)
+plot_rates_fracs(
+  obj,
+  type = "frac",
+  height = "100\%",
+  width = 800,
+  plotly = TRUE
+)
 }
 \arguments{
 \item{obj}{an object from \code{\link[=get_rates_and_fractions]{get_rates_and_fractions()}}}
 
 \item{type}{one of "frac" or "rate"}
+
+\item{height}{height of plot if using plotly}
+
+\item{width}{width of plot if using plotly}
 
 \item{plotly}{should the result be a plotly graph?}
 }

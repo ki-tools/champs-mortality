@@ -7,6 +7,8 @@ table_overview <- function(obj) {
     msg = cli::format_error("'obj' must come from get_rates_and_fractions()")
   )
 
+  per <- format(obj[[1]]$inputs$per, big.mark = ",")
+
   datr <- lapply(obj, function(x) x$rate) %>%
     dplyr::bind_rows()
   datf <- lapply(obj, function(x) x$frac) %>%
@@ -27,9 +29,11 @@ table_overview <- function(obj) {
       names_from = "var", values_from = c("allcauseMR", "interval")) %>%
     dplyr::select(-c("allcauseMR_aTU5MR"))
 
-  names(tmp1) <- c("Site", "Catchment", "ACTU5MR",
-    "cCSMR (per 10k)<br>(Bayesian CrI)", "aCSMR (per 10k)<br>(Bayesian CrI)")
-
+  names(tmp1) <- c("Site", "Catchment",
+    "All-Cause<br>Mortality Rate",
+    paste0("Crude CSMR (per ", per, ")<br>(Bayesian Credible Interval)"),
+    paste0("Adjusted CSMR (per ", per, ")<br>(Bayesian Credible Interval)")
+  )
 
   tmp2 <- datf %>%
     dplyr::mutate(interval = paste0(
@@ -38,12 +42,12 @@ table_overview <- function(obj) {
       round(.data$upper, 1), ")")) %>%
     dplyr::select(dplyr::all_of(
       c("site", "catchments", "var", "interval")
-     )) %>%
+    )) %>%
     tidyr::pivot_wider(id_cols = c("site", "catchments"),
       names_from = "var", values_from = c("interval"))
 
-  names(tmp2) <- c("Site", "Catchment", "cCSMF (%)<br>(Bayesian CrI)",
-    "aCSMF (%)<br>(Bayesian CrI)")
+  names(tmp2) <- c("Site", "Catchment", "Crude CSMF (%)<br>(Bayesian Credible Interval)",
+    "Adjusted CSMF (%)<br>(Bayesian Credible Interval)")
 
   adj_vars <- lapply(obj, function(x) dplyr::tibble(Site = x$site,
     adjust_vars = if (is.null(x$adjust_vars)) "none" else
