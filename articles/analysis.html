@@ -563,10 +563,11 @@
 <p>In the case that you would like to compute rates and fractions for a large number of site/catchment/condition/etc. combinations, you can use a function <code><a href="../reference/batch_rates_and_fractions.html">batch_rates_and_fractions()</a></code>. This takes an input csv such as the following:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">inputs_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".csv"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"site,catchment,age,condition,icd10_regex,causal_chain"</span>,</span>
-<span>  <span class="st">"S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE"</span>,</span>
-<span>  <span class="st">"S6,C1,Stillbirth,Congenital birth defects,,FALSE"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"site,catchment,age,condition,icd10_regex,causal_chain,maternal"</span>,</span>
+<span>    <span class="st">"S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE,FALSE"</span>,</span>
+<span>    <span class="st">"S6,C1,Stillbirth,Congenital birth defects,,FALSE,FALSE"</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  <span class="va">inputs_csv</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -586,7 +587,8 @@
 <span>    age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Neonate"</span>, <span class="st">"Infant"</span>, <span class="st">"Child"</span><span class="op">)</span>,</span>
 <span>    condition <span class="op">=</span> <span class="st">"Perinatal asphyxia/hypoxia"</span>,</span>
 <span>    icd10_regex <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>    causal_chain <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    causal_chain <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    maternal <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    site <span class="op">=</span> <span class="st">"S6"</span>,</span>
@@ -594,7 +596,8 @@
 <span>    age <span class="op">=</span> <span class="st">"Stillbirth"</span>,</span>
 <span>    condition <span class="op">=</span> <span class="st">"Congenital birth defects"</span>,</span>
 <span>    icd10_regex <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>    causal_chain <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>    causal_chain <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    maternal <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
