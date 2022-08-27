@@ -1,4 +1,4 @@
-﻿site,catchment,age,condition,icd10_regex,causal_chain
-S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE
-S6,C1,Stillbirth,Congenital birth defects,,FALSE
+﻿site,catchment,age,condition,icd10_regex,causal_chain,maternal
+S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE,FALSE
+S6,C1,Stillbirth,Congenital birth defects,,FALSE,FALSE
 

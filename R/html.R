@@ -45,8 +45,6 @@ index_page <- function(obj) {
   )
 }
 
-
-
 fac_adj_page <- function(obj) {
   tbl <- table_adjust_decision(obj)
 

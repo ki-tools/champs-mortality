@@ -175,62 +175,6 @@ test_that("Package works", {
     graf, comp$get_rates_and_fractions, tolerance = 4
   )
 
-  # TODO: works locally but not on github actions - investigate
-  #   Nothing changed in the code from previous commit where it worked
-  # # html tables on mft1 and cftb1
-  # expect_equal(
-  #   table_overview(graf), comp$table_overview, tolerance = 4
-  # )
-
-  tfssm <- table_factor_sig_stats(
-    mft1,
-    print_columns = c("MITS", "non-MITS+DSS-only"),
-    percent_digits = 1)
-
-  tfssc <- table_factor_sig_stats(
-    cftb1,
-    print_columns = c("MITS", "non-MITS+DSS-only"),
-    percent_digits = 1)
-
-  tad <- table_adjust_decision(graf)
-
-  expect_equal(
-    tfssm$`_spanners`,
-    comp$table_factor_sig_stats_mits$`_spanners`,
-    tolerance = 4
-  )
-
-  expect_equal(
-    tfssm$`_boxhead`,
-    comp$table_factor_sig_stats_mits$`_boxhead`,
-    tolerance = 4
-  )
-
-  expect_equal(
-    tfssc$`_spanners`,
-    comp$table_factor_sig_stats_cond$`_spanners`,
-    tolerance = 4
-  )
-
-  expect_equal(
-    tfssc$`_boxhead`,
-    comp$table_factor_sig_stats_cond$`_boxhead`,
-    tolerance = 4
-  )
-
-  expect_equal(
-    tad$`_spanners`,
-    comp$table_adjust_decision$`_spanners`,
-    tolerance = 4
-  )
-
-  # TODO: works locally but not on github actions - investigate
-  # expect_equal(
-  #   tad$`_boxhead`,
-  #   comp$table_adjust_decision$`_boxhead`,
-  #   tolerance = 4
-  # )
-
   # calculate interval
   expect_equal(
     get_interval(1 / 100, 1000, 95),
@@ -243,9 +187,9 @@ test_that("Package works", {
 
   expect_equal(bat1, comp$bat1)
 
-  inputs2 <- I("site,catchment,age,condition,icd10_regex,causal_chain
-S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE
-S6,C1,Stillbirth,Congenital birth defects,,FALSE
+  inputs2 <- I("site,catchment,age,condition,icd10_regex,causal_chain,maternal
+S6,C1;C2,Neonate;Infant;Child,Perinatal asphyxia/hypoxia,,TRUE,FALSE
+S6,C1,Stillbirth,Congenital birth defects,,FALSE,FALSE
 ")
 
   bat2 <- batch_rates_and_fractions(dd, inputs2)
@@ -257,7 +201,8 @@ S6,C1,Stillbirth,Congenital birth defects,,FALSE
       age = c("Neonate", "Infant", "Child"),
       condition = "Perinatal asphyxia/hypoxia",
       icd10_regex = NULL,
-      causal_chain = TRUE
+      causal_chain = TRUE,
+      maternal = FALSE
     ),
     list(
       site = "S6",
@@ -265,7 +210,8 @@ S6,C1,Stillbirth,Congenital birth defects,,FALSE
       age = "Stillbirth",
       condition = "Congenital birth defects",
       icd10_regex = NULL,
-      causal_chain = FALSE
+      causal_chain = FALSE,
+      maternal = FALSE
     )
   )
 
@@ -273,21 +219,11 @@ S6,C1,Stillbirth,Congenital birth defects,,FALSE
 
   expect_equal(bat2, bat3, tolerance = 4)
 
-  # # repeat calculation functions
-  # expect_equal(
-  #   rates_and_fractions_wide(input_list[[2]], dd),
-  #   comp$rates_and_fractions_wide,
-  #   tolerance = 4
-  # )
-
-  # expect_equal(
-  #   suppressMessages(batch_rates_and_fractions(
-  #     path_wide,
-  #     dat_folder,
-  #     start_year = 2017,
-  #     end_year = 2020
-  #   )),
-  #   comp$batch_rates_and_fractions,
-  #   tolerance = 4
-  # )
+  # make sure plotting functions aren't broken (not checking actual values)
+  expect_true({ plot_rates_fracs(graf, type = "rate", plotly = FALSE); TRUE})
+  expect_true({ plot_rates_fracs(graf, type = "frac", plotly = TRUE); TRUE})
+  expect_true({ table_overview(graf); TRUE})
+  expect_true({ table_adjust_decision(graf); TRUE})
+  expect_true({ table_factor_sig_stats(graf, which = "mits"); TRUE})
+  expect_true({ table_factor_sig_stats(graf, which = "cond"); TRUE})
 })

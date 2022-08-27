@@ -1,6 +1,8 @@
 #' Build pretty table of factor significance and level counts
-#' @param tbl output from mits_factor_tables() or
-#' cond_factor_tables() for one site.
+#' @param obj output from `get_rates_and_fractions()` or
+#' `batch_get_rates_and_fractions()` for one site.
+#' @param which one of "mits" or "cond" to specify which adjustment statistics
+#' to display
 #' @param print_columns specific columns from the nested tibbles in the table
 #' column to print. Defaults to "MITS" and "non-MITS+DSS-only". "DSS-only" and
 #' "non-MITS" are the other two columns that can be printed.
@@ -8,10 +10,94 @@
 #' Defaults to 1.
 #' @export
 table_factor_sig_stats <- function(
-  tbl,
+  obj,
+  which = c("mits", "cond"),
   print_columns = c("MITS", "non-MITS+DSS-only"),
   percent_digits = 1
 ) {
+  which <- match.arg(which)
+
+  if (inherits(obj, "rate_frac_site")) {
+    obj <- list(obj)
+    class(obj) <- c("list", "rate_frac_multi_site")
+  }
+
+  check_multi_site_output(obj, "rates_and_fractions_table()")
+
+  tbls <- lapply(obj, function(x) {
+    get_factor_sig_table(x, which, print_columns, percent_digits)
+  })
+
+  has_non_dss <- any(sapply(obj, function(x) !x$can_use_dss))
+
+  content <- htmltools::tagList(
+    tags$head(
+      tags$style(htmltools::HTML("
+body {
+  font-family: 'Poppins', sans-serif;
+  padding: 0px;
+  margin: 0px;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
+.table-container > * {
+  margin-left: 5px;
+  margin-right: 5px;
+  overflow-x:unset;
+  overflow-y:unset;
+}
+[class^='gt_'], [class*=' gt_']{
+  white-space: nowrap;
+}
+.footer {
+  color: #777777;
+  padding-top: 7px;
+  padding-left: 4px;
+}
+.footer > a {
+  color: black;
+}
+.footer > a:visited {
+  color: black;
+}
+"))),
+    tags$div(class = "table-container",
+      tbls
+    ),
+    tags$div(class = "footer",
+      tags$span(
+        ifelse(has_non_dss,
+          "* includes catchments with no DSS data \u2014",
+          ""
+        )
+      ),
+      tags$span("see"),
+      tags$a(
+        "here",
+        href = "",
+        target = "_blank",
+      ),
+      tags$span(
+        "for details about the methology"
+      )
+    )
+  )
+
+  htmltools::browsable(content)
+}
+
+get_factor_sig_table <- function(
+  x,
+  which,
+  print_columns,
+  percent_digits
+) {
+  tbl <- x[[which]]
+
   assertthat::assert_that(
     attributes(tbl)$cm_class[1] == "factor_table",
     msg = cli::format_error(paste0("'tbl' must come from ",
@@ -20,16 +106,8 @@ table_factor_sig_stats <- function(
   )
 
   spacer <- ""
-  if ("dss" %in% names(tbl)) {
-    dss_str <- ifelse(tbl$dss[1],
-      "<span style='color: gray;'>(DSS)</span>",
-      "<span style='color: gray;'>(non-DSS)</span>"
-    )
-    if (!tbl$dss[1])
-      spacer <- "<br>"
-  } else {
-    dss_str <- ""
-  }
+  dss_str <- ifelse(x$can_use_dss, "", "*")
+  spacer <- ifelse(x$can_use_dss, "", "<br>")
 
   if (!any(grepl("DSS", names(tbl$table[[1]]))) &&
     all(c("MITS", "non-MITS") %in% names(tbl$table[[1]]))) {

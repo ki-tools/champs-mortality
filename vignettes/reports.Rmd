@@ -14,4 +14,69 @@ knitr::opts_chunk$set(
 )
 ```
 
-TODO
+This package comes with a few utility functions for generating specific tables and figures, as well as a function that will generate a static website showing the results for a given condition across all sites.
+
+If you are looking at results for individual scenarios, or desire more customized outputs, it is best to extract the data from the output and build tables or figures to your liking.
+
+Before illustrating these methods, we will get environment set up using the synthetic datasets.
+
+```{r, message=FALSE}
+library(champsmortality)
+
+data_dir <- file.path(system.file(package = "champsmortality"), "testdata")
+d <- read_and_validate_data(data_dir)
+dd <- process_data(d, start_year = 2017, end_year = 2020)
+
+graf <- get_rates_and_fractions(
+  dd,
+  condition = "Lower respiratory infections",
+  cond_name_short = "LRI"
+)
+```
+
+Here we are looking at rates and fractions for "Lower respiratory infections" for all sites.
+
+All of the functions described in this article can take as input the object returned either from `get_rates_and_fractions()` or `batch_rates_and_fractions()`. When using the latter, however, note that the figure and table methods described in this article only make sense if each scenario is looking at the same condition. In fact, the only thing that should vary from one result to another is which site/catchment combinations are being looked at.
+
+## Plotting rates and fractions
+
+We can plot crude and adjusted rates (`type = "rate"`) and fractions (`type = "frac"`) along with their credible intervals for our set of results with the following:
+
+```{r}
+plot_rates_fracs(graf, type = "rate", plotly = FALSE)
+plot_rates_fracs(graf, type = "frac", plotly = FALSE)
+```
+
+Note here that we are setting `plotly=FALSE`. The default is `TRUE` in which case an interactive version of the visualization will be made available.
+
+## Overview table
+
+To get a nice-looking overview table that shows the rates and fractions for each scenario along with other useful information, we can do the following:
+
+```{r}
+table_overview(graf)
+```
+
+## Factor adjustment decision table
+
+To view the p-values and % missing statistics that went into the decision on what factors should be adjusted for in each scenario, we can use `table_adjust_decision()`:
+
+```{r}
+table_adjust_decision(graf)
+```
+
+## Factor adjustment underlying statistics
+
+We can go into even further detail by looking at the underlying statistics from which the adjustment deciions were being made with the function `table_factor_sig_stats()`, which can be called for either "mits" or "cond".
+
+```{r}
+table_factor_sig_stats(graf, which = "mits")
+```
+
+```{r}
+table_factor_sig_stats(graf, which = "cond")
+```
+
+## Static summary app
+
+Coming...

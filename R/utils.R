@@ -190,3 +190,13 @@ check_cond_switch <- function(., group, rgx, causal_chain, maternal) {
     check_cond(., group, rgx, causal_chain)
   }
 }
+
+check_multi_site_output <- function(x, fn) {
+  if (!inherits(x, "rate_frac_multi_site")) {
+    cls <- sapply(x, function(a) inherits(a, "rate_frac_site"))
+
+    if (!all(cls))
+      stop("Input to ", fn, " must come from ",
+        "get_rates_and_fractions() or batch_get_rates_and_fractions()")
+  }
+}

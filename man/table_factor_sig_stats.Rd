@@ -5,14 +5,18 @@
 \title{Build pretty table of factor significance and level counts}
 \usage{
 table_factor_sig_stats(
-  tbl,
+  obj,
+  which = c("mits", "cond"),
   print_columns = c("MITS", "non-MITS+DSS-only"),
   percent_digits = 1
 )
 }
 \arguments{
-\item{tbl}{output from mits_factor_tables() or
-cond_factor_tables() for one site.}
+\item{obj}{output from \code{get_rates_and_fractions()} or
+\code{batch_get_rates_and_fractions()} for one site.}
+
+\item{which}{one of "mits" or "cond" to specify which adjustment statistics
+to display}
 
 \item{print_columns}{specific columns from the nested tibbles in the table
 column to print. Defaults to "MITS" and "non-MITS+DSS-only". "DSS-only" and
