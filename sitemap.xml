@@ -34,6 +34,9 @@
     <loc>https://ki-tools.github.io/champs-mortality/reference/batch_rates_and_fractions.html</loc>
   </url>
   <url>
+    <loc>https://ki-tools.github.io/champs-mortality/reference/champs_web_report.html</loc>
+  </url>
+  <url>
     <loc>https://ki-tools.github.io/champs-mortality/reference/combine_decision_tables.html</loc>
   </url>
   <url>
@@ -68,9 +71,6 @@
   </url>
   <url>
     <loc>https://ki-tools.github.io/champs-mortality/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ki-tools.github.io/champs-mortality/reference/make_outputs.html</loc>
   </url>
   <url>
     <loc>https://ki-tools.github.io/champs-mortality/reference/mits_factor_tables.html</loc>
