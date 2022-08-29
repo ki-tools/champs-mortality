@@ -4,7 +4,7 @@ tags <- htmltools::tags
 #' @param obj an object that comes from [get_rates_and_fractions()]
 #' @param path path to where the output html will be stored
 #' @export
-make_outputs <- function(obj, path = tempfile()) {
+champs_web_report <- function(obj, path = tempfile()) {
   assertthat::assert_that(inherits(obj, "rate_frac_multi_site"),
     msg = cli::format_error("'obj' must come from get_rates_and_fractions()")
   )
@@ -21,7 +21,12 @@ make_outputs <- function(obj, path = tempfile()) {
   message("Condition selection tables")
   write_page(stats_page(obj, mits = FALSE), path)
 
-  path
+  index <- file.path(path, "index.html")
+
+  if (interactive())
+    utils::browseURL(index)
+
+  invisible()
 }
 
 write_page <- function(obj, path) {
@@ -60,20 +65,8 @@ fac_adj_page <- function(obj) {
 
 stats_page <- function(obj, mits = TRUE) {
   prefix <- ifelse(mits, "mits", "cond")
-  tmp <- lapply(obj, function(x) {
-        x[[prefix]] %>%
-          dplyr::mutate(dss = x$can_use_dss)}) %>%
-      dplyr::bind_rows() %>%
-      dplyr::arrange_at(c("site", "catchment"))
 
-  tbls <- split(tmp, paste(tmp$site, tmp$catchment)) %>%
-    lapply(table_factor_sig_stats)
-
-  content <- htmltools::tagList(
-    tags$div(class = "table-container",
-      tbls
-    )
-  )
+  content <- table_factor_sig_stats(obj, which = prefix)
 
   name <- paste0("stats_", prefix)
   make_page(name,
@@ -211,7 +204,7 @@ a {
       tags$div(id = "notice",
         "These results are produced using the ",
         tags$a(href = "https://github.com/ki-tools/champs-mortality", "champs-mortality"),
-        " R package, which is under active development. The statistics provided have not been fully validated and should not yet be treated as reliable."
+        " R package."
       ),
       tags$div(class = "header",
         tags$div(class = "title",

@@ -5,8 +5,11 @@
 #' @param pmissing the percent missing allowed for a factor to be considered
 #' in the decision table. Cells are colored using this value.
 #' @param percent_digits the number of digits to round the percent missing to.
+#' @importFrom gt cell_borders cell_fill cell_text cells_body
+#' cells_column_spanners cols_label cols_merge fmt_number gt html md
+#' opt_align_table_header opt_css px tab_footnote tab_header tab_options
+#' tab_style text_transform
 #' @export
-# broken on line 28. Commented out for now.
 table_adjust_decision <- function(
   obj,
   alpha_value = 0.1,
@@ -58,9 +61,11 @@ table_adjust_decision <- function(
   levels(tbl$factor) <- tmp
 
   if (! "dss" %in% names(tbl)) {
+    has_non_dss <- FALSE
     tbl$dss <- ""
   } else {
-    tbl$dss <- ifelse(tbl$dss, "(DSS)", "(non-DSS)")
+    has_non_dss <- TRUE
+    tbl$dss <- ifelse(tbl$dss, "", "*")
   }
 
   # build the wide table that has location by row and
@@ -108,7 +113,7 @@ table_adjust_decision <- function(
     stringr::str_split_fixed("\\.", n = 3) %>%
     .[, 2] %>%
     unique()
-  
+
   # start base table with initial formatting.
   gt_table <- dat_wide %>%
     gt::gt() %>%
@@ -246,6 +251,13 @@ table_adjust_decision <- function(
     fill_names <- fill_names[-1]
   }
 
+  if (has_non_dss) {
+    gt_table <- gt_table %>%
+      gt::tab_footnote(footnote = gt::html(
+        "* includes catchments with no DSS data \u2014 see <a href='https://ki-tools.github.io/champs-mortality/articles/methodology.html' target='_blank'>here</a> for details about the methodology",
+      ))
+  }
+
   # final formatting of the table for output.
   gt_table %>%
     gt::tab_style(
@@ -259,7 +271,7 @@ table_adjust_decision <- function(
       title = gt::md(paste0("__Potential adjustment factors__")),
       subtitle = gt::html(glue::glue(
         '<span style="background-color:{full_color};color:White">Blue: </span>\
-                 <em>&nbsp; P-value < 0.1 & Missing < 20%</em> <b>,</b>
+                <em>&nbsp; P-value < 0.1 & Missing < 20%</em> <b>,</b>
                 <span style="background-color:{partial_color};color:White"> Light blue: </span>\
                 <em>&nbsp; P-value < 0.1</em>'
       ))

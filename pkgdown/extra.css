@@ -1,0 +1,9 @@
+.row>main {
+  max-width: 65rem !important;
+}
+
+@media (min-width: 1700px) {
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+      max-width:1620px !important;
+  }
+}
