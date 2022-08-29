@@ -400,7 +400,7 @@ CH00403,Yellow Fever virus,Yellow Fever virus,YEFV_1
 CH00404,Yersinia spp.,Yersinia spp.,YERS_1
 CH00405,Zika,Zika,ZIKA_1
 CH00406,Percent infected red blood cells,Percent infected RBCs,CH00406
-CH00407,Bangladesh,People’s Republic of Bangladesh,BD
+CH00407,Bangladesh,Peopleï¿½s Republic of Bangladesh,BD
 CH00408,Ethiopia,Federal Democratic Republic of Ethiopia,ET
 CH00409,Kenya,Republic of Kenya,KE
 CH00410,Mali,Republic of Mali,ML
@@ -540,7 +540,7 @@ CH00543,Bamako,NA,ML-BKO
 CH00544,Kayes,NA,ML-1
 CH00545,Koulikoro,NA,ML-2
 CH00546,Sikasso,NA,ML-3
-CH00547,Ségou,NA,ML-4
+CH00547,Sï¿½gou,NA,ML-4
 CH00548,Mopti,NA,ML-5
 CH00549,Tombouctou,NA,ML-6
 CH00550,Gao,NA,ML-7
@@ -553,7 +553,7 @@ CH00556,Inhambane,NA,MZ-I
 CH00557,Maputo,NA,MZ-L
 CH00558,Nampula,NA,MZ-N
 CH00559,Cabo Delgado,NA,MZ-P
-CH00560,Zambézia,NA,MZ-Q
+CH00560,Zambï¿½zia,NA,MZ-Q
 CH00561,Sofala,NA,MZ-S
 CH00562,Tete,NA,MZ-T
 CH00563,Western Area (Freetown),NA,SL-W
@@ -2055,7 +2055,7 @@ CH02075,QUELIMANE DISTRICT: Urban 4: CS de  Chabeco,QUELIMANE DISTRICT: Urban 4:
 CH02076,QUELIMANE DISTRICT: Urban 2: CS  de  Incidua,QUELIMANE DISTRICT: Urban 2: CS  de  Incidua,CH02076
 CH02077,QUELIMANE DISTRICT: Urban 5: CS  de Micajune,QUELIMANE DISTRICT: Urban 5: CS  de Micajune,CH02077
 CH02078,QUELIMANE DISTRICT: Maquival: CS de Inhangulue,QUELIMANE DISTRICT: Maquival: CS de Inhangulue,CH02078
-CH02079,QUELIMANE DISTRICT: Maquival: C.S. Estação Malanha,QUELIMANE DISTRICT: Maquival: C.S. Estação Malanha,CH02079
+CH02079,QUELIMANE DISTRICT: Maquival: C.S. Estaï¿½ï¿½o Malanha,QUELIMANE DISTRICT: Maquival: C.S. Estaï¿½ï¿½o Malanha,CH02079
 CH02080,QUELIMANE DISTRICT: Maquival: CS de Ionge,QUELIMANE DISTRICT: Maquival: CS de Ionge,CH02080
 CH02081,QUELIMANE DISTRICT: Maquival: CS de Maquival-Rio,QUELIMANE DISTRICT: Maquival: CS de Maquival-Rio,CH02081
 CH02082,QUELIMANE DISTRICT: Maquival: CS de Maquival Sede,QUELIMANE DISTRICT: Maquival: CS de Maquival Sede,CH02082
@@ -2105,9 +2105,9 @@ CH02125,MORRUMBALA: Morrumbala Sede: HD Morrumbala,MORRUMBALA: Morrumbala Sede: 
 CH02126,CHINDE: Chinde - Sede: CS Chinde - Sede,CHINDE: Chinde - Sede: CS Chinde - Sede,CH02126
 CH02127,CHINDE: Micaune: CS Madal,CHINDE: Micaune: CS Madal,CH02127
 CH02128,CHINDE: Micaune: CS Micaune,CHINDE: Micaune: CS Micaune,CH02128
-CH02129,ALTO MOLÓCUÈ: Alto Molocue: CS Alto Molócuè,ALTO MOLÓCUÈ: Alto Molocue: CS Alto Molócuè,CH02129
-CH02130,GILÉ: Gile Sede: HD de Gile,GILÉ: Gile Sede: HD de Gile,CH02130
-CH02131,GURUÉ:  Gurue Sede: CS Gurue,GURUÉ:  Gurue Sede: CS Gurue,CH02131
+CH02129,ALTO MOLï¿½CUï¿½: Alto Molocue: CS Alto Molï¿½cuï¿½,ALTO MOLï¿½CUï¿½: Alto Molocue: CS Alto Molï¿½cuï¿½,CH02129
+CH02130,GILï¿½: Gile Sede: HD de Gile,GILï¿½: Gile Sede: HD de Gile,CH02130
+CH02131,GURUï¿½:  Gurue Sede: CS Gurue,GURUï¿½:  Gurue Sede: CS Gurue,CH02131
 CH02132,ILE: Ile Sede: CS de Ile-Sede,ILE: Ile Sede: CS de Ile-Sede,CH02132
 CH02133,LUGELA: Lugela Sede: CS Lugela-Sede,LUGELA: Lugela Sede: CS Lugela-Sede,CH02133
 CH02134,MAGANJA DA COSTA: Maganja da Costa: CS Maganja da Costa,MAGANJA DA COSTA: Maganja da Costa: CS Maganja da Costa,CH02134
@@ -2123,21 +2123,21 @@ CH02143,CHBAH (Chris Hani Baragwanath Academic Hospital) Mortuary,CHBAH (Chris H
 CH02144,FPS (Forensic Pathology Services) Diepkloof,FPS (Forensic Pathology Services) Diepkloof,CH02144
 CH02145,BMH (Bheki Mlangeni Hospital) Mortuary,BMH (Bheki Mlangeni Hospital) Mortuary,CH02145
 CH02146,RMH (Rahima Moosa Hospital) Mortuary,RMH (Rahima Moosa Hospital) Mortuary,CH02146
-CH02147,Braamfischerville Ext 12 Undertakers’ Mortuary,Braamfischerville Ext 12 Undertakers’ Mortuary,CH02147
-CH02148,Emdeni Undertakers’ Mortuary,Emdeni Undertakers’ Mortuary,CH02148
-CH02149,Meadowlands Zone 4 Undertakers’ Mortuary,Meadowlands Zone 4 Undertakers’ Mortuary,CH02149
-CH02150,Meadowlands Zone 5 Undertakers’ Mortuary,Meadowlands Zone 5 Undertakers’ Mortuary,CH02150
-CH02151,Mapetla Undertakers’ Mortuary,Mapetla Undertakers’ Mortuary,CH02151
-CH02152,Mofolo North Undertakers’ Mortuary,Mofolo North Undertakers’ Mortuary,CH02152
-CH02153,Phiri/Senaone Undertakers’ Mortuary,Phiri/Senaone Undertakers’ Mortuary,CH02153
-CH02154,Thulani Undertakers’ Mortuary,Thulani Undertakers’ Mortuary,CH02154
-CH02155,Thembelilhle Undertakers’ Mortuary,Thembelilhle Undertakers’ Mortuary,CH02155
-CH02156,Lenasia South Undertakers’ Mortuary,Lenasia South Undertakers’ Mortuary,CH02156
+CH02147,Braamfischerville Ext 12 Undertakersï¿½ Mortuary,Braamfischerville Ext 12 Undertakersï¿½ Mortuary,CH02147
+CH02148,Emdeni Undertakersï¿½ Mortuary,Emdeni Undertakersï¿½ Mortuary,CH02148
+CH02149,Meadowlands Zone 4 Undertakersï¿½ Mortuary,Meadowlands Zone 4 Undertakersï¿½ Mortuary,CH02149
+CH02150,Meadowlands Zone 5 Undertakersï¿½ Mortuary,Meadowlands Zone 5 Undertakersï¿½ Mortuary,CH02150
+CH02151,Mapetla Undertakersï¿½ Mortuary,Mapetla Undertakersï¿½ Mortuary,CH02151
+CH02152,Mofolo North Undertakersï¿½ Mortuary,Mofolo North Undertakersï¿½ Mortuary,CH02152
+CH02153,Phiri/Senaone Undertakersï¿½ Mortuary,Phiri/Senaone Undertakersï¿½ Mortuary,CH02153
+CH02154,Thulani Undertakersï¿½ Mortuary,Thulani Undertakersï¿½ Mortuary,CH02154
+CH02155,Thembelilhle Undertakersï¿½ Mortuary,Thembelilhle Undertakersï¿½ Mortuary,CH02155
+CH02156,Lenasia South Undertakersï¿½ Mortuary,Lenasia South Undertakersï¿½ Mortuary,CH02156
 CH02157,CHB Hospital - Respiratory and Meningeal Pathogens Research Unit (RMPRU),CHB Hospital - Respiratory and Meningeal Pathogens Research Unit (RMPRU),CH02157
 CH02158,CVD-Mali  Laboratory of Microbiology Molecular Biology,CVD-Mali  Laboratory of Microbiology Molecular Biology,CH02158
 CH02159,KEMRI CGHR_Kenya,KEMRI CGHR_Kenya,CH02159
 CH02160,Makeni Regional Hospital - MRH Lab,Makeni Regional Hospital - MRH Lab,CH02160
-CH02161,CISM  (Manhiça Health Research Centre),CISM  (Manhiça Health Research Centre),CH02161
+CH02161,CISM  (Manhiï¿½a Health Research Centre),CISM  (Manhiï¿½a Health Research Centre),CH02161
 CH02162,Avenue Hospital,Avenue Hospital,CH02162
 CH02163,SPN Serotype 1,SPN Serotype 1,S01_1
 CH02164,SPN Serotype 2,SPN Serotype 2,S02_1
@@ -2682,7 +2682,7 @@ CH02700,Kebele16,Kebele16,CH02700
 CH02701,Kebele17,Kebele17,CH02701
 CH02702,Kebele18,Kebele18,CH02702
 CH02703,Centre Iranien,Centre Iranien,CH02702
-CH02704,Maternité de Hamdallaye,Maternité de Hamdallaye,CH02703
+CH02704,Maternitï¿½ de Hamdallaye,Maternitï¿½ de Hamdallaye,CH02703
 CH02705,Djicoroni,Djicoroni,CH02704
 CH02706,Banconi,Banconi,CH02705
 CH02707,Bamako City (excluding the DSS),Bamako City (excluding the DSS),CH02706
@@ -2690,7 +2690,7 @@ CH02708,Senegal,Republic of Senegal,SN
 CH02709,Guinea-Bissau,Republic of Guinea-Bissau,GW
 CH02710,Guinea,Republic of Guinea,GN
 CH02711,Liberia,Republic of Liberia,LR
-CH02712,Cote d'Ivoire,Republic of Côte d'Ivoire,CI
+CH02712,Cote d'Ivoire,Republic of Cï¿½te d'Ivoire,CI
 CH02713,Ghana,Republic of Ghana,GH
 CH02714,Togo,Togolese Republic,TG
 CH02715,Benin,Republic of Benin,BJ
@@ -3023,7 +3023,7 @@ CH03042,mPADs,mPADs,CH03042
 CH03043,Color-based filter test,Color-based filter test,CH03043
 CH03044,Radical-7,Radical-7,CH03044
 CH03045,ToucHb,ToucHb,CH03045
-CH03046, Co-oximeter, Co-oximeter,CH03046
+CH03046,ï¿½Co-oximeter,ï¿½Co-oximeter,CH03046
 CH03047,Noninvasive point of care,Noninvasive point of care,CH03047
 CH03048,Not Applicable (NA),NA,CH03048
 CH03049,Overweight,Overweight,CH03049
@@ -3138,3 +3138,4 @@ CH03157,Severely stunted* confirm with all available data,Severely stunted* conf
 CH03158,Macrocephaly* confirm with all available data,Macrocephaly* confirm with all available data,CH03158
 CH03159,Severe microcephaly* confirm with all available data,Severe microcephaly* confirm with all available data,CH03159
 CH03160,Severe malnutrition* confirm with all available data,Severe malnutrition* confirm with all available data,CH03160
+
