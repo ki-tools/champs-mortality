@@ -33,12 +33,6 @@ table_factor_sig_stats <- function(
   content <- htmltools::tagList(
     tags$head(
       tags$style(htmltools::HTML("
-body {
-  font-family: 'Poppins', sans-serif;
-  padding: 0px;
-  margin: 0px;
-}
-
 .table-container {
   display: flex;
   flex-direction: row;
@@ -68,26 +62,31 @@ body {
     tags$div(class = "table-container",
       tbls
     ),
-    tags$div(class = "footer",
-      tags$span(
-        ifelse(has_non_dss,
-          "* includes catchments with no DSS data \u2014",
-          ""
-        )
-      ),
-      tags$span("see"),
-      tags$a(
-        "here",
-        href = "",
-        target = "_blank",
-      ),
-      tags$span(
-        "for details about the methology"
-      )
-    )
+    get_footer(has_non_dss)
   )
 
   htmltools::browsable(content)
+}
+
+get_footer <- function(has_non_dss) {
+  tags$div(class = "footer",
+    tags$span(
+      ifelse(has_non_dss,
+        "* includes catchments with no DSS data \u2014",
+        ""
+      )
+    ),
+    tags$span("see"),
+    tags$a(
+      "here",
+      href = "https://ki-tools.github.io/champs-mortality/articles/methodology.html",
+      target = "_blank",
+    ),
+    tags$span(
+      "for details about the methology"
+    )
+  )
+
 }
 
 get_factor_sig_table <- function(

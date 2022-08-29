@@ -149,4 +149,4 @@ dr$get_interval <- get_interval(1 / 100, 1000, 95)
 saveRDS(dr, paste0("inst/evaluationdata/evaluation_results_v", version, ".rds"))
 
 # This functions writes files
-# make_outputs(graf)
+# champs_web_report(graf)

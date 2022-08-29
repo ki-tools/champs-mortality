@@ -219,6 +219,10 @@ S6,C1,Stillbirth,Congenital birth defects,,FALSE,FALSE
 
   expect_equal(bat2, bat3, tolerance = 4)
 
+  expect_true({ rates_and_fractions_table(graf); TRUE })
+
+  expect_true({ champs_web_report(graf); TRUE })
+
   # make sure plotting functions aren't broken (not checking actual values)
   expect_true({ plot_rates_fracs(graf, type = "rate", plotly = FALSE); TRUE})
   expect_true({ plot_rates_fracs(graf, type = "frac", plotly = TRUE); TRUE})
