@@ -51,9 +51,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="reading-and-validating-data">Reading and Validating Data<a class="anchor" aria-label="anchor" href="#reading-and-validating-data"></a></h2>
       
-      
+      <p class="section-desc"></p><p>Functions for setting up, reading, and validating the datasets necessary for calculations with this package.</p>
 
       
     </div><div id="" class="section level2">
@@ -63,95 +63,87 @@
 
       <dl><dt>
           
-          <code><a href="batch_rates_and_fractions.html">batch_rates_and_fractions()</a></code> 
-        </dt>
-        <dd>Calculate rates and fraction of an input list of values.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="champs_web_report.html">champs_web_report()</a></code> 
-        </dt>
-        <dd>Create html outputs for a given mortality rate/fraction analysis</dd>
-      </dl><dl><dt>
-          
-          <code><a href="combine_decision_tables.html">combine_decision_tables()</a></code> 
-        </dt>
-        <dd>Combine mits_factor_tables() and cond_factor_tables() output to one
-decision dataframe</dd>
-      </dl><dl><dt>
-          
-          <code><a href="cond_factor_tables.html">cond_factor_tables()</a></code> 
-        </dt>
-        <dd>Compute counts of MITS cases and non-cases for a given condition by factors</dd>
-      </dl><dl><dt>
-          
           <code><a href="create_dataset_directory.html">create_dataset_directory()</a></code> 
         </dt>
         <dd>Create a dataset directory with the shell of a config.yaml file</dd>
       </dl><dl><dt>
           
-          <code><a href="get_interval.html">get_interval()</a></code> 
+          <code><a href="read_and_validate_data.html">read_and_validate_data()</a></code> 
         </dt>
-        <dd>Get a credible interval for a fraction</dd>
+        <dd>Read and validate data files from a specified directory</dd>
       </dl><dl><dt>
           
-          <code><a href="get_rate_frac_data.html">get_rate_frac_data()</a></code> 
+          <code><a href="process_data.html">process_data()</a></code> 
         </dt>
-        <dd>Get data necessary to compute adjusted mortality fractions and rates</dd>
+        <dd>Process a set of CHAMPS data files</dd>
+      </dl></div><div class="section level2">
+      <h2 id="seeing-what-s-in-the-data">Seeing What’s In the Data<a class="anchor" aria-label="anchor" href="#seeing-what-s-in-the-data"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions for seeing what kind of.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="valid_conditions.html">valid_conditions()</a></code> 
+        </dt>
+        <dd>Get a list of valid conditions found in the causal chain</dd>
       </dl><dl><dt>
+          
+          <code><a href="valid_maternal_conditions.html">valid_maternal_conditions()</a></code> 
+        </dt>
+        <dd>Get a list of valid maternal conditions</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_site_info.html">get_site_info()</a></code> 
+        </dt>
+        <dd>Get a list of sites and catchments with data start and end years</dd>
+      </dl></div><div class="section level2">
+      <h2 id="getting-rates-and-fractions">Getting Rates and Fractions<a class="anchor" aria-label="anchor" href="#getting-rates-and-fractions"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions for calculating and viewing crude and adjusted rates and fractions.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="get_rates_and_fractions.html">get_rates_and_fractions()</a></code> 
         </dt>
         <dd>Get rate and fraction data</dd>
       </dl><dl><dt>
           
-          <code><a href="get_site_info.html">get_site_info()</a></code> 
+          <code><a href="batch_rates_and_fractions.html">batch_rates_and_fractions()</a></code> 
         </dt>
-        <dd>Get a list of sites and catchments with data start and end years</dd>
-      </dl><dl><dt>
-          
-          <code><a href="has_champs_group.html">has_champs_group()</a></code> 
-        </dt>
-        <dd>Check to see if a CHAMPS group is in the causal chain</dd>
-      </dl><dl><dt>
-          
-          <code><a href="has_icd10.html">has_icd10()</a></code> 
-        </dt>
-        <dd>Check to see if an ICD10 regular expression is in the causal chain</dd>
-      </dl><dl><dt>
-          
-          <code><a href="has_maternal_champs_group.html">has_maternal_champs_group()</a></code> 
-        </dt>
-        <dd>Check to see if a CHAMPS group is in the main maternal cause</dd>
-      </dl><dl><dt>
-          
-          <code><a href="has_maternal_icd10.html">has_maternal_icd10()</a></code> 
-        </dt>
-        <dd>Check to see if an ICD10 regular expression is in the main maternal cause</dd>
-      </dl><dl><dt>
-          
-          <code><a href="mits_factor_tables.html">mits_factor_tables()</a></code> 
-        </dt>
-        <dd>Compute counts of MITS and non-MITS+DSS-only deaths by factors</dd>
-      </dl><dl><dt>
-          
-          <code><a href="plot_rates_fracs.html">plot_rates_fracs()</a></code> 
-        </dt>
-        <dd>Create a plot of rates or fractions</dd>
-      </dl><dl><dt>
-          
-          <code><a href="process_data.html">process_data()</a></code> 
-        </dt>
-        <dd>Process a set of CHAMPS data files</dd>
+        <dd>Calculate rates and fraction of an input list of values.</dd>
       </dl><dl><dt>
           
           <code><a href="rates_fracs_to_df.html">rates_fracs_to_df()</a></code> 
         </dt>
         <dd>Wrapper for get_rates_and_fractions()</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      <h2 id="creating-outputs">Creating Outputs<a class="anchor" aria-label="anchor" href="#creating-outputs"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions to create tables and figures of rate and fraction calculation results.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
-          <code><a href="read_and_validate_data.html">read_and_validate_data()</a></code> 
+          <code><a href="table_rates_fracs.html">table_rates_fracs()</a></code> 
         </dt>
-        <dd>Read and validate data files from a specified directory</dd>
+        <dd>Create an overview table of results</dd>
       </dl><dl><dt>
           
           <code><a href="table_adjust_decision.html">table_adjust_decision()</a></code> 
@@ -164,21 +156,17 @@ decision dataframe</dd>
         <dd>Build pretty table of factor significance and level counts</dd>
       </dl><dl><dt>
           
-          <code><a href="table_rates_fracs.html">table_rates_fracs()</a></code> 
+          <code><a href="plot_rates_fracs.html">plot_rates_fracs()</a></code> 
         </dt>
-        <dd>Create an overview table of results</dd>
+        <dd>Create a plot of rates or fractions</dd>
       </dl><dl><dt>
           
-          <code><a href="valid_conditions.html">valid_conditions()</a></code> 
+          <code><a href="champs_web_report.html">champs_web_report()</a></code> 
         </dt>
-        <dd>Get a list of valid conditions found in the causal chain</dd>
-      </dl><dl><dt>
-          
-          <code><a href="valid_maternal_conditions.html">valid_maternal_conditions()</a></code> 
-        </dt>
-        <dd>Get a list of valid maternal conditions</dd>
+        <dd>Create html outputs for a given mortality rate/fraction analysis</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

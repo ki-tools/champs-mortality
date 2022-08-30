@@ -156,8 +156,6 @@
 <li>
 <strong>Calc Dod</strong>: Date of death</li>
 <li>
-<strong>Caretakers Religion</strong>: Caretaker’s religion</li>
-<li>
 <strong>VA Cause1 Iva</strong>: Verbal Autopsy Inter-VA Cause 1 - ICD10 code (used to classify trauma or infection)</li>
 </ul>
 <p>Note that the column names should be as listed here, or a matching <a href="https://en.wikipedia.org/wiki/Snake_case" class="external-link">snake case</a> (e.g. Calc Dod -&gt; calc_dod) version. If they do not match what is expected, the code in this package will return an error.</p>
@@ -165,15 +163,11 @@
 <div class="section level2">
 <h2 id="maternal-registry-dataset">Maternal Registry Dataset<a class="anchor" aria-label="anchor" href="#maternal-registry-dataset"></a>
 </h2>
-<p>The maternal registry dataset also does not come with the package and is available from LabKey under the name “2.”Maternal Registry Forms table”. It is mainly used to link the mother’s education to the cases in the analytics dataset.</p>
+<p>The maternal registry dataset also does not come with the package and is available from LabKey under the name “Maternal Registry Forms table”. It is mainly used to link the mother’s education to the cases in the analytics dataset.</p>
 <p>The following variables are used by this package:</p>
 <ul>
 <li>
 <strong>Mort Id</strong>: CHAMPS ID</li>
-<li>
-<strong>Mat 0010</strong>: estimated maternal age</li>
-<li>
-<strong>Mat 0011</strong>: known maternal age</li>
 <li>
 <strong>Mat 0013</strong>: maternal education (coded with CHAMPS codes)</li>
 </ul>
@@ -194,7 +188,7 @@
 <div class="section level2">
 <h2 id="dss">DSS<a class="anchor" aria-label="anchor" href="#dss"></a>
 </h2>
-<p>In addition to data about specific CHAMPS cases, the methods in the package also need information about non-CHAMPS child mortality in CHAMPS catchments. Data from the Demographic Surveillance Sites (DSS) has been tabulated by CHAMPS in a way that it can be easily used by this package. This data, although not individual-level data, must be obtained directly from CHAMPS.</p>
+<p>In addition to data about specific CHAMPS cases, the methods in the package also need information about non-CHAMPS child mortality in CHAMPS catchments. Data from the Demographic Surveillance Sites (DSS) has been tabulated by CHAMPS in a way that it can be easily used by this package. These data, although not individual-level data, must be obtained directly from CHAMPS.</p>
 <p>The aggregate data contains tabulations of deaths from each site broken down by all of the other factors (“sex”, “education”, “season”, “location”, “va”).</p>
 <ul>
 <li>
@@ -215,6 +209,7 @@
 <strong>period_end_year</strong>: period end year</li>
 </ul>
 <p>Note: Due to the nature of this dataset being aggregated by age crossed with other factors, we can at most adjust for one factor or age + one other factor. Also since the statistics are aggregated across the whole time period (multiple years), we currently cannot compute statistics broken down by year.</p>
+<p>DSS is a dataset available as a downloadable file from LabKey.</p>
 </div>
 <div class="section level2">
 <h2 id="dhs">DHS<a class="anchor" aria-label="anchor" href="#dhs"></a>
@@ -256,7 +251,7 @@
 <li>
 <strong>live_births</strong>: number of live births according to DSS</li>
 </ul>
-<p>This data, although not individual-level data, must be obtained directly from CHAMPS.</p>
+<p>This dataset, although it does not contain individual-level data, is not shared publicly and is available as a downloadable file from LabKey.</p>
 </div>
 <div class="section level2">
 <h2 id="season-lookup">Season Lookup<a class="anchor" aria-label="anchor" href="#season-lookup"></a>
@@ -285,6 +280,7 @@
 <li>
 <strong>catchment_id</strong>: catchment ID - a three digit string padded with zeros, e.g. “001”</li>
 </ul>
+<p>Previous article: <a href="getting-started.html">Getting Started</a>. Next article: <a href="analysis.html">Computing Adjusted Rates and Fractions</a>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

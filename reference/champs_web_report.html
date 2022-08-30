@@ -58,17 +58,22 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">champs_web_report</span><span class="op">(</span><span class="va">obj</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">champs_web_report</span><span class="op">(</span><span class="va">obj</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>, title <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>obj</dt>
-<dd><p>an object that comes from <code><a href="get_rates_and_fractions.html">get_rates_and_fractions()</a></code></p></dd>
+<dd><p>An object that comes from <code><a href="get_rates_and_fractions.html">get_rates_and_fractions()</a></code>.</p></dd>
 
 
 <dt>path</dt>
-<dd><p>path to where the output html will be stored</p></dd>
+<dd><p>Path to where the output html will be stored.</p></dd>
+
+
+<dt>title</dt>
+<dd><p>Title of the page to place in the header. If not provided,
+the condition name found in the provided <code>obj</code> will be used</p></dd>
 
 </dl></div>
 

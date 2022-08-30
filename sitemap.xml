@@ -37,19 +37,7 @@
     <loc>https://ki-tools.github.io/champs-mortality/reference/champs_web_report.html</loc>
   </url>
   <url>
-    <loc>https://ki-tools.github.io/champs-mortality/reference/combine_decision_tables.html</loc>
-  </url>
-  <url>
-    <loc>https://ki-tools.github.io/champs-mortality/reference/cond_factor_tables.html</loc>
-  </url>
-  <url>
     <loc>https://ki-tools.github.io/champs-mortality/reference/create_dataset_directory.html</loc>
-  </url>
-  <url>
-    <loc>https://ki-tools.github.io/champs-mortality/reference/get_interval.html</loc>
-  </url>
-  <url>
-    <loc>https://ki-tools.github.io/champs-mortality/reference/get_rate_frac_data.html</loc>
   </url>
   <url>
     <loc>https://ki-tools.github.io/champs-mortality/reference/get_rates_and_fractions.html</loc>
@@ -58,22 +46,7 @@
     <loc>https://ki-tools.github.io/champs-mortality/reference/get_site_info.html</loc>
   </url>
   <url>
-    <loc>https://ki-tools.github.io/champs-mortality/reference/has_champs_group.html</loc>
-  </url>
-  <url>
-    <loc>https://ki-tools.github.io/champs-mortality/reference/has_icd10.html</loc>
-  </url>
-  <url>
-    <loc>https://ki-tools.github.io/champs-mortality/reference/has_maternal_champs_group.html</loc>
-  </url>
-  <url>
-    <loc>https://ki-tools.github.io/champs-mortality/reference/has_maternal_icd10.html</loc>
-  </url>
-  <url>
     <loc>https://ki-tools.github.io/champs-mortality/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ki-tools.github.io/champs-mortality/reference/mits_factor_tables.html</loc>
   </url>
   <url>
     <loc>https://ki-tools.github.io/champs-mortality/reference/plot_rates_fracs.html</loc>

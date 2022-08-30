@@ -92,7 +92,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ki-tools.github.io/champs-mortality/">champsmortality</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"champsmortality"</span><span class="op">)</span>, <span class="st">"testdata"</span><span class="op">)</span></span></code></pre></div>
-<p>Note that this directory fully populated with synthetic data and comes with the package for the purposes of documentation and examples. This package is most useful with real data obtainable from <a href="https://champshealth.org/data/" class="external-link">CHAMPS</a>. <strong>As such, keep in mind that the results of the examples in this documentation not meaningful.</strong></p>
+<p>Note that this directory fully populated with synthetic data and comes with the package for the purposes of documentation and examples. This package is most useful with real data obtainable from <a href="https://champshealth.org/data/" class="external-link">CHAMPS</a>. <strong>As such, keep in mind that the results of the examples in this documentation are not meaningful.</strong></p>
 </div>
 <div class="section level2">
 <h2 id="read-the-data">Read the data<a class="anchor" aria-label="anchor" href="#read-the-data"></a>
@@ -113,7 +113,7 @@
 <div class="section level2">
 <h2 id="process-the-data">Process the data<a class="anchor" aria-label="anchor" href="#process-the-data"></a>
 </h2>
-<p>A function, <code><a href="../reference/process_data.html">process_data()</a></code> takes the data that has been read and joins it together to create a dataset ready analysis.</p>
+<p>A function, <code><a href="../reference/process_data.html">process_data()</a></code> takes the data that has been read and joins it together to create a dataset ready for analysis.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/process_data.html">process_data</a></span><span class="op">(</span><span class="va">d</span>, start_year <span class="op">=</span> <span class="fl">2017</span>, end_year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -246,8 +246,17 @@
 <span><span class="co">#&gt; Processing site:  S7</span></span>
 <span><span class="co">#&gt;   using adjustment variable: location</span></span>
 <span><span class="co">#&gt;   other significant factors not adjusted for: va</span></span></code></pre></div>
-<p>This applies the calculations to each site independently. For each site, data for all catchments are combined. We will show how to get results for individual catchments later. The main arguments are the input data, <code>dd</code> and the condition. Here we specify the optional parameter <code>cond_name_short</code> to be “LRI”. This is used in some of the tabular and graphical outputs.</p>
+<p>This applies the calculations to each site independently. For each site, data for all catchments are combined. To get results for individual catchments, you can call the function with specific catchments using the <code>catchments</code> argument. The main arguments are the input data, <code>dd</code> and the condition. Here we specify the optional parameter <code>cond_name_short</code> to be “LRI”. This is used in some of the tabular and graphical outputs.</p>
 <p>As seen in the printed output, some sites have no adjustment variables while others are adjusted on location. For site “S7”, both “location” and “va” were significant but we can only adjust for one variable or two variables if one of them is “age”, so just “location” is chosen.</p>
+<p>Note: In the previous article’s discussion of the DSS data, we highlighted that because the data was collected in a way that crosses age with all of the other factors, but does not cross the other factors with each other, we can only adjust for one factor or age + another factor. If there are more than two candidate factors for adjustment, precedence is given to factors according to the following ranking:</p>
+<ol style="list-style-type: decimal">
+<li>age</li>
+<li>season</li>
+<li>location</li>
+<li>va</li>
+<li>sex</li>
+<li>education</li>
+</ol>
 <div class="section level3">
 <h3 id="examining-the-output">Examining the Output<a class="anchor" aria-label="anchor" href="#examining-the-output"></a>
 </h3>
@@ -322,7 +331,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   n_na &lt;dbl&gt;, n_tot &lt;dbl&gt;, pct_na &lt;dbl&gt;, and abbreviated variable names</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ¹​start_year, ²​end_year</span></span></span></code></pre></div>
 <p>Each row contains information that went into the calculation of whether the factor is statistically significantly associated with MITS consent.</p>
-<p>The <code>table</code> element contains . For example, for the factor <code>age</code>:</p>
+<p>The <code>table</code> variable contains nested tables with additional details. For example, see the table associated with the factor <code>age</code>:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graf</span><span class="op">$</span><span class="va">S6</span><span class="op">$</span><span class="va">mits</span><span class="op">$</span><span class="va">table</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
@@ -333,7 +342,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Infant         9         81</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Child          4         66</span></span></code></pre></div>
 <p>We see counts of MITS vs. non-MITS broken down by age. A chi-square test is carried out on this table to determine a p-value. If a factor is significant and has sufficiently non-missing data (default is 20%), it is a candidate for adjustment.</p>
-<p>The <code>pop_mits</code> output reports statistics of number of stillbirths and under-5 deaths plus stillbirths for each catchment in the site.</p>
+<p>The <code>pop_mits</code> element reports statistics of number of stillbirths and under-5 deaths plus stillbirths for each catchment in the site.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graf</span><span class="op">$</span><span class="va">S6</span><span class="op">$</span><span class="va">pop_mits</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
@@ -652,6 +661,11 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   cCSMR &lt;dbl&gt;, cCSMR_LL &lt;dbl&gt;, cCSMR_UL &lt;dbl&gt;, aCSMR &lt;dbl&gt;, aCSMR_LL &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   aCSMR_UL &lt;dbl&gt;, adj_factors &lt;chr&gt;, and abbreviated variable names</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ¹​catchments, ²​condition, ³​cond_name_short, ⁴​dss_only, ⁵​cCSMF_LL, ⁶​cCSMF_UL</span></span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="visual-and-tabular-outputs">Visual and Tabular Outputs<a class="anchor" aria-label="anchor" href="#visual-and-tabular-outputs"></a>
+</h2>
+<p>The <a href="reports.html">next article</a> provides examples functions available in this package for creating nicely-formatted tables and figures of the outputs we have learned to create in this article.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
