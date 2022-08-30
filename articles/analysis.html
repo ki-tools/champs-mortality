@@ -56,7 +56,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/tidyverse/tidytemplate/" aria-label="github">
+  <a class="external-link nav-link" href="https://github.com/ki-tools/champs-mortality/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -76,7 +76,7 @@
       <img src="" class="logo" alt=""><h1>Computing Adjusted Rates and Fractions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tidytemplate/blob/HEAD/vignettes/analysis.Rmd" class="external-link"><code>vignettes/analysis.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ki-tools/champs-mortality/blob/HEAD/vignettes/analysis.Rmd" class="external-link"><code>vignettes/analysis.Rmd</code></a></small>
       <div class="d-none name"><code>analysis.Rmd</code></div>
     </div>
 
@@ -611,10 +611,10 @@
 <div class="section level2">
 <h2 id="postprocessing">Postprocessing<a class="anchor" aria-label="anchor" href="#postprocessing"></a>
 </h2>
-<p>After we have processed several scenarios, it can be useful to conslidate the output into a simple table with one row per scenario and all of the relevant statistics. This can be done with a function <code><a href="../reference/rates_and_fractions_table.html">rates_and_fractions_table()</a></code>.</p>
+<p>After we have processed several scenarios, it can be useful to conslidate the output into a simple table with one row per scenario and all of the relevant statistics. This can be done with a function <code><a href="../reference/rates_fracs_to_df.html">rates_fracs_to_df()</a></code>.</p>
 <p>For example, to turn our previous batch processing result into a table, we can do the following</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rates_and_fractions_table.html">rates_and_fractions_table</a></span><span class="op">(</span><span class="va">bat1</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rates_fracs_to_df.html">rates_fracs_to_df</a></span><span class="op">(</span><span class="va">bat1</span><span class="op">)</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 2</span></span>
 <span><span class="co">#&gt; Columns: 21</span></span>
@@ -643,7 +643,7 @@
 <p>For example, in our first example of this article, we calculated LRI statistics for every site and catchment and stored the result in an object named <code>graf</code>.</p>
 <p>We can consolidate this output with the following:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/rates_and_fractions_table.html">rates_and_fractions_table</a></span><span class="op">(</span><span class="va">graf</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rates_fracs_to_df.html">rates_fracs_to_df</a></span><span class="op">(</span><span class="va">graf</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 21</span></span></span>
 <span><span class="co">#&gt;   site  catch…¹ age   condi…² cond_…³ dss_o…⁴ DeCoDe     n cCSMF cCSMF…⁵ cCSMF…⁶</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
