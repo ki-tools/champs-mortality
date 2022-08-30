@@ -38,6 +38,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat
-BugReports: https://github.com/tidyverse/tidytemplate/issues
+BugReports: https://github.com/ki-tools/champs-mortality/issues
 URL: https://ki-tools.github.io/champs-mortality/
 VignetteBuilder: knitr
