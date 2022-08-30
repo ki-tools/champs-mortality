@@ -6,7 +6,7 @@
 \usage{
 plot_rates_fracs(
   obj,
-  type = "frac",
+  which = "frac",
   height = "100\%",
   width = 800,
   plotly = TRUE
@@ -15,7 +15,7 @@ plot_rates_fracs(
 \arguments{
 \item{obj}{an object from \code{\link[=get_rates_and_fractions]{get_rates_and_fractions()}}}
 
-\item{type}{one of "frac" or "rate"}
+\item{which}{one of "frac" or "rate"}
 
 \item{height}{height of plot if using plotly}
 

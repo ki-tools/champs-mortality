@@ -355,12 +355,12 @@ A drawback of the batch processing approach is that we do not quite have full co
 
 ## Postprocessing
 
-After we have processed several scenarios, it can be useful to conslidate the output into a simple table with one row per scenario and all of the relevant statistics. This can be done with a function `rates_and_fractions_table()`.
+After we have processed several scenarios, it can be useful to conslidate the output into a simple table with one row per scenario and all of the relevant statistics. This can be done with a function `rates_fracs_to_df()`.
 
 For example, to turn our previous batch processing result into a table, we can do the following
 
 ```{r}
-tbl <- rates_and_fractions_table(bat1)
+tbl <- rates_fracs_to_df(bat1)
 dplyr::glimpse(tbl)
 ```
 
@@ -371,7 +371,7 @@ For example, in our first example of this article, we calculated LRI statistics 
 We can consolidate this output with the following:
 
 ```{r}
-rates_and_fractions_table(graf)
+rates_fracs_to_df(graf)
 ```
 
 

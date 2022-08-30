@@ -4,14 +4,14 @@
 #' @param dat A list of outputs from either get_rates_and_fractions() or
 #' `batch_rates_and_fractions()`.
 #' @export
-rates_and_fractions_table <- function(dat) {
+rates_fracs_to_df <- function(dat) {
 
   if (inherits(dat, "rate_frac_site")) {
     dat <- list(dat)
     class(dat) <- c("list", "rate_frac_multi_site")
   }
 
-  check_multi_site_output(dat, "rates_and_fractions_table()")
+  check_multi_site_output(dat, "rates_fracs_to_df()")
 
   collapse_vec <- function(x) {
     ifelse(is.null(x), "None", paste(x, collapse = ","))

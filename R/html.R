@@ -26,7 +26,7 @@ champs_web_report <- function(obj, path = tempfile()) {
   if (interactive())
     utils::browseURL(index)
 
-  invisible()
+  invisible(path)
 }
 
 write_page <- function(obj, path) {
@@ -43,7 +43,7 @@ index_page <- function(obj) {
         tags$div(p1),
         tags$div(p2)
       ),
-      tags$div(table_overview(obj))
+      tags$div(table_rates_fracs(obj))
     ),
     condition = obj[[1]]$condition,
     causal_chain = obj[[1]]$causal_chain

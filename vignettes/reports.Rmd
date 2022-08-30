@@ -40,11 +40,11 @@ All of the functions described in this article can take as input the object retu
 
 ## Plotting rates and fractions
 
-We can plot crude and adjusted rates (`type = "rate"`) and fractions (`type = "frac"`) along with their credible intervals for our set of results with the following:
+We can plot crude and adjusted rates (`which = "rate"`) and fractions (`which = "frac"`) along with their credible intervals for our set of results with the following:
 
 ```{r}
-plot_rates_fracs(graf, type = "rate", plotly = FALSE)
-plot_rates_fracs(graf, type = "frac", plotly = FALSE)
+plot_rates_fracs(graf, which = "rate", plotly = FALSE)
+plot_rates_fracs(graf, which = "frac", plotly = FALSE)
 ```
 
 Note here that we are setting `plotly=FALSE`. The default is `TRUE` in which case an interactive version of the visualization will be made available.
@@ -54,7 +54,7 @@ Note here that we are setting `plotly=FALSE`. The default is `TRUE` in which cas
 To get a nice-looking overview table that shows the rates and fractions for each scenario along with other useful information, we can do the following:
 
 ```{r}
-table_overview(graf)
+table_rates_fracs(graf)
 ```
 
 ## Factor adjustment decision table

@@ -22,7 +22,7 @@ table_factor_sig_stats <- function(
     class(obj) <- c("list", "rate_frac_multi_site")
   }
 
-  check_multi_site_output(obj, "rates_and_fractions_table()")
+  check_multi_site_output(obj, "rates_fracs_to_df()")
 
   tbls <- lapply(obj, function(x) {
     get_factor_sig_table(x, which, print_columns, percent_digits)
