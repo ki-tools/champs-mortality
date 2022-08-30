@@ -79,6 +79,16 @@ table_factor_sig_stats(graf, which = "mits")
 table_factor_sig_stats(graf, which = "cond")
 ```
 
-## Static summary app
+## Static summary web page
 
-Coming...
+A function has been provided with this package that will put all of these outputs together into a static summary web page. This can be done with:
+
+```r
+champs_web_report(graf)
+```
+
+The main page output will look something like this:
+
+![](webpage_example.png)
+
+The page contains tabs that can be navigated to for the additional detail behind the calculations.

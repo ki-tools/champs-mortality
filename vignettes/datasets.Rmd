@@ -67,7 +67,7 @@ Note that the column names should be as listed here, or a matching [snake case](
 
 ## Maternal Registry Dataset
 
-The maternal registry dataset also does not come with the package and is available from LabKey under the name "2.	"Maternal Registry Forms table". It is mainly used to link the mother's education to the cases in the analytics dataset.
+The maternal registry dataset also does not come with the package and is available from LabKey under the name "Maternal Registry Forms table". It is mainly used to link the mother's education to the cases in the analytics dataset.
 
 The following variables are used by this package:
 
@@ -84,7 +84,7 @@ The previous two datasets have some variables that are coded as CHAMPS codes, wh
 
 ## DSS
 
-In addition to data about specific CHAMPS cases, the methods in the package also need information about non-CHAMPS child mortality in CHAMPS catchments. Data from the Demographic Surveillance Sites (DSS) has been tabulated by CHAMPS in a way that it can be easily used by this package. This data, although not individual-level data, must be obtained directly from CHAMPS.
+In addition to data about specific CHAMPS cases, the methods in the package also need information about non-CHAMPS child mortality in CHAMPS catchments. Data from the Demographic Surveillance Sites (DSS) has been tabulated by CHAMPS in a way that it can be easily used by this package. These data, although not individual-level data, must be obtained directly from CHAMPS.
 
 The aggregate data contains tabulations of deaths from each site broken down by all of the other factors ("sex", "education", "season", "location", "va").
 

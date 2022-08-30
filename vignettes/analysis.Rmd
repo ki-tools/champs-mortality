@@ -28,7 +28,7 @@ library(champsmortality)
 data_dir <- file.path(system.file(package = "champsmortality"), "testdata")
 ```
 
-Note that this directory fully populated with synthetic data and comes with the package for the purposes of documentation and examples. This package is most useful with real data obtainable from [CHAMPS](https://champshealth.org/data/). **As such, keep in mind that the results of the examples in this documentation not meaningful.**
+Note that this directory fully populated with synthetic data and comes with the package for the purposes of documentation and examples. This package is most useful with real data obtainable from [CHAMPS](https://champshealth.org/data/). **As such, keep in mind that the results of the examples in this documentation are not meaningful.**
 
 ## Read the data
 
@@ -42,7 +42,7 @@ The validation ensures that all of the variables required to perform the calcula
 
 ## Process the data
 
-A function, `process_data()` takes the data that has been read and joins it together to create a dataset ready analysis.
+A function, `process_data()` takes the data that has been read and joins it together to create a dataset ready for analysis.
 ```{r}
 dd <- process_data(d, start_year = 2017, end_year = 2020)
 ```
@@ -124,7 +124,7 @@ graf$S6$mits
 
 Each row contains information that went into the calculation of whether the factor is statistically significantly associated with MITS consent.
 
-The `table` element contains . For example, for the factor `age`:
+The `table` variable contains nested tables with additional details. For example, see the table associated with the factor `age`:
 
 ```{r}
 graf$S6$mits$table[[1]]
@@ -132,7 +132,7 @@ graf$S6$mits$table[[1]]
 
 We see counts of MITS vs. non-MITS broken down by age. A chi-square test is carried out on this table to determine a p-value. If a factor is significant and has sufficiently non-missing data (default is 20%), it is a candidate for adjustment.
 
-The `pop_mits` output reports statistics of number of stillbirths and under-5 deaths plus stillbirths for each catchment in the site.
+The `pop_mits` element reports statistics of number of stillbirths and under-5 deaths plus stillbirths for each catchment in the site.
 
 ```{r}
 graf$S6$pop_mits
