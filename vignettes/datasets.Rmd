@@ -61,20 +61,17 @@ There are many variables in the dataset but only the following are used by this 
 - **MITS Flag**: Was MITS procedure completed? (0/1)
 - **M00060**: Was this case DeCoDed? (0/1)
 - **Calc Dod**: Date of death
-- **Caretakers Religion**: Caretaker's religion
 - **VA Cause1 Iva**: Verbal Autopsy Inter-VA Cause 1 - ICD10 code (used to classify trauma or infection)
 
 Note that the column names should be as listed here, or a matching [snake case](https://en.wikipedia.org/wiki/Snake_case) (e.g. Calc Dod -> calc_dod) version. If they do not match what is expected, the code in this package will return an error.
 
 ## Maternal Registry Dataset
 
-The maternal registry dataset also does not come with the package and is available from LabKey under the name "2.	"Maternal Registry Forms table". It is mainly used to link the mother's education to the cases in the analytics dataset.
+The maternal registry dataset also does not come with the package and is available from LabKey under the name "Maternal Registry Forms table". It is mainly used to link the mother's education to the cases in the analytics dataset.
 
 The following variables are used by this package:
 
 - **Mort Id**: CHAMPS ID
-- **Mat 0010**: estimated maternal age
-- **Mat 0011**: known maternal age
 - **Mat 0013**: maternal education (coded with CHAMPS codes)
 
 ## Champs Vocabulary
@@ -87,7 +84,7 @@ The previous two datasets have some variables that are coded as CHAMPS codes, wh
 
 ## DSS
 
-In addition to data about specific CHAMPS cases, the methods in the package also need information about non-CHAMPS child mortality in CHAMPS catchments. Data from the Demographic Surveillance Sites (DSS) has been tabulated by CHAMPS in a way that it can be easily used by this package. This data, although not individual-level data, must be obtained directly from CHAMPS.
+In addition to data about specific CHAMPS cases, the methods in the package also need information about non-CHAMPS child mortality in CHAMPS catchments. Data from the Demographic Surveillance Sites (DSS) has been tabulated by CHAMPS in a way that it can be easily used by this package. These data, although not individual-level data, must be obtained directly from CHAMPS.
 
 The aggregate data contains tabulations of deaths from each site broken down by all of the other factors ("sex", "education", "season", "location", "va").
 
@@ -101,6 +98,8 @@ The aggregate data contains tabulations of deaths from each site broken down by 
 - **period_end_year**: period end year
 
 Note: Due to the nature of this dataset being aggregated by age crossed with other factors, we can at most adjust for one factor or age + one other factor. Also since the statistics are aggregated across the whole time period (multiple years), we currently cannot compute statistics broken down by year.
+
+DSS is a dataset available as a downloadable file from LabKey.
 
 ## DHS
 
@@ -129,7 +128,7 @@ The total number of live births is required in the mortality rate and fraction c
 - **year**: year
 - **live_births**: number of live births according to DSS
 
-This data, although not individual-level data, must be obtained directly from CHAMPS.
+This dataset, although it does not contain individual-level data, is not shared publicly and is available as a downloadable file from LabKey.
 
 ## Season Lookup
 
@@ -148,4 +147,4 @@ Catchments in the analytics dataset are coded with an identifier. This lookup ta
 - **catchment**: catchment name
 - **catchment_id**: catchment ID - a three digit string padded with zeros, e.g. "001"
 
-
+Previous article: [Getting Started](getting-started.html). Next article: [Computing Adjusted Rates and Fractions](analysis.html).

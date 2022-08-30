@@ -4,12 +4,15 @@
 \alias{champs_web_report}
 \title{Create html outputs for a given mortality rate/fraction analysis}
 \usage{
-champs_web_report(obj, path = tempfile())
+champs_web_report(obj, path = tempfile(), title = NULL)
 }
 \arguments{
-\item{obj}{an object that comes from \code{\link[=get_rates_and_fractions]{get_rates_and_fractions()}}}
+\item{obj}{An object that comes from \code{\link[=get_rates_and_fractions]{get_rates_and_fractions()}}.}
 
-\item{path}{path to where the output html will be stored}
+\item{path}{Path to where the output html will be stored.}
+
+\item{title}{Title of the page to place in the header. If not provided,
+the condition name found in the provided \code{obj} will be used}
 }
 \description{
 Create html outputs for a given mortality rate/fraction analysis

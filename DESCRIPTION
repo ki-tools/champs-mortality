@@ -19,7 +19,7 @@ Imports:
     ggplot2,
     ggthemes,
     glue,
-    gt,
+    gt (>= 0.7.0),
     htmltools,
     lubridate,
     plotly,

@@ -9,6 +9,7 @@
 #' cells_column_spanners cols_label cols_merge fmt_number gt html md
 #' opt_align_table_header opt_css px tab_footnote tab_header tab_options
 #' tab_style text_transform
+#' @importFrom dplyr contains
 #' @export
 table_adjust_decision <- function(
   obj,
@@ -143,26 +144,26 @@ table_adjust_decision <- function(
     # variable groupings.
     gt::tab_spanner(
       label = "Age",
-      columns = contains("Age")
+      columns = dplyr::contains("Age")
       ) |>
     gt::tab_spanner(
       label = "Sex",
-      columns = contains("Sex")
+      columns = dplyr::contains("Sex")
     ) |> gt::tab_spanner(
       label = "Education",
-      columns = contains("Education")
+      columns = dplyr::contains("Education")
       ) |>
     gt::tab_spanner(
       label = "Season",
-      columns = contains("Season") 
+      columns = dplyr::contains("Season") 
     ) |>
     gt::tab_spanner(
       label = "Location",
-      columns = contains("Location", ignore.case = FALSE)
+      columns = dplyr::contains("Location", ignore.case = FALSE)
     ) |>
     gt::tab_spanner(
       label = "VA CoD",
-      columns = contains("VA CoD")
+      columns = dplyr::contains("VA CoD")
     )
 
   # since missing columns and p-value columns are the same name with the
@@ -298,6 +299,7 @@ table_adjust_decision <- function(
 #' @param tables_dat a named list object with a table
 #' from mits_factor_tables() and a table from cond_factor_tables().
 #' The names assigned to each table will be used in naming the table columns.
+#' @noRd
 combine_decision_tables <- function(tables_dat) {
   append_names <- names(tables_dat)
 

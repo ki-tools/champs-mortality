@@ -10,7 +10,7 @@
 #' @importFrom dplyr relocate group_by_at full_join n
 #' @importFrom purrr map2 map_dbl
 #' @importFrom tidyr pivot_longer pivot_wider nest
-#' @export
+#' @noRd
 mits_factor_tables <- function(
   x, sites = NULL, catchments = NULL, factor_groups = NULL, ctch_info = NULL
 ) {
@@ -286,7 +286,7 @@ mits_factor_tables <- function(
 #' FALSE, the underlying cause is searched
 #' @param ctch_info An object that tracks information about catchments in the data.
 #' This is used internally and should be ignored by users.
-#' @export
+#' @noRd
 cond_factor_tables <- function(
   x, sites = NULL, catchments = NULL,
   factor_groups = NULL,
