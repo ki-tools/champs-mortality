@@ -2,12 +2,9 @@
 
 export(batch_rates_and_fractions)
 export(champs_web_report)
-export(cond_factor_tables)
 export(create_dataset_directory)
-export(get_interval)
 export(get_rates_and_fractions)
 export(get_site_info)
-export(mits_factor_tables)
 export(plot_rates_fracs)
 export(process_data)
 export(rates_fracs_to_df)

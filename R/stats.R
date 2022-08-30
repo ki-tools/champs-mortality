@@ -18,7 +18,7 @@ fisher_test <- function(x) {
 #' @param tot the denominator used to compute the fraction
 #' @param limit the percent confidence limit (0-100)
 #' @importFrom stats qbeta
-#' @export
+#' @noRd
 get_interval <- function(frac, tot, limit = 90) {
   tail <- (1 - limit / 100) / 2
   num <- frac * tot

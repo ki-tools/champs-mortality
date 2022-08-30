@@ -1,10 +1,12 @@
 tags <- htmltools::tags
 
 #' Create html outputs for a given mortality rate/fraction analysis
-#' @param obj an object that comes from [get_rates_and_fractions()]
-#' @param path path to where the output html will be stored
+#' @param obj An object that comes from [get_rates_and_fractions()].
+#' @param path Path to where the output html will be stored.
+#' @param title Title of the page to place in the header. If not provided,
+#' the condition name found in the provided `obj` will be used
 #' @export
-champs_web_report <- function(obj, path = tempfile()) {
+champs_web_report <- function(obj, path = tempfile(), title = NULL) {
   assertthat::assert_that(inherits(obj, "rate_frac_multi_site"),
     msg = cli::format_error("'obj' must come from get_rates_and_fractions()")
   )
@@ -12,14 +14,21 @@ champs_web_report <- function(obj, path = tempfile()) {
   if (!dir.exists(path))
     dir.create(path)
 
+  if (is.null(title)) {
+    title <- obj[[1]]$inputs$condition
+    if (is.null(title)) {
+      title <- obj[[1]]$inputs$cond_name_short
+    }
+  }
+
   message("index")
-  write_page(index_page(obj), path)
+  write_page(index_page(obj, title = title), path)
   message("factor adjustment table")
-  write_page(fac_adj_page(obj), path)
+  write_page(fac_adj_page(obj, title = title), path)
   message("MITS selection tables")
-  write_page(stats_page(obj, mits = TRUE), path)
+  write_page(stats_page(obj, mits = TRUE, title = title), path)
   message("Condition selection tables")
-  write_page(stats_page(obj, mits = FALSE), path)
+  write_page(stats_page(obj, mits = FALSE, title = title), path)
 
   index <- file.path(path, "index.html")
 
@@ -33,7 +42,7 @@ write_page <- function(obj, path) {
   htmltools::save_html(obj$tags, file.path(path, obj$page))
 }
 
-index_page <- function(obj) {
+index_page <- function(obj, title = NULL) {
   p1 <- plot_rates_fracs(obj, "frac")
   p2 <- plot_rates_fracs(obj, "rate")
 
@@ -45,12 +54,13 @@ index_page <- function(obj) {
       ),
       tags$div(table_rates_fracs(obj))
     ),
-    condition = obj[[1]]$condition,
-    causal_chain = obj[[1]]$causal_chain
+    condition = obj[[1]]$inputs$condition,
+    causal_chain = obj[[1]]$inputs$causal_chain,
+    title = title
   )
 }
 
-fac_adj_page <- function(obj) {
+fac_adj_page <- function(obj, title = NULL) {
   tbl <- table_adjust_decision(obj)
 
   name <- "fac_adj"
@@ -58,12 +68,13 @@ fac_adj_page <- function(obj) {
     htmltools::tagList(
       tbl
     ),
-    condition = obj[[1]]$condition,
-    causal_chain = obj[[1]]$causal_chain
+    condition = obj[[1]]$inputs$condition,
+    causal_chain = obj[[1]]$inputs$causal_chain,
+    title = title
   )
 }
 
-stats_page <- function(obj, mits = TRUE) {
+stats_page <- function(obj, mits = TRUE, title = NULL) {
   prefix <- ifelse(mits, "mits", "cond")
 
   content <- table_factor_sig_stats(obj, which = prefix)
@@ -73,12 +84,15 @@ stats_page <- function(obj, mits = TRUE) {
     htmltools::tagList(
       content
     ),
-    condition = obj[[1]]$condition,
-    causal_chain = obj[[1]]$causal_chain
+    condition = obj[[1]]$inputs$condition,
+    causal_chain = obj[[1]]$inputs$causal_chain,
+    title = title
   )
 }
 
-make_page <- function(name, content, condition, causal_chain) {
+make_page <- function(
+  name, content, condition, causal_chain, title = "Results"
+) {
   cc <- ifelse(causal_chain, "In the causal chain", "In the underlying cause")
 
   tgs <- htmltools::tagList(
@@ -208,7 +222,7 @@ a {
       ),
       tags$div(class = "header",
         tags$div(class = "title",
-          tags$div(class = "condition", condition),
+          tags$div(class = "condition", title),
           tags$div(class = "cc", cc)
         ),
         tags$div(class = "tabs",

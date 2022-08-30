@@ -49,6 +49,8 @@ plot_rates_fracs(graf, which = "frac", plotly = FALSE)
 
 Note here that we are setting `plotly=FALSE`. The default is `TRUE` in which case an interactive version of the visualization will be made available.
 
+Also note that the y-axis labels are the sites and catchments within each site. For this synthetic dataset, the names do not make it clear that this is the case, but when working with real data, it will be apparent.
+
 ## Overview table
 
 To get a nice-looking overview table that shows the rates and fractions for each scenario along with other useful information, we can do the following:

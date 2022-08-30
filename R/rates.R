@@ -332,7 +332,7 @@ get_rates_and_fractions_site <- function(
 #' @param factor_groups A named list that specifies how to group factors
 #' @param ctch_info An object that tracks information about catchments in the data.
 #' @note One or both of `icd10_regex` and `condition` must be specified
-# @export
+#' @noRd
 get_rate_frac_data <- function(x,
   site,
   catchments = NULL,

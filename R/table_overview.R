@@ -1,11 +1,15 @@
 #' Create an overview table of results
 #' @param obj an object [from get_rates_and_fractions]()
 #' @importFrom utils tail
+#' @importFrom dplyr recode
 #' @export
 table_rates_fracs <- function(obj) {
   assertthat::assert_that(inherits(obj, "rate_frac_multi_site"),
     msg = cli::format_error("'obj' must come from get_rates_and_fractions()")
   )
+
+  # TODO: make sure all entries of obj have same "condition",
+  #   same "per", etc. and do this with the other output functions
 
   per <- format(obj[[1]]$inputs$per, big.mark = ",")
 
@@ -30,9 +34,9 @@ table_rates_fracs <- function(obj) {
     dplyr::select(-c("allcauseMR_aTU5MR"))
 
   names(tmp1) <- c("Site", "Catchment",
-    "* All-Cause<br>Mortality Rate",
-    paste0("* Crude CSMR<br>(90% Bayesian CrI)"),
-    paste0("* Adjusted CSMR<br>(90% Bayesian CrI)")
+    "+ All-Cause<br>Mortality Rate",
+    paste0("+ Crude CSMR<br>(90% Bayesian CrI)"),
+    paste0("+ Adjusted CSMR<br>(90% Bayesian CrI)")
   )
 
   tmp2 <- datf %>%
@@ -61,6 +65,18 @@ table_rates_fracs <- function(obj) {
   labs <- lapply(names(tmp), function(x) gt::html(paste0("<b>", x, "</b>")))
   names(labs) <- names(tmp)
 
+  can_use_dss <- sapply(obj, function(x) x$can_use_dss)
+  sites <- names(can_use_dss)
+  sites2 <- paste0(sites, ifelse(can_use_dss, "", " *"))
+  names(sites2) <- sites
+  tmp$Site <- dplyr::recode(tmp$Site, !!!sites2)
+
+  foot <- paste0("+ per ", per, " live births")
+  if (!all(can_use_dss))
+    foot <- paste0(foot, " \u2014 * includes catchments with no DSS data")
+
+  foot <- paste0(foot, " \u2014 see <a href='https://ki-tools.github.io/champs-mortality/articles/methodology.html' target='_blank'>here</a> for details about the methodology")
+
   tbl <- gt::gt(tmp) %>%
     gt::cols_label(.list = labs) %>%
     gt::cols_align(align = "right", columns = utils::tail(names(tmp), 5)) %>%
@@ -72,5 +88,5 @@ table_rates_fracs <- function(obj) {
     )
 
   tbl %>%
-    gt::tab_footnote(footnote = paste0("* per ", per, " live births"))
+    gt::tab_footnote(footnote = gt::html(foot))
 }

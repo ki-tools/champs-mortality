@@ -83,9 +83,18 @@ graf <- get_rates_and_fractions(
 )
 ```
 
-This applies the calculations to each site independently. For each site, data for all catchments are combined. We will show how to get results for individual catchments later. The main arguments are the input data, `dd` and the condition. Here we specify the optional parameter `cond_name_short` to be "LRI". This is used in some of the tabular and graphical outputs.
+This applies the calculations to each site independently. For each site, data for all catchments are combined. To get results for individual catchments, you can call the function with specific catchments using the `catchments` argument. The main arguments are the input data, `dd` and the condition. Here we specify the optional parameter `cond_name_short` to be "LRI". This is used in some of the tabular and graphical outputs.
 
 As seen in the printed output, some sites have no adjustment variables while others are adjusted on location. For site "S7", both "location" and "va" were significant but we can only adjust for one variable or two variables if one of them is "age", so just "location" is chosen.
+
+Note: In the previous article's discussion of the DSS data, we highlighted that because the data was collected in a way that crosses age with all of the other factors, but does not cross the other factors with each other, we can only adjust for one factor or age + another factor. If there are more than two candidate factors for adjustment, precedence is given to factors according to the following ranking:
+
+1. age
+2. season
+3. location
+4. va
+5. sex
+6. education
 
 ### Examining the Output
 
@@ -374,4 +383,6 @@ We can consolidate this output with the following:
 rates_fracs_to_df(graf)
 ```
 
+## Visual and Tabular Outputs
 
+The [next article](reports.html) provides examples functions available in this package for creating nicely-formatted tables and figures of the outputs we have learned to create in this article.

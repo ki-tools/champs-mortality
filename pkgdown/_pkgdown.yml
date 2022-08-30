@@ -16,3 +16,29 @@ navbar:
         href: articles/reports.html
       - text: Methodology
         href: articles/methodology.html
+reference:
+- title: "Reading and Validating Data"
+  desc: "Functions for setting up, reading, and validating the datasets necessary for calculations with this package."
+  contents:
+  - create_dataset_directory
+  - read_and_validate_data
+  - process_data
+- title: "Seeing What's In the Data"
+  desc: "Functions for seeing what kind of."
+  contents:
+  - starts_with("valid_")
+  - get_site_info
+- title: "Getting Rates and Fractions"
+  desc: "Functions for calculating and viewing crude and adjusted rates and fractions."
+  contents:
+  - get_rates_and_fractions
+  - batch_rates_and_fractions
+  - rates_fracs_to_df
+- title: "Creating Outputs"
+  desc: "Functions to create tables and figures of rate and fraction calculation results."
+  contents:
+  - table_rates_fracs
+  - table_adjust_decision
+  - table_factor_sig_stats
+  - plot_rates_fracs
+  - champs_web_report

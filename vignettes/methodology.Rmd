@@ -24,7 +24,7 @@ Most sites - except Sierra Leone, Quelimane in Mozambique, and Faridpur in Bangl
 
 ## [Cause of Death]
 
-All CHAMPS deaths, excluding stillbirths, whose families consented to minimally invasive tissue sampling (MITS) between 1st January 2017 and 31st December 2020, and were assigned a cause of death by a Determination of Cause of Death (DeCoDe) panel as of August 23, 2022 were included. Cases were determined to have died due to [cause] if they were assigned one of the following International Classification of Diseases, Revision 10 (ICD-10) codes: [list of ICD-10 codes]. [cause] was classified as either the underlying cause of death or as being anywhere in the causal chain (immediate, underlying, and/or comorbid causes). 
+All CHAMPS deaths whose families consented to minimally invasive tissue sampling (MITS) between 1st January 2017 and 31st December 2020, and were assigned a cause of death by a Determination of Cause of Death (DeCoDe) panel as of May 24, 2022 were included. Cases were determined to have died due to [cause] if they were assigned one of the following International Classification of Diseases, Revision 10 (ICD-10) codes: [list of ICD-10 codes]. [cause] was classified as either the underlying cause of death or as being anywhere in the causal chain (immediate, underlying, and/or comorbid causes). 
 
 ## Cause-Specific Mortality Fractions
 

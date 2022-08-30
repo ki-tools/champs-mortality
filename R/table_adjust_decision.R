@@ -288,6 +288,7 @@ table_adjust_decision <- function(
 #' @param tables_dat a named list object with a table
 #' from mits_factor_tables() and a table from cond_factor_tables().
 #' The names assigned to each table will be used in naming the table columns.
+#' @noRd
 combine_decision_tables <- function(tables_dat) {
   append_names <- names(tables_dat)
 
