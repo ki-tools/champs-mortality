@@ -1,6 +1,6 @@
 #' Create a plot of rates or fractions
 #' @param obj an object from [get_rates_and_fractions()]
-#' @param type one of "frac" or "rate"
+#' @param which one of "frac" or "rate"
 #' @param width width of plot if using plotly
 #' @param height height of plot if using plotly
 #' @param plotly should the result be a plotly graph?
@@ -10,7 +10,7 @@
 #' @importFrom ggthemes scale_color_tableau
 #' @importFrom plotly ggplotly layout config
 #' @importFrom forcats fct_reorder
-plot_rates_fracs <- function(obj, type = "frac",
+plot_rates_fracs <- function(obj, which = "frac",
   height = "100%", width = 800, plotly = TRUE
 ) {
   assertthat::assert_that(inherits(obj, "rate_frac_multi_site"),
@@ -49,7 +49,7 @@ plot_rates_fracs <- function(obj, type = "frac",
         " (", .data$lower, ", ", .data$upper, ")")
     )
 
-  if (type == "frac") {
+  if (which == "frac") {
     make_plot(
       pdat_frac,
       xlb = "Estimate, % (90% Bayesian Credible Interval)",
@@ -63,7 +63,7 @@ plot_rates_fracs <- function(obj, type = "frac",
       pdat_rate,
       xlb = paste0("Estimate, deaths per ", format(per, big.mark = ","),
         " live births (90% Bayesian Credible Interval)"),
-      ttl = "Cause-specfic mortality fractions (CSMR)",
+      ttl = "Cause-specfic mortality rates (CSMR)",
       height = height,
       width = width,
       plotly = plotly

@@ -105,7 +105,7 @@ dr$get_site_info <- get_site_info(dd)
 
 ### HTML tables
 # functions on get_rates_and_fractions
-dr$table_overview <- table_overview(graf)
+dr$table_rates_fracs <- table_rates_fracs(graf)
 
 dr$table_factor_sig_stats_mits <- table_factor_sig_stats(
   mft1,

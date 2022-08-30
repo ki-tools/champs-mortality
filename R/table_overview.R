@@ -2,7 +2,7 @@
 #' @param obj an object [from get_rates_and_fractions]()
 #' @importFrom utils tail
 #' @export
-table_overview <- function(obj) {
+table_rates_fracs <- function(obj) {
   assertthat::assert_that(inherits(obj, "rate_frac_multi_site"),
     msg = cli::format_error("'obj' must come from get_rates_and_fractions()")
   )
@@ -30,9 +30,9 @@ table_overview <- function(obj) {
     dplyr::select(-c("allcauseMR_aTU5MR"))
 
   names(tmp1) <- c("Site", "Catchment",
-    "All-Cause<br>Mortality Rate",
-    paste0("Crude CSMR (per ", per, ")<br>(Bayesian Credible Interval)"),
-    paste0("Adjusted CSMR (per ", per, ")<br>(Bayesian Credible Interval)")
+    "* All-Cause<br>Mortality Rate",
+    paste0("* Crude CSMR<br>(90% Bayesian CrI)"),
+    paste0("* Adjusted CSMR<br>(90% Bayesian CrI)")
   )
 
   tmp2 <- datf %>%
@@ -46,8 +46,8 @@ table_overview <- function(obj) {
     tidyr::pivot_wider(id_cols = c("site", "catchments"),
       names_from = "var", values_from = c("interval"))
 
-  names(tmp2) <- c("Site", "Catchment", "Crude CSMF (%)<br>(Bayesian Credible Interval)",
-    "Adjusted CSMF (%)<br>(Bayesian Credible Interval)")
+  names(tmp2) <- c("Site", "Catchment", "Crude CSMF (%)<br>(90% Bayesian CrI)",
+    "Adjusted CSMF (%)<br>(90% Bayesian CrI)")
 
   adj_vars <- lapply(obj, function(x) dplyr::tibble(Site = x$site,
     adjust_vars = if (is.null(x$adjust_vars)) "none" else
@@ -61,7 +61,7 @@ table_overview <- function(obj) {
   labs <- lapply(names(tmp), function(x) gt::html(paste0("<b>", x, "</b>")))
   names(labs) <- names(tmp)
 
-  gt::gt(tmp) %>%
+  tbl <- gt::gt(tmp) %>%
     gt::cols_label(.list = labs) %>%
     gt::cols_align(align = "right", columns = utils::tail(names(tmp), 5)) %>%
     gt::tab_options(
@@ -70,4 +70,7 @@ table_overview <- function(obj) {
       column_labels.padding.horizontal = gt::px(20),
       table.font.size = gt::px(14)
     )
+
+  tbl %>%
+    gt::tab_footnote(footnote = paste0("* per ", per, " live births"))
 }

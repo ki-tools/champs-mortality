@@ -224,14 +224,14 @@ S6,C1,Stillbirth,Congenital birth defects,,FALSE,FALSE
   expect_equal(list.files(path),
     c("catchment_lookup.csv", "config.yaml", "dhs.csv", "seasons.csv"))
 
-  expect_true({ rates_and_fractions_table(graf); TRUE })
+  expect_true({ rates_fracs_to_df(graf); TRUE })
 
   expect_true({ champs_web_report(graf); TRUE })
 
   # make sure plotting functions aren't broken (not checking actual values)
-  expect_true({ plot_rates_fracs(graf, type = "rate", plotly = FALSE); TRUE})
-  expect_true({ plot_rates_fracs(graf, type = "frac", plotly = TRUE); TRUE})
-  expect_true({ table_overview(graf); TRUE})
+  expect_true({ plot_rates_fracs(graf, which = "rate", plotly = FALSE); TRUE})
+  expect_true({ plot_rates_fracs(graf, which = "frac", plotly = TRUE); TRUE})
+  expect_true({ table_rates_fracs(graf); TRUE})
   expect_true({ table_adjust_decision(graf); TRUE})
   expect_true({ table_factor_sig_stats(graf, which = "mits"); TRUE})
   expect_true({ table_factor_sig_stats(graf, which = "cond"); TRUE})
