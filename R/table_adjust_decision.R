@@ -138,13 +138,32 @@ table_adjust_decision <- function(
     gt::cols_merge(
       columns = c("location_name", "dss", "year_period"),
       pattern = "<b>{1}</b> <span style='color: gray;'>{2}</span><br><em>{3}</em>"
-    ) %>%
-    tab_spanner_delim_old(
-      delim = ".",
-      split = "first"
+    ) |>
+    # new code here assumes that these are the only
+    # variable groupings.
+    gt::tab_spanner(
+      label = "Age",
+      columns = contains("Age")
+      ) |>
+    gt::tab_spanner(
+      label = "Sex",
+      columns = contains("Sex")
+    ) |> gt::tab_spanner(
+      label = "Education",
+      columns = contains("Education")
+      ) |>
+    gt::tab_spanner(
+      label = "Season",
+      columns = contains("Season") 
+    ) |>
+    gt::tab_spanner(
+      label = "Location",
+      columns = contains("Location", ignore.case = FALSE)
+    ) |>
+    gt::tab_spanner(
+      label = "VA CoD",
+      columns = contains("VA CoD")
     )
-    # tab_spanner_delim_old is the Feb, 2022 version from gt. See notes
-    # on around line 319
 
   # since missing columns and p-value columns are the same name with the
   # the exception of the label.
@@ -225,15 +244,6 @@ table_adjust_decision <- function(
               (.data[[col2]] < pmissing))
         )
       )
-      # ) %>%
-      # gt::tab_style(
-      #   style = gt::cell_borders(
-      #     sides = c("left", "right"),
-      #     color = "black"
-      #   ),
-      #   locations = gt::cells_body(columns = {{ col1 }})
-      # )
-
 
       if (grepl(paste0("\\.", table_names[2], "\\."), col1)) {
         gt_table <- gt_table %>%
@@ -325,97 +335,4 @@ combine_decision_tables <- function(tables_dat) {
     join_cols <- setdiff(join_cols, "dss")
   t1 %>%
     dplyr::left_join(t2, by = join_cols)
-}
-
-# hack from old gt function as the new one is not
-# working
-# Old function from
-# https://github.com/rstudio/gt/blob/8a306326cd63de71c7d887dc3706fc0ec1c553c9/R/tab_create_modify.R
-tab_spanner_delim_old <- function(
-  data,
-  delim,
-  columns = dplyr::everything(),
-  gather = TRUE,
-  split = c("last", "first")
-) {
-  # Perform input object validation
-  gt:::stop_if_not_gt(data = data)
-
-  split <- match.arg(split)
-
-  # Get all of the columns in the dataset
-  all_cols <- gt:::dt_boxhead_get_vars(data = data)
-
-  # Get the columns supplied in `columns` as a character vector
-  columns <-
-    gt:::resolve_cols_c(
-      expr = {{ columns }},
-      data = data
-    )
-
-  if (!is.null(columns)) {
-    colnames <- base::intersect(all_cols, columns)
-  } else {
-    colnames <- all_cols
-  }
-
-  if (length(colnames) == 0) {
-    return(data)
-  }
-
-  colnames_has_delim <- grepl(pattern = delim, x = colnames, fixed = TRUE)
-
-  if (any(colnames_has_delim)) {
-
-    colnames_with_delim <- colnames[colnames_has_delim]
-
-    # Perform regexec match where the delimiter is either declared
-    # to be the 'first' instance or the 'last' instance
-    regexec_m <-
-      regexec(
-        paste0(
-          "^(.*",
-          ifelse(split == "first", "?", ""),
-          ")\\Q", delim, "\\E(.*)$"
-        ),
-        colnames_with_delim
-      )
-
-    split_colnames <-
-      lapply(regmatches(colnames_with_delim, regexec_m), FUN = `[`, 2:3)
-
-    spanners <- vapply(split_colnames, FUN.VALUE = character(1), `[[`, 1)
-
-    spanner_var_list <- split(colnames_with_delim, spanners)
-
-    for (label in names(spanner_var_list)) {
-
-      data <-
-        gt::tab_spanner(
-          data = data,
-          label = label,
-          columns = spanner_var_list[[label]],
-          gather = gather
-        )
-    }
-
-    new_labels <-
-      lapply(split_colnames, `[[`, -1) %>%
-      vapply(paste0, FUN.VALUE = character(1), collapse = delim)
-
-    for (i in seq_along(split_colnames)) {
-
-      new_labels_i <- new_labels[i]
-      var_i <- colnames_with_delim[i]
-
-      data <-
-        gt:::dt_boxhead_edit(
-          data = data,
-          var = var_i,
-          column_label = new_labels_i
-        )
-    }
-  }
-
-  data
 }
