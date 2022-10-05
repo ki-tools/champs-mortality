@@ -99,7 +99,7 @@ make_page <- function(
     tags$head(
       tags$style(htmltools::HTML("
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Lato', sans-serif;
   padding: 0px;
   margin: 0px;
 }
@@ -121,7 +121,7 @@ body {
 
 .header {
   border-bottom: 1px solid #e7e7e7;
-  background: #90caf9;
+  background: #93d500;
   color: white;
   display: flex;
   flex-direction: row;
@@ -161,7 +161,7 @@ body {
 }
 
 .tabs > a > div {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 16px;
   padding-left: 30px;
   padding-right: 30px;
@@ -173,12 +173,12 @@ body {
 }
 
 .tab-item:hover {
-  background: #64b5f6;
+  background: #66b648;
 }
 
 .tabs > a > div.is-active {
-  border-bottom: 2px solid #1e88e5;
-  background: #42a5f5;
+  border-bottom: 2px solid #338315;
+  background: #4c9c2e;
 }
 
 .plot-container {
@@ -211,7 +211,7 @@ a {
       tags$link(rel = "preconnect", href = "https://fonts.googleapis.com"),
       tags$link(rel = "preconnect", href = "https://fonts.gstatic.com",
         crossorigin = ""),
-      tags$link(href = "https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&amp;display=swap",
+      tags$link(href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",
         rel = "stylesheet")
     ),
     tags$body(
