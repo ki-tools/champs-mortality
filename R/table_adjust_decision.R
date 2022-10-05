@@ -288,7 +288,7 @@ table_adjust_decision <- function(
       ))
     ) %>%
     gt::opt_align_table_header(align = "left") %>%
-    gt::tab_options(table.font.names = c("Poppins", "sans-serif")) %>%
+    gt::tab_options(table.font.names = c("Lato", "sans-serif")) %>%
     gt::opt_css(
       css = ".gt_col_heading { line-height: 18px; }"
     )

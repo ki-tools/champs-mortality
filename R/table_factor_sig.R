@@ -344,6 +344,6 @@ get_factor_sig_table <- function(
       heading.subtitle.font.size = gt::pct(100),
       container.overflow.x = "unset",
       container.overflow.y = "unset",
-      table.font.names = c("Poppins", "sans-serif")
+      table.font.names = c("Lato", "sans-serif")
     )
 }

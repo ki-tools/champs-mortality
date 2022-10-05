@@ -88,7 +88,8 @@ make_plot <- function(pdat, xlb, ttl, height, width, plotly = TRUE) {
       title = ttl
     ) +
     ggplot2::theme_minimal() +
-    ggthemes::scale_color_tableau(name = NULL)
+    ggplot2::scale_color_manual(values = c("#00a7e1", "#f4436c"))
+    # ggthemes::scale_color_tableau(name = NULL)
 
   if (!plotly) {
     return(p)
@@ -103,7 +104,7 @@ make_plot <- function(pdat, xlb, ttl, height, width, plotly = TRUE) {
   pp <- plotly::ggplotly(p, width = width, height = NULL, tooltip = "text") %>%
     plotly::layout(
       legend = list(orientation = "h", xanchor = "center", x = 0.5, y = -0.12),
-      font = list(family = "Poppins, sans-serif"),
+      font = list(family = "Lato, sans-serif"),
       yaxis = list(automargin = FALSE)
     ) %>%
     plotly::config(
