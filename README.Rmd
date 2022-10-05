@@ -25,7 +25,7 @@ options(width = 94)
 
 The goal of champsmortality is to provide functions for calculating mortality fractions and rates at CHAMPS sites for various causes.
 
-Below is a high-level walkthrough of some of the major pacakge functionality and workflow. Read the additional articles for more depth:
+Below is a high-level walkthrough of some of the major package functionality and workflow. Read the additional articles for more depth:
 
 - [Getting Started](https://ki-tools.github.io/champs-mortality/articles/getting-started.html)
 - [Datasets](https://ki-tools.github.io/champs-mortality/articles/datasets.html)
@@ -98,7 +98,7 @@ This searches the CHAMPS data and finds all unique condition values found anywhe
 
 ### Getting Rates and Fractions
 
-The main function of this package computes factor-adjusted mortality rates and fractions for a specified set of sites and catchments. More details about the methodology can be found [in this article](methodology.html).
+The main function of this package computes factor-adjusted mortality rates and fractions for a specified set of sites and catchments. More details about the methodology can be found [in this article](articles/methodology.html).
 
 ```{r}
 graf <- get_rates_and_fractions(

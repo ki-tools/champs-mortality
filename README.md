@@ -14,7 +14,7 @@ coverage](https://codecov.io/gh/ki-tools/champs-mortality/branch/main/graph/badg
 The goal of champsmortality is to provide functions for calculating
 mortality fractions and rates at CHAMPS sites for various causes.
 
-Below is a high-level walkthrough of some of the major pacakge
+Below is a high-level walkthrough of some of the major package
 functionality and workflow. Read the additional articles for more depth:
 
 -   [Getting

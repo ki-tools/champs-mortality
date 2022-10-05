@@ -99,7 +99,7 @@ The aggregate data contains tabulations of deaths from each site broken down by 
 
 Note: Due to the nature of this dataset being aggregated by age crossed with other factors, we can at most adjust for one factor or age + one other factor. Also since the statistics are aggregated across the whole time period (multiple years), we currently cannot compute statistics broken down by year.
 
-DSS is a dataset available as a downloadable file from LabKey.
+DSS is a dataset available as a downloadable file from LabKey or can be constructed by DSS sites by formatting their data appropriately.
 
 ## DHS
 
@@ -110,7 +110,7 @@ The following catchments do not have DSS data:
 - Sierra Leone, Makeni
 - Mozambique, Quelimane
 
-For these catchments, we use alternate surveillance nubmers from [DHS](https://dhsprogram.com), particularly as calculated at [globaldatalab.org](https://globaldatalab.org/areadata/2020/child-mortality/BGD+MLI+MOZ+SLE). This dataset was manually put together by pulling statistics from this site. It contains the following variables:
+For these catchments, we use alternate surveillance numbers from [DHS](https://dhsprogram.com), particularly as calculated at [globaldatalab.org](https://globaldatalab.org/areadata/2020/child-mortality/). This dataset was manually put together by pulling statistics from this site. It contains the following variables:
 
 - **site**: site name
 - **catchment**: catchment name
@@ -128,7 +128,7 @@ The total number of live births is required in the mortality rate and fraction c
 - **year**: year
 - **live_births**: number of live births according to DSS
 
-This dataset, although it does not contain individual-level data, is not shared publicly and is available as a downloadable file from LabKey.
+This dataset, although it does not contain individual-level data, is not shared publicly and is available as a downloadable file from LabKey or can be constructed by DSS sites by formatting their data appropriately.
 
 ## Season Lookup
 
